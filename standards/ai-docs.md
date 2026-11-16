@@ -231,7 +231,7 @@ When a repo has Claude Code hooks:
 
 A repo that agents open worktrees in has a `paseo.json` at its root with a worktree `setup` and `teardown` and one named script per canonical command in [dev-scripts.md](dev-scripts.md). Script keys are the command names with colons replaced by hyphens (`dev-doctor`, `validate`, `test`, `build`).
 
-Devkit repos use devkit's setup and teardown pair as documented in devkit's README; do not re-document it. Under D-045, devkit generates the file from a template. Under D-088, the Windows repos' file initialises submodules on setup and exposes the four `*:desktop` scripts.
+Devkit repos use devkit's setup and teardown pair as documented in devkit's README; do not re-document it. Repos with submodules run `git submodule deinit --all --force` in teardown, because `git worktree remove` refuses a worktree that still has submodules (reference: immich-drive's `paseo.json`). Under D-045, devkit generates the file from a template. Under D-088, the Windows repos' file initialises submodules on setup and exposes the four `*:desktop` scripts.
 
 Where worktrees are created is not stated in a project file (D-032, FIX-041).
 

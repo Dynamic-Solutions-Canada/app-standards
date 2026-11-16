@@ -120,7 +120,7 @@ Root `test` runs every unit test in the repo, in every workspace or project. `te
 
 | Script | Does |
 | --- | --- |
-| `verify:desktop` | Full Debug compile with the Windows toolchain, including XAML. The check to run before finishing a change |
+| `verify:desktop` | Full Debug compile with the Windows toolchain, including XAML. The check to run before finishing a change. It compiles only the `project` named in `windows-build.json`; a repo that ships a second project (immich-drive's thumbnail provider) uses `package:desktop:dev` as its compile proof for changes that touch that project, until the tooling compiles every shipped project |
 | `package:desktop:dev` | Builds a signed Release dev MSIX and keeps the run under `.artifacts/windows-build/` |
 | `install:desktop` | Builds, updates the installed dev package in place, then launches it |
 | `package:desktop` | Builds the unsigned Release MSIX with the Store identity |

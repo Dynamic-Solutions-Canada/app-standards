@@ -134,7 +134,7 @@ KIT-9 and KIT-10 list what is already at or past the third copy.
 | Confirm dialog helper | 5 apps | winui-app-kit | `wsl-monitor/WslMonitor/DetailsWindow.xaml.cs` | none |
 | App bootstrap (two unhandled-exception handlers, restore settings, create host) and the hidden host window setup | 6 and 5 | winui-app-kit | `wsl-monitor/WslMonitor/App.xaml.cs` | D-074 |
 | Tray icon rasteriser (supersample and shrink) | 2: hub-display-switch, wsl-monitor | winui-app-kit | `wsl-monitor/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
-| DPAPI protected store | 1, and 1 app that needs it (FIX-001) | winui-app-kit | `little-launcher/LittleLauncher/Services/ProtectedStore.cs` | D-081 |
+| DPAPI protected store | 2: little-launcher, immich-drive (FIX-001) | winui-app-kit, accepting an app-supplied folder, file name and entropy (both apps' values are permanent once shipped), with no logging dependency so a second process such as a shell extension can link it | `immich-drive/ImmichDrive/Services/ProtectedStore.cs` (adds `Exists`, an injectable protector, folder and error hooks, atomic save, and no delete on a failed load because two processes read the file) | D-081 |
 | Settings schema versioning, backup and reset | 0 (new) | winui-app-kit | none | D-077, D-104 |
 | `NLog.config` | 6, in two variants | winui-app-kit | `wsl-monitor/WslMonitor/NLog.config` | D-080 |
 | Runtime CVE guard (`Directory.Build.targets`) and `global.json` | 3 guards, in three implementations | winui-app-kit | repilot's | D-053 |

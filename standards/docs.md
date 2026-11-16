@@ -118,7 +118,7 @@ This rule owns the privacy policy; LOG-10 in [logging.md](logging.md) was merged
 In three parts:
 
 - **Telemetry:** the README and the privacy policy each carry one line stating that the app collects no telemetry or crash reports; the policy behind that line is LOG-9 in [logging.md](logging.md). If that ever stops being true, the line changes in the same release.
-- **Where data lives:** `ARCHITECTURE.md`, or `docs/development.md` in a small app, lists every place the app writes (data folder, registry, startup entry, sync roots, server-side data) and what remains after uninstall.
+- **Where data lives:** `ARCHITECTURE.md`, or `docs/development.md` in a small app, lists every place the app writes (data folder, registry, startup entry, sync roots, server-side data) and what remains after uninstall. For a packaged (MSIX) Windows install, files under the app's AppData are redirected into the package's own folder, which Windows deletes on uninstall unless the manifest opts out of that virtualization; what survives is what the app writes elsewhere (registry entries outside the package, sync roots, user documents) and everything an unpackaged dev build writes. State which case applies, and mark the list unconfirmed until a real uninstall has been checked.
 - **Backup, export, deletion:** what a product must provide and state is SEC-13 in [security.md](security.md). It is written in `docs/deployment.md` for a product that runs on a server, and beside the data-location list otherwise.
 
 ### DOCS-10: Protocol and contract documents

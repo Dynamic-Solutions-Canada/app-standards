@@ -39,7 +39,7 @@ The publisher display name is "Dynamic Solutions (CA)", used unchanged in every 
 - **Reference:** `repilot/LICENSE.md`
 - **Why:** The licence, the README, and the About page must name the same holder for the grant to be clear.
 
-The copyright holder is the company, written "Dynamic Solutions", for every repo except the two personal projects, game-is-up and store-sign-controller, whose holder is the individual owner (the repo owner's legal name). printstream and its Home Assistant integration keep their own licence (D-008), and the holder named in it was not part of the decision. The copyright line reads `Copyright (c) <first year>-<current year> <holder>`, or a single year for a new repo, and is identical in the licence file (HYG-1 in [repo-hygiene.md](repo-hygiene.md)), the README's License section (README-5), and any About page that shows it.
+The copyright holder is the company, written "Dynamic Solutions", for every repo except the two personal projects, game-is-up and store-sign-controller, whose holder is the individual owner (the repo owner's legal name). printstream and its Home Assistant integration keep their own licence (D-008), and the holder named in it was not part of the decision. The same holder appears on every About page's copyright line (BRAND-8). The copyright line reads `Copyright (c) <first year>-<current year> <holder>`, or a single year for a new repo, and is identical in the licence file (HYG-1 in [repo-hygiene.md](repo-hygiene.md)), the README's License section (README-5), and any About page that shows it.
 
 ### BRAND-4: GitHub owner and repo names
 

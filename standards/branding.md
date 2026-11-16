@@ -176,6 +176,8 @@ Shared values, one row each:
 
 Not yet collected, and added as columns when the registry is next filled in: the per-app identifiers that must survive a kit migration (tray GUID, mutex name, startup task id and data folder name; see TRAY-3, TRAY-9 and TRAY-10 in [tray.md](tray.md) and CONF-1 in [settings-config.md](settings-config.md)). The standards repo itself is public, with its `audit/` working material kept private (D-004).
 
+App privacy policies live at `https://www.dynamic-solutions.ca/privacy/<slug>`, where the slug is the display name lowercased with spaces as hyphens (decided 2026-11-16): `/privacy/hub-display-switch`, `/privacy/wsl-monitor`, `/privacy/little-launcher`, `/privacy/repilot`, `/privacy/immichdrive`, `/privacy/phonelock`, `/privacy/sonarbridge`. These URLs are permanent once a store listing or a shipped app links them (BRAND-11). `/privacy-policy` stays the website's own policy and indexes the app policies; Persistent and PrintStream keep their policies on their own domains.
+
 ### BRAND-11: A rename keeps old URLs working
 
 - **Status:** Proposed

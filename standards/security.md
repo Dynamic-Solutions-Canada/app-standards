@@ -62,6 +62,7 @@ No credential, token, or API key is written to `settings.json` or to a log. A Wi
 - Every repo carries the shared ignore block that HYG-6 in [repo-hygiene.md](repo-hygiene.md) defines, which covers env files, the secrets folder, cloud credential folders, certificates, keystores, and service-account key patterns. A new place a secret can sit gets an ignore rule before the file exists (FIX-002, FIX-003).
 - Tracked configuration refers to secrets by reference (an environment variable, a CI secret, the tool's own secret file), never by value. This includes device and firmware configuration (FIX-004).
 - No personal detail is tracked: no personal email address, home network name, or home directory path in code, docs, skills, or listings (FIX-005, FIX-011). Use the company contact address chosen under D-017.
+- History is checked before a repo is first pushed or made public. If any commit contains a written secret or personal detail, it is removed from history before publishing: a fresh root commit when the history is short and unpublished, or a history scrub otherwise (as for game-is-up and store-sign-controller). A secret that was ever pushed to a public remote is rotated, not just removed.
 - Agents never open secret files to verify these rules; check ignore rules with `git check-ignore`.
 
 ### SEC-5: Example and template files use placeholders

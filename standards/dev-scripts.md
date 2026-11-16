@@ -127,7 +127,7 @@ Root `test` runs every unit test in the repo, in every workspace or project. `te
 
 All four are one-line calls to `scripts/windows-build`, which hands the working tree to the shared Windows build tooling using the repo's `windows-build.json`. The repo does not call the packaging script directly, and does not copy the tooling's guide into its own docs; it links to the tooling's README (the stale copies are FIX-037 and FIX-038). The target architecture is passed as `-- --platform <arch>`; it is not baked into the script. None of the four commits, pushes or publishes.
 
-The wrapper is a per-repo copy of winui-app-kit's canonical `scripts/windows-build`, because it locates the repo from its own path (a script inside a submodule cannot do that reliably, and persistent's desktop app is nested). The kit's shared-file check, called from `validate`, verifies the copy is byte-identical to the kit's at the pinned tag (decided 2026-11-16; all five standalone apps' copies were already identical). The tooling has its own GitHub repo, Dynamic-Solutions-Canada/windows-build-tools (D-005). The absolute host path in one consumer is FIX-049.
+The wrapper lives only in winui-app-kit; apps call `external/winui-app-kit/scripts/windows-build` from their npm scripts and keep no copy (decided 2026-11-16). It takes the app's root from the directory npm runs it in, not from its own path, since inside a submodule its own path points at the kit. A repo that needs a step before staging (persistent's localization preparation) runs it in its own npm script before calling the wrapper. The tooling has its own GitHub repo, Dynamic-Solutions-Canada/windows-build-tools (D-005). The absolute host path in one consumer is FIX-049.
 
 ### SCRIPT-7: Web entry points go through devkit
 

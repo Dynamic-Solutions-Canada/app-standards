@@ -78,6 +78,8 @@ Workflows read the Node version from `.nvmrc`, the .NET SDK from `global.json`, 
 
 Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A job that depends on a tool preinstalled on the image, rather than installed by a setup action, names the image version (`ubuntu-26.04`) or installs the tool itself.
 
+`actions/setup-node` turns npm caching on by itself when `package.json` has a `packageManager` field, and then fails if there is no lockfile. A repo whose `package.json` only wraps scripts and has no dependencies (the Android and Windows repos) sets `package-manager-cache: false` on that step, with a comment.
+
 ### CI-7: Action pinning and Dependabot for actions
 
 - **Status:** Decided (D-046). Existing (Dependabot `github-actions` entry in 1 of 8 repos with workflows: printstream; SHA pins in 0 of 8). FIX-009 and FIX-052 cover the floating branches and the unwatched satellite directory

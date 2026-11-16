@@ -129,6 +129,8 @@ A Node repo has `.nvmrc` with an exact version, `engines.node` and `engines.npm`
 
 The fleet version is store-sign-controller's generation (D-007): it is the target for all web repos, persistent and game-is-up migrate first, printstream moves last because its pin has a documented runtime-parity reason, and devkit moves to the fleet version. devkit's mismatch with its own CI is FIX-057.
 
+The fleet pin as of 2026-11-16 is Node 24.22.3 with npm 11.19.1, the current 24.x LTS (D-007 moved the fleet to Node 24). A repo adopting it switches with `nvm install` from its `.nvmrc`; the pin moves under the upgrade cadence (D-095), in every Node repo together. This table records the number so new repos do not pick their own.
+
 ### PLAT-9: One web library generation
 
 - **Status:** Decided (D-007). Existing (3 of 4 web monorepos share one generation: persistent, printstream, game-is-up; store-sign-controller is one major ahead on React, Prisma, zod and TypeScript)

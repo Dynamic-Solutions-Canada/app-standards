@@ -141,6 +141,7 @@ This rule adds the one requirement that is about the secrets themselves: a secre
 - Production keys never sign debug builds. Debug and local development builds use a separate development key; the shared Windows development certificate is supplied by the build tooling and is git-ignored in every Windows-building repo (FIX-002).
 - One application id has one signer across every channel it ships on; DIST-8 in [distribution.md](distribution.md) owns that rule (D-021 for phonelock). Where a store holds the app signing key, the upload key is the only one the maintainer keeps, and the published signing certificate fingerprint is recorded so releases can be checked against it.
 - Which signer each build context uses is DIST-2 (Windows) and DIST-8 (Android) in [distribution.md](distribution.md).
+- A throwaway certificate created for a single CI packaging check (DIST-2) is outside these custody rules: it is never a production or development signing key, is never stored, and signs nothing that is published.
 
 ### SEC-12: Dependency update cadence
 

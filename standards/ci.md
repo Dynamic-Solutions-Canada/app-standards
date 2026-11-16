@@ -127,7 +127,7 @@ A monorepo with several lanes adds the lane after the job word (`release-linux.y
 - **Reference:** `sonarphone-nmea-bridge/.github/workflows/play-publish.yml` (a `workflow_call` workflow used by its own `release.yml`)
 - **Why:** The three copies of `store-publish.yml` already differ, and each fix has to be made once per repo.
 
-The baseline workflows for CI, CodeQL, MSIX build and Store publish are reusable `workflow_call` workflows that each repo calls, pinned to a tag. This is possible because the repo that hosts them is public (D-004), so every caller can read them, the public repos included. A repo does not keep a hand-edited copy of a baseline workflow; a needed difference becomes an input.
+The baseline workflows for CI, CodeQL, MSIX build and Store publish are reusable `workflow_call` workflows that each repo calls, pinned to a tag. The shared MSIX build workflow signs its packaging check with the per-run throwaway certificate from DIST-2 by default, so no app decides this again; until it exists, `immich-drive/.github/workflows/build-msix.yml` ("Build MSIX" step) is the reference. This is possible because the repo that hosts them is public (D-004), so every caller can read them, the public repos included. A repo does not keep a hand-edited copy of a baseline workflow; a needed difference becomes an input.
 
 ### CI-11: Store credentials in workflows
 

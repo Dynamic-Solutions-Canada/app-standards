@@ -27,7 +27,7 @@ Each app has an `<App>MSIX/` folder with `Package.appxmanifest` and a `build-msi
 
 ### DIST-2: Signing depends on the context, and no key lives in a repo
 
-- **Status:** Existing (shared dev certificate through `windows-build.json` in 6 of 6; unsigned Store packages in 4 of 4 Store apps; a CI code-signing secret pair in 3 of 3 standalone apps with a build workflow: little-launcher, repilot, immich-drive). FIX-002 covers the one missing ignore rule
+- **Status:** Existing (shared dev certificate through `windows-build.json` in 6 of 6; unsigned Store packages in 4 of 4 Store apps; no CI code-signing secret in any of the 3 standalone apps with a build workflow, checked with `gh secret list` on 2026-11-16: little-launcher, repilot, immich-drive; CI packaging checks signed through the script fallback that FIX-060 removes). FIX-002 covers the one missing ignore rule
 - **Applies to:** Windows
 - **Reference:** `immich-drive/windows-build.json` and `immich-drive/.github/workflows/build-msix.yml`
 - **Why:** Three contexts need three different signers, and mixing them is how a private key ends up in a working tree or a script.
@@ -36,6 +36,7 @@ Each app has an `<App>MSIX/` folder with `Package.appxmanifest` and a `build-msi
 | --- | --- |
 | Local dev build | The shared dev certificate supplied by the build tool (`"signing": "shared-dev"` in `windows-build.json`). The app repo holds no certificate |
 | CI sideload or portable build | A code-signing certificate held as repository secrets, passed to the packaging script, with a timestamp |
+| CI packaging check (nothing published) | A throwaway self-signed certificate created per run with a random password, masked in the log, written only to the runner's temp folder, removed from the certificate store and deleted after the run, and passed to the packaging script like any other. It is never stored or reused. Building unsigned is not a substitute, because it skips the script's signing branch (publisher stamp from the certificate subject, dev name stamp, signing tool), which dev builds depend on |
 | Store build | Unsigned (`-NoSign`); the Store signs on ingestion |
 
 Packaging scripts contain no fallback that signs with a certificate file kept beside the script, and no password (FIX-060). Key custody in general is SEC-11 in [security.md](security.md). Every repo ignores the dev certificate path and certificate file types (see [repo-hygiene.md](repo-hygiene.md)). Per-app self-signed certificates from before the shared dev certificate are deleted, not kept as a fallback.

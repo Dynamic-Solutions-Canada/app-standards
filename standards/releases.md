@@ -119,7 +119,7 @@ Each releasing repo has `.agents/skills/release/SKILL.md` holding the full proce
 
 - **Status:** Decided (D-063). Proposed (no releasing repo names the website or promo catalog step; printstream names its exports)
 - **Applies to:** all
-- **Reference:** `printstream/.agents/skills/release/SKILL.md` for a procedure that names every downstream step; `refresh.ps1` in apps-promo, documented in its README, for the catalog refresh
+- **Reference:** `printstream/.agents/skills/release/SKILL.md` for a procedure that names every downstream step; `scripts/refresh-catalog.ps1` in apps-promo, documented in its README, for the catalog refresh
 - **Why:** The website and the promo catalog are updated by hand outside every release document today, so they go stale without anyone deciding to leave them.
 
 One shared post-release skill, delivered as AI-9 in [ai-docs.md](ai-docs.md) describes, is called by every `release` skill and covers:

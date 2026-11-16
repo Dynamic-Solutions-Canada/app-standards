@@ -24,7 +24,7 @@ Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-laun
 | Kit | Owns | Does not own |
 | --- | --- | --- |
 | winui-app-kit | Tray icon and menu, tray flyout, window chrome and placement, the JSON settings store, start with Windows, theme switching, localization mechanism, app environment (packaged or not, version, data folders), single instance | Any app's pages, settings fields, strings, or feature behaviour |
-| apps-promo | The catalog data (`ids.json`, the generated manifest and icons), `refresh.ps1`, the WinUI page and its localization, `catalog.ts` for web consumers | Where the page sits in an app (see [promo.md](promo.md)); other apps' listings |
+| apps-promo | The catalog data (`ids.json`, the generated manifest and icons), `scripts/refresh-catalog.ps1`, the WinUI page and its localization, `catalog.ts` for web consumers | Where the page sits in an app (see [promo.md](promo.md)); other apps' listings |
 | devkit | A hostname, port and database per checkout and worktree, the routing proxy, `devkit.config.mjs`, the `devkit` commands, development data snapshots | Production deployment (D-045 lets it supply the deploy script as a template, nothing more), CI, the app's own dev processes |
 
 What the kits should additionally own is KIT-9 and KIT-10. The rules that depend on each kit are in [tray.md](tray.md), [ui.md](ui.md), [settings-config.md](settings-config.md), [promo.md](promo.md) and [dev-scripts.md](dev-scripts.md).

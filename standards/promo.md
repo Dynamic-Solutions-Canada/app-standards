@@ -2,7 +2,7 @@
 
 The "Our other apps" page: which apps show it, how they include it, and how the catalog behind it is kept complete.
 
-The page and its catalog live in the apps-promo repo, which owns its own usage docs: see [its README](https://github.com/Dynamic-Solutions-Canada/apps-promo) (local copy: `wsl-monitor/external/promo/README.md`) for how to add the submodule, how `refresh.ps1` regenerates the catalog, and how web consumers read it. This file says when and where an app uses it. Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app) unless a rule says otherwise.
+The page and its catalog live in the apps-promo repo, which owns its own usage docs: see [its README](https://github.com/Dynamic-Solutions-Canada/apps-promo) (local copy: `wsl-monitor/external/promo/README.md`) for how to add the submodule, how `scripts/refresh-catalog.ps1` regenerates the catalog, and how web consumers read it. This file says when and where an app uses it. Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app) unless a rule says otherwise.
 
 ## Overview
 
@@ -68,7 +68,7 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 - An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`.
 - The display name is the product's canonical name (D-012, see [branding.md](branding.md)); the catalog still shows "ImmichDrive".
 - Icons are 256 px, supplied through `iconUrl`, not the Store's 50 px logo (D-070, see [assets.md](assets.md)).
-- Adding or updating the entry and running `refresh.ps1` is a step of every release (D-063, see [releases.md](releases.md)). No release procedure includes it today.
+- Adding or updating the entry and running `scripts/refresh-catalog.ps1` is a step of every release (D-063, see [releases.md](releases.md)). No release procedure includes it today.
 
 ### PROMO-6: The manifest URL is a permanent identifier
 
@@ -78,7 +78,7 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 - **Why:** Installed copies fetch the catalog from a fixed public URL. If that URL stops resolving, every shipped app's page silently freezes at its last cached catalog.
 
 - The public manifest URL is recorded in the identifier registry (BRAND-10 in [branding.md](branding.md)) and is checked before any rename or transfer of the apps-promo repo. When the URL changes, the old one must keep serving the catalog for installed copies.
-- At runtime the page reads only the committed public manifest and its icons, with the last successful copy cached and the bundled copy as the offline fallback. Nothing but `refresh.ps1` talks to a store backend.
+- At runtime the page reads only the committed public manifest and its icons, with the last successful copy cached and the bundled copy as the offline fallback. Nothing but `scripts/refresh-catalog.ps1` talks to a store backend.
 - The fetch is a network call made by every app that shows the page, so each product's privacy policy names it (DOCS-8 in [docs.md](docs.md)).
 
 ### PROMO-7: Localization goes through the page's own hook

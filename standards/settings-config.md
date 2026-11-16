@@ -49,7 +49,18 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 - **Reference:** `hub-display-switch/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`MigrateV1`, the `.v1.bak` copy) as the nearest example of one migration step
 - **Why:** With defaults omitted from the file, a `false` saved for a setting that defaults to `true` loads back as `true`. little-launcher works around this per property; repilot, immich-drive and persistent's desktop app are exposed. And without a version, a migration has to guess the file's age from its shape.
 
-- Every settings file carries an integer `SchemaVersion`. Migrations are an ordered list of functions, one per version step, run by the kit's store, and the old file is backed up before the first one runs.
+- Every settings file carries an integer `SchemaVersion`. Migrations are an ordered list of functions, one per version step, run by the kit's store, and the old file is backed up before the first one runs. A file without a version is version 0, and the current version is the number of steps.
+- The store reports how the file was loaded, and each case is handled the same way in every app:
+
+| Case | Handling |
+| --- | --- |
+| First run | Defaults are written at once, so the next launch is an ordinary load |
+| Migrated | Backed up as `settings.json.v<old>.bak` before the first step |
+| Written by a newer app version (a downgrade) | Backed up as `settings.json.v<n>.bak`, loaded as far as this version understands, and not rewritten until the next save |
+| Unreadable, or a migration step throws | Kept as `.bad` (and `.v<n>.bak` for a failed migration), defaults written, and the one-time "settings were reset" notice shown (CONF-2) |
+| Reset | See CONF-4 |
+
+The mechanics are the kit's `JsonSettingsStore` and are documented in its README; an existing app keeps its current behaviour until it opts into the versioned store.
 - Default values are written to the file; only nulls are omitted. An app switches to written defaults before it next changes any default, because the switch is only safe while every omitted value still means the current default.
 - An app version stamp such as little-launcher's `LastRunVersion` may be kept as well, for upgrade notices only (UI-15). It is not used to choose migrations.
 
@@ -60,7 +71,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 - **Reference:** `little-launcher/LittleLauncher/Pages/SystemPage.xaml` for export and import
 - **Why:** "Delete the settings file" is the support answer today, and it requires the user to find a folder that packaged apps redirect.
 
-- **Reset:** the Settings page offers "Reset settings". It renames the current file (so it can be recovered), loads defaults, and reports it as a reset, not a first run. It does not touch state Windows owns, such as the startup task (TRAY-10 in [tray.md](tray.md)), or stored credentials unless the user is told. Web apps offer the equivalent for device preferences ("reset this device").
+- **Reset:** the Settings page offers "Reset settings". It renames the current file to `settings.json.<UTC timestamp>.reset` (so it can be recovered), writes defaults, and reports it as a reset, not a first run. It does not touch state Windows owns, such as the startup task (TRAY-10 in [tray.md](tray.md)), or stored credentials unless the user is told. Web apps offer the equivalent for device preferences ("reset this device").
 - **Export and import** are offered where settings are content the user authored (launchers, mappings, layouts), not for apps with a handful of switches. An export never contains credentials.
 - Account-level data export and deletion for web products is a separate question (D-025, see [security.md](security.md)).
 

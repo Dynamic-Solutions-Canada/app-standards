@@ -147,7 +147,7 @@ Values below are as found in the audit on 2026-11-16, with the decisions of the 
 
 | Product | Display name | Repo today | Visibility (D-004) | Permanent identifier | URLs fetched or shown by shipped copies |
 | --- | --- | --- | --- | --- | --- |
-| Hub Display Switch | Hub Display Switch | `Dynamic-Solutions-Canada/hub-display-switch` | Public | None yet; placeholder `TechnicallyReal.HubDisplaySwitch` until the Store name is reserved (D-014) | Promo catalog |
+| Hub Display Switch | Hub Display Switch | `Dynamic-Solutions-Canada/hub-display-switch` | Public | Placeholder package identity `TechnicallyReal.HubDisplaySwitch` until the Store name is reserved (D-014); tray GUID `5b0f1c7e-3c1a-4e8e-9a35-6f1d2a7c4b11`; host window "Hub Display Switch Host"; single-instance mutex `HubDisplaySwitch`; startup task `HubDisplaySwitchStartup` | Promo catalog |
 | WSL Monitor | WSL Monitor | `Dynamic-Solutions-Canada/wsl-monitor` | Public | None yet; placeholder `TechnicallyReal.WslMonitor` until the Store name is reserved (D-014) | Promo catalog |
 | Little Launcher | Little Launcher | `Dynamic-Solutions-Canada/little-launcher` | Public | Store identity `27766TechnicallyReal.LittleLauncher` | Release check on the repo; About source link (FIX-013); promo catalog |
 | Repilot | Repilot | Resolves to `Dynamic-Solutions-Canada/repilot`; app strings use the old owner (FIX-015) | Public | Store identity `27766TechnicallyReal.CopilotKeyRemapper`, an old product name kept permanently | Release check and About link on the old owner; promo catalog |

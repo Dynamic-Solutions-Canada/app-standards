@@ -40,6 +40,8 @@ The canonical text is kept in one place and reaches each repo by the mechanism c
 
 A formatter is enforced in every stack, using the tools in the table above (D-016). Enforcement is rolled out one repo at a time, each taking its one-off reformat commit when it adopts the check; printstream does so on its own schedule. Each repo exposes `format` (rewrites files) and `format:check` (fails on a difference), and `format:check` is part of the `validate` gate (see [dev-scripts.md](dev-scripts.md)).
 
+For Windows repos, `format:check` runs `dotnet format <project> --verify-no-changes` on Linux with `EnableWindowsTargeting=true`, using the host SDK when present and otherwise the `mcr.microsoft.com/dotnet/sdk` image at the `global.json` version, under a memory cap. Reference: winui-app-kit's `scripts/dotnet`. Against an app (not a library) the workspace loads with warnings and code-behind may be only partly checked, so the Windows compile in CI (CI-3) remains the backstop.
+
 A repo adopts the formatter in one commit that contains only the reformat, with no behaviour change, so it can be skipped in blame and reviewed by its size alone. New and small repos take that commit now. printstream takes it on its own schedule because of its size.
 
 ### STYLE-3: Web lint uses the shared ESLint flat config
@@ -73,10 +75,11 @@ Every monorepo has a root `tsconfig.base.json` that workspaces extend. It is the
 
 - File-scoped namespaces.
 - Four-space indentation, braces on every block.
-- Private fields are `_camelCase`. Types, methods, properties and constants are PascalCase.
+- Private fields are `_camelCase`, including mutable private static fields. Private `static readonly` fields are PascalCase, like constants (`Logger`, `LatestReleaseUri`). No `s_` prefix. Types, methods, properties and constants are PascalCase.
+- MSBuild and manifest XML (`.csproj`, `.props`, `.targets`, `.projitems`, `.appxmanifest`, `.resw`, `.config`, `.nuspec`) use 2-space indentation; XAML keeps 4 (STYLE-1).
 - Namespaces match the project name and folder path, with no company prefix.
 
-These go in the C# section of the `.editorconfig` (STYLE-1) so that `dotnet format` applies them.
+These go in the `.editorconfig` (STYLE-1) so that `dotnet format` applies them. The static field rules are two naming rules, not an exemption: `private static readonly` fields match PascalCase, other private fields (static or not) match `_camelCase`. Decided 2026-11-16 from the code: `_camelCase` is the majority form for mutable private statics (62 of about 103 across the Windows repos; `s_` appeared only in winui-app-kit and once in wsl-monitor), PascalCase was already the form for `static readonly`, and all 36 MSBuild and manifest files already used 2-space indentation.
 
 ### STYLE-6: Nullable and language settings are on in every .NET project
 
@@ -95,6 +98,8 @@ Every project, including helper executables and test harnesses, has `Nullable` e
 - **Why:** The compiler is the only reviewer that reads every line on every build.
 
 The shared build props turn on the .NET analyzers and `EnforceCodeStyleInBuild`, so an `.editorconfig` violation shows up in a normal build. A change does not add warnings: a build that was clean stays clean. Once a repo builds without warnings, its CI and Release builds set `TreatWarningsAsErrors`; Debug builds leave it off so work in progress still compiles. A warning that cannot be fixed is suppressed at the narrowest scope with a reason.
+
+The shared props pin `AnalysisLevel` to the SDK's major (`10.0` today), so a newer SDK feature band cannot add warnings that become errors. Build props of a project apply wherever it is built: when an app builds winui-app-kit through a project reference, the kit's warnings-as-errors fires inside the app's Release build, so a kit tag is warning-free before apps take it (KIT-5).
 
 A library with a public API (winui-app-kit) also sets `GenerateDocumentationFile`, so undocumented public members are reported.
 

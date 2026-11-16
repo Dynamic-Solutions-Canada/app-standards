@@ -178,6 +178,8 @@ A skill does not hold configuration, such as a commit author (FIX-005).
 
 Each repo with skills tracks one symlink, `.claude/skills -> ../.agents/skills`, created with `ln -s ../.agents/skills .claude/skills` and committed as a symlink. `.agents/skills/` stays the one real location; never put a skill directly in `.claude/skills/`.
 
+The Windows build tooling (windows-build-tools) skips `.claude/` and `.agents/` at any depth when it stages a source tree, so the symlink does not break `verify:desktop` or packaging; it still rejects any other symlink. A Windows app adds the symlink, or bumps to a winui-app-kit tag that contains it, only once it uses a tooling version with that exclusion.
+
 Repos are worked on from WSL and Linux, where git checks symlinks out correctly. A checkout made by Windows git with `core.symlinks` off turns the link into a small text file and Claude Code there sees no skills; that is acceptable because no agent works from a Windows checkout. If that changes, switch to per-skill symlinks or revisit this rule.
 
 ### AI-9: Shared skills

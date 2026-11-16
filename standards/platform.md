@@ -56,7 +56,7 @@ Each stack's pins are reviewed once a quarter and moved together (D-095). A secu
 
 ### PLAT-2: One .NET SDK pin
 
-- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
+- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; hub-display-switch and wsl-monitor still pin 10.0.100, rechecked 2026-11-16; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
 - **Applies to:** Windows, Kit (winui-app-kit)
 - **Reference:** `repilot/global.json`
 - **Why:** Two SDK bands are pinned today, and the older one predates the runtime fix that PLAT-3 requires.

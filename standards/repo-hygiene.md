@@ -107,6 +107,8 @@ Every repo has a `.gitignore` in three parts, in this order. The shared block co
 | `local.properties` | Android SDK path |
 | Editor and OS files | `.vs/`, `.idea/`, `.DS_Store`, `Thumbs.db` |
 
+The Visual Studio template's `[Rr]elease/` rule also matches `.agents/skills/release/`, the standard `release` skill (AI-7, REL-8). A Windows repo that has the skill re-includes it in its project rules with `!/.agents/skills/release/`, and checks it with `git check-ignore`. Reference: winui-app-kit's `.gitignore`.
+
 Directory rules end with a slash. A rule copied from another repo is checked for that repo's names before it is committed, and lines that match nothing are removed. What counts as a secret and where one may live are in [security.md](security.md); which agent folders are tracked is in [ai-docs.md](ai-docs.md).
 
 This rule owns the ignore file; LAYOUT-14 in [repo-layout.md](repo-layout.md) was merged into it.

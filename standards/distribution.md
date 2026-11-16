@@ -34,7 +34,7 @@ Each app has an `<App>MSIX/` folder with `Package.appxmanifest` and a `build-msi
 
 | Context | Signer |
 | --- | --- |
-| Local dev build | The shared dev certificate supplied by the build tool (`"signing": "shared-dev"` in `windows-build.json`). The app repo holds no certificate |
+| Local dev build | The shared dev certificate supplied by the build tool (`"signing": "shared-dev"` in `windows-build.json`). The app repo holds no certificate, and the tool reads the certificate's password from the user-level credential store, never from code |
 | CI sideload or portable build | A code-signing certificate held as repository secrets, passed to the packaging script, with a timestamp |
 | CI packaging check (nothing published) | A throwaway self-signed certificate created per run with a random password, masked in the log, written only to the runner's temp folder, removed from the certificate store and deleted after the run, and passed to the packaging script like any other. It is never stored or reused. Building unsigned is not a substitute, because it skips the script's signing branch (publisher stamp from the certificate subject, dev name stamp, signing tool), which dev builds depend on |
 | Store build | Unsigned (`-NoSign`); the Store signs on ingestion |

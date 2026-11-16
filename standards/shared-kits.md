@@ -74,6 +74,7 @@ A web monorepo gets its development hostname, ports and database from devkit, co
 | Web tooling | devkit as a git-tag-pinned npm dependency |
 | Web UI components | A git-tag-pinned npm package for primitives that have reached a third copy (D-005: a new `web-app-kit` repo); the rest stay copied from printstream under the same names (KIT-10) |
 
+- Shared build configuration arrives through three imports: the app's `Directory.Build.props`, `Directory.Build.targets` and `Directory.Packages.props` each import the matching file from the kit's `build/` folder. The kit's README documents the files and their switches; apps do not restate them.
 - Shared code is never vendored by hand into an app's own source folders.
 - The build tooling the Windows apps call (windows-build-tools) has no remote today and is referenced by an absolute host path (FIX-049). It gets a GitHub repo of its own (D-005).
 - The kit README's "No XAML (yet)" rule is replaced when this decision lands.

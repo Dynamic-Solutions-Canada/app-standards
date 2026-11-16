@@ -90,6 +90,8 @@ The app project targets `net10.0-windows10.0.22000.0`, builds for `x64` and `ARM
 
 Every WinUI project in the family uses the Windows App SDK version that winui-app-kit uses; an app does not move ahead of the kit. The packages the family shares (Windows App SDK, NLog, CommunityToolkit.Mvvm) get their version from one shared file, not from each csproj. That file is central package management (`Directory.Packages.props`), with the shared versions imported from the kit, which is where D-005 puts shared build props (D-096).
 
+Taking the kit's central versions moves an app to the kit's package versions: NLog was on 6.1.1 in little-launcher, repilot, immich-drive and persistent and on 6.2.2 in the kit, hub-display-switch and wsl-monitor (2026-11-16), so those four move to 6.2.2 with their kit migration.
+
 One secondary project is on a newer major today (persistent's widget). A project that needs a newer major than the kit says why in a comment, and the kit is moved as its own change.
 
 ### PLAT-6: Minimum Windows version

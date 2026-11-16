@@ -93,7 +93,7 @@ Every repo has a `.gitignore` in three parts, in this order. The shared block co
 
 1. **Stack template:** the Visual Studio template plus the Windows tail (the packaging project's `bin/`, the build bridge's working folder) for Windows; `node_modules/` and `dist/` for Web; Gradle `build/` and `.gradle/` for Android.
 2. **Project rules:** anything specific to the repo, each rule with a one-line comment saying why it exists.
-3. **Shared block,** the same in every repo:
+3. **Shared block,** the same in every repo. For Windows repos on winui-app-kit it is the kit's `build/shared.gitignore`, and `external/winui-app-kit/scripts/check-gitignore .` in `validate` checks that the repo's `.gitignore` ends with it unchanged:
 
 | Rule | Covers |
 | --- | --- |
@@ -137,7 +137,7 @@ This rule owns encoding and line endings; STYLE-10 in [code-style.md](code-style
 - **Reference:** `printstream/.github/dependabot.yml`
 - **Why:** Pinned versions only stay safe if something proposes the updates, and grouping keeps that to one pull request a week.
 
-`.github/dependabot.yml` has one entry per ecosystem in the repo (npm, NuGet, Gradle, pip, and `github-actions`), each on a weekly schedule with updates grouped. Every directory that holds a manifest or workflow source is listed, not only the root (FIX-052). Dependabot branches are merged or closed within the week; they are not left open.
+`.github/dependabot.yml` has one entry per ecosystem in the repo (npm, NuGet, Gradle, pip, and `github-actions`), each on a weekly schedule with updates grouped. Every directory that holds a manifest or workflow source is listed, not only the root (FIX-052). Dependabot branches are merged or closed within the week; they are not left open. Not yet proven: whether Dependabot's NuGet updater follows the import from `Directory.Packages.props` into the kit's `build/WinUIAppKit.Packages.props`, or only updates versions written directly in the app's file. Until a Dependabot run shows it, the kit's own Dependabot updates the shared versions and apps take them by bumping the kit tag.
 
 This rule owns the Dependabot setup. Version pinning policy is PLAT-10 in [platform.md](platform.md), action pinning is CI-7 in [ci.md](ci.md), and how fast a security update must land is SEC-12 in [security.md](security.md). Choosing versions for new dependencies is covered by the user-level agent rules.
 

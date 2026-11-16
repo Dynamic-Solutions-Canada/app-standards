@@ -97,6 +97,8 @@ Every project, including helper executables and test harnesses, has `Nullable` e
 - **Reference:** `wsl-monitor/external/winui-app-kit/WinUIAppKit/WinUIAppKit.csproj` (documentation warnings on public members, the only compiler-checked style rule in the family)
 - **Why:** The compiler is the only reviewer that reads every line on every build.
 
+An app that is not yet warning-free sets `WinUIAppKitWarningsAsErrors=false` in its `Directory.Build.props`, with a comment saying why, and removes it once the build is clean; that switch is how "once a repo builds without warnings" below is put into practice for apps on the kit.
+
 The shared build props turn on the .NET analyzers and `EnforceCodeStyleInBuild`, so an `.editorconfig` violation shows up in a normal build. A change does not add warnings: a build that was clean stays clean. Once a repo builds without warnings, its CI and Release builds set `TreatWarningsAsErrors`; Debug builds leave it off so work in progress still compiles. A warning that cannot be fixed is suppressed at the narrowest scope with a reason.
 
 The shared props pin `AnalysisLevel` to the SDK's major (`10.0` today), so a newer SDK feature band cannot add warnings that become errors. Build props of a project apply wherever it is built: when an app builds winui-app-kit through a project reference, the kit's warnings-as-errors fires inside the app's Release build, so a kit tag is warning-free before apps take it (KIT-5).

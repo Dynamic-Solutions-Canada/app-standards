@@ -23,7 +23,7 @@ Counts are against the in-scope repos in [SCOPE.md](../SCOPE.md). "WinUI apps" m
 - **Reference:** `wsl-monitor/WslMonitor/NLog.config`
 - **Why:** A user asked for "the log from when it broke" can find one file per launch by its timestamp, in the same place in every app.
 
-Logs are written to `%AppData%\<DataFolderName>\logs.<start time>.txt`, one file per launch, named by the process start time. `<DataFolderName>` is the same folder that holds `settings.json`; CONF-1 in [settings-config.md](settings-config.md) defines it once for both the settings store and the logging config. A hand-appended log file, a second folder, or a vendor-named folder is not allowed.
+Logs are written to `%AppData%\<DataFolderName>\logs.<start time>.txt`, one file per launch, named by the process start time. `<DataFolderName>` is the same folder that holds `settings.json`; CONF-1 in [settings-config.md](settings-config.md) defines it once for both the settings store and the logging config. The kit's shared NLog config cannot name the folder, so the app calls `AppLogging.UseDataFolder("<DataFolderName>")` first thing in its `App` constructor; the config is linked into every app executable by the kit's build targets, so an app deletes its own `NLog.config` rather than copying the kit's (see the kit's README). A hand-appended log file, a second folder, or a vendor-named folder is not allowed.
 
 ### LOG-2: One shared NLog config, with levels and retention
 
@@ -41,7 +41,7 @@ The config comes from winui-app-kit (see [shared-kits.md](shared-kits.md)), not 
 | Layout | Explicit: timestamp, upper-case level, short logger name, message with exception |
 | Retention | The current file plus three older ones |
 
-Retention must be verified on a long-lived install before this rule is marked existing: the current config names three archives but sets no archive trigger, so whether old per-launch files are pruned is unconfirmed. If they are not, the kit prunes them at startup.
+Retention is verified for NLog 6.2.2 (2026-11-16, in winui-app-kit): with the per-launch file name and `maxArchiveFiles="3"`, NLog deletes older per-launch files when a new one is created, keeping the current file plus three, and only inside that app's folder. No pruning code is needed. The test ran in a Linux container on the same NLog code path that Windows uses; a long-lived Windows install has not been watched yet.
 
 Use levels the same way in every stack:
 

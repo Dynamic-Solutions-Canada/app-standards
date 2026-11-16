@@ -185,6 +185,12 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 - **Consequence:** under D-004 every app but PS has a public repo, so issues are the target in ten of the eleven end-user apps, including GIU and SSC on the personal account. The issue template (HYG-9) reminds the reporter what a log may contain, because a public issue is where a user will attach one (BRAND-8, LOG-8, UI-5).
 - **Reversibility:** costly once shipped (installed copies keep the link they were built with). **Repos:** all 11 end-user apps. **Sources:** REC (BRAND-8, LOG-8, UI-5; raised by two writers).
 
+### D-109 sonarphone-nmea-bridge exceptions to SEC-5 and AI-13
+`security` `ai-docs`
+- **Decided (2026-11-16):** the ESP32 bridge component keeps the T-Box vendor's factory default as the default for `phone_ap_password` instead of requiring the option (an exception to SEC-5), and the protocol spec keeps naming the reference T-Box unit's network alongside that default (an exception to AI-13). The vendor default stays documented, since users need it to connect.
+- **Consequence:** builders who don't set `phone_ap_password` broadcast the vendor's known default; secrets.yaml and the example file make overriding it easy. Revisit if the bridge is ever distributed as a prebuilt image.
+- **Reversibility:** cheap. **Repos:** SNB. **Sources:** the sonarphone-nmea-bridge parity session, package 1.
+
 ## Open decisions
 
 No entry is open. D-004 to D-025, D-085 and D-086 were answered on 2026-11-16, and they are recorded under "Already decided". The points left open inside those answers were settled the same day:

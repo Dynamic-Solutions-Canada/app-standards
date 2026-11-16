@@ -100,6 +100,8 @@ Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A jo
 
 `codeql.yml` runs on push to `main`, on pull requests, and weekly. C# repos scan `csharp` and `actions` in buildless mode on `ubuntu-latest`; web repos scan JavaScript and TypeScript. The trigger branch must be the repo's actual default branch.
 
+A repo that consumes kits as submodules checks them out so calls resolve, but scans only its own code (`paths-ignore: [external/**]` in the CodeQL config); each kit is scanned in its own repo.
+
 ### CI-9: Workflow file names and display names
 
 - **Status:** Decided (D-048). Existing (Title Case display names in 4 of 6 repos recorded: little-launcher, repilot, immich-drive, printstream)

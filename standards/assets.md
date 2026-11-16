@@ -171,6 +171,8 @@ The check (part of the listing validation in LIST-9) confirms dimensions, count,
 
 The README header icon is `assets/generated/icon-256.png`, shown at one size. README screenshots are files from `store-assets/web/screenshots/`, by relative path. The README does not hot-link an image from a hosted site, does not point at a platform output such as an MSIX logo, and does not carry images that exist nowhere else in the layout. Kits and tools need no images.
 
+When the only screenshots a product has are a store's own set (an Android app with only Play images), the README points at that store's folder (`store-assets/play/screenshots/phone/...`) rather than copying them into `store-assets/web/screenshots/`, since ASSET-4 allows one copy of each image. The same holds for the icon until an SVG master and the shared generator produce `assets/generated/` (reference: sonarphone-nmea-bridge).
+
 ### ASSET-11: Home Assistant brand images
 
 - **Status:** Existing (1 of 1). The sizes are Decided (D-103)

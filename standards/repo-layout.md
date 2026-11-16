@@ -193,6 +193,8 @@ The source of truth is a folder in the parent product (`integrations/home-assist
 ```text
 <repo>/
 ├── <Project>/  or  src/        one source folder
+├── Xaml/                       shared-items XAML, if the kit ships any (beside, not inside, the library)
+├── build/                      imported .props, .targets and shared files, if any
 ├── tests/                      if any
 ├── scripts/                    if any
 ├── README.md                   the kit's usage doc (see readme.md)
@@ -201,7 +203,7 @@ The source of truth is a folder in the parent product (`integrations/home-assist
 ├── .editorconfig, .gitattributes, .gitignore
 ```
 
-A kit has no committed build output (LAYOUT-13) and no consumer-specific paths.
+A kit has no committed build output (LAYOUT-13) and no consumer-specific paths. XAML that apps compile through a shared-items import sits in its own folder outside the library project, because the library would otherwise compile it too and produce conflicting resources (winui-app-kit's `Xaml/`, the same mechanism apps-promo uses).
 
 ### LAYOUT-7: Submodules live under `external/`
 

@@ -122,6 +122,8 @@ No user-facing string is a literal in code or markup in a localized app. Symbols
 - Plural or gendered sentences are separate keys or the library's plural form, never string concatenation.
 - Existing English-sentence keys in hub-display-switch are not rewritten for their own sake; under D-067 they move to dotted keys at the app's next string pass. `{name}` in little-launcher changes when it adopts the kit.
 
+Shared labels that every app shows (D-072: Settings, About and tray wording such as "Start with Windows", "Our other apps", "Open logs folder") are supplied by winui-app-kit in its own catalogs under the `kit.` key prefix, in the same wording catalogs as the apps. Text lookup checks the app's catalog, then the kit's, then `en-US`. Apps do not define `kit.` keys: a different wording for a shared label is a change to the kit, so the label reads the same in every app. The catalog check (LOC-9) treats `kit.` keys as owned by the kit.
+
 ### LOC-8: Catalog location and file names
 
 - **Status:** Decided (D-067). Existing (1 of 5 Windows apps uses the decided path: hub-display-switch; four different paths are in use)

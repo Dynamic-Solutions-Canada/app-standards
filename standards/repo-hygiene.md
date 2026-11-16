@@ -58,6 +58,8 @@ A product that ships a binary includes a generated third-party notices file in t
 
 A `NOTICE` file describes the repo it sits in. A repo generated from another gets its own, not a copy of its parent's (FIX-024).
 
+Android: the notices file is generated at build time per variant into the APK's assets (`third_party_notices.txt`), and the build fails when a module's POM chain names no licence. While the Android Gradle Plugin is held at 8.5.2 (D-095), no maintained plugin works (AboutLibraries 15.3.0 applies but registers no tasks there), so repos use the hand-written `generate<Variant>ThirdPartyNotices` task in sonarphone-nmea-bridge's `android/app/build.gradle.kts` as the reference, ported rather than shared, and switch to a maintained plugin at the AGP upgrade. Proof of a working setup: the module list in the APK equals the variant's runtime classpath.
+
 ### HYG-4: Default branch and topic branches
 
 - **Status:** Existing (15 of 15 use `main` as the default branch). Branch prefixes and clean-up are Decided (D-090)

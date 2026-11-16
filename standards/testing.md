@@ -32,7 +32,7 @@ Tests use Node's built-in runner, with `tsx` for TypeScript, and Testing Library
 - **Reference:** `little-launcher/tests/AGENTS.md`; `little-launcher/tests/LauncherItemReorder.Tests/README.md`
 - **Why:** A harness with no framework and no Windows-only target runs from WSL and on a Linux runner, so policy code is tested without a Windows machine.
 
-Each harness is an `OutputType=Exe` project under `tests/<App>.<Area>.Tests/`, run with `dotnet run`, that links the production source files it tests and adapts native boundaries so it runs on Linux. It exits non-zero on failure. Each harness has a short README saying what it covers and what it does not prove (anything that needs a real window, the installed package, or the shell). A root `test` script runs every portable harness. No xunit, NUnit or MSTest.
+Each harness is an `OutputType=Exe` project under `tests/<App>.<Area>.Tests/`, run with `dotnet run` (the root `test` script discovers and runs every harness; winui-app-kit's `scripts/run-tests` with `scripts/dotnet`, which uses the host SDK or the pinned SDK container, is the reference), that links the production source files it tests and adapts native boundaries so it runs on Linux. It exits non-zero on failure. Each harness has a short README saying what it covers and what it does not prove (anything that needs a real window, the installed package, or the shell). A root `test` script runs every portable harness. No xunit, NUnit or MSTest.
 
 ### TEST-3: Android tests are JVM unit tests; the emulator is optional
 

@@ -195,8 +195,11 @@ The source of truth is a folder in the parent product (`integrations/home-assist
 ├── <Project>/  or  src/        one source folder
 ├── Xaml/                       shared-items XAML, if the kit ships any (beside, not inside, the library)
 ├── build/                      imported .props, .targets and shared files, if any
-├── tests/                      if any
-├── scripts/                    if any
+├── tests/                      harnesses, if any
+├── scripts/                    if any (winui-app-kit: dotnet, run-tests, windows-build, check-gitignore, check-localization.py)
+├── release-notes/              one file per version (REL-6)
+├── .agents/, .claude/skills    agent guides and skills (AI-6 to AI-8)
+├── .github/                    workflows, SECURITY.md, issue template
 ├── README.md                   the kit's usage doc (see readme.md)
 ├── AGENTS.md
 ├── LICENSE                     (D-008)

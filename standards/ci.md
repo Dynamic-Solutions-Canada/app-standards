@@ -76,6 +76,8 @@ Every workflow file has:
 
 Workflows read the Node version from `.nvmrc`, the .NET SDK from `global.json`, and Gradle from the committed wrapper. No workflow hard-codes a toolchain version. Which versions the pins hold is in [platform.md](platform.md). Runner images are named explicitly for builds (`windows-2025` for MSIX work); buildless scans use `ubuntu-latest`.
 
+Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A job that depends on a tool preinstalled on the image, rather than installed by a setup action, names the image version (`ubuntu-26.04`) or installs the tool itself.
+
 ### CI-7: Action pinning and Dependabot for actions
 
 - **Status:** Decided (D-046). Existing (Dependabot `github-actions` entry in 1 of 8 repos with workflows: printstream; SHA pins in 0 of 8). FIX-009 and FIX-052 cover the floating branches and the unwatched satellite directory

@@ -175,7 +175,7 @@ A host keeps its settings in one state store under the platform's user-data fold
 | --- | --- | --- |
 | Windows | `Directory.Build.props` | The version (the only place it is written; see [releases.md](releases.md)) and shared build properties |
 | Windows | `global.json` | The .NET SDK pin (D-053, see [platform.md](platform.md)) |
-| Windows | `windows-build.json` | Per-app values for the shared build tooling: project, identities, signing mode (D-065, see [distribution.md](distribution.md)) |
+| Windows | `windows-build.json` | Per-app values for the shared build tooling and the kit's scripts: project, identities, signing mode (D-065, see [distribution.md](distribution.md)), the packaging settings read by the kit's `build-msix.ps1`, and the `localization` block read by the shared `check:l10n` (see winui-app-kit's README) |
 | Web | `devkit.config.mjs` | Ports, database, worktree files and env mapping for devkit, in the house shape |
 | Android | `gradle.properties`, the version catalog | Build settings and dependency versions (D-055) |
 

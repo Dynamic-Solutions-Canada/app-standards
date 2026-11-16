@@ -115,6 +115,8 @@ The tag workflow builds, runs the gate, and creates the store submission as a dr
 
 Each releasing repo has `.agents/skills/release/SKILL.md` holding the full procedure, built from the checklist for its stack below, and a short human summary with a link in its development doc (see [docs.md](docs.md) and [ai-docs.md](ai-docs.md)). Invoking the skill authorises its own commit, tag and push end to end, with no second confirmation for those steps (D-013; AI-14 in [ai-docs.md](ai-docs.md)); a `deploy` skill carries the same authority for its own steps. As written before that decision, the skill stops for approval of the notes before anything is committed, and stops on a dirty tree; whether those two stops survive "end to end" is an open point noted in D-013, and they stay until the maintainer says otherwise. Procedures kept as Codex command files or in `AGENTS.md` move to the skill (D-027).
 
+Notes approval and the go-ahead for the commit, tag and push may come from the maintainer or from someone the maintainer has delegated release approval to; the skill records who approved in its report.
+
 ### REL-9: Post-release steps are part of the release
 
 - **Status:** Decided (D-063). Proposed (no releasing repo names the website or promo catalog step; printstream names its exports)

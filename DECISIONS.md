@@ -117,6 +117,7 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 `distribution`
 - **Decided (2026-11-16):** HDS and WSL go to the Microsoft Store, and their names are reserved now. The standard update path is "open the Store updates page", moved into KIT. PER keeps its in-app installer as the exception.
 - **Consequence:** both apps replace their placeholder identity with the Store-assigned one before any install base exists (BRAND-6, DIST-4), and gain CI, tags, a licence file and a promo catalog entry as parity work. The small update service is shared from KIT (DIST-6). This unblocks D-065.
+- **Follow-up (2026-11-16):** both are paid apps at US $0.99 (`Tier1012`) with the same free trial as the other paid Store apps, so their GitHub Releases attach no binaries (DIST-5).
 - **Reversibility:** permanent for the reserved identity; cheap for update depth. **Repos:** HDS, WSL; KIT for the update service. **Sources:** WAP 4.10, WAR 4.12, AI 2.6.
 
 ### D-015 What the public Home Assistant repo contains

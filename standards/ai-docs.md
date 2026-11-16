@@ -246,6 +246,8 @@ Tracked agent files use repo-relative paths. They contain no absolute host path,
 
 A cross-repo convention ("do it the way Little Launcher does") is replaced by a link to the rule in these standards once the rule exists.
 
+Tracked files name roles, not people: a skill or guide says "the maintainer" (or "the release approver") where a person must act or approve, never a personal name.
+
 ### AI-14: No restated global rules; one commit and push rule
 
 - **Status:** Decided (D-013) for commit, push, release and deploy authority. Proposed for restatement (FIX-043)

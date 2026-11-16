@@ -111,7 +111,7 @@ Never log credentials, tokens, session identifiers, full request or response bod
 - **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` (About page content); wsl-monitor (the one-line kit call); printstream's Logs tab and help and feedback dialog (web)
 - **Why:** With no telemetry, the only way the maintainer sees a problem is when the user can find the log and knows where to send it.
 
-- **Windows:** "Open logs folder" opens the log folder in Explorer. It appears on the About page beside the support link, and in the tray menu of a resident app. This rule owns what the action does; where it sits is owned elsewhere and not restated: the About items are BRAND-8 in [branding.md](branding.md), the About page layout is UI-5 in [ui.md](ui.md), and the tray menu position is TRAY-5 in [tray.md](tray.md).
+- **Windows:** "Open logs folder" opens the log folder in Explorer (on winui-app-kit, `AppLogging.OpenLogsFolder()`). It appears on the About page beside the support link, and in the tray menu of a resident app. This rule owns what the action does; where it sits is owned elsewhere and not restated: the About items are BRAND-8 in [branding.md](branding.md), the About page layout is UI-5 in [ui.md](ui.md), and the tray menu position is TRAY-5 in [tray.md](tray.md).
 - **Web:** a self-hosted product exposes recent server logs to its administrators inside the app, as printstream does. A product the maintainer hosts needs only a support link, since the maintainer reads the server logs directly.
 - **Android:** a support link in Settings, next to the privacy link (BRAND-8). No in-app log export is required.
 

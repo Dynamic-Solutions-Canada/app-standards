@@ -107,7 +107,7 @@ The page is a candidate for the kit's shared XAML (KIT-9 in [shared-kits.md](sha
 - **Reference:** `wsl-monitor/WslMonitor/DetailsWindow.xaml.cs` (`ConfirmAsync`)
 - **Why:** A destructive dialog whose default button is the destructive one turns a stray Enter key into data loss. One helper makes the safe default the only default.
 
-- Confirmations go through one `ConfirmAsync`-style helper per app, not a `ContentDialog` constructed at each call site (little-launcher has 18 constructions across 12 files). The helper moves to the kit when it is extracted (KIT-9).
+- Confirmations go through one `ConfirmAsync`-style helper per app, not a `ContentDialog` constructed at each call site (little-launcher has 18 constructions across 12 files). Apps on winui-app-kit use the kit's `ConfirmDialog.ConfirmAsync`, which always defaults to Close and never leaves a caller waiting if its window closes (see the kit's README).
 - A destructive confirmation names the action on its primary button and sets the default button to Close.
 - Standing status that the user must see (not connected, needs setup) is a non-closable `InfoBar` at the top of the Home page, as repilot and immich-drive do. Do not use a dialog for status. Operating-system notifications (toasts) are LOG-11 in [logging.md](logging.md).
 - A second click on the same button as confirmation (wsl-monitor's flyout) is allowed only inside a flyout, where a dialog would dismiss it.

@@ -132,9 +132,9 @@ KIT-9 and KIT-10 list what is already at or past the third copy.
 | Tray, startup, theme, settings store, window chrome, single instance, localization classes | 4 apps still carry their own (about 600 to 800 lines each) | winui-app-kit (exists; apps migrate, KIT-2) | the kit | none |
 | Update service (Store when packaged, GitHub releases when not) | 4: little-launcher, repilot, immich-drive, persistent | winui-app-kit | `repilot/Repilot/Services/UpdateService.cs` | D-014 |
 | Settings window shell, About page, card and page styles | 6 | winui-app-kit shared XAML | `wsl-monitor/WslMonitor/` | D-019 |
-| Confirm dialog helper | 5 apps | winui-app-kit | `wsl-monitor/WslMonitor/DetailsWindow.xaml.cs` | none |
-| App bootstrap (two unhandled-exception handlers, restore settings, create host) and the hidden host window setup | 6 and 5 | winui-app-kit | `wsl-monitor/WslMonitor/App.xaml.cs` | D-074 |
-| Tray icon rasteriser (supersample and shrink) | 2: hub-display-switch, wsl-monitor | winui-app-kit | `wsl-monitor/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
+| Confirm dialog helper (in the kit from v1.0.0: `ConfirmDialog`) | 5 apps | winui-app-kit | `wsl-monitor/WslMonitor/DetailsWindow.xaml.cs` | none |
+| App bootstrap (two unhandled-exception handlers, restore settings, create host) and the hidden host window setup (in the kit from v1.0.0: `AppBootstrap`, `HostWindow`) | 6 and 5 | winui-app-kit | `wsl-monitor/WslMonitor/App.xaml.cs` | D-074 |
+| Tray icon rasteriser (supersample and shrink) (in the kit from v1.0.0: `TrayIconRasterizer`) | 2: hub-display-switch, wsl-monitor | winui-app-kit | `wsl-monitor/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
 | DPAPI protected store | 2: little-launcher, immich-drive (FIX-001) | winui-app-kit, accepting an app-supplied folder, file name and entropy (both apps' values are permanent once shipped), with no logging dependency so a second process such as a shell extension can link it | `immich-drive/ImmichDrive/Services/ProtectedStore.cs` (adds `Exists`, an injectable protector, folder and error hooks, atomic save, and no delete on a failed load because two processes read the file) | D-081 |
 | Settings schema versioning, backup and reset | 0 (new) | winui-app-kit | none | D-077, D-104 |
 | `NLog.config` | 6, in two variants | winui-app-kit | `wsl-monitor/WslMonitor/NLog.config` | D-080 |

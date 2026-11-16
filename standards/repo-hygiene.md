@@ -177,7 +177,7 @@ Pull request templates, `CONTRIBUTING`, `CODE_OF_CONDUCT`, `CODEOWNERS`, and `FU
 - **Reference:** none yet in scope
 - **Why:** A git hook applies to every tool and to people, where an agent tool's hook covers only that tool.
 
-What must never be committed (generated files edited by hand, secrets, files over a size limit) is blocked by a git hook managed with lefthook, configured in one `lefthook.yml` at the root. Husky is removed (FIX-042). Hooks stay fast: they check the staged files and do not run the test suite, which belongs to `validate` and CI (see [ci.md](ci.md)). Hooks that guide an agent during a session are covered by AI-11 in [ai-docs.md](ai-docs.md).
+What must never be committed (generated files edited by hand, secrets, files over a size limit) is blocked by a git hook managed with lefthook, configured in one `lefthook.yml` at the root. Hooks are installed with `lefthook install`: the worktree `setup` in `paseo.json` runs it, and the developer guide tells people to run it once in a fresh clone. Repos without an npm dependency step rely on a user-level lefthook install rather than adding one. Husky is removed (FIX-042). Hooks stay fast: they check the staged files and do not run the test suite, which belongs to `validate` and CI (see [ci.md](ci.md)). Hooks that guide an agent during a session are covered by AI-11 in [ai-docs.md](ai-docs.md).
 
 ### HYG-11: Remotes and submodule URLs are current
 

@@ -80,7 +80,7 @@ Reset and export of settings are covered by CONF-4 in [settings-config.md](setti
 
 ### UI-5: About page
 
-- **Status:** Proposed (every card exists in at least one app; persistent's desktop app has 5 of the 8 items). The updates card is Decided (D-014), the privacy link Decided (D-017) and the support link Decided (D-086)
+- **Status:** Decided (D-005, D-014, D-017, D-086). winui-app-kit ships the page from v1.1.0; 0 of 6 apps use it yet (each app's kit migration adopts it)
 - **Applies to:** Windows
 - **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` for content; `wsl-monitor/WslMonitor/Pages/AboutPage.xaml` for layout and for taking the version from the kit
 - **Why:** About is where a user goes for the version, an update, help and the logs. Today no two apps offer the same set, and none offers a support link.
@@ -98,7 +98,7 @@ The items every About surface carries, on any stack, are listed once in BRAND-8 
 - Links use the repo's current owner and the product's registered policy URL, never a hardcoded pre-move address; the known stale links are FIX-013 to FIX-016.
 - Product-specific cards ("How it works", a technology list) may follow the standard cards. They do not replace them.
 
-The page is a candidate for the kit's shared XAML (KIT-9 in [shared-kits.md](shared-kits.md)); until then, copy the reference and keep the card order.
+Windows apps use winui-app-kit's shared `AboutPage`, filled from an `AboutInfo` (see the kit's README, "Shared XAML"); an app never builds its own About page or restyles the standard cards. Product-specific cards go in `AboutInfo.ExtraCards`, after the standard ones.
 
 ### UI-6: Dialogs and status messages
 

@@ -107,7 +107,21 @@ Every app has an About surface with these items, in this order. This rule owns t
 7. Licence, and third-party notices where they ship (HYG-3 in [repo-hygiene.md](repo-hygiene.md)).
 8. Open logs folder, on platforms where the user can reach it (see [logging.md](logging.md)).
 
-Labels use the same wording in every app. For the Windows apps the block is delivered by winui-app-kit (D-005); page layout is in [ui.md](ui.md). Android apps put the same items in Settings. Web products provide a Help or feedback entry and a privacy link in the main menu or footer.
+Labels use the same wording in every app, on every stack. The wording is winui-app-kit's `kit.about.*` labels, which already have the family's translations; Android and web apps copy the text (and, when localized, the translations) from the kit's catalogs rather than writing their own:
+
+| Item | Label (en-US) |
+| --- | --- |
+| Section and entry | About |
+| Version | Version {version} |
+| Updates | Updates; button: Check for updates |
+| Links section | Links: Source code, Privacy policy, Support, License, Third-party notices |
+| Diagnostics section | Diagnostics; action: Open logs folder |
+
+Where each stack shows them:
+
+- **Windows:** winui-app-kit's shared About page (UI-5 in [ui.md](ui.md)).
+- **Android:** an "About" screen reached from the last row of Settings, with the same sections in the same order as Material list items (product name and version as the header, then Updates, Links, Diagnostics where the user can share logs). Play-distributed builds omit "Check for updates" when Play handles updates.
+- **Web:** an "About" dialog or page reached from the main menu, with the same sections in the same order, plus a privacy link in the footer. "Check for updates" becomes the app's own update notice where it is a PWA, and is omitted otherwise.
 
 The support link goes to the repo's GitHub issues page, which has an issue template (HYG-9 in [repo-hygiene.md](repo-hygiene.md)). printstream, whose repo is private, links to its help channel or the company contact (BRAND-9) instead (D-086).
 

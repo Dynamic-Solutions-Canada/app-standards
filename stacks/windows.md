@@ -316,7 +316,7 @@ WinUI tray and desktop apps, including Windows desktop hosts inside web monorepo
 | UI-2: Navigation order and footer | Existing |
 | UI-3: Page layout and cards | Decided |
 | UI-4: Settings page | Existing |
-| UI-5: About page | Proposed |
+| UI-5: About page | Decided |
 | UI-6: Dialogs and status messages | Existing |
 | UI-13: Empty states | Proposed |
 | UI-14: Accessibility baseline | Proposed |

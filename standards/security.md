@@ -194,3 +194,14 @@ One pattern (D-083):
 - **Why:** Someone who finds a problem needs a private way to report it; the only channel today is a public issue.
 
 Every public repo gives a private way to report a vulnerability. The policy file, where it sits, its template and the channel it names are owned by HYG-9 in [repo-hygiene.md](repo-hygiene.md) and are not restated here. This rule adds the handling side: a fix for a reported problem is given a FIX ID and its detail is recorded privately, in the same way as the security findings of the audit; public files cite the ID only.
+
+### SEC-16: A deployed web root serves no repository files
+
+- **Status:** Proposed (found 2026-11-17: the company website, deployed by `git pull` into its web root, served `/.git/` and `AGENTS.md` publicly; fixed the same day)
+- **Applies to:** Web, and any site deployed from a git checkout
+- **Reference:** `dynamic-solutions-website/.htaccess` (404 for dot-paths except `/.well-known/`, and for `*.md`)
+- **Why:** When the web root is the checkout, `/.git/` lets anyone download the full history of a private repository, and agent or developer notes become public pages.
+
+- A site deployed by checking out its repository into the web root denies every dot-path except `/.well-known/`, and every Markdown file, with a 404 rather than a 403, so it does not confirm the paths exist.
+- After any change to the server configuration, a deploy checks that `/.git/HEAD` returns 404.
+- Where the host allows it, deploy a build output or a subfolder as the web root instead, so repository files are never under it.

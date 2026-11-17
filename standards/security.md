@@ -197,7 +197,7 @@ Every public repo gives a private way to report a vulnerability. The policy file
 
 ### SEC-16: A deployed web root serves no repository files
 
-- **Status:** Proposed (found 2026-11-17: the company website, deployed by `git pull` into its web root, served `/.git/` and `AGENTS.md` publicly; fixed the same day)
+- **Status:** Proposed (1 of 1 site deployed from a checkout follows it)
 - **Applies to:** Web, and any site deployed from a git checkout
 - **Reference:** `dynamic-solutions-website/.htaccess` (404 for dot-paths except `/.well-known/`, and for `*.md`)
 - **Why:** When the web root is the checkout, `/.git/` lets anyone download the full history of a private repository, and agent or developer notes become public pages.

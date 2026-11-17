@@ -145,10 +145,12 @@ An app's listing is published in exactly the locales its interface supports ([lo
 - **Reference:** `persistent/store-assets/manifest.json`, `persistent/store-assets/README.md`
 - **Why:** Order, caption and alt text are part of the listing. Keeping them beside the files means a reorder or a caption fix is a one-line change, not a recapture.
 
-- **Names:** `NN-subject-theme.png`, two-digit order first, lower-case kebab subject, `light` or `dark` last (`00-current-light.png`). Drop the theme only when the app has one theme.
+- **Names:** `NN-subject-theme.png`, two-digit order first, lower-case kebab subject, `light` or `dark` last (`00-current-dark.png`). Drop the theme only when the app has one theme.
 - **Manifest:** `store-assets/manifest.json` lists, per store, each file with its raw source, theme, caption and alt text. The captions in `listings.json` and the manifest order must agree in count.
 - **Raw captures** stay in `store-assets/raw/` so framing and captions can change without recapturing.
-- **Content:** captured from the real installed app with synthetic data. No personal names, device names, network names, account details or addresses. Alternate light and dark where the app has both.
+- **Content:** captured from the real installed app with synthetic data. No personal names, device names, network names, account details or addresses.
+- **Look (decided 2026-11-17):** every screenshot shows the app in dark mode. Windows screenshots are framed centred on the Windows 11 default dark wallpaper (the dark "bloom", `C:\Windows\Web\Wallpaper\Windows\img19.jpg`), read from a Windows machine at render time and never committed to a repo. Android screenshots are dark mode with no added frame.
+- **Approval:** new or changed screenshots, in a store listing, a README or the website, are shown to the maintainer and approved before they are committed as listing assets or published.
 - **Sizes and counts** are in [assets.md](assets.md), ASSET-9.
 - **Scripts:** capture, render, check and sync are package scripts, documented in `store-assets/README.md`. Persistent's `shots:*` set is the model; script naming follows [dev-scripts.md](dev-scripts.md).
 

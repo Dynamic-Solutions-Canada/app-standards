@@ -142,6 +142,7 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 `distribution`
 - **Decided (2026-11-16):** LL stops attaching portable zips to GitHub Releases.
 - **Consequence:** "a paid Store app in a public repo attaches no binaries" has no exception (DIST-5). Zips on already-published Releases stay downloadable unless the maintainer removes them, which the answer does not cover. This unblocks D-041.
+- **Clarified (2026-11-17):** the rule covers Windows binaries only. The Linux AppImage stays on GitHub Releases: Linux has no paid channel, and the AppImage is the only way to get the Linux version. A recorded exception to DIST-5.
 - **Reversibility:** cheap. **Repos:** LL. **Sources:** STR 4.10, STR 3 (standard 18).
 
 ### D-021 PhoneLock signing across GitHub and Play

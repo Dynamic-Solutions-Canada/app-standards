@@ -66,7 +66,7 @@ Every Windows app is delivered through the Store. The app's name is reserved in 
 - **Reference:** the header comment of `repilot/.github/workflows/build-msix.yml` (why nothing is attached); `printstream` server packages for `SHA256SUMS`
 - **Why:** A free binary on a public repo undercuts a paid listing, and an asset whose name an installed app fetches cannot be renamed casually.
 
-- A paid Store app in a public repo attaches no binaries to its Releases; the Release points to the Store. little-launcher stops attaching its portable zips (D-020); there is no exception.
+- A paid Store app in a public repo attaches no binaries to its Releases; the Release points to the Store. little-launcher stops attaching its portable zips (D-020). The rule covers Windows builds, where the paid listing is: a Linux build with no paid channel (little-launcher's AppImage) may still be attached, with `SHA256SUMS`.
 - A free app, or one with an unpackaged audience, may attach a signed sideload or portable build (DIST-2).
 - Assets are named by the convention in [repo-layout.md](repo-layout.md) (D-041). Before renaming any asset, check whether an installed updater fetches it by name (DIST-10).
 - A Release with binaries carries one `SHA256SUMS` file.

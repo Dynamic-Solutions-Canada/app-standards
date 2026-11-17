@@ -198,6 +198,12 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 - **Consequence:** GitHub redirects the old repo and release links. Installed copies up to v0.2.6 open a dead privacy link until they update; the next release links `/privacy/sonarbridge`, which the Play listing also uses (set 2026-11-17). References in these standards use the new name; D-109 and older entries keep the old one.
 - **Reversibility:** costly (shipped links). **Repos:** SNB. **Sources:** maintainer instruction, 2026-11-17.
 
+### D-111 ImmichDrive listing stays English while the interface is localized
+`locales` `store-listings`
+- **Decided (2026-11-16, recorded 2026-11-17):** ImmichDrive's interface, package declaration and in-app text move to the nine-locale set now; its Store listing and Store release notes stay English until a separate listing-translation step. This is a temporary exception to LOC-3 and LOC-11.
+- **Consequence:** the app's `windows-build.json` sets `"listing": {"catalog_dir": null}` so the kit's listing check accepts an English-only listing on purpose. The exception ends when the listing is translated; the setting is then removed.
+- **Reversibility:** cheap. **Repos:** IMD. **Sources:** maintainer instruction, 2026-11-16; the immich-drive parity session, package 10.
+
 ## Open decisions
 
 No entry is open. D-004 to D-025, D-085 and D-086 were answered on 2026-11-16, and they are recorded under "Already decided". The points left open inside those answers were settled the same day:

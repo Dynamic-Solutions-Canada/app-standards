@@ -79,7 +79,7 @@ Every Windows app is delivered through the Store. The app's name is reserved in 
 - **Reference:** `repilot/Repilot/Services/UpdateService.cs` (the small service shared in shape by three apps); `persistent/apps/desktop/Persistent.Desktop/Services/UpdateService.cs` for the in-app install, whose header documents the traps
 - **Why:** The Store already updates packaged apps; the app only needs to tell the user where to look, and one small shared service is cheaper to keep right than six.
 
-- Every app has a "Check for updates" action on its About page (see [ui.md](ui.md)). No app checks in the background.
+- Every app has a "Check for updates" action on its About page (see [ui.md](ui.md)). No app checks in the background. Exception (decided 2026-11-17): little-launcher's retired portable (unpackaged) copies keep a startup check with a notice, because it is how those users learn that updates moved to the Store; packaged copies never check in the background.
 - Packaged build: the action opens the Store's updates page. In-app download and install is the exception, used only where the product needs it (persistent).
 - Unpackaged build: the action queries the repo's GitHub Releases (filtered by the lane's tag prefix in a monorepo) and links to the Release page.
 - The service comes from winui-app-kit once it is moved there (D-005); apps do not keep private copies. The repo owner string it queries must be the repo's current owner (FIX-014, FIX-015, FIX-016).

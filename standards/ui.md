@@ -2,7 +2,7 @@
 
 What the apps look like and how their common screens behave, per stack. The aim is that a user who knows one app finds the same window, the same Settings and About pages, and the same dialog behaviour in the next one.
 
-Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), or the 2 native Android apps (phonelock, sonarphone-nmea-bridge) unless a rule says otherwise. store-sign-controller's desktop host and the Capacitor mobile shells are web views around the web app; they follow the Web rules for their content.
+Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), or the 2 native Android apps (phonelock, sonarbridge) unless a rule says otherwise. store-sign-controller's desktop host and the Capacitor mobile shells are web views around the web app; they follow the Web rules for their content.
 
 Related topics: the tray icon and flyout are in [tray.md](tray.md), the "Our other apps" page in [promo.md](promo.md), interface languages in [locales.md](locales.md), icon artwork in [assets.md](assets.md), and which shared code delivers these screens in [shared-kits.md](shared-kits.md). The conventions rule in the user-level agent rules (kept outside this repo) (find the sibling surface first, extract on the third copy) applies to all UI work and is not restated here.
 
@@ -163,7 +163,7 @@ A web app builds its Joy theme through a `theme/buildTheme.ts` module adapted fr
 
 - **Status:** Existing (2 of 2 for Material 3 and dynamic colour; 2 of 2 keep all text in string resources)
 - **Applies to:** Android
-- **Reference:** `phonelock/companion/` for Compose; `sonarphone-nmea-bridge/android/app/` (`Theme.Material3.DayNight.NoActionBar` plus `DynamicColors`) for Views
+- **Reference:** `phonelock/companion/` for Compose; `sonarbridge/android/app/` (`Theme.Material3.DayNight.NoActionBar` plus `DynamicColors`) for Views
 - **Why:** These outcomes do not depend on the toolkit, so both native apps can meet them and still look like Android apps first.
 
 - Material 3, light and dark, with dynamic colour where the device supports it, applied through one theme wrapper (phonelock sets it in two places today).
@@ -173,12 +173,12 @@ A web app builds its Joy theme through a `theme/buildTheme.ts` module adapted fr
 
 ### UI-12: Toolkit for new Android work
 
-- **Status:** Decided (D-056). Existing (1 of 2 on Compose: phonelock; sonarphone-nmea-bridge builds Views in code by an explicit rule in its `AGENTS.md`)
+- **Status:** Decided (D-056). Existing (1 of 2 on Compose: phonelock; sonarbridge builds Views in code by an explicit rule in its `AGENTS.md`)
 - **Applies to:** Android
 - **Reference:** `phonelock/companion/`
 - **Why:** A shared Android UI kit is only practical with one toolkit, and Compose is the platform direction.
 
-New Android apps use Jetpack Compose. sonarphone-nmea-bridge stays on programmatic Views and is not converted. There is no shared Android UI kit until a third native app exists; phonelock's primitives are the seed if one is needed.
+New Android apps use Jetpack Compose. sonarbridge stays on programmatic Views and is not converted. There is no shared Android UI kit until a third native app exists; phonelock's primitives are the seed if one is needed.
 
 ## All stacks
 

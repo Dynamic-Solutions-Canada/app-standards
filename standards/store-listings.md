@@ -2,7 +2,7 @@
 
 Where the text and images for each store listing live, what shape they take, and how the README, the listing and the website page are kept saying the same thing. The asset sizes themselves are in [assets.md](assets.md); the locale set is in [locales.md](locales.md); how a release reaches a store is in [distribution.md](distribution.md) and [releases.md](releases.md).
 
-Counts are out of the 9 in-scope apps that have, or are being prepared for, a Microsoft Store or Google Play listing (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarphone-nmea-bridge) unless a rule says otherwise. The Home Assistant integration is the one HACS listing. game-is-up and store-sign-controller have no listing.
+Counts are out of the 9 in-scope apps that have, or are being prepared for, a Microsoft Store or Google Play listing (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge) unless a rule says otherwise. The Home Assistant integration is the one HACS listing. game-is-up and store-sign-controller have no listing.
 
 ## Listing surfaces
 
@@ -47,7 +47,7 @@ HACS has no folder here: `hacs.json` and `brand/` stay where HACS requires them 
 
 ### LIST-1: Listing text lives in the repo
 
-- **Status:** Decided (D-066). Existing (5 of 9 keep listing text in the repo: hub-display-switch, persistent, printstream, phonelock, sonarphone-nmea-bridge)
+- **Status:** Decided (D-066). Existing (5 of 9 keep listing text in the repo: hub-display-switch, persistent, printstream, phonelock, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/apps/mobile/store/listings.json`
 - **Why:** Text that exists only in a store console cannot be reviewed, translated in one pass, or checked against what the app does.
@@ -122,7 +122,7 @@ The Microsoft `title` is the name reserved in Partner Center and must match it e
 
 ### LIST-6: Tool-specific trees are generated, never a second hand-kept copy
 
-- **Status:** Decided (D-066). Proposed (no repo generates a tool tree; 2 of 9 keep the text twice by hand: persistent, sonarphone-nmea-bridge)
+- **Status:** Decided (D-066). Proposed (no repo generates a tool tree; 2 of 9 keep the text twice by hand: persistent, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/.github/workflows/play-listing.yml` (publishes straight from the JSON, with no intermediate tree)
 - **Why:** Two hand-kept copies of the same sentence drift, and the copy that drifts is the one nobody publishes from.
@@ -131,12 +131,12 @@ Where a tool demands its own layout (fastlane's `metadata/android/<locale>/` tex
 
 ### LIST-7: Listing locales equal UI locales
 
-- **Status:** Decided (D-010, D-098). Existing (2 of the 7 localized apps: persistent, sonarphone-nmea-bridge)
+- **Status:** Decided (D-010, D-098). Existing (2 of the 7 localized apps: persistent, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
-- **Reference:** `sonarphone-nmea-bridge/fastlane/metadata/android/` (nine listing locales matching nine UI locales)
+- **Reference:** `sonarbridge/fastlane/metadata/android/` (nine listing locales matching nine UI locales)
 - **Why:** A listing in English for an app that runs in Japanese hides the translation from the people it was made for, and a Japanese listing for an English-only app misleads them.
 
-An app's listing is published in exactly the locales its interface supports ([locales.md](locales.md), LOC-1 and LOC-3): all nine identities for a localized app, one for an English-only app. Listing wording uses the same terms as the in-app catalogs. A release is not complete until listing text exists for every wording catalog. Under D-098, screenshots are captured once, in English, and serve every listing locale, as persistent and sonarphone-nmea-bridge do today. Captions and alt text are translated.
+An app's listing is published in exactly the locales its interface supports ([locales.md](locales.md), LOC-1 and LOC-3): all nine identities for a localized app, one for an English-only app. Listing wording uses the same terms as the in-app catalogs. A release is not complete until listing text exists for every wording catalog. Under D-098, screenshots are captured once, in English, and serve every listing locale, as persistent and sonarbridge do today. Captions and alt text are translated.
 
 ### LIST-8: Screenshots are named, ordered by a manifest, and captured from the real app
 
@@ -166,7 +166,7 @@ An app's listing is published in exactly the locales its interface supports ([lo
 
 ### LIST-10: Store release notes come from the release-notes source
 
-- **Status:** Decided (D-058, D-010). Existing (2 of 9 feed one committed file to both the store and GitHub and fail when it is missing: immich-drive, printstream; 2 of 9 publish localized notes: persistent, sonarphone-nmea-bridge)
+- **Status:** Decided (D-058, D-010). Existing (2 of 9 feed one committed file to both the store and GitHub and fail when it is missing: immich-drive, printstream; 2 of 9 publish localized notes: persistent, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `immich-drive/release-notes/` with `.github/scripts/set-store-release-notes.ps1`; `persistent/apps/mobile/store/releases/<version>.json` for localized notes as they are kept today (JSON, which D-058 replaces with one Markdown file per wording catalog)
 - **Why:** Notes kept as a field in the listing file, a separate text file and a GitHub body are three texts for one release, and only one of them is what CI sends.

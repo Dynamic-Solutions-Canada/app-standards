@@ -2,7 +2,7 @@
 
 How a version is chosen, recorded, tagged, published and followed up. How the artifacts are packaged, signed and delivered to users is in [distribution.md](distribution.md); the CI side of release gating is in [ci.md](ci.md); store listing text is in [store-listings.md](store-listings.md).
 
-Counts are out of the 9 in-scope repos that tag or release today (little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarphone-nmea-bridge, printstream-home-assistant, devkit) unless a rule says otherwise. The other six (hub-display-switch, wsl-monitor, game-is-up, store-sign-controller, winui-app-kit, apps-promo) have no tags and no Releases, and follow these rules from their first release.
+Counts are out of the 9 in-scope repos that tag or release today (little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge, printstream-home-assistant, devkit) unless a rule says otherwise. The other six (hub-display-switch, wsl-monitor, game-is-up, store-sign-controller, winui-app-kit, apps-promo) have no tags and no Releases, and follow these rules from their first release.
 
 ## Reference flows
 
@@ -12,7 +12,7 @@ No repo follows every rule below. Copy the named part of each reference, as the 
 | --- | --- | --- |
 | immich-drive | Notes before the tag, for a single-app repo, and the overall model: one version file, a per-version notes file committed before the tag, CI fails when the file is missing, the same text is sent to the Store, tests run before publication | Notes are plain `.txt`; the procedure sits under `.codex/`; the Store submission fires on the tag, and only a manual run can stage a draft for review (see REL-7) |
 | printstream | Notes before the tag, for a multi-channel product: an approved changelog entry checked by `changelog:check`, shown in the app and reused for the Release and the stores; a version check across workspaces; an approval stop before version files change; exports named in the procedure | Too heavy to copy whole; lane tags lack the `v` |
-| sonarphone-nmea-bridge | Android mechanics: version name and version code derived from the tag by a tested script, upload to Play from CI, the Play-signed APK attached to the GitHub Release | Notes are generated from commit subjects; the tag workflow runs no tests |
+| sonarbridge | Android mechanics: version name and version code derived from the tag by a tested script, upload to Play from CI, the Play-signed APK attached to the GitHub Release | Notes are generated from commit subjects; the tag workflow runs no tests |
 | printstream-home-assistant (exported from printstream) | Satellites: version in the host ecosystem's manifest, an export that refuses unbumped changes, and an idempotent Release created when the manifest version changes | Notes are GitHub's generated text and effectively empty |
 | little-launcher | The best written versioning procedure (`docs/versioning.md`) | Notes file is optional and not sent to the Store; no tests on the tag |
 | devkit | The closest thing to a kit flow: tagged versions that consumers pin | Releases are made by hand and exist for only some tags |
@@ -21,9 +21,9 @@ No repo follows every rule below. Copy the named part of each reference, as the 
 
 ### REL-1: One version source per deliverable
 
-- **Status:** Existing (6 of 9 releasing repos keep one version file per deliverable; the exceptions are the three with Android apps: persistent, phonelock, sonarphone-nmea-bridge). Decided (D-059) for Android and (D-060) for where a monorepo's product version lives
+- **Status:** Existing (6 of 9 releasing repos keep one version file per deliverable; the exceptions are the three with Android apps: persistent, phonelock, sonarbridge). Decided (D-059) for Android and (D-060) for where a monorepo's product version lives
 - **Applies to:** all
-- **Reference:** `immich-drive/Directory.Build.props` (Windows); `printstream/package.json` with its `version:check` script (Web); `sonarphone-nmea-bridge/scripts/release-version.sh` (Android)
+- **Reference:** `immich-drive/Directory.Build.props` (Windows); `printstream/package.json` with its `version:check` script (Web); `sonarbridge/scripts/release-version.sh` (Android)
 - **Why:** A version held in two places will disagree, and on Android a version code can never go down once it has shipped.
 
 | Stack | Version source | Notes |

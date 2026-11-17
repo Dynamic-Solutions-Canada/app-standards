@@ -139,7 +139,7 @@ Adding any reporting that leaves the user's device or server is a new decision f
 
 - **Status:** Existing (2 of 2 Android apps follow the channel naming); Windows part Proposed
 - **Applies to:** Android, Windows
-- **Reference:** `phonelock` and `sonarphone-nmea-bridge` (channels); `persistent/apps/desktop/Persistent.Desktop/Notifications/ToastNotifier.cs` (Windows toasts)
+- **Reference:** `phonelock` and `sonarbridge` (channels); `persistent/apps/desktop/Persistent.Desktop/Notifications/ToastNotifier.cs` (Windows toasts)
 - **Why:** Channel ids are permanent once users have set preferences on them, and toast code is the next thing likely to be copied between Windows apps.
 
 - **Android:** a channel id is one short lower-case word; the channel name is a localized string that is refreshed when the language changes; there is one channel per category a user would want to mute separately. A published channel id is never renamed.

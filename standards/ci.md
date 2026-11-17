@@ -2,7 +2,7 @@
 
 Which GitHub Actions workflows each repo carries, when they run, and how they are written. What the tests are and where they run locally is in [testing.md](testing.md); what a release does after the gate passes is in [releases.md](releases.md); script names such as `validate` and `verify:desktop` are defined in [dev-scripts.md](dev-scripts.md).
 
-Counts are out of the 15 in-scope repos unless a rule says otherwise. Eight of them have workflows today (little-launcher, repilot, immich-drive, persistent, printstream, sonarphone-nmea-bridge, printstream-home-assistant, devkit), 45 workflow files in total. The Home Assistant workflows are authored in `printstream/integrations/home-assistant/.github/workflows/` and exported, so changes to them land in printstream.
+Counts are out of the 15 in-scope repos unless a rule says otherwise. Eight of them have workflows today (little-launcher, repilot, immich-drive, persistent, printstream, sonarbridge, printstream-home-assistant, devkit), 45 workflow files in total. The Home Assistant workflows are authored in `printstream/integrations/home-assistant/.github/workflows/` and exported, so changes to them land in printstream.
 
 ## Baseline workflow set
 
@@ -31,7 +31,7 @@ Each repo has one workflow file named `ci.yml`, display name "CI", triggered by 
 
 - **Status:** Proposed (no repo carries its stack's full set; printstream is closest)
 - **Applies to:** all
-- **Reference:** the table above; `printstream/.github/` for Web, `immich-drive/.github/` for Windows release workflows, `sonarphone-nmea-bridge/.github/` for Android release workflows
+- **Reference:** the table above; `printstream/.github/` for Web, `immich-drive/.github/` for Windows release workflows, `sonarbridge/.github/` for Android release workflows
 - **Why:** A fixed set per stack makes a missing check visible as a missing file, and lets one repo's workflow be compared line by line with its sibling's.
 
 A repo carries the workflows in its stack's row of the table, under those file names (CI-9). A repo with no release yet still carries `ci.yml`. Product-specific workflows (store listing sync, package retention, review repair) are added beside the baseline, not folded into it.
@@ -128,9 +128,9 @@ A monorepo with several lanes adds the lane after the job word (`release-linux.y
 
 ### CI-10: Shared workflows
 
-- **Status:** Decided (D-047). Existing (8 of 8 repos with workflows copy them; reuse inside one repo in 2 of 8: sonarphone-nmea-bridge, little-launcher)
+- **Status:** Decided (D-047). Existing (8 of 8 repos with workflows copy them; reuse inside one repo in 2 of 8: sonarbridge, little-launcher)
 - **Applies to:** all
-- **Reference:** `sonarphone-nmea-bridge/.github/workflows/play-publish.yml` (a `workflow_call` workflow used by its own `release.yml`)
+- **Reference:** `sonarbridge/.github/workflows/play-publish.yml` (a `workflow_call` workflow used by its own `release.yml`)
 - **Why:** The three copies of `store-publish.yml` already differ, and each fix has to be made once per repo.
 
 The baseline workflows for CI, CodeQL, MSIX build and Store publish are reusable `workflow_call` workflows that each repo calls, pinned to a tag. The shared MSIX build workflow signs its packaging check with the per-run throwaway certificate from DIST-2 by default, so no app decides this again; until it exists, `immich-drive/.github/workflows/build-msix.yml` ("Build MSIX" step) is the reference. This is possible because the repo that hosts them is public (D-004), so every caller can read them, the public repos included. A repo does not keep a hand-edited copy of a baseline workflow; a needed difference becomes an input.
@@ -139,7 +139,7 @@ The baseline workflows for CI, CodeQL, MSIX build and Store publish are reusable
 
 - **Status:** Existing (shared secret names in 4 of 5 repos that publish to the Microsoft Store and 3 of 3 that publish to Play; expiry reminder in 2 of 5 repos that use expiring store credentials: persistent, printstream)
 - **Applies to:** Windows, Web, Android repos that publish to a store
-- **Reference:** `repilot/.github/workflows/store-publish.yml` (Store secret names); `sonarphone-nmea-bridge/.github/workflows/release.yml` (Play secret names); `persistent/.github/workflows/store-secret-expiry.yml` (reminder)
+- **Reference:** `repilot/.github/workflows/store-publish.yml` (Store secret names); `sonarbridge/.github/workflows/release.yml` (Play secret names); `persistent/.github/workflows/store-secret-expiry.yml` (reminder)
 - **Why:** One set of names lets a workflow move between repos unchanged, and an expired credential otherwise shows up as a failed release.
 
 Workflows that publish to a store use the secret names already shared by the reference workflows, and never a repo-specific name for the same credential. Every Microsoft Store app publishes through the one shared Entra app registration ("MS Store Publisher"), so the client and tenant IDs are the same in every repo and a new Store app reuses them rather than registering its own. The registration has one active client secret, used by every organisation that publishes (Dynamic-Solutions-Canada and PrintStreamApp), so a rotation is one new secret. All the apps are in one Partner Center account, so the seller ID is the same everywhere too. In Dynamic-Solutions-Canada the four credentials and the `STORE_SECRET_EXPIRES` variable (ISO date) are organisation secrets and an organisation variable, granted to the Store repos, and repos hold no copies (a repo-level secret of the same name would override them). Entra descriptions cannot be edited later, so a new secret's description names its purpose when it is created. A new secret is saved under the user-level credential rules when it is created, since Entra shows the value only once, and the old secret is deleted once a Store run has succeeded on the new one. Any repo whose workflows use a credential that expires carries a weekly reminder workflow that fails or opens an issue before the expiry date. How a secret may be used inside a job is SEC-10 in [security.md](security.md); how credentials are stored and rotated is in the user-level agent rules (kept outside this repo).

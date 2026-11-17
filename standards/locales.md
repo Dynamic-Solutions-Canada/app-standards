@@ -2,7 +2,7 @@
 
 Which languages the apps ship in, how that set is named, and how strings are stored, keyed, resolved and checked on each stack. Listing text is in [store-listings.md](store-listings.md); the language setting's place on the Settings page is UI-4 in [ui.md](ui.md).
 
-Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (hub-display-switch, wsl-monitor, little-launcher, repilot, persistent, phonelock, sonarphone-nmea-bridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
+Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (hub-display-switch, wsl-monitor, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
 
 ## The nine-locale set
 
@@ -75,7 +75,7 @@ On Android and with `.resw`, the platform's own resource resolution provides mos
 
 ### LOC-5: Aliases are a mapping, not duplicated files
 
-- **Status:** Decided (D-068). Existing (6 of 7; sonarphone-nmea-bridge ships three duplicate catalogs)
+- **Status:** Decided (D-068). Existing (6 of 7; sonarbridge ships three duplicate catalogs)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/packages/shared/src/locales.ts` (`localeCatalogs`); `phonelock/companion/src/main/res/` for Android
 - **Why:** A duplicated catalog is hundreds of strings to keep in step by hand for no visible difference.
@@ -142,7 +142,7 @@ Seven files or folders, one per wording catalog; none for the two aliases (LOC-5
 
 ### LOC-9: A catalog check runs in the normal validate step
 
-- **Status:** Decided (D-067). Existing (7 of 7 have a check, in seven implementations; 6 of 7 fail the build, and sonarphone-nmea-bridge's `android/scripts/check-localization.py` is run by hand: neither Gradle nor a workflow calls it)
+- **Status:** Decided (D-067). Existing (7 of 7 have a check, in seven implementations; 6 of 7 fail the build, and sonarbridge's `android/scripts/check-localization.py` is run by hand: neither Gradle nor a workflow calls it)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `wsl-monitor/scripts/check-strings.py` (most complete single script); `phonelock/companion/build.gradle` `lint` block (Android)
 - **Why:** A missing key is invisible in English testing and shows as English text, or a raw key, to exactly the users the translation was for.
@@ -173,16 +173,16 @@ The declaration is checked against the supported list by LOC-9, so adding a cata
 
 ### LOC-11: Listing and release-note locales track the UI locales
 
-- **Status:** Decided (D-010). Existing (2 of 7: persistent, sonarphone-nmea-bridge)
+- **Status:** Decided (D-010). Existing (2 of 7: persistent, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
-- **Reference:** `sonarphone-nmea-bridge/fastlane/metadata/android/`
+- **Reference:** `sonarbridge/fastlane/metadata/android/`
 - **Why:** The set is one promise to the user, made in the store before the app is installed and kept inside it.
 
 The locale set of the interface, the package declaration, the store listing and the store release notes is the same set. The listing-side rules are [store-listings.md](store-listings.md) LIST-7 and LIST-10, and how localized notes are stored is REL-6 in [releases.md](releases.md). Moving an app from English only to localized is one piece of work that lands together: catalogs, OS declaration, language picker, `listings.json` for every store, and the README `## Languages` section. It is not released in parts.
 
 ### LOC-12: Translations are marked as unreviewed until a native speaker reviews them
 
-- **Status:** Decided (D-100). Existing (4 of 7 say so in writing: sonarphone-nmea-bridge, hub-display-switch, persistent, phonelock)
+- **Status:** Decided (D-100). Existing (4 of 7 say so in writing: sonarbridge, hub-display-switch, persistent, phonelock)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/docs/localization.md`
 - **Why:** Every catalog so far is AI-drafted. Recording that honestly tells a future reviewer what has and has not been checked, and stops a draft being mistaken for approved copy.

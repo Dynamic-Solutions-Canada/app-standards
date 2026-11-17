@@ -97,12 +97,12 @@ Documentation for something shared (the Windows build bridge, devkit, winui-app-
 
 ### DOCS-8: Privacy policy
 
-- **Status:** Decided (D-017). Existing (4 of the 11 end-user apps have a policy: persistent, printstream, phonelock, sonarphone-nmea-bridge; in three formats and three hosting places)
+- **Status:** Decided (D-017). Existing (4 of the 11 end-user apps have a policy: persistent, printstream, phonelock, sonarbridge; in three formats and three hosting places)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `phonelock/PRIVACY.md` for the outline; Persistent's page on its own domain for hosting
 - **Why:** Stores register the policy URL, so it must survive a repo move, and reviewers read it.
 
-Every store-listed product has a policy published as a page on the company site or the product's own domain, written from one template, using the single company contact (see BRAND-9 in [branding.md](branding.md)). The app's About surface (BRAND-8 in [branding.md](branding.md)), the README and every store listing link to that page (see [store-listings.md](store-listings.md)). A GitHub blob URL or a GitHub Pages URL is not used as the registered address, because it changes when the repo moves (D-017). phonelock's GitHub file and sonarphone-nmea-bridge's GitHub Pages page move to website pages.
+Every store-listed product has a policy published as a page on the company site or the product's own domain, written from one template, using the single company contact (see BRAND-9 in [branding.md](branding.md)). The app's About surface (BRAND-8 in [branding.md](branding.md)), the README and every store listing link to that page (see [store-listings.md](store-listings.md)). A GitHub blob URL or a GitHub Pages URL is not used as the registered address, because it changes when the repo moves (D-017). phonelock's GitHub file and sonarbridge's GitHub Pages page move to website pages.
 
 The outline is phonelock's: the short version, what is handled, who can read it, services and servers, retention, children, your choices, contact. A policy names every network call the app makes on its own, including update checks and the promo catalog fetch (see [promo.md](promo.md)), even when no personal data is sent. No policy ships with a placeholder in it (FIX-012); the contact address fix is FIX-011.
 

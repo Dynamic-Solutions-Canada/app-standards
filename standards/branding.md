@@ -43,7 +43,7 @@ The copyright holder is the company, written "Dynamic Solutions", for every repo
 
 ### BRAND-4: GitHub owner and repo names
 
-- **Status:** Decided (D-009). Existing (9 of 15 are in the `Dynamic-Solutions-Canada` organisation; 4 are under the personal account; 2 are under `PrintStreamApp`)
+- **Status:** Decided (D-009). Existing (10 of 15 are in the `Dynamic-Solutions-Canada` organisation; 3 are under the personal account; 2 are under `PrintStreamApp`)
 - **Applies to:** all
 - **Reference:** `wsl-monitor` (organisation owner, kebab-case name, current remote)
 - **Why:** A known owner per repo makes every link predictable, and nine repos have already moved.
@@ -52,13 +52,13 @@ There are three owners, and each repo has exactly one:
 
 | Owner | Repos |
 | --- | --- |
-| `Dynamic-Solutions-Canada` organisation | Every repo not named below. sonarphone-nmea-bridge and devkit move there from the personal account |
+| `Dynamic-Solutions-Canada` organisation | Every repo not named below. devkit moves there from the personal account; sonarbridge moved on 2026-11-17 |
 | `PrintStreamApp` | printstream and printstream-home-assistant |
 | The maintainer's personal account | game-is-up and store-sign-controller, which are personal projects |
 
 Repo names are lower-case kebab-case and match the product name (`little-launcher`, not `LittleLauncher`). devkit's package is renamed from its personal-account scope to `@dynamic-solutions-canada/devkit` when the repo moves, and its consumers update their dependency in the same change (D-009).
 
-A move is planned against the registry (BRAND-10) and follows BRAND-11. sonarphone-nmea-bridge moves only together with its privacy page address and in-app links.
+A move is planned against the registry (BRAND-10) and follows BRAND-11.
 
 ### BRAND-5: Links in shipped apps name the current owner
 
@@ -82,9 +82,9 @@ A permanent identity may carry an old product name; Repilot's does. That is reco
 
 ### BRAND-7: Android application ids
 
-- **Status:** Decided (D-011). Existing (1 of 4 Android ids uses the company namespace: sonarphone-nmea-bridge; 2 of 4 use the product's own domain: persistent, printstream)
+- **Status:** Decided (D-011). Existing (1 of 4 Android ids uses the company namespace: sonarbridge; 2 of 4 use the product's own domain: persistent, printstream)
 - **Applies to:** Android
-- **Reference:** `sonarphone-nmea-bridge/android/app/build.gradle.kts`
+- **Reference:** `sonarbridge/android/app/build.gradle.kts`
 - **Why:** An application id cannot change after the first Play upload, and it should show who published the app.
 
 A new Android app uses `ca.dynamicsolutions.<app>`, or the reversed product domain when the product has its own (`app.printstream`, `ca.persistent.app`). No other namespace is used for new apps. phonelock's Play-bound parent app is renamed to `ca.dynamicsolutions.phonelock.parent` before its first Play upload. Published ids are permanent and are recorded in the registry.
@@ -158,7 +158,7 @@ Values below are as found in the audit on 2026-11-16, with the decisions of the 
 | Game's Up | Game's Up | Personal account (stays; a personal project, D-009) | Public | None recorded | None recorded |
 | store-sign-controller | "Store Sign" in its README; not otherwise checked | Personal account (stays; a personal project, D-009) | Public | None recorded | None recorded |
 | PhoneLock | PhoneLock (D-012; the parent app's label is FIX-023) | `Dynamic-Solutions-Canada/phonelock` | Public | Android ids `home.phonelock` and `home.phonelock.parent`; the parent app becomes `ca.dynamicsolutions.phonelock.parent` before the first Play upload (D-011), and is permanent after it | Release check on the repo, fetching assets by fixed file name; privacy policy as a GitHub file link, which moves to a website page (D-017) |
-| sonarphone-nmea-bridge | SonarBridge | Personal account; moves to `Dynamic-Solutions-Canada` (D-009) | Public | Android id `ca.dynamicsolutions.sonarbridge` | Releases link on the personal account; privacy page on GitHub Pages, which moves to a website page (D-017) |
+| sonarbridge | SonarBridge | `Dynamic-Solutions-Canada` (moved and renamed from the personal account's sonarbridge on 2026-11-17, D-110) | Public | Android id `ca.dynamicsolutions.sonarbridge` | Older releases link the personal account's repo (GitHub redirects it) and the old GitHub Pages privacy page, which no longer resolves (D-110); the privacy policy is `/privacy/sonarbridge` (D-017) |
 | apps-promo | n/a | `Dynamic-Solutions-Canada/apps-promo` | Public | The catalog URL itself | Every WinUI app fetches the catalog from a raw URL under the pre-rename owner and repo name (FIX-017) |
 | devkit | n/a | Personal account; moves to `Dynamic-Solutions-Canada` (D-009) | Public | Package name `@dynamic-solutions-canada/devkit` (renamed from its personal-account scope), installed by git tag | None |
 | winui-app-kit | n/a | `Dynamic-Solutions-Canada/winui-app-kit` | Public | None | None |

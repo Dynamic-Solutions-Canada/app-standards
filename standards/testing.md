@@ -36,9 +36,9 @@ Each harness is an `OutputType=Exe` project under `tests/<App>.<Area>.Tests/`, r
 
 ### TEST-3: Android tests are JVM unit tests; the emulator is optional
 
-- **Status:** Decided (D-052). Existing (JVM unit tests in 4 of 4 Android-building repos: phonelock, sonarphone-nmea-bridge, printstream, persistent; emulator instrumentation in CI in 1 of 4: printstream)
+- **Status:** Decided (D-052). Existing (JVM unit tests in 4 of 4 Android-building repos: phonelock, sonarbridge, printstream, persistent; emulator instrumentation in CI in 1 of 4: printstream)
 - **Applies to:** Android, and Capacitor apps inside Web monorepos
-- **Reference:** `sonarphone-nmea-bridge/android/app/src/test/` (JUnit with Robolectric); `printstream/scripts/ci/run-android-instrumentation.sh` for the optional emulator job
+- **Reference:** `sonarbridge/android/app/src/test/` (JUnit with Robolectric); `printstream/scripts/ci/run-android-instrumentation.sh` for the optional emulator job
 - **Why:** JVM tests are fast and stable enough to gate every push; emulator jobs are slow to run and costly to keep green, so they are worth it only where the app has native behaviour to protect.
 
 The required minimum is JUnit tests under the module's `src/test`, with Robolectric where resources or framework classes matter, plus Gradle lint. Emulator instrumentation in CI is optional and printstream is the reference for it. Anything that depends on real hardware (radios, lock state, another device) is checked on a phone before a release (TEST-9).
@@ -78,7 +78,7 @@ Tests that need a database live behind `test:integration`, so the local `validat
 
 - **Status:** Proposed (no stack has every repo at the minimum)
 - **Applies to:** all
-- **Reference:** `immich-drive/tests/CloudFilterLayout` (Windows), `persistent/` (Web), `sonarphone-nmea-bridge/android/` (Android), `devkit/test/` (Kit)
+- **Reference:** `immich-drive/tests/CloudFilterLayout` (Windows), `persistent/` (Web), `sonarbridge/android/` (Android), `devkit/test/` (Kit)
 - **Why:** A stated floor turns "has some tests" into something a parity check can answer yes or no.
 
 | Stack | Minimum | Runs in CI |

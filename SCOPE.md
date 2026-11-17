@@ -16,7 +16,7 @@ Projects held to these standards, as approved on 2026-11-15.
 | game-is-up | Web monorepo |
 | store-sign-controller | Web monorepo |
 | phonelock | Android |
-| sonarphone-nmea-bridge | Android plus ESP32 |
+| sonarbridge (formerly sonarphone-nmea-bridge) | Android plus ESP32 |
 | printstream-home-assistant | Home Assistant integration (PrintStream add-on); generated from `printstream/integrations/home-assistant/`, so fixes land in printstream |
 | devkit | Shared dev tooling |
 | winui-app-kit | Shared WinUI kit (submodule) |

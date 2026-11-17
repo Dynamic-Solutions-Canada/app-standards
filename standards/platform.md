@@ -2,7 +2,7 @@
 
 Which SDKs, runtimes, operating system versions and framework generations the apps build on, and where each is pinned. Shared code (winui-app-kit, devkit, any shared web package) can only target one baseline, and a security bump that has to be repeated by hand in each repo gets missed in some.
 
-Counts are against the in-scope repos a rule applies to: the 6 Windows-building repos (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent), the 5 Node repos (persistent, printstream, game-is-up, store-sign-controller, devkit), the 4 web monorepos (the Node repos without devkit), and the 2 native Android repos (phonelock, sonarphone-nmea-bridge).
+Counts are against the in-scope repos a rule applies to: the 6 Windows-building repos (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent), the 5 Node repos (persistent, printstream, game-is-up, store-sign-controller, devkit), the 4 web monorepos (the Node repos without devkit), and the 2 native Android repos (phonelock, sonarbridge).
 
 **This file states pin policy, not "current" versions.** The table records what the repos pinned when it was last checked (2026-11-16), so drift is visible. It is not a list of what to install. The dependency-version rule in the user-level agent rules (kept outside this repo) applies: check the registry before adding or moving a version, and never take one from memory or from this table.
 
@@ -25,11 +25,11 @@ Counts are against the in-scope repos a rule applies to: the 6 Windows-building 
 | Web | Vite | `apps/web/package.json` | 8 (3 of 4); 6.4 (persistent) | PLAT-9 |
 | Web | Dev database | `devkit.config.mjs` | Postgres 16 (3 of 3 devkit consumers) | [shared-kits.md](shared-kits.md) |
 | Android | JDK | Gradle `compileOptions`, build container | 17 (2 of 2) | PLAT-11 |
-| Android | Gradle | wrapper | 8.7 by wrapper (sonarphone-nmea-bridge); 9.9.1 from a host install, no wrapper (phonelock) | PLAT-12 |
-| Android | Android Gradle Plugin | root build script | 8.5.2 (sonarphone-nmea-bridge, a documented hold); 9.5.1 (phonelock) | PLAT-12 |
-| Android | `minSdk` | app build script | 29 (sonarphone-nmea-bridge); 33 (phonelock); 24 (persistent's Capacitor shell) | PLAT-11 |
+| Android | Gradle | wrapper | 8.7 by wrapper (sonarbridge); 9.9.1 from a host install, no wrapper (phonelock) | PLAT-12 |
+| Android | Android Gradle Plugin | root build script | 8.5.2 (sonarbridge, a documented hold); 9.5.1 (phonelock) | PLAT-12 |
+| Android | `minSdk` | app build script | 29 (sonarbridge); 33 (phonelock); 24 (persistent's Capacitor shell) | PLAT-11 |
 | Android | `targetSdk` | app build script | 36 (2 of 2, and persistent's shell) | PLAT-11 |
-| Android | `compileSdk` | app build script | 36 (sonarphone-nmea-bridge, a documented hold); 37 (phonelock) | PLAT-11 |
+| Android | `compileSdk` | app build script | 36 (sonarbridge, a documented hold); 37 (phonelock) | PLAT-11 |
 | HA | Minimum Home Assistant | `hacs.json` | 2024.6.0 | PLAT-14 |
 
 ## Rules
@@ -38,7 +38,7 @@ Counts are against the in-scope repos a rule applies to: the 6 Windows-building 
 
 - **Status:** Existing in part (.NET: 5 of 6 have a `global.json`; Node: 3 of 5 have `.nvmrc` with exact `engines`; Gradle: 1 of 2 has a wrapper). The upgrade cadence is Decided (D-095)
 - **Applies to:** all
-- **Reference:** `repilot/global.json`, `game-is-up/package.json` with `.nvmrc`, `sonarphone-nmea-bridge/android/gradle/wrapper/`
+- **Reference:** `repilot/global.json`, `game-is-up/package.json` with `.nvmrc`, `sonarbridge/android/gradle/wrapper/`
 - **Why:** A version that lives in a README, a workflow file or someone's machine is a version each of them can get wrong separately.
 
 | Tool | The pin | Read by |
@@ -50,7 +50,7 @@ Counts are against the in-scope repos a rule applies to: the 6 Windows-building 
 
 CI, Dockerfiles, docs and scripts read the pin; they do not repeat the number. Where a tool cannot read the file (a Dockerfile base image), a comment names the file it must match. The persistent workflows that hard-code Node are FIX-050; the README that states stale Android versions is FIX-022; how workflows read pins is in [ci.md](ci.md).
 
-Moving a pin is its own change, made in every repo of the stack in one pass, and not mixed into feature work. A pin held back on purpose has a comment or doc line naming the reason, as `sonarphone-nmea-bridge/AGENTS.md` does for its Android levels.
+Moving a pin is its own change, made in every repo of the stack in one pass, and not mixed into feature work. A pin held back on purpose has a comment or doc line naming the reason, as `sonarbridge/AGENTS.md` does for its Android levels.
 
 Each stack's pins are reviewed once a quarter and moved together (D-095). A security release does not wait for that pass; its deadline is SEC-12 in [security.md](security.md) (D-107).
 
@@ -155,22 +155,22 @@ Running the native TypeScript compiler beside the standard one (printstream, gam
 
 - **Status:** Existing (2 of 2 use JDK 17 for source, target and the Kotlin JVM target; 2 of 2 target SDK 36)
 - **Applies to:** Android, and Capacitor shells
-- **Reference:** `sonarphone-nmea-bridge/android/app/build.gradle.kts`
+- **Reference:** `sonarbridge/android/app/build.gradle.kts`
 - **Why:** Play enforces a target level on a schedule, so the level is a deadline and must be visible. The minimum level decides who can install the app, so it is a product choice and must be written down.
 
 - **JDK:** one version for `sourceCompatibility`, `targetCompatibility`, the Kotlin JVM target and the build container image. All four agree.
 - **`targetSdk`:** the level Play currently requires for updates, the same in every app. Raising it is its own change, with the behaviour changes of the new level reviewed.
 - **`compileSdk`:** equal to or above `targetSdk`.
 - **`minSdk`:** chosen per app from what the app needs, and stated with its reason in the README's requirements and in `AGENTS.md`. It is not raised without the maintainer's decision, because raising it strands installed users.
-- A level held back on purpose is documented where the build file sets it, as sonarphone-nmea-bridge does for its build-tools and API 37 holds.
+- A level held back on purpose is documented where the build file sets it, as sonarbridge does for its build-tools and API 37 holds.
 
 Android application ids are BRAND-7 in [branding.md](branding.md) (D-011).
 
 ### PLAT-12: Gradle conventions
 
-- **Status:** Decided (D-055). Existing (1 of 2 has a committed wrapper and Kotlin DSL: sonarphone-nmea-bridge; 0 of 2 has a version catalog)
+- **Status:** Decided (D-055). Existing (1 of 2 has a committed wrapper and Kotlin DSL: sonarbridge; 0 of 2 has a version catalog)
 - **Applies to:** Android
-- **Reference:** `sonarphone-nmea-bridge/android/` (wrapper, Kotlin DSL, build container); `phonelock/companion/build.gradle` (each third-party dependency carries an "approved:" comment with the reason)
+- **Reference:** `sonarbridge/android/` (wrapper, Kotlin DSL, build container); `phonelock/companion/build.gradle` (each third-party dependency carries an "approved:" comment with the reason)
 - **Why:** A build that needs a particular Gradle in a home directory cannot run in CI or a container.
 
 For new work and for phonelock:
@@ -181,7 +181,7 @@ For new work and for phonelock:
 - Each third-party dependency has a comment saying why it was approved.
 - Builds run in the repo's build container, in line with the Docker and memory-limit sections of the user-level agent rules.
 
-sonarphone-nmea-bridge keeps its documented Android Gradle Plugin and Kotlin holds; "latest everywhere" is not the rule.
+sonarbridge keeps its documented Android Gradle Plugin and Kotlin holds; "latest everywhere" is not the rule.
 
 ### PLAT-13: One host technology per platform for web products
 

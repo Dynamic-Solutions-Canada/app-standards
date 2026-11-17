@@ -134,7 +134,7 @@ This rule adds the one requirement that is about the secrets themselves: a secre
 
 - **Status:** Proposed as a whole; Decided (D-021) for phonelock. Existing in part (no certificate or production keystore is tracked in any in-scope repo; which key signs debug builds was not verified for every app)
 - **Applies to:** Windows, Android
-- **Reference:** `sonarphone-nmea-bridge/android/app/build.gradle.kts` and its release workflow
+- **Reference:** `sonarbridge/android/app/build.gradle.kts` and its release workflow
 - **Why:** A lost signing key ends an app's update path, and a leaked one lets someone else ship as the publisher. Neither can be patched afterwards.
 
 - A production signing key exists in exactly two kinds of place: the CI secret store, and the maintainer's private credential storage with its backup, as the credential rule in the user-level agent rules describes. Never in a repo, a build script, a container image, or an artifact.

@@ -2,7 +2,7 @@
 
 Where things live at the top of each repo, where build output goes, and what a deliverable file is called. What git ignores is HYG-6 in [repo-hygiene.md](repo-hygiene.md). Each stack is already close to one shape internally; these rules name that shape so a new repo starts from it and an old one knows what is out of place.
 
-Counts are against the in-scope repos a rule applies to: the 5 standalone WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive), the 6 Windows-building repos (those five plus persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), the 2 Android repos (phonelock, sonarphone-nmea-bridge), and the 3 kits (devkit, winui-app-kit, apps-promo).
+Counts are against the in-scope repos a rule applies to: the 5 standalone WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive), the 6 Windows-building repos (those five plus persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), the 2 Android repos (phonelock, sonarbridge), and the 3 kits (devkit, winui-app-kit, apps-promo).
 
 The trees show the canonical set. An entry marked "if any" is omitted when the repo has nothing to put there. Several entries rest on a decision owned by another topic; those are noted beside the entry.
 
@@ -129,9 +129,9 @@ Tests sit beside the code they test as `*.test.ts` (4 of 4). The npm workspace l
 
 ### LAYOUT-4: Android repo layout
 
-- **Status:** Existing (1 of 2: sonarphone-nmea-bridge; phonelock keeps Gradle at the repo root and calls its scripts folder `tools/`). phonelock's move is Decided (D-094)
+- **Status:** Existing (1 of 2: sonarbridge; phonelock keeps Gradle at the repo root and calls its scripts folder `tools/`). phonelock's move is Decided (D-094)
 - **Applies to:** Android (native apps; Capacitor shells follow LAYOUT-3)
-- **Reference:** `sonarphone-nmea-bridge/`
+- **Reference:** `sonarbridge/`
 - **Why:** Nesting the Gradle project leaves the repo root for the things every repo has (docs, scripts, listings), and keeps room for a companion such as firmware or a server.
 
 ```text
@@ -297,7 +297,7 @@ The pattern applies to new products now, and to an existing asset only where no 
 
 ### LAYOUT-13: No build output is committed
 
-- **Status:** Decided (D-042). Existing (13 of 15; the exceptions are a `.vsix` in devkit and a firmware image in sonarphone-nmea-bridge)
+- **Status:** Decided (D-042). Existing (13 of 15; the exceptions are a `.vsix` in devkit and a firmware image in sonarbridge)
 - **Applies to:** all
 - **Reference:** `winui-app-kit` (none tracked)
 - **Why:** A committed binary goes stale silently and cannot be matched to the source that built it.

@@ -174,7 +174,7 @@ The Back-aware modal is at three copies, so D-005 gives shared web UI a package 
 - **Reference:** none
 - **Why:** A kit has a running cost: every consumer must be updated together. It is only worth it once the third consumer exists and the consumers share a toolkit.
 
-- **Android:** no shared UI kit until a third native app exists (D-056); the two native apps use different toolkits by design. Play release tooling in sonarphone-nmea-bridge is the first candidate when a second app needs it.
+- **Android:** no shared UI kit until a third native app exists (D-056); the two native apps use different toolkits by design. Play release tooling in sonarbridge is the first candidate when a second app needs it.
 - **Native host shells** (WebView2, Electron, Capacitor) are not merged into one codebase; the contract between host and web app is written down instead (PLAT-13 in [platform.md](platform.md), D-057).
 - **Backend service skeleton:** written as a standard first and extracted when a third copy is confirmed (PLAT-15 in [platform.md](platform.md), D-082).
 - **One-app code stays in the app.** Nothing moves to a kit because it might be reused.

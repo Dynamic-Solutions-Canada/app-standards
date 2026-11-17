@@ -86,27 +86,27 @@ Every Windows app is delivered through the Store. The app's name is reserved in 
 
 ### DIST-7: Android flavours are named for the channel
 
-- **Status:** Existing (2 of 2 native Android apps use `github` and `play` flavours on one dimension: phonelock, sonarphone-nmea-bridge; persistent, the Capacitor app checked, uses a single channel flavour)
+- **Status:** Existing (2 of 2 native Android apps use `github` and `play` flavours on one dimension: phonelock, sonarbridge; persistent, the Capacitor app checked, uses a single channel flavour)
 - **Applies to:** Android
-- **Reference:** `sonarphone-nmea-bridge/android/app/build.gradle.kts`
+- **Reference:** `sonarbridge/android/app/build.gradle.kts`
 - **Why:** Play forbids things a direct download allows (self-update, some permissions), and a flavour is the place to keep that difference out of shared code.
 
 An app distributed through more than one channel has one flavour per channel, named for it (`play`, `github`), on a single distribution dimension. Code and manifest entries that only one channel may have (an updater, a permission Play would reject) live in that flavour's source set, not in `main`. An app with one channel does not need flavours. Application ids are BRAND-7 in [branding.md](branding.md) (D-011).
 
 ### DIST-8: One signer per Android application id
 
-- **Status:** Decided (D-021). Existing (1 of 2 native apps uses Play App Signing with its upload key held only in CI secrets: sonarphone-nmea-bridge; phonelock is not on Play yet)
+- **Status:** Decided (D-021). Existing (1 of 2 native apps uses Play App Signing with its upload key held only in CI secrets: sonarbridge; phonelock is not on Play yet)
 - **Applies to:** Android
-- **Reference:** `sonarphone-nmea-bridge/.github/workflows/play-publish.yml`; `sonarphone-nmea-bridge/docs/android-migration-release-notes.md` for what a signer split costs users
+- **Reference:** `sonarbridge/.github/workflows/play-publish.yml`; `sonarbridge/docs/android-migration-release-notes.md` for what a signer split costs users
 - **Why:** Two builds with the same application id and different signers cannot replace each other, so users must uninstall and lose settings to move between them.
 
 Every build of an application id that users can install is signed by the same key. For a Play app that key is Google's app signing key, and the upload key lives only in CI secrets. Release signing credentials are never in the repo; a debug keystore may be committed so reinstalls work across build containers, and it signs debug builds only. An app that must ship outside Play with a different signer takes a distinct application id (a flavour suffix). For phonelock (D-021): the existing key is enrolled as Play's app signing key so both channels keep one signer; if Google refuses it, the two channels take separate application ids. Debug builds get their own key. All of this is done before the first Play upload.
 
 ### DIST-9: Play apps attach only the Play-signed APK to GitHub
 
-- **Status:** Existing (2 of 3 repos that publish to Play: persistent, sonarphone-nmea-bridge, both with a `play-apk.yml` workflow; printstream attaches no APK)
+- **Status:** Existing (2 of 3 repos that publish to Play: persistent, sonarbridge, both with a `play-apk.yml` workflow; printstream attaches no APK)
 - **Applies to:** Android
-- **Reference:** `sonarphone-nmea-bridge/scripts/play-apk.mjs` and `.github/workflows/play-apk.yml`
+- **Reference:** `sonarbridge/scripts/play-apk.mjs` and `.github/workflows/play-apk.yml`
 - **Why:** It is the direct consequence of DIST-8: the only APK that can update, or be updated by, the Play install is the one Google signed.
 
 CI uploads the bundle to Play, then downloads Google's signed universal APK, verifies its certificate fingerprint, and attaches it to the GitHub Release with a `play` channel suffix in its name. No locally signed APK of a Play app is published anywhere. Version name and version code come from the tag (see [releases.md](releases.md) REL-1), and listing metadata and "What's new" text are pushed from the repo (see [store-listings.md](store-listings.md)).

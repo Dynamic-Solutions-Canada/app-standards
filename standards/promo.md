@@ -64,7 +64,7 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 - **Reference:** `ids.json` and `Assets/PromotedApps/apps.json` in apps-promo
 - **Why:** An app missing from the catalog is not promoted by any of its siblings, and nobody notices because the page still looks full.
 
-- Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. hub-display-switch and wsl-monitor join when their Store names are reserved (D-014); phonelock and sonarphone-nmea-bridge join when they have listings (D-075). Internal or client-specific apps are not listed.
+- Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. hub-display-switch and wsl-monitor join when their Store names are reserved (D-014); phonelock and sonarbridge join when they have listings (D-075). Internal or client-specific apps are not listed.
 - An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`.
 - The display name is the product's canonical name (D-012, see [branding.md](branding.md)); the catalog still shows "ImmichDrive".
 - Icons are 256 px, supplied through `iconUrl`, not the Store's 50 px logo (D-070, see [assets.md](assets.md)).
@@ -104,6 +104,6 @@ The WinUI page uses the family page standard (UI-3): the same padding, max width
 - **Status:** Decided (D-075). Existing (2 of 2 native Android apps have none)
 - **Applies to:** Android
 - **Reference:** none
-- **Why:** phonelock is a parental-control tool and sonarphone-nmea-bridge is a single-purpose utility; a sibling-apps page fits neither and would need new UI in two toolkits.
+- **Why:** phonelock is a parental-control tool and sonarbridge is a single-purpose utility; a sibling-apps page fits neither and would need new UI in two toolkits.
 
 The native Android apps do not show sibling apps. They still appear in the catalog once listed (PROMO-5), so the Windows apps and the website can show them. A Capacitor shell shows whatever its web app shows.

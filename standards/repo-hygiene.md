@@ -23,7 +23,7 @@ Counts are out of the 15 in-scope repos unless a rule says otherwise. Server-sid
 - **Status:** Decided (D-008, D-006). Existing (7 of 15 have a licence file: little-launcher, repilot, immich-drive, persistent, winui-app-kit, printstream, printstream-home-assistant)
 - **Applies to:** all
 - **Reference:** `printstream/LICENSE` for the file name; `repilot/LICENSE.md` for the PolyForm text
-- **Why:** A public repo with no licence grants nobody anything, and under D-004 every in-scope repo but printstream is public; phonelock and sonarphone-nmea-bridge are public with none today.
+- **Why:** A public repo with no licence grants nobody anything, and under D-004 every in-scope repo but printstream is public; phonelock and sonarbridge are public with none today.
 
 Every repo has one licence file at the root (D-008):
 
@@ -58,7 +58,7 @@ A product that ships a binary includes a generated third-party notices file in t
 
 A `NOTICE` file describes the repo it sits in. A repo generated from another gets its own, not a copy of its parent's (FIX-024).
 
-Android: the notices file is generated at build time per variant into the APK's assets (`third_party_notices.txt`), and the build fails when a module's POM chain names no licence. While the Android Gradle Plugin is held at 8.5.2 (D-095), no maintained plugin works (AboutLibraries 15.3.0 applies but registers no tasks there), so repos use the hand-written `generate<Variant>ThirdPartyNotices` task in sonarphone-nmea-bridge's `android/app/build.gradle.kts` as the reference, ported rather than shared, and switch to a maintained plugin at the AGP upgrade. Proof of a working setup: the module list in the APK equals the variant's runtime classpath.
+Android: the notices file is generated at build time per variant into the APK's assets (`third_party_notices.txt`), and the build fails when a module's POM chain names no licence. While the Android Gradle Plugin is held at 8.5.2 (D-095), no maintained plugin works (AboutLibraries 15.3.0 applies but registers no tasks there), so repos use the hand-written `generate<Variant>ThirdPartyNotices` task in sonarbridge's `android/app/build.gradle.kts` as the reference, ported rather than shared, and switch to a maintained plugin at the AGP upgrade. Proof of a working setup: the module list in the APK equals the variant's runtime classpath.
 
 ### HYG-4: Default branch and topic branches
 
@@ -73,7 +73,7 @@ A workflow trigger names only branches that exist in the repo; for every repo bu
 
 ### HYG-5: Commit subjects
 
-- **Status:** Existing (11 of 15 follow the style throughout; printstream, devkit, printstream-home-assistant, and sonarphone-nmea-bridge have older conventional-commit prefixes in their history). The fixed wording for bump and update commits is owned by REL-2 (D-097) and KIT-6
+- **Status:** Existing (11 of 15 follow the style throughout; printstream, devkit, printstream-home-assistant, and sonarbridge have older conventional-commit prefixes in their history). The fixed wording for bump and update commits is owned by REL-2 (D-097) and KIT-6
 - **Applies to:** all
 - **Reference:** `little-launcher` history
 - **Why:** Subjects written as outcomes can be read as a change list and reused when drafting release notes.

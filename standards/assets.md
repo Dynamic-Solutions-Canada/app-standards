@@ -40,7 +40,7 @@ Platform outputs are written where the platform requires them, not under `assets
 - **Reference:** `game-is-up/scripts/dev/generate-brand-icons.mjs` with `game-is-up/apps/web/public/` (closest: one script, every output)
 - **Why:** When the master has a fixed address, the README, the website, the promo catalog and every build target can all be pointed at one file.
 
-This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and the trees in [repo-layout.md](repo-layout.md) follow it. Use the layout above. `assets/brand/` holds hand-authored masters only. `assets/generated/` holds the small cross-surface exports. `store-assets/` holds everything made for a listing. The README takes its icon from `assets/generated/icon-256.png` and its screenshots from `store-assets/web/screenshots/` (see [readme.md](readme.md), README-2 and README-9), by relative path. `docs/` is for documents, not images; README screenshots kept in `docs/*.png` today (little-launcher, repilot, immich-drive, sonarphone-nmea-bridge) move. In a monorepo both folders are at the repo root.
+This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and the trees in [repo-layout.md](repo-layout.md) follow it. Use the layout above. `assets/brand/` holds hand-authored masters only. `assets/generated/` holds the small cross-surface exports. `store-assets/` holds everything made for a listing. The README takes its icon from `assets/generated/icon-256.png` and its screenshots from `store-assets/web/screenshots/` (see [readme.md](readme.md), README-2 and README-9), by relative path. `docs/` is for documents, not images; README screenshots kept in `docs/*.png` today (little-launcher, repilot, immich-drive, sonarbridge) move. In a monorepo both folders are at the repo root.
 
 ### ASSET-2: One vector master per mark
 
@@ -75,7 +75,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 - **Why:** Committed outputs keep builds independent of the generator and its rasterizer, and make an icon change visible in review. The check mode in ASSET-3 removes the usual risk of committed outputs going stale.
 
 - Outputs a build or a platform reads from the tree (`.ico`, MSIX images, Android resources, web icons, HA brand images, store graphics, `assets/generated/`) are committed.
-- A generated file is never edited by hand and never has a second copy elsewhere in the repo. If two targets need the same file, the generator writes both, or one target references the other's path. Counter-examples: little-launcher's six 1024 px PNGs tracked twice, sonarphone-nmea-bridge's store images tracked two and three times.
+- A generated file is never edited by hand and never has a second copy elsewhere in the repo. If two targets need the same file, the generator writes both, or one target references the other's path. Counter-examples: little-launcher's six 1024 px PNGs tracked twice, sonarbridge's store images tracked two and three times.
 - Intermediate files (raw rasters, temporary renders) are ignored; see [repo-hygiene.md](repo-hygiene.md).
 - Build outputs in general follow D-042 in [repo-layout.md](repo-layout.md); icons are source-like inputs to the build, which is why they are the exception.
 
@@ -102,9 +102,9 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 ### ASSET-6: Android size set
 
-- **Status:** Decided (D-069). Existing (2 of 5 repos with an Android app have a layered vector adaptive icon: printstream, sonarphone-nmea-bridge; 1 of 5 generates it from the master: printstream)
+- **Status:** Decided (D-069). Existing (2 of 5 repos with an Android app have a layered vector adaptive icon: printstream, sonarbridge; 1 of 5 generates it from the master: printstream)
 - **Applies to:** Android (native apps and the Android hosts of web products)
-- **Reference:** `printstream/apps/mobile/scripts/android-branding.mjs`; `sonarphone-nmea-bridge/android/app/src/main/res/mipmap-anydpi-v26/`
+- **Reference:** `printstream/apps/mobile/scripts/android-branding.mjs`; `sonarbridge/android/app/src/main/res/mipmap-anydpi-v26/`
 - **Why:** The adaptive icon is what every current launcher masks, animates and themes. A raster-only or system icon looks wrong on all of them.
 
 | Output | File | Sizes |
@@ -171,7 +171,7 @@ The check (part of the listing validation in LIST-9) confirms dimensions, count,
 
 The README header icon is `assets/generated/icon-256.png`, shown at one size. README screenshots are files from `store-assets/web/screenshots/`, by relative path. The README does not hot-link an image from a hosted site, does not point at a platform output such as an MSIX logo, and does not carry images that exist nowhere else in the layout. Kits and tools need no images.
 
-When the only screenshots a product has are a store's own set (an Android app with only Play images), the README points at that store's folder (`store-assets/play/screenshots/phone/...`) rather than copying them into `store-assets/web/screenshots/`, since ASSET-4 allows one copy of each image. The same holds for the icon until an SVG master and the shared generator produce `assets/generated/` (reference: sonarphone-nmea-bridge).
+When the only screenshots a product has are a store's own set (an Android app with only Play images), the README points at that store's folder (`store-assets/play/screenshots/phone/...`) rather than copying them into `store-assets/web/screenshots/`, since ASSET-4 allows one copy of each image. The same holds for the icon until an SVG master and the shared generator produce `assets/generated/` (reference: sonarbridge).
 
 ### ASSET-11: Home Assistant brand images
 

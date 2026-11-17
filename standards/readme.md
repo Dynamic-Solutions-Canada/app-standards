@@ -2,7 +2,7 @@
 
 How each repo's `README.md` is shaped. A README is the front door for users first and developers second; deep developer material lives in the docs set (see [docs.md](docs.md)).
 
-Counts are out of the 11 end-user apps in scope (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent, printstream, game-is-up, store-sign-controller, phonelock, sonarphone-nmea-bridge) unless a rule says otherwise.
+Counts are out of the 11 end-user apps in scope (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent, printstream, game-is-up, store-sign-controller, phonelock, sonarbridge) unless a rule says otherwise.
 
 ## Templates
 
@@ -49,11 +49,11 @@ A centred HTML block with: the app icon (one size, from the repo's asset folder;
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/README.md` (Microsoft Store and Google Play together)
 
-Use the official Microsoft Store and Google Play badge images, linked to the listing, at a consistent height. Do not use plain text links in place of badges, and do not hardcode a release tag (as `sonarphone-nmea-bridge/README.md` does), because it goes stale on every release.
+Use the official Microsoft Store and Google Play badge images, linked to the listing, at a consistent height. Do not use plain text links in place of badges, and do not hardcode a release tag (as `sonarbridge/README.md` does), because it goes stale on every release.
 
 ### README-4: Developers section links out
 
-- **Status:** Decided (D-035). Existing (about 4 of 11: persistent, store-sign-controller, printstream, sonarphone-nmea-bridge)
+- **Status:** Decided (D-035). Existing (about 4 of 11: persistent, store-sign-controller, printstream, sonarbridge)
 - **Applies to:** all
 - **Reference:** `store-sign-controller/README.md` `## Developers`
 
@@ -105,4 +105,4 @@ Where README images live is owned by ASSET-1 and ASSET-10 in [assets.md](assets.
 - **Status:** Existing (no hard-wrapping in most READMEs; em dashes in 6 of 15 in-scope READMEs)
 - **Applies to:** all
 
-README prose follows the writing section of the user-level agent rules (kept outside this repo) (no hard wrapping, no em dashes), which is not restated here. The rule exists so that README parity checks include it: little-launcher, repilot, immich-drive, persistent, game-is-up, and sonarphone-nmea-bridge currently contain em dashes, and hub-display-switch and sonarphone-nmea-bridge are hard-wrapped.
+README prose follows the writing section of the user-level agent rules (kept outside this repo) (no hard wrapping, no em dashes), which is not restated here. The rule exists so that README parity checks include it: little-launcher, repilot, immich-drive, persistent, game-is-up, and sonarbridge currently contain em dashes, and hub-display-switch and sonarbridge are hard-wrapped.

@@ -157,7 +157,7 @@ Every app with a UI has `.agents/guides/ui-conventions.md`, the path the user-le
 
 - **Status:** Existing (9 of 15 keep workflows as skills under `.agents/skills/`; all 9 use `name` and `description` frontmatter)
 - **Applies to:** all
-- **Reference:** `sonarphone-nmea-bridge/.agents/skills/` (small, single-purpose, trigger-style descriptions); `persistent/.agents/skills/verify/SKILL.md`
+- **Reference:** `sonarbridge/.agents/skills/` (small, single-purpose, trigger-style descriptions); `persistent/.agents/skills/verify/SKILL.md`
 - **Why:** A skill is found by its description, so a vague one never runs and an overlapping one runs at the wrong time.
 
 A repeatable workflow is a skill at `.agents/skills/<name>/SKILL.md`.
@@ -237,7 +237,7 @@ Where worktrees are created is not stated in a project file (D-032, FIX-041).
 
 ### AI-13: No host paths, sibling links, or personal details
 
-- **Status:** Proposed (violations in winui-app-kit, printstream, hub-display-switch, game-is-up, and sonarphone-nmea-bridge: FIX-005, FIX-035, FIX-038, FIX-041)
+- **Status:** Proposed (violations in winui-app-kit, printstream, hub-display-switch, game-is-up, and sonarbridge: FIX-005, FIX-035, FIX-038, FIX-041)
 - **Applies to:** all
 - **Reference:** `immich-drive/AGENTS.md` (refers to a sibling only "if available and permitted by the current environment")
 - **Why:** Tracked instructions are read in containers, CI, cloud sessions, and public repos, where a path on the maintainer's machine is wrong and a personal detail is a leak.

@@ -2,7 +2,7 @@
 
 How source code is formatted, linted and named in each stack, and which tool checks it. Today style is consistent by habit and checked almost nowhere, so most rules here describe an existing habit that D-016 now enforces, rolled out repo by repo with printstream on its own schedule.
 
-Counts are against the in-scope repos a rule applies to: the 6 repos with a WinUI app on the shared build tooling (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), and the 2 Android repos (phonelock, sonarphone-nmea-bridge).
+Counts are against the in-scope repos a rule applies to: the 6 repos with a WinUI app on the shared build tooling (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), and the 2 Android repos (phonelock, sonarbridge).
 
 How code is commented, documented and split into functions and files is covered by the user-level agent rules (kept outside this repo) (code clarity and structure, conventions, writing) and is not restated here.
 
@@ -111,7 +111,7 @@ Warnings are errors in CI and Release builds (D-091).
 
 - **Status:** Existing (2 of 2 set `kotlin.code.style=official`). The formatter is Decided (D-016, D-092) (0 of 2)
 - **Applies to:** Android
-- **Reference:** `sonarphone-nmea-bridge/android/gradle.properties`; `phonelock/companion/build.gradle` (lint block)
+- **Reference:** `sonarbridge/android/gradle.properties`; `phonelock/companion/build.gradle` (lint block)
 - **Why:** The two repos share one formatting setting today and differ in line length and density; a formatter settles it without debate.
 
 `kotlin.code.style=official` in `gradle.properties`, four spaces, and one Kotlin formatter wired into Gradle and exposed as `format` and `format:check`. The formatter is Spotless (D-092), running ktlint for Kotlin and a Java formatter for Java, set up the same way in both repos.

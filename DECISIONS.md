@@ -192,6 +192,12 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 - **Consequence:** builders who don't set `phone_ap_password` broadcast the vendor's known default; secrets.yaml and the example file make overriding it easy. Revisit if the bridge is ever distributed as a prebuilt image.
 - **Reversibility:** cheap. **Repos:** SNB. **Sources:** the sonarphone-nmea-bridge parity session, package 1.
 
+### D-110 SonarBridge repo moved and renamed
+`branding` `repo-hygiene`
+- **Decided (2026-11-17):** the repo moved from the personal account to `Dynamic-Solutions-Canada` and was renamed `sonarbridge` to match the product name (BRAND-4). The old GitHub Pages privacy page was not kept alive with a redirect: an exception to BRAND-11.
+- **Consequence:** GitHub redirects the old repo and release links. Installed copies up to v0.2.6 open a dead privacy link until they update; the next release links `/privacy/sonarbridge`, which the Play listing also uses (set 2026-11-17). References in these standards use the new name; D-109 and older entries keep the old one.
+- **Reversibility:** costly (shipped links). **Repos:** SNB. **Sources:** maintainer instruction, 2026-11-17.
+
 ## Open decisions
 
 No entry is open. D-004 to D-025, D-085 and D-086 were answered on 2026-11-16, and they are recorded under "Already decided". The points left open inside those answers were settled the same day:

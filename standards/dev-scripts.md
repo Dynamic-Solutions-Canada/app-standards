@@ -47,7 +47,7 @@ Releasing is a guided procedure, not a script name; see [releases.md](releases.m
 
 Every repo with something to run, check or build has a root `package.json` whose `scripts` use the canonical names. In a repo that is not a Node project it is `"private": true`, has no dependencies and no lockfile, and each script is a one-line call to the real tool. The five Windows apps already do this for the Windows build tooling.
 
-D-044 gives phonelock and sonarphone-nmea-bridge the same wrapper over Gradle (SCRIPT-9). The Home Assistant integration has no entry point of its own, because it is generated; its scripts are in printstream. A kit with tests exposes `test`.
+D-044 gives phonelock and sonarbridge the same wrapper over Gradle (SCRIPT-9). The Home Assistant integration has no entry point of its own, because it is generated; its scripts are in printstream. A kit with tests exposes `test`.
 
 ### SCRIPT-2: Names are `job:target[:variant]`
 
@@ -162,7 +162,7 @@ Under D-045, devkit generates these scripts, `paseo.json` and the runner from te
 
 - **Status:** Decided (D-044). Proposed (0 of 2 native Android repos)
 - **Applies to:** Android
-- **Reference:** `hub-display-switch/package.json` for the wrapper pattern; `sonarphone-nmea-bridge/android/README-dev.md` for the Gradle commands
+- **Reference:** `hub-display-switch/package.json` for the wrapper pattern; `sonarbridge/android/README-dev.md` for the Gradle commands
 - **Why:** Today one repo has a root shell script with a hard-coded tool path and no test or lint path, and the other documents Gradle commands in prose. Neither can be called by name.
 
 Each native Android repo has a root `package.json` (SCRIPT-1) with:

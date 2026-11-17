@@ -39,7 +39,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 - **Why:** A crash or power loss during a plain file write leaves a truncated settings file, and silently replacing it with defaults loses the user's setup without telling them.
 
 - Every save writes a temporary file and renames it over the original. No app uses a direct `File.WriteAllText` on its settings file.
-- A file that cannot be read is kept beside the original as `.bad`, defaults are loaded, the event is logged, and the user is told once that settings were reset. This notice is separate from first run (UI-15 in [ui.md](ui.md)).
+- A file that cannot be read is kept beside the original as `.bad`, defaults are loaded, the event is logged, and the user is told once that settings were reset. Because the store writes defaults straight away, the next launch looks normal, so the notice belongs to that same launch: a resident app opens its settings window on that launch (even when started silently at sign-in) and shows the notice at the top, using winui-app-kit's `SettingsResetNotice` and the `NeedsResetNotice` flag from v1.7.0. The notice names only the backup file's name, never a full path. This notice is separate from first run (UI-15 in [ui.md](ui.md)).
 - Settings save as they change (UI-4); there is no deferred "save on exit".
 
 ### CONF-3: Schema version and written defaults

@@ -117,7 +117,7 @@ The Windows build VM and the Android VM are never run at the same time; both REA
 - **Reference:** `little-launcher/tests/native-drag/README.md`; `repilot/tests/Repilot.InputTests/README.md`
 - **Why:** A test that moves the pointer, injects keys or replaces settings can damage the session of whoever is using the machine.
 
-A suite that moves the pointer, sends input, or replaces user settings refuses to start unless it is on the expected machine and has an explicit opt-in. It is never part of `test`, `validate` or CI, and it works on a disposable copy of settings. Its README states the guard and how to run it deliberately.
+A suite that moves the pointer, sends input, or replaces user settings refuses to start unless it is on the expected machine and has an explicit opt-in. It is never part of `test`, `validate` or CI, and it works on a disposable copy of settings. Its README states the guard and how to run it deliberately. It lives in `tests-native/<Suite>/`, outside the `tests/` folder that the shared test runner discovers, so it cannot be picked up by `test` by accident. The opt-in is an environment variable named for the app (for example `REPILOT_INPUT_TESTS=1`), and the suite also refuses to run on any OS other than the one it drives; the variable is the machine statement, so suites do not hardcode a host name (AI-13).
 
 ### TEST-11: Shared kits are tested in their own repo
 

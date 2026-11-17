@@ -55,7 +55,7 @@ An app is in one of two states, and is in the same state everywhere (interface, 
 - **Localized:** the full nine-locale set.
 - **English only:** one language, `en-US`, declared as the only language everywhere, and stated in the README.
 
-The exemptions, decided in D-010: printstream is exempt until it has an i18n layer; game-is-up, store-sign-controller and the Home Assistant integration are exempt; immich-drive is brought into the nine-locale set because it is a paid Store app sold in the same markets as the localized ones. Kits and developer tooling (devkit's CLI, agent docs, logs) are English and are not user-facing in this sense. A new app with a store listing is localized from its first release unless an exemption is recorded in D-010. Temporary exception: ImmichDrive's listing and Store notes stay English while its interface is localized (D-111).
+The exemptions, decided in D-010: printstream is exempt until it has an i18n layer; game-is-up, store-sign-controller and the Home Assistant integration are exempt; immich-drive is brought into the nine-locale set because it is a paid Store app sold in the same markets as the localized ones. Kits and developer tooling (devkit's CLI, agent docs, logs) are English and are not user-facing in this sense. A new app with a store listing is localized from its first release unless an exemption is recorded in D-010.
 
 ### LOC-4: Default, fallback and resolution
 
@@ -178,7 +178,7 @@ The declaration is checked against the supported list by LOC-9, so adding a cata
 - **Reference:** `sonarbridge/fastlane/metadata/android/`
 - **Why:** The set is one promise to the user, made in the store before the app is installed and kept inside it.
 
-The locale set of the interface, the package declaration, the store listing and the store release notes is the same set. The listing-side rules are [store-listings.md](store-listings.md) LIST-7 and LIST-10, and how localized notes are stored is REL-6 in [releases.md](releases.md). Moving an app from English only to localized is one piece of work that lands together: catalogs, OS declaration, language picker, `listings.json` for every store, and the README `## Languages` section. It is not released in parts, except where a decision records a temporary exception (D-111).
+The locale set of the interface, the package declaration, the store listing and the store release notes is the same set. The listing-side rules are [store-listings.md](store-listings.md) LIST-7 and LIST-10, and how localized notes are stored is REL-6 in [releases.md](releases.md). Moving an app from English only to localized is one piece of work that lands together: catalogs, OS declaration, language picker, `listings.json` for every store, and the README `## Languages` section. It is not released in parts.
 
 ### LOC-12: Translations are marked as unreviewed until a native speaker reviews them
 

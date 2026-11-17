@@ -204,6 +204,7 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 `locales` `store-listings`
 - **Decided (2026-11-16, recorded 2026-11-17):** ImmichDrive's interface, package declaration and in-app text move to the nine-locale set now; its Store listing and Store release notes stay English until a separate listing-translation step. This is a temporary exception to LOC-3 and LOC-11.
 - **Consequence:** the app's `windows-build.json` sets `"listing": {"catalog_dir": null}` so the kit's listing check accepts an English-only listing on purpose. The exception ends when the listing is translated; the setting is then removed.
+- **Superseded (2026-11-17):** the maintainer decided to translate ImmichDrive's listing now, as for Little Launcher. The exception ends when the translated listing lands; the null setting is removed in the same change.
 - **Reversibility:** cheap. **Repos:** IMD. **Sources:** maintainer instruction, 2026-11-16; the immich-drive parity session, package 10.
 
 ## Open decisions

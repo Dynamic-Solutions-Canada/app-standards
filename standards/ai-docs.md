@@ -233,7 +233,7 @@ A repo that agents open worktrees in has a `paseo.json` at its root with a workt
 
 Devkit repos use devkit's setup and teardown pair as documented in devkit's README; do not re-document it. Repos with submodules run `git submodule deinit --all --force` in teardown, because `git worktree remove` refuses a worktree that still has submodules (reference: immich-drive's `paseo.json`). Under D-045, devkit generates the file from a template. Under D-088, the Windows repos' file initialises submodules on setup and exposes the four `*:desktop` scripts.
 
-Where worktrees are created is not stated in a project file (D-032, FIX-041).
+Where worktrees are created is not stated in a project file (D-032, FIX-041): the maintainer's global rules put them inside the main checkout at `.worktrees/<name>/`, and each repo ignores that folder in git, its Docker build context, and its lint, format, test and watcher settings.
 
 ### AI-13: No host paths, sibling links, or personal details
 

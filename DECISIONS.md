@@ -317,6 +317,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 ### D-032 Worktree location
 `ai-docs` `repo-layout`
 - **Adopted (2026-11-16).**
+- **Superseded (2026-11-18):** worktrees live inside the main checkout at `<repo>/.worktrees/<name>/`, stated once in the maintainer's global rules. Every repo git-ignores `.worktrees/` (through the shared ignore block) and excludes it from its Docker build context and from lint, format, test and file-watcher globs.
 - **Question:** one location for agent worktrees, stated in one place.
 - **Options:** (a) `/development/<repo>.worktrees` [what the audit and `SCOPE.md` assume]; (b) a worktree folder under the user's home directory [required by 1 of 15: PS, in a tracked file]. Both folders exist for PS.
 - **Recommend:** (a), stated in DK or the global rules and removed from PS's tracked docs. Reason: a host path in a project file breaks in containers and for anyone else.
@@ -453,6 +454,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 ### D-042 Committed build outputs
 `repo-layout` `releases`
 - **Adopted (2026-11-16).**
+- **Amended (2026-11-18):** devkit's browser extension package (`vscode-extension/*.vsix`) stays tracked as a documented exception, because consumers install devkit from a git tag with no build step and the runtime loads the file from the installed package. CI rebuilds it and fails when the rebuild differs from the tracked file. The firmware image still moves to Release assets.
 - **Question:** do the two tracked binaries move to Release assets?
 - **Options:** (a) move them [13 of 15 repos already commit no build output]; (b) keep [2 of 15: DK `vscode-extension/*.vsix`, SNB `esp32-client/*.factory.bin`].
 - **Recommend:** (a). Reason: it also gives SNB's firmware the versioned release path it lacks today.

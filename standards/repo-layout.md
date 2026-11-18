@@ -302,7 +302,7 @@ The pattern applies to new products now, and to an existing asset only where no 
 - **Reference:** `winui-app-kit` (none tracked)
 - **Why:** A committed binary goes stale silently and cannot be matched to the source that built it.
 
-Both tracked binaries move to GitHub Release assets, which also gives the firmware a versioned release path. Generated files that a platform needs in the tree (MSIX image sets, the HA card bundle) are a separate case covered by ASSET-4 in [assets.md](assets.md) (D-069). This rule owns the no-committed-output point; HYG-12 in [repo-hygiene.md](repo-hygiene.md) and DIST-5 in [distribution.md](distribution.md) link here.
+The firmware image moves to GitHub Release assets, which gives it a versioned release path. devkit's `.vsix` is the one exception (D-042, amended 2026-11-18): consumers install devkit from a git tag with no build step and load the file from the installed package, so it stays tracked, and CI fails when a rebuild from source differs from it. Generated files that a platform needs in the tree (MSIX image sets, the HA card bundle) are a separate case covered by ASSET-4 in [assets.md](assets.md) (D-069). This rule owns the no-committed-output point; HYG-12 in [repo-hygiene.md](repo-hygiene.md) and DIST-5 in [distribution.md](distribution.md) link here.
 
 ### LAYOUT-14: What every repo git-ignores
 

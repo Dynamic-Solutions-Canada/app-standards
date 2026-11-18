@@ -184,9 +184,9 @@ Repos are worked on from WSL and Linux, where git checks symlinks out correctly.
 
 ### AI-9: Shared skills
 
-- **Status:** Decided (D-029). Existing (0 of 15 share a skill; the `desktop` skill is copied into 6 repos and a generic `commit` skill into several)
+- **Status:** Decided (D-029). Existing (the generic `commit` skill is installed at user level since 2026-11-18; repo copies are being trimmed to what they add; the `desktop` skill is still copied into 6 repos)
 - **Applies to:** all
-- **Reference:** none yet
+- **Reference:** the maintainer's user-level `commit` skill (`~/.agents/skills/commit/`, linked into `~/.claude/skills/`)
 - **Why:** A copied skill drifts the same way a copied doc does.
 
 A skill that is the same in every repo (`desktop`, the generic `commit`, the post-release steps in D-063) is installed once at user level, in `~/.agents/skills/` with `~/.claude/skills` linked to it the same way as AI-8. A repo that must work in cloud sessions keeps a copy, checked against the shared original for drift. A repo that opts into the `external/standards` submodule may symlink from it instead.

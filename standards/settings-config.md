@@ -150,7 +150,7 @@ A host keeps its settings in one state store under the platform's user-data fold
 
 - **Status:** Decided (D-079) for production (2 of 4 use the name: persistent, store-sign-controller; 3 of 4 ship a single image). Existing (4 of 4) for `compose.dev.yml`
 - **Applies to:** Web
-- **Reference:** `persistent/compose.server.yml` and `persistent/nginx.server.example.conf`; `game-is-up/compose.dev.yml` (no project-specific additions); `printstream/compose.server.example.yml` for a self-hosted product
+- **Reference:** `persistent/compose.server.yml` and its nginx site file; `game-is-up/compose.dev.yml` (no project-specific additions); `printstream/compose.server.example.yml` for a self-hosted product
 - **Why:** A tracked production file is reviewable and is what is actually running. An example file that is copied and edited on the server drifts from the repo by design, which is right only when someone else operates it.
 
 | File | Use |
@@ -158,7 +158,8 @@ A host keeps its settings in one state store under the platform's user-data fold
 | `compose.dev.yml` | Development: one `node` service built from `docker/dev/Dockerfile`; devkit adds the database (see [dev-scripts.md](dev-scripts.md) and devkit's README) |
 | `compose.server.yml` | Production for products the maintainer hosts: tracked and used directly (D-079) |
 | `compose.server.example.yml` | Production for self-hosted products only (printstream): copied to an ignored `compose.yml` by the operator |
-| `nginx.server.example.conf` | Reverse-proxy example, with placeholder hostnames |
+| `nginx.server.conf` | The site file for products the maintainer hosts: tracked with its real public host names and installed as is by the deploy (CTR-8, CTR-11). Public host names are not secret; server addresses and paths still never appear (SEC-5) |
+| `nginx.server.example.conf` | Reverse-proxy example for self-hosted products only (printstream), with placeholder hostnames |
 
 - The root `compose.yml` name is reserved for an ignored deployment-local copy and is never tracked.
 - That production is one image serving the API and the web app is DIST-12 in [distribution.md](distribution.md).

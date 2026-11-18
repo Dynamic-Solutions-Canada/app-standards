@@ -106,7 +106,7 @@ Every long-running service sets:
 - **Why:** One proxy keeps TLS, logging and routing in one place, and a predictable layout lets any product add or change its site without touching the others.
 
 - One nginx container owns ports 80 and 443 and the `nginx_default` network. Its image is pinned (CTR-3) and its log is capped (LOG-4).
-- Each product has one site file, `conf.d/<product>.conf`, installed from the repo's `nginx.server.example.conf` (CONF-11). Backups of a site file live outside `conf.d/`.
+- Each product has one site file, `conf.d/<product>.conf`, installed by the deploy from the repo's tracked `nginx.server.conf` (CONF-11). Backups of a site file live outside `conf.d/`.
 - A `000-default.conf` catch-all answers names no site claims: on port 80 it redirects to the company site, and on 443 it refuses the handshake (`ssl_reject_handshake on`), so no product's certificate or page is served for a stranger's name.
 - The base configuration sets `server_tokens off` and keeps access logs off globally; each site names its own access log under `/var/log/nginx/sites/`, rotated daily on the host and kept 14 days.
 - A change is applied with `nginx -t` and then a graceful reload, never a restart, and an install script restores the previous file if the test fails.

@@ -207,6 +207,13 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 - **Superseded (2026-11-17):** the maintainer decided to translate ImmichDrive's listing now, as for Little Launcher. The exception ends when the translated listing lands; the null setting is removed in the same change.
 - **Reversibility:** cheap. **Repos:** IMD. **Sources:** maintainer instruction, 2026-11-16; the immich-drive parity session, package 10.
 
+### D-112 SonarBridge is distributed only through Google Play
+`distribution` `android`
+- **Decided (2026-11-18):** SonarBridge ships only through Google Play. GitHub Releases carry the notes and a link to the Play listing, with no APK; the APKs on earlier Releases were removed and each Release body points to Play.
+- **Consequence:** the `github` and `play` flavours are removed (one channel needs none, DIST-7); the shipped battery-optimization path is the only one, and the exported service for ADB driving lives in the debug source set. CI still fetches and verifies Google's universal APK, but keeps it as a private workflow artifact for screenshot capture (DIST-9). Copies installed from the old GitHub key cannot be reached by an update; the README tells those users to uninstall and install from Play (DIST-8).
+- **Why:** the Play-signed APK opened the Play Store when installed from anywhere else (Play's license check), so a GitHub download did not work, and a second channel kept a second build to test.
+- **Reversibility:** moderate (a second channel would bring back a flavour and an APK lane). **Repos:** SB. **Sources:** maintainer instruction, 2026-11-18; the sonarbridge session.
+
 ## Open decisions
 
 No entry is open. D-004 to D-025, D-085 and D-086 were answered on 2026-11-16, and they are recorded under "Already decided". The points left open inside those answers were settled the same day:

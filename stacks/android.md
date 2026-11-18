@@ -93,7 +93,7 @@ Native Android apps and Android shells of web products. The rules below apply to
 | DIST-5: What a GitHub Release carries | Decided |
 | DIST-7: Android flavours are named for the channel | Existing |
 | DIST-8: One signer per Android application id | Decided |
-| DIST-9: Play apps attach only the Play-signed APK to GitHub | Existing |
+| DIST-9: A Play app attaches no APK to GitHub, or only the Play-signed one | Existing |
 | DIST-10: Self-updaters outside the stores | Existing |
 
 ## [Docs](../standards/docs.md)

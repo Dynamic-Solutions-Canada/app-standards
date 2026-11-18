@@ -106,6 +106,8 @@ There is no separate `CHANGELOG.md`; the per-version files are the changelog, an
 
 The tag workflow builds, runs the gate, and creates the store submission as a draft with the notes attached. Committing the draft for review is a separate, deliberate step: a manual workflow dispatch that checks the draft against the tag. A release that should skip a store is expressed by not running the second step, never by excluding a tag in a trigger.
 
+An app's first Microsoft Store submission is the exception: Microsoft's submission API cannot create or edit it, so it is completed in Partner Center by hand (package upload, listings, age rating, then Submit), with the package built from the tag by the same scripts CI uses. The tag's store job stops at its pending-submission guard while that draft is open, which is expected. Every later release follows the flow above.
+
 ### REL-8: The release procedure lives in a `release` skill
 
 - **Status:** Existing (2 of 9: persistent, printstream; the procedure is written in six different kinds of place across the rest)

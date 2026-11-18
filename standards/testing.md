@@ -72,7 +72,7 @@ Every repo with tests has a root `test` script that finds them by walking the tr
 - **Reference:** `store-sign-controller/package.json` (`test:integration`); `printstream/.github/workflows/ci.yml` (Postgres service)
 - **Why:** A test that skips when its database is missing reports success for work that was never checked.
 
-Tests that need a database live behind `test:integration`, so the local `validate` (SCRIPT-4 in [dev-scripts.md](dev-scripts.md)) stays fast and needs nothing provisioned. CI runs both `validate` and `test:integration` against a Postgres service. A database test with no database fails; it does not skip.
+Tests that need a database live behind `test:integration`, so the local `validate` (SCRIPT-4 in [dev-scripts.md](dev-scripts.md)) stays fast and needs nothing provisioned. CI runs both `validate` and `test:integration` against a Postgres service. A database test with no database fails; it does not skip. A database test is named `*.integration.test.ts` (or `.tsx`, `.mjs`) and sits beside the code it tests, so it stays typechecked; devkit's `devkit-test` skips that suffix by default and runs only those files with `--integration`. `test:integration` refuses any database whose name does not end in `_test`, and the unit run points `DATABASE_URL` at an unreachable placeholder and blanks third-party API keys, so no test reaches a real database or service.
 
 ### TEST-8: Minimum testing per stack
 

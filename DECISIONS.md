@@ -216,10 +216,11 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 
 ## Open decisions
 
-Four entries are open, raised by the containers and reverse-proxy rules (CTR-1 to CTR-13 in `standards/containers.md`, adopted 2026-11-18).
+No entry is open. D-113 to D-116, raised by the containers and reverse-proxy rules (CTR-1 to CTR-13 in `standards/containers.md`), were answered on 2026-11-18:
 
 ### D-113 Encryption between Cloudflare and the server
 `containers` `security`
+- **Decided (2026-11-18):** (a), Full (strict) with Cloudflare origin certificates, provided it stays easy to set up and maintain.
 - **Question:** is the leg from Cloudflare to the server encrypted?
 - **Options:** (a) Cloudflare "Full (strict)" with a Cloudflare origin certificate on the server for every proxied site; (b) Full (strict) with Let's Encrypt certificates per site; (c) keep "Flexible" (plain HTTP to the server) [most proxied sites today].
 - **Recommend:** (a). Reason: it encrypts the whole path with one long-lived certificate and no renewal job per site, and Cloudflare already terminates the public certificate.
@@ -227,6 +228,7 @@ Four entries are open, raised by the containers and reverse-proxy rules (CTR-1 t
 
 ### D-114 Where server health problems are reported
 `containers` `logging`
+- **Decided (2026-11-18):** (a), push notifications through ntfy.
 - **Question:** how does the maintainer hear about an unhealthy container, a failed certificate renewal or a stopped deploy?
 - **Options:** (a) push notifications through the ntfy service already run for phonelock; (b) email; (c) nothing [today].
 - **Recommend:** (a). Reason: it is already on the server and reaches a phone without a new account.
@@ -234,6 +236,7 @@ Four entries are open, raised by the containers and reverse-proxy rules (CTR-1 t
 
 ### D-115 How a deploy gets the new release
 `containers` `distribution`
+- **Decided (2026-11-18):** (a).
 - **Question:** does a deploy rebuild the image on the server, or pull a published image?
 - **Options:** (a) rebuild on the server from the checkout for products only the maintainer hosts, and pull published images for self-hosted products; (b) publish and pull images for every product.
 - **Recommend:** (a). Reason: it is today's working shape for both kinds of product, and only self-hosters need published images.
@@ -241,12 +244,13 @@ Four entries are open, raised by the containers and reverse-proxy rules (CTR-1 t
 
 ### D-116 Where the shared proxy's configuration lives
 `containers` `repo-hygiene`
+- **Decided (2026-11-18):** (a), a private repo for the shared proxy.
 - **Question:** the shared nginx's base and per-site files exist only on the server; should they be tracked?
 - **Options:** (a) a small private repo holding the proxy's compose file, base configuration, shared includes and the catch-all, deployed like a product; (b) leave them on the server only.
 - **Recommend:** (a). Reason: changes become reviewable and recoverable, and CTR-8 and CTR-9 get a reference that is not the live server.
 - **Reversibility:** cheap. **Repos:** new. **Sources:** the 2026-11-18 survey.
 
-Earlier entries are all closed. D-004 to D-025, D-085 and D-086 were answered on 2026-11-16, and they are recorded under "Already decided". The points left open inside those answers were settled the same day:
+D-004 to D-025, D-085 and D-086 were answered on 2026-11-16, and they are recorded under "Already decided". The points left open inside those answers were settled the same day:
 
 - **D-004:** the standards repo is `Dynamic-Solutions-Canada/app-standards` (https://github.com/Dynamic-Solutions-Canada/app-standards).
 - **D-005:** `web-app-kit` and `windows-build-tools` both live in the Dynamic-Solutions-Canada organisation and are MIT.

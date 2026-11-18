@@ -14,7 +14,7 @@ Projects held to these standards, as approved on 2026-11-15.
 | persistent | Web monorepo with Windows desktop app |
 | printstream | Web monorepo |
 | game-is-up | Web monorepo |
-| store-sign-controller | Web monorepo |
+| store-sign-controller | Web monorepo; a private project that stays private, so rules that exist only because a repo is public (D-004, scrubbing history for public release) do not apply, and every other rule does |
 | phonelock | Android |
 | sonarbridge (formerly sonarphone-nmea-bridge) | Android plus ESP32 |
 | printstream-home-assistant | Home Assistant integration (PrintStream add-on); generated from `printstream/integrations/home-assistant/`, so fixes land in printstream |

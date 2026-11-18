@@ -87,7 +87,7 @@ Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A jo
 - **Reference:** `printstream/.github/dependabot.yml` for the Dependabot entry; the out-of-scope `paseo-shared-browser/.github/workflows/ci.yml` for SHA pins with a version comment
 - **Why:** Third-party actions run with access to signing and store secrets, and a moved tag changes what runs without any commit in the repo.
 
-- Third-party actions (store publishers, release creators, Android and Home Assistant helpers, signing actions) are pinned to a full commit SHA with the version in a trailing comment.
+- Third-party actions (store publishers, release creators, Android and Home Assistant helpers, signing actions) are pinned to a full commit SHA with the version in a trailing comment. An action whose project publishes no current release and documents a branch instead (hacs/action, home-assistant/actions) is pinned to that branch head's SHA with the branch and date in the comment (`# main, 2026-06-08`), refreshed by hand, rather than to an old release tag that would downgrade the check.
 - `actions/*` and `github/*` actions are pinned to a major tag.
 - No action is referenced by a branch.
 - Each action appears at one version per repo.

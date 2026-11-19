@@ -112,7 +112,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 | Launcher icon | `res/mipmap-anydpi-v26/ic_launcher.xml` and `ic_launcher_round.xml`, with `res/drawable/ic_launcher_foreground.xml`, `ic_launcher_background.xml` and `ic_launcher_monochrome.xml` | vector; 108 dp canvas with the art inside the central 66 dp |
 | Legacy launcher rasters, only if `minSdk` is below 26 | `res/mipmap-{mdpi,hdpi,xhdpi,xxhdpi,xxxhdpi}/ic_launcher.png` and `ic_launcher_round.png` | 48, 72, 96, 144, 192 px |
 | Notification and foreground-service icon | `res/drawable/ic_stat.xml` | vector, 24 dp, single colour on transparent |
-| Play icon | `store-assets/play/icon.png` | 512 x 512, 32-bit PNG, no transparency |
+| Play icon | `store-assets/play/graphics/icon.png` (devkit 0.21.0 default; kept out of the screenshots folder) | 512 x 512, 32-bit PNG, no transparency |
 | Play feature graphic | `store-assets/play/feature-graphic.png` | 1024 x 500, PNG or JPEG, no transparency |
 
 The monochrome layer is required (it is what themed icons use) and comes from `icon-mono.svg`. Emoji and system drawables are not used as app or notification icons. In-app iconography is a [ui.md](ui.md) topic.

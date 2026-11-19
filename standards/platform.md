@@ -153,6 +153,8 @@ Running the native TypeScript compiler beside the standard one (printstream, gam
 
 npm 11 runs a dependency's install scripts only when the root `package.json` approves them in `allowScripts`. Unapproved scripts are skipped with a warning, so a fresh `npm ci` can silently miss Prisma's engines or esbuild's binary. Each repo approves the exact versions that need their scripts with `npm install-scripts approve <name>@<version>`, and denies the ones that set things up some other way (lefthook, whose hooks `dev:postprepare` installs). The keys are version-specific, so a bump of an approved package re-approves it in the same commit. Reference: `game-is-up/package.json`.
 
+In a workspace monorepo, a package that a workspace moves to a new major while a tool still pulls in the old major (Prisma Studio with React, the Discord SDK with zod) is also declared at the new exact version in the root `package.json`, so npm hoists the new major and nests the old one under its consumer. Otherwise the root keeps the old major, a runtime image that copies only the root `node_modules` runs it, and a web bundle can carry two Reacts. After an upgrade, check that exactly one copy of the new major is installed, both locally and in the image.
+
 ### PLAT-11: Android SDK levels and JDK
 
 - **Status:** Existing (2 of 2 use JDK 17 for source, target and the Kotlin JVM target; 2 of 2 target SDK 36)

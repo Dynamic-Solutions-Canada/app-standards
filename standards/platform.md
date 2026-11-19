@@ -151,6 +151,8 @@ Running the native TypeScript compiler beside the standard one (printstream, gam
 
 `package.json` lists exact versions with no `^` or `~`, the lockfile is committed, and updates arrive as grouped Dependabot pull requests (HYG-8 in [repo-hygiene.md](repo-hygiene.md)). A version held below the latest has a comment naming the constraint, as the dependency rule in the user-level agent rules requires. Android dependencies follow PLAT-12.
 
+npm 11 runs a dependency's install scripts only when the root `package.json` approves them in `allowScripts`. Unapproved scripts are skipped with a warning, so a fresh `npm ci` can silently miss Prisma's engines or esbuild's binary. Each repo approves the exact versions that need their scripts with `npm install-scripts approve <name>@<version>`, and denies the ones that set things up some other way (lefthook, whose hooks `dev:postprepare` installs). The keys are version-specific, so a bump of an approved package re-approves it in the same commit. Reference: `game-is-up/package.json`.
+
 ### PLAT-11: Android SDK levels and JDK
 
 - **Status:** Existing (2 of 2 use JDK 17 for source, target and the Kotlin JVM target; 2 of 2 target SDK 36)

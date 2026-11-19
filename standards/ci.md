@@ -76,6 +76,8 @@ Every workflow file has:
 
 Workflows read the Node version from `.nvmrc`, the .NET SDK from `global.json`, and Gradle from the committed wrapper. No workflow hard-codes a toolchain version. Which versions the pins hold is in [platform.md](platform.md). Runner images are named explicitly for builds (`windows-2025` for MSIX work); buildless scans use `ubuntu-latest`.
 
+Android jobs cache Gradle's downloads with `gradle/actions/setup-gradle` (pinned by commit SHA, `cache-provider: basic`, the MIT provider on the standard Actions cache), placed after setup-java and setup-android, in CI and in the release bundle job. Without it every run fetches the whole Kotlin, AGP and AndroidX tree from Maven Central, which rate-limits shared CI addresses (HTTP 429, sometimes reported as "Could not find"; seen in persistent 2026-11-19). Only the default branch writes the cache; tags and pull requests restore it. Reference: `persistent/.github/workflows/ci.yml`.
+
 Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A job that depends on a tool preinstalled on the image, rather than installed by a setup action, names the image version (`ubuntu-26.04`) or installs the tool itself.
 
 `actions/setup-node` turns npm caching on by itself when `package.json` has a `packageManager` field, and then fails if there is no lockfile. A repo whose `package.json` only wraps scripts and has no dependencies (the Android and Windows repos) sets `package-manager-cache: false` on that step, with a comment.

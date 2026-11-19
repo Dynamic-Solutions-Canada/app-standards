@@ -97,7 +97,7 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 ### D-011 Android package ids
 `platform` `branding`
 - **Decided (2026-11-16):** PL's parent app is renamed to `ca.dynamicsolutions.phonelock.parent` before its first Play upload. New apps use `ca.dynamicsolutions.<app>`, or the product's own domain if it has one.
-- **Consequence:** existing child devices reinstall, and the ids pinned in PL's setup code are updated in the same change. The registry records the new id (D-036). This unblocks D-021.
+- **Consequence:** child devices need nothing (the lock app's pairing has no reference to the parent id; corrected 2026-11-19); each parent phone re-adds its devices in the new app, through a final old-id release that hands the pairing links across. The ids pinned in PL's setup code are updated in the same change. The registry records the new id (D-036). This unblocks D-021.
 - **Reversibility:** permanent once listed on Play. **Repos:** PL; rule for new apps. **Sources:** AND 4.1, SET 4.11.
 
 ### D-012 Product names

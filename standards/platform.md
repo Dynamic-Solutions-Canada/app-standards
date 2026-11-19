@@ -200,7 +200,7 @@ sonarbridge keeps its documented Android Gradle Plugin and Kotlin holds; "latest
 | Linux | Electron |
 | Android and iOS | Capacitor |
 
-A new host shell uses the technology in the table. D-057 leaves the existing host code as it is and writes down the host bridge contract (settings, notifications, updates, version negotiation); that contract is written as a contract document (DOCS-10 in [docs.md](docs.md)) and linked from this rule once it exists. The toolkit for native Android UI (D-056) is in [ui.md](ui.md).
+A new host shell uses the technology in the table. D-057 leaves the existing host code as it is and writes down the host bridge contract (settings, notifications, updates, version negotiation); that contract is written as a contract document (DOCS-10 in [docs.md](docs.md)). Reference: `persistent/docs/host-bridge-contract.md`, which covers host detection, every message in each direction, version skew, security boundaries and how the contract changes; it changes in the same commit as the bridge code. Another product with host shells writes its own in the same shape. The toolkit for native Android UI (D-056) is in [ui.md](ui.md).
 
 ### PLAT-14: Home Assistant baseline
 

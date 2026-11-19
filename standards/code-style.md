@@ -53,6 +53,8 @@ A repo adopts the formatter in one commit that contains only the reformat, with 
 
 `eslint.config.mjs` at the root, flat config, built from: the JavaScript recommended set, the `typescript-eslint` recommended set, Node globals for `.js`, `.mjs` and `.cjs` files, and React hooks and react-refresh rules scoped to `apps/web/**`. It adds unused-variable checking with a `^_` ignore pattern and `no-alert` for web code. store-sign-controller and devkit have no lint today.
 
+The React hooks set is eslint-plugin-react-hooks 7 or later, with its compiler rules `react-hooks/refs`, `react-hooks/set-state-in-effect` and `react-hooks/purity` at `error`. State that follows a prop is reset during render (a `useResetOnChange` helper), an invalid stored choice is derived rather than overwritten, and the clock is read in render through one shared `useNow` store and in handlers through `Date.now()`. A waiver is a one-line disable with its reason, only for a real sync with an external system. Reference: `game-is-up/eslint.config.mjs` and `game-is-up/apps/web/AGENTS.md`.
+
 A product may add rules that encode its own UI conventions, as `printstream/eslint.config.mjs` does (no native confirm or prompt, icon decorators). The conventions themselves are in [ui.md](ui.md). Formatting rules do not go in ESLint once Prettier is in place (STYLE-2).
 
 ### STYLE-4: Web house style and the shared TypeScript base

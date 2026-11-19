@@ -90,6 +90,15 @@ Every service in a production compose file sets Docker log options with a maximu
 
 Never log credentials, tokens, session identifiers, full request or response bodies, or the user's content (file contents, message text, photos, locations). Log the identifier of a thing, not the thing. When a URL or header may carry a credential, log it with the credential removed. Credential storage itself is in [security.md](security.md).
 
+Database errors carry user content too. An ORM error's message and stack can quote the query's argument values: Prisma 7 does this for validation and constraint errors, and also prints the whole invocation to stdout when the client is built with `log: ['error']` (Prisma 6 did not). So:
+
+- Build the database client with no stdout logging. Where its log levels are wanted, take them as events (`emit: 'event'`) and forward only the first line of the message and the target to the app's logger.
+- Log a database error by class and code only, never its message or stack. Non-database errors keep message and stack (LOG-7).
+- An Express error handler never hands an error to Express's default handler (`next(err)` after headers are sent), which prints the raw stack; it closes the connection itself.
+- A unit test plants a value in an invalid query and asserts it appears 0 times in stdout, stderr and the logger output.
+
+References: `persistent/apps/api/src/lib/prisma-client.ts` (event sink), `store-sign-controller/apps/api/src/lib/prisma.test.ts` (planted-value test), `game-is-up/apps/api/src/lib/request-error-handler.ts` (headers-sent path).
+
 ### LOG-7: Unhandled errors are always logged
 
 - **Status:** Existing (6 of 6 WinUI apps; 1 of 4 web APIs: printstream; 2 of 4 web clients: persistent, printstream)

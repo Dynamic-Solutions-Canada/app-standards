@@ -102,6 +102,8 @@ Adding a check to a repo means adding it to `validate` in the same change. A tes
 
 Database-backed tests are not inside `validate` (D-049): they stay in `test:integration` locally, with CI running both, and never a silent skip (see [testing.md](testing.md)).
 
+In a web monorepo that also ships a native app, a suite that needs that platform's toolchain (the .NET SDK for a Windows host, the Android SDK for a Capacitor shell) runs as its own `test:desktop` or `test:android` script rather than inside the root `validate`, so the root gate runs on any machine with only Node. CI runs each such script as its own job, and the release gate includes them, which is what makes them reachable. `verify:<target>` stays compile-only (SCRIPT-3).
+
 ### SCRIPT-5: `test` exists at the root and finds tests by itself
 
 - **Status:** Existing (2 of 5 repos with a root `test` use a discovery script: persistent, printstream)

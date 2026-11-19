@@ -105,6 +105,7 @@ Every repo has a `.gitignore` in three parts, in this order. The shared block co
 | `.aws/` | Local cloud credentials |
 | `.env`, `.env.*`, with `!.env*.example` | Environment files, keeping the examples |
 | `tmp/`, `.backups/` | Scratch and local backups |
+| `/.worktrees/` | Nested git worktrees, which live in `.worktrees/<name>/` (D-032) |
 | `*.pfx`, `*.cer`, `*.der`, `*.keystore`, `*.jks` | Signing material, as a backstop |
 | `local.properties` | Android SDK path |
 | Editor and OS files | `.vs/`, `.idea/`, `.DS_Store`, `Thumbs.db` |

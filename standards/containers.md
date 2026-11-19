@@ -119,7 +119,7 @@ Every long-running service sets:
 - **Why:** Behind Cloudflare every request arrives from Cloudflare's addresses, so without these settings an app logs and rate-limits the wrong client, and believes every request is plain HTTP.
 
 - The upstream is resolved at request time: `resolver 127.0.0.11 valid=30s;` and `set $upstream <product>-<service>;` before `proxy_pass http://$upstream:<port>;`, so restarting the app container never needs a proxy reload.
-- Proxy headers come from one shared include, not a copy per location: `Host`, `X-Real-IP`, `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto https` for a site behind Cloudflare (never `$scheme`, which is always `http` there).
+- Proxy headers are set once, at server level or through one shared include, not copied per location. nginx does not inherit `proxy_set_header` into a location that sets any header of its own, so a location that adds one (an upgrade header, for example) must include the full set again: `Host`, `X-Real-IP`, `X-Forwarded-For`, `X-Forwarded-Host`, and `X-Forwarded-Proto https` for a site behind Cloudflare (never `$scheme`, which is always `http` there).
 - The real client address is restored from Cloudflare with `real_ip_header CF-Connecting-IP` and `set_real_ip_from` for Cloudflare's published ranges, kept in one shared include and refreshed when Cloudflare changes them.
 - WebSocket routes use a `map $http_upgrade $connection_upgrade` and long read timeouts on that location only.
 - `client_max_body_size` matches the app's own upload limit, stated in both places.

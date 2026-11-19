@@ -143,5 +143,6 @@ The public repo follows the HACS layout (`custom_components/<domain>/`, `hacs.js
 - Hardening of the image and the compose files (non-root user, health check, named volumes, required secrets with no default, placeholder host names) is SEC-5 and SEC-7 in [security.md](security.md) and is not restated here.
 - Deploy is `npm run deploy:prod` (and `deploy:staging` where a staging environment exists), which updates the server checkout and rebuilds. What the script must refuse and check first is SCRIPT-10 in [dev-scripts.md](dev-scripts.md); env files and variable names are CONF-10 in [settings-config.md](settings-config.md).
 - Migrations run on container start through `start:prod` (seen in persistent and store-sign-controller; not checked in the other two).
+- The API serves the web app's shell (`index.html`) for any GET that matches no file, so client routes load directly, except a path whose last segment has a file extension, which gets a 404 with `Cache-Control: no-store` (Cloudflare caches 404s for static extensions otherwise). A missing image then fails as an image instead of returning HTML with a 200. App routes keep their last segment free of a dot. Reference: `game-is-up/apps/api/src/lib/web-static.ts`.
 
 Container conventions for development belong to devkit; see `devkit/README.md`.

@@ -119,7 +119,7 @@ Where the support link goes is decided once, in BRAND-8 (D-086), and is the same
 
 ### LOG-9: No telemetry and no hosted crash reporting
 
-- **Status:** Decided (D-023). Existing (15 of 15 repos contain no crash reporting or product telemetry; 1 of 11 end-user apps states it: phonelock)
+- **Status:** Decided (D-023, D-117). Existing (15 of 15 repos contain no crash reporting or product telemetry; 1 of 11 end-user apps states it: phonelock)
 - **Applies to:** all
 - **Reference:** `phonelock/PRIVACY.md` ("The short version")
 - **Why:** Every existing privacy statement already promises this, and trust lost by adding tracking later is expensive to win back.
@@ -128,6 +128,7 @@ Apps do not include analytics, tracking, or crash-reporting SDKs, and do not sen
 
 - Page analytics on a product's public marketing site, never inside the app.
 - Operational metrics on a self-hosted server that are off by default and enabled by the operator.
+- Visit counting in a hosted web app with the shared self-hosted Umami, in a normal browser only and never inside a native app or its web views (D-117). It is off unless both env values are set, the CSP gains the analytics origin only then, it excludes the query and hash, replaces identifiers in paths, sends only fixed page titles, honours Do Not Track, and the README and privacy policy describe it. Reference: `game-is-up` `apps/web/src/lib/analytics.ts`.
 
 Adding any reporting that leaves the user's device or server is a new decision for the maintainer, not an implementation choice.
 

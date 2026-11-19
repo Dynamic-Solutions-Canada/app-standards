@@ -909,6 +909,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Recommend:** (a), run with the existing `unittest` suite in PS CI as a gate before export; keep both monorepo-only until D-015 says otherwise. Reason: it matches the host ecosystem at the lowest upkeep.
 - **Reversibility:** cheap. **Repos:** PS (for HA). **Sources:** PSA 4.2. **Waits on:** D-015.
 
+### D-117 Visit counting in hosted web apps
+`logging` `security`
+- **Decided (2026-11-19):** hosted web apps may count page visits with the shared, self-hosted, cookieless Umami (analytics.dynamic-solutions.ca), in a normal web browser only. Native apps and the web views inside them (Android, Windows, Linux) never load it.
+- **Consequence:** LOG-9 gains a third disclosed exception with the rules that make it safe: env-driven and off unless configured, CSP widened only when on, query and hash excluded, identifiers in paths replaced, only fixed page titles sent, Do Not Track honoured, and the privacy policy describes it with its retention. game-is-up (a981719) is the reference.
+- **Reversibility:** cheap: unset two env values. **Repos:** GIU, PER (web), the company website. **Sources:** maintainer decisions 2026-11-19.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

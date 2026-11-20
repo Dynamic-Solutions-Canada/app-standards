@@ -261,6 +261,8 @@ Build output goes to `.artifacts/` at the repo root everywhere, including monore
 | --- | --- |
 | `.artifacts/windows-build/<utc>-<id>/` | One folder per run of the Windows build tooling: `artifacts/`, `build.log`, `result.json` |
 | `.artifacts/packages/<version>/` | Final, named deliverables for any platform (LAYOUT-12) |
+| `.artifacts/packages/<product>/` | Deliverables that are content-addressed (a source fingerprint) or that a tool keeps as a multi-version tree (electron-builder), instead of per version |
+| `.artifacts/work/<product>/` | Scratch a packaging step needs outside the tool's own build folder, deleted freely |
 | `.artifacts/evidence/<topic>/` | Screenshots, verification output and other proof kept for review |
 
 Intermediate output stays where the tool puts it and stays ignored: `bin/` and `obj/`, `dist/`, Gradle `build/`. A packaging step copies the finished, named file into `.artifacts/packages/`; nothing is written beside the sources.

@@ -918,7 +918,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 ### D-118 WSL Monitor is renamed WSL Status
 `branding` `store-listings`
 - **Decided (2026-11-20):** the product shown as "WSL Monitor" is renamed "WSL Status" everywhere users see it (Store listing, window and tray titles, About, README, release notes). Microsoft rejected "WSL Monitor" under Store policy 10.1.1.1 as too close to an existing app, "WSL Tray Monitor". "WSL" in a name is fine.
-- **Consequence:** the repo name, package identity, Store ID, tray GUID, mutex and startup task stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
+- **Consequence:** the GitHub repo and local folder are renamed `wsl-status` after the resubmission (confirmed 2026-11-20); the package identity, Store ID, tray GUID, mutex, startup task, settings folder and exe name stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
 - **Reversibility:** the Store name is cheap to change before publish. **Repos:** wsl-monitor.
 
 ## Source coverage

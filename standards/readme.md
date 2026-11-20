@@ -2,7 +2,7 @@
 
 How each repo's `README.md` is shaped. A README is the front door for users first and developers second; deep developer material lives in the docs set (see [docs.md](docs.md)).
 
-Counts are out of the 11 end-user apps in scope (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, persistent, printstream, game-is-up, store-sign-controller, phonelock, sonarbridge) unless a rule says otherwise.
+Counts are out of the 11 end-user apps in scope (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, persistent, printstream, game-is-up, store-sign-controller, phonelock, sonarbridge) unless a rule says otherwise.
 
 ## Templates
 
@@ -12,7 +12,7 @@ There are three README shapes. Pick the one that matches the repo.
 | --- | --- | --- |
 | Product | Any app with end users | `repilot/README.md` (short, every section present); `persistent/README.md` (several platforms and badges) |
 | Add-on | A plugin or integration for another product, such as the Home Assistant integration | `printstream-home-assistant/README.md` |
-| Tool | Shared kits and developer tooling: winui-app-kit, apps-promo, devkit | `wsl-monitor/external/winui-app-kit/README.md`; the out-of-scope `android-vm/README.md` is also a good model |
+| Tool | Shared kits and developer tooling: winui-app-kit, apps-promo, devkit | `wsl-status/external/winui-app-kit/README.md`; the out-of-scope `android-vm/README.md` is also a good model |
 
 ## Rules
 
@@ -89,7 +89,7 @@ The header is `# <Product> for <Host>`. Then: one sentence linking the parent pr
 
 - **Status:** Existing (2 of 3: winui-app-kit, devkit)
 - **Applies to:** Kit
-- **Reference:** `wsl-monitor/external/winui-app-kit/README.md`
+- **Reference:** `wsl-status/external/winui-app-kit/README.md`
 
 What it is and who uses it, how to add it to an app, the commands or API at a glance, and limits or gotchas, then `## License`. A tool README is the canonical usage doc for that tool; app READMEs link to it rather than repeating it.
 

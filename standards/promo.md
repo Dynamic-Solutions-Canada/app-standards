@@ -2,7 +2,7 @@
 
 The "Our other apps" page: which apps show it, how they include it, and how the catalog behind it is kept complete.
 
-The page and its catalog live in the apps-promo repo, which owns its own usage docs: see [its README](https://github.com/Dynamic-Solutions-Canada/apps-promo) (local copy: `wsl-monitor/external/promo/README.md`) for how to add the submodule, how `scripts/refresh-catalog.ps1` regenerates the catalog, and how web consumers read it. This file says when and where an app uses it. Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app) unless a rule says otherwise.
+The page and its catalog live in the apps-promo repo, which owns its own usage docs: see [its README](https://github.com/Dynamic-Solutions-Canada/apps-promo) (local copy: `wsl-status/external/promo/README.md`) for how to add the submodule, how `scripts/refresh-catalog.ps1` regenerates the catalog, and how web consumers read it. This file says when and where an app uses it. Counts are out of the 6 WinUI apps (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, and persistent's desktop app) unless a rule says otherwise.
 
 ## Overview
 
@@ -27,7 +27,7 @@ Any WinUI app with a settings window includes the apps-promo page, from its firs
 
 - **Status:** Existing (6 of 6 for the path and import; 3 of 6 for the URL, see FIX-046)
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/.gitmodules`, `wsl-monitor/WslMonitor/WslMonitor.csproj`
+- **Reference:** `wsl-status/.gitmodules`, `wsl-status/WslMonitor/WslMonitor.csproj`
 - **Why:** One path and one URL mean the same commands, CI steps and ignore rules work in every repo.
 
 | Item | Value |
@@ -64,7 +64,7 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 - **Reference:** `ids.json` and `Assets/PromotedApps/apps.json` in apps-promo
 - **Why:** An app missing from the catalog is not promoted by any of its siblings, and nobody notices because the page still looks full.
 
-- Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. hub-display-switch and wsl-monitor join when their Store names are reserved (D-014); phonelock and sonarbridge join when they have listings (D-075). Internal or client-specific apps are not listed.
+- Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. hub-display-switch and wsl-status join when their Store names are reserved (D-014); phonelock and sonarbridge join when they have listings (D-075). Internal or client-specific apps are not listed.
 - An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`.
 - The display name is the product's canonical name (D-012, see [branding.md](branding.md)); the catalog still shows "ImmichDrive".
 - Icons are 256 px, supplied through `iconUrl`, not the Store's 50 px logo (D-070, see [assets.md](assets.md)).

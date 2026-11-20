@@ -88,7 +88,7 @@ When to commit, and the ban on attribution trailers, are in the user-level agent
 
 - **Status:** Decided (D-038). Existing (13 of 15 have a `.gitignore`; 2 of 15 give a reason for each rule: persistent, printstream; 0 of 15 carry the whole shared block, with `/.artifacts/` ignored in 6 and `.secrets/` in 3)
 - **Applies to:** all
-- **Reference:** `persistent/.gitignore`; `wsl-monitor/.gitignore` for the Windows tail
+- **Reference:** `persistent/.gitignore`; `wsl-status/.gitignore` for the Windows tail
 - **Why:** The ignore file is the last guard between a local secret or build output and a commit, and the gaps found so far are all in hand-copied files (FIX-002, FIX-003, FIX-031).
 
 Every repo has a `.gitignore` in three parts, in this order. The shared block comes last so that no later line can un-ignore something it covers.
@@ -186,7 +186,7 @@ What must never be committed (generated files edited by hand, secrets, files ove
 
 - **Status:** Existing (3 of the 6 promo consumers use the current submodule URL; FIX-046, FIX-047)
 - **Applies to:** all
-- **Reference:** `wsl-monitor/.gitmodules`
+- **Reference:** `wsl-status/.gitmodules`
 - **Why:** A URL that works only through a redirect stops working the day the old name is reused or the redirect is dropped.
 
 After a repo is renamed or moved, `.gitmodules` in every consumer, the local `origin` remote, and any script that names the repo are updated to the new URL in the same piece of work. Where submodules live is LAYOUT-7 in [repo-layout.md](repo-layout.md); their URLs use the owner recorded in [branding.md](branding.md). How submodules are pinned is in [shared-kits.md](shared-kits.md).

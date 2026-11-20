@@ -42,7 +42,7 @@ This rule is about documents, not configuration files. D-035 also allows a root 
 - **Reference:** `persistent/docs/development.md`; `repilot/DEVELOPING.md` for the right size in a small app
 - **Why:** The README's Developers section links here (README-4), so the target must exist under one name.
 
-`docs/development.md` covers prerequisites, build, run, test, debug, and the release procedure or a link to it. In a small app it is the only developer document and may include a short architecture section. Kit repos use their README as the developer guide (README-8) and do not need this file. hub-display-switch and wsl-monitor have no developer guide today; their build steps sit in the README.
+`docs/development.md` covers prerequisites, build, run, test, debug, and the release procedure or a link to it. In a small app it is the only developer document and may include a short architecture section. Kit repos use their README as the developer guide (README-8) and do not need this file. hub-display-switch and wsl-status have no developer guide today; their build steps sit in the README.
 
 Commands are named as they appear in [dev-scripts.md](dev-scripts.md). The guide explains what a command proves; it does not copy another repo's documentation (DOCS-7).
 
@@ -90,7 +90,7 @@ A topic doc opens with two lines: what it covers ("Scope") and the paths it gove
 
 - **Status:** Decided (D-005). Existing (0 of 6: every Windows-building repo carries its own copy of the build guide)
 - **Applies to:** all
-- **Reference:** none yet; `wsl-monitor/.codex/docs/windows-development.md` is the only corrected copy
+- **Reference:** none yet; `wsl-status/.codex/docs/windows-development.md` is the only corrected copy
 - **Why:** A fix made in one copy does not reach the others (FIX-037, FIX-038).
 
 Documentation for something shared (the Windows build bridge, devkit, winui-app-kit, apps-promo) lives once, in the project that owns it. An app keeps only what is specific to it, such as its platform and its submodules, and links to the rest by URL. The link must resolve outside this machine: no sibling-checkout paths (see AI-13 in [ai-docs.md](ai-docs.md)). This is the documentation side of README-4, which says the same for the devkit section of the README.

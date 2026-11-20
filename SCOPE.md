@@ -7,7 +7,7 @@ Projects held to these standards, as approved on 2026-11-15.
 | Project | Kind |
 | --- | --- |
 | hub-display-switch | Windows (WinUI) |
-| wsl-monitor | Windows (WinUI) |
+| wsl-status | Windows (WinUI) |
 | little-launcher | Windows (WinUI) |
 | repilot | Windows (WinUI) |
 | immich-drive | Windows (WinUI) |

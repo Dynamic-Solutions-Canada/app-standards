@@ -2,7 +2,7 @@
 
 Where each app keeps what the user chose (user settings) and what the developer or operator chose (app and build configuration), and how both are stored safely.
 
-Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise.
+Counts are out of the 6 WinUI apps (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise.
 
 Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); where credentials and the `.secrets/` folder live is in [security.md](security.md) (D-038, D-081); log files that share the data folder are in [logging.md](logging.md); runtime and SDK pins are in [platform.md](platform.md). The Windows settings store is provided by winui-app-kit and documented in [its README](https://github.com/Dynamic-Solutions-Canada/winui-app-kit); it is not re-described here.
 
@@ -21,9 +21,9 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 ### CONF-1: Windows settings location and store
 
-- **Status:** Decided (D-076) for the location (6 of 6 already use it). Existing (2 of 6: hub-display-switch, wsl-monitor) for the kit store
+- **Status:** Decided (D-076) for the location (6 of 6 already use it). Existing (2 of 6: hub-display-switch, wsl-status) for the kit store
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/WslMonitor/Classes/SettingsManager.cs` (40 lines over the kit); winui-app-kit `Settings/JsonSettingsStore.cs` and `AppEnvironment.cs`
+- **Reference:** `wsl-status/WslMonitor/Classes/SettingsManager.cs` (40 lines over the kit); winui-app-kit `Settings/JsonSettingsStore.cs` and `AppEnvironment.cs`
 - **Why:** One location and format means support instructions, backup advice and "open the data folder" work the same in every app. Four apps still carry a copied settings manager with a known data-loss bug (CONF-3).
 
 - Settings are one file, `%AppData%\<DataFolderName>\settings.json`, in indented PascalCase JSON, holding one `UserSettings` class. Logs and caches live in the same folder (D-076: everything roaming, no local split). store-sign-controller's desktop host follows when it moves to the kit.
@@ -44,7 +44,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 ### CONF-3: Schema version and written defaults
 
-- **Status:** Decided (D-077). Existing (0 of 6 have an integer schema version; 2 of 6 write default values: hub-display-switch, wsl-monitor)
+- **Status:** Decided (D-077). Existing (0 of 6 have an integer schema version; 2 of 6 write default values: hub-display-switch, wsl-status)
 - **Applies to:** Windows, Kit
 - **Reference:** `hub-display-switch/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`MigrateV1`, the `.v1.bak` copy) as the nearest example of one migration step
 - **Why:** With defaults omitted from the file, a `false` saved for a setting that defaults to `true` loads back as `true`. little-launcher works around this per property; repilot, immich-drive and persistent's desktop app are exposed. And without a version, a migration has to guess the file's age from its shape.
@@ -169,7 +169,7 @@ A host keeps its settings in one state store under the platform's user-data fold
 
 - **Status:** Existing (6 of 6 Windows apps have `Directory.Build.props` and `windows-build.json`; 5 of 6 have `global.json`; 3 of 4 web monorepos have `devkit.config.mjs`)
 - **Applies to:** Windows, Web, Android, Kit
-- **Reference:** `wsl-monitor/windows-build.json`, `wsl-monitor/Directory.Build.props`; `persistent/devkit.config.mjs`
+- **Reference:** `wsl-status/windows-build.json`, `wsl-status/Directory.Build.props`; `persistent/devkit.config.mjs`
 - **Why:** Build inputs in the same named files mean a script, an agent or a shared build tool can find them without knowing the repo.
 
 | Stack | File | Holds |

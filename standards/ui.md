@@ -2,7 +2,7 @@
 
 What the apps look like and how their common screens behave, per stack. The aim is that a user who knows one app finds the same window, the same Settings and About pages, and the same dialog behaviour in the next one.
 
-Counts are out of the 6 WinUI apps (hub-display-switch, wsl-monitor, little-launcher, repilot, immich-drive, and persistent's desktop app), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), or the 2 native Android apps (phonelock, sonarbridge) unless a rule says otherwise. store-sign-controller's desktop host and the Capacitor mobile shells are web views around the web app; they follow the Web rules for their content.
+Counts are out of the 6 WinUI apps (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, and persistent's desktop app), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), or the 2 native Android apps (phonelock, sonarbridge) unless a rule says otherwise. store-sign-controller's desktop host and the Capacitor mobile shells are web views around the web app; they follow the Web rules for their content.
 
 Related topics: the tray icon and flyout are in [tray.md](tray.md), the "Our other apps" page in [promo.md](promo.md), interface languages in [locales.md](locales.md), icon artwork in [assets.md](assets.md), and which shared code delivers these screens in [shared-kits.md](shared-kits.md). The conventions rule in the user-level agent rules (kept outside this repo) (find the sibling surface first, extract on the third copy) applies to all UI work and is not restated here.
 
@@ -10,7 +10,7 @@ Related topics: the tray icon and flyout are in [tray.md](tray.md), the "Our oth
 
 | Stack | Toolkit | Best reference | Project UI guide |
 | --- | --- | --- | --- |
-| Windows | WinUI 3, Windows App SDK, winui-app-kit | `wsl-monitor/WslMonitor/` (layout and kit use), `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` (About content) | none yet |
+| Windows | WinUI 3, Windows App SDK, winui-app-kit | `wsl-status/WslMonitor/` (layout and kit use), `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` (About content) | none yet |
 | Web | React, Joy UI, TanStack Query | `printstream/apps/web/src/components/` | `printstream/.agents/guides/ui-conventions.md` |
 | Android | Material 3; Compose for new apps (D-056) | `phonelock/companion/` (`AppDialog.kt`, `ListRow.kt`, `SettingsScreen.kt`) | none yet |
 
@@ -22,7 +22,7 @@ Every app with a UI keeps a written guide at `.agents/guides/ui-conventions.md` 
 
 - **Status:** Existing (6 of 6 for the shell; 2 of 6 take icon, placement and theme tracking from the kit)
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/WslMonitor/DetailsWindow.xaml` and `.xaml.cs`; `hub-display-switch/HubDisplaySwitch/SettingsWindow.xaml` for an app whose window is named `SettingsWindow`
+- **Reference:** `wsl-status/WslMonitor/DetailsWindow.xaml` and `.xaml.cs`; `hub-display-switch/HubDisplaySwitch/SettingsWindow.xaml` for an app whose window is named `SettingsWindow`
 - **Why:** The main window is the first thing users compare between apps. All six already share this shape by copy and paste, so writing it down stops it drifting.
 
 Every app's main window has:
@@ -38,16 +38,16 @@ The window class is `SettingsWindow` (5 of 6). Window icon, saved placement and 
 
 - **Status:** Existing (6 of 6)
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/WslMonitor/DetailsWindow.xaml`
+- **Reference:** `wsl-status/WslMonitor/DetailsWindow.xaml`
 - **Why:** A fixed footer means "About" and the sibling apps are in the same place in every app, whatever the app's own pages are.
 
-The menu items are the app's own pages, starting with its main content (a Home page, or the per-item pages in hub-display-switch and wsl-monitor). The footer holds exactly two items, in this order: "Our other apps" (glyph E719; see [promo.md](promo.md)), then "About" (glyph E946). The built-in Settings item sits below them as WinUI places it. Nothing else goes in the footer.
+The menu items are the app's own pages, starting with its main content (a Home page, or the per-item pages in hub-display-switch and wsl-status). The footer holds exactly two items, in this order: "Our other apps" (glyph E719; see [promo.md](promo.md)), then "About" (glyph E946). The built-in Settings item sits below them as WinUI places it. Nothing else goes in the footer.
 
 ### UI-3: Page layout and cards
 
-- **Status:** Decided (D-019). Existing (2 of 6: hub-display-switch, wsl-monitor)
+- **Status:** Decided (D-019). Existing (2 of 6: hub-display-switch, wsl-status)
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/WslMonitor/App.xaml` (`PageContentStyle`, `PageTitleStyle`, `SectionHeaderStyle`, `CardBorderStyle`) and `wsl-monitor/WslMonitor/Pages/GeneralPage.xaml`
+- **Reference:** `wsl-status/WslMonitor/App.xaml` (`PageContentStyle`, `PageTitleStyle`, `SectionHeaderStyle`, `CardBorderStyle`) and `wsl-status/WslMonitor/Pages/GeneralPage.xaml`
 - **Why:** Three generations of page styling coexist today, two of them inside single apps, and the shared promo page matches only the oldest. One named set of styles is the only thing that stops a fourth.
 
 Every Windows app adopts the newest generation (D-019):
@@ -66,7 +66,7 @@ Pages use the named styles; they do not write padding, radius or header sizes in
 
 - **Status:** Existing (6 of 6 for the title, the theme setting and immediate save). Labels are Decided (D-072) (2 of 6 use the wording)
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/WslMonitor/Pages/GeneralPage.xaml` and `.xaml.cs`; winui-app-kit `Theming/AppTheme.cs`
+- **Reference:** `wsl-status/WslMonitor/Pages/GeneralPage.xaml` and `.xaml.cs`; winui-app-kit `Theming/AppTheme.cs`
 - **Why:** These are the settings every app has, so they should read and behave identically.
 
 - The page is titled "Settings" and is reached from the built-in Settings item.
@@ -82,7 +82,7 @@ Reset and export of settings are covered by CONF-4 in [settings-config.md](setti
 
 - **Status:** Decided (D-005, D-014, D-017, D-086). winui-app-kit ships the page from v1.1.0; 0 of 6 apps use it yet (each app's kit migration adopts it)
 - **Applies to:** Windows
-- **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` for content; `wsl-monitor/WslMonitor/Pages/AboutPage.xaml` for layout and for taking the version from the kit
+- **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` for content; `wsl-status/WslMonitor/Pages/AboutPage.xaml` for layout and for taking the version from the kit
 - **Why:** About is where a user goes for the version, an update, help and the logs. Today no two apps offer the same set, and none offers a support link.
 
 The items every About surface carries, on any stack, are listed once in BRAND-8 in [branding.md](branding.md). This rule owns how a Windows app lays them out, as these cards, in order:
@@ -104,13 +104,13 @@ Windows apps use winui-app-kit's shared `AboutPage`, filled from an `AboutInfo` 
 
 - **Status:** Existing (confirmations are code-built `ContentDialog`s in every app that has one; destructive ones default to Close in 3 of the 4 apps checked). A shared helper is Proposed
 - **Applies to:** Windows
-- **Reference:** `wsl-monitor/WslMonitor/DetailsWindow.xaml.cs` (`ConfirmAsync`)
+- **Reference:** `wsl-status/WslMonitor/DetailsWindow.xaml.cs` (`ConfirmAsync`)
 - **Why:** A destructive dialog whose default button is the destructive one turns a stray Enter key into data loss. One helper makes the safe default the only default.
 
 - Confirmations go through one `ConfirmAsync`-style helper per app, not a `ContentDialog` constructed at each call site (little-launcher has 18 constructions across 12 files). Apps on winui-app-kit use the kit's `ConfirmDialog.ConfirmAsync`, which always defaults to Close and never leaves a caller waiting if its window closes (see the kit's README).
 - A destructive confirmation names the action on its primary button and sets the default button to Close.
 - Standing status that the user must see (not connected, needs setup) is a non-closable `InfoBar` at the top of the Home page, as repilot and immich-drive do. Do not use a dialog for status. Operating-system notifications (toasts) are LOG-11 in [logging.md](logging.md).
-- A second click on the same button as confirmation (wsl-monitor's flyout) is allowed only inside a flyout, where a dialog would dismiss it.
+- A second click on the same button as confirmation (wsl-status's flyout) is allowed only inside a flyout, where a dialog would dismiss it.
 
 ## Web
 
@@ -184,12 +184,12 @@ New Android apps use Jetpack Compose. sonarbridge stays on programmatic Views an
 
 ### UI-13: Empty states
 
-- **Status:** Proposed (a shared empty state exists in 1 of 6 Windows apps, wsl-monitor, and 2 of 4 web apps, printstream and game-is-up)
+- **Status:** Proposed (a shared empty state exists in 1 of 6 Windows apps, wsl-status, and 2 of 4 web apps, printstream and game-is-up)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `printstream/apps/web/src/components/EmptyState.tsx`; `wsl-monitor/WslMonitor/Controls/DistroList.cs`
+- **Reference:** `printstream/apps/web/src/components/EmptyState.tsx`; `wsl-status/WslMonitor/Controls/DistroList.cs`
 - **Why:** An empty list with no explanation looks broken. Grey text in one place and a designed message in the next makes one product look like several.
 
-Any surface that can have nothing to show uses the app's one empty-state component: an icon, a short title saying what is missing, one sentence on why or what to do, and an optional action. The same component is used on every surface that shows the same list (wsl-monitor uses one builder for its flyout and its overview page). Web apps name the component `EmptyState` and keep it in `components/`, not inside a feature folder. An app does not fall back to a different page instead of showing an empty state.
+Any surface that can have nothing to show uses the app's one empty-state component: an icon, a short title saying what is missing, one sentence on why or what to do, and an optional action. The same component is used on every surface that shows the same list (wsl-status uses one builder for its flyout and its overview page). Web apps name the component `EmptyState` and keep it in `components/`, not inside a feature folder. An app does not fall back to a different page instead of showing an empty state.
 
 ### UI-14: Accessibility baseline
 
@@ -208,7 +208,7 @@ Each stack gets one lint or check for this in [code-style.md](code-style.md) and
 
 ### UI-15: First run and change notices
 
-- **Status:** Existing (first-run flag in 3 of 6 Windows apps: hub-display-switch, wsl-monitor, little-launcher; "existing users only" notices in 2 products: little-launcher, persistent)
+- **Status:** Existing (first-run flag in 3 of 6 Windows apps: hub-display-switch, wsl-status, little-launcher; "existing users only" notices in 2 products: little-launcher, persistent)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `little-launcher/LittleLauncher/Classes/Settings/SettingsManager.cs` (`RaiseUpgradeNotices`); `hub-display-switch/HubDisplaySwitch/` for telling first run apart from a settings reset
 - **Why:** Windows 11 hides new tray icons, so a resident app that starts silently looks like it did nothing. And a "what changed" notice shown to someone who never saw the old behaviour is noise.

@@ -915,6 +915,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** LOG-9 gains a third disclosed exception with the rules that make it safe: env-driven and off unless configured, CSP widened only when on, query and hash excluded, identifiers in paths replaced, only fixed page titles sent, Do Not Track honoured, and the privacy policy describes it with its retention. game-is-up (a981719) is the reference.
 - **Reversibility:** cheap: unset two env values. **Repos:** GIU, PER (web), the company website. **Sources:** maintainer decisions 2026-11-19.
 
+### D-118 WSL Monitor is renamed WSL Status
+`branding` `store-listings`
+- **Decided (2026-11-20):** the product shown as "WSL Monitor" is renamed "WSL Status" everywhere users see it (Store listing, window and tray titles, About, README, release notes). Microsoft rejected "WSL Monitor" under Store policy 10.1.1.1 as too close to an existing app, "WSL Tray Monitor". "WSL" in a name is fine.
+- **Consequence:** the repo name, package identity, Store ID, tray GUID, mutex and startup task stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
+- **Reversibility:** the Store name is cheap to change before publish. **Repos:** wsl-monitor.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

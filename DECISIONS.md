@@ -921,6 +921,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** the GitHub repo and local folder are renamed `wsl-status` after the resubmission (confirmed 2026-11-20); the package identity, Store ID, tray GUID, mutex, startup task, settings folder and exe name stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
 - **Reversibility:** the Store name is cheap to change before publish. **Repos:** wsl-status.
 
+### D-119 First-party usage counts in hosted services
+`logging` `security`
+- **Decided (2026-11-20):** a hosted service may keep server-side counts of feature use per account or workspace (no content), on its own server, visible only to the operator, with a stated retention, if its privacy policy describes them. PrintStream's hosted feature usage (400 days) is kept and disclosed; Persistent's admin statistics already fit.
+- **Consequence:** LOG-9 gains a fourth disclosed exception. No third-party analytics service is involved.
+- **Reversibility:** cheap. **Repos:** PS (hosted), PER.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

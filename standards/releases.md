@@ -52,7 +52,7 @@ The notes for the version are written and approved first (REL-6). Then the versi
 
 - `vX.Y.Z` is the product's primary deliverable.
 - Every other deliverable in the same repo is a lane, tagged `<lane>-vX.Y.Z` (`desktop-v1.2.3`, `android-v1.2.3`, `linux-v1.2.3`). The `v` is always present.
-- Tags are annotated, always, and sit on the default branch.
+- Tags a person or release script pushes are annotated, always, and sit on the default branch. A tag a workflow creates through the Releases API (a CI-built lane such as printstream's desktop or server packages) may be lightweight.
 - Tags produced by automation for content-addressed builds (printstream's server packages) are outside this rule, as D-060 notes.
 - Existing tags are never renamed. persistent moves Android to `android-v*` at its next release so that `v*` can mean the product, and printstream's desktop lane gains the `v`.
 

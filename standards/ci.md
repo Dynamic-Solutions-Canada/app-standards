@@ -76,6 +76,8 @@ Every workflow file has:
 
 Workflows read the Node version from `.nvmrc`, the .NET SDK from `global.json`, and Gradle from the committed wrapper. No workflow hard-codes a toolchain version. Which versions the pins hold is in [platform.md](platform.md). Runner images are named explicitly for builds (`windows-2025` for MSIX work); buildless scans use `ubuntu-latest`.
 
+Every workflow that opens a Google Play edit (Play Check, Play Listing, Publish to Google Play) shares one concurrency group, `google-play-edit`, with `cancel-in-progress: false`. Play allows one open edit per app, and opening a new one deletes the previous, so two such runs at once break each other (seen in printstream 2026-11-20); queueing them fixes it, and never cancelling keeps a check from killing a publish mid-upload.
+
 Android jobs cache Gradle's downloads with `gradle/actions/setup-gradle` (pinned by commit SHA, `cache-provider: basic`, the MIT provider on the standard Actions cache), placed after setup-java and setup-android, in CI and in the release bundle job. Without it every run fetches the whole Kotlin, AGP and AndroidX tree from Maven Central, which rate-limits shared CI addresses (HTTP 429, sometimes reported as "Could not find"; seen in persistent 2026-11-19). Only the default branch, or the branch the job itself runs on when that is not the default (printstream's Android CI runs on main while dev is the default), writes the cache; tags and pull requests restore it. Reference: `persistent/.github/workflows/ci.yml`.
 
 Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A job that depends on a tool preinstalled on the image, rather than installed by a setup action, names the image version (`ubuntu-26.04`) or installs the tool itself.

@@ -41,6 +41,7 @@ The trees show the canonical set. An entry marked "if any" is omitted when the r
 ├── AGENTS.md
 ├── README.md
 ├── LICENSE                     (D-008)
+├── NOTICE                      where the licence requires one (HYG-2)
 ├── <App>.slnx                  (D-054)
 ├── Directory.Build.props       version and shared build settings
 ├── Directory.Build.targets     runtime guard (D-053)
@@ -119,11 +120,17 @@ A WinUI app inside a web monorepo (persistent) keeps this same set under `apps/d
 ├── devkit.config.mjs, paseo.json
 ├── Dockerfile
 ├── compose.dev.yml             and the production compose file (D-079)
-├── .env.example                (D-078)
+├── .env.example                (D-078), plus `.env.<role>.example` per role (server, dev, bridge)
+├── *.example.yml, *.conf.example   self-hosted products' documented example configs (compose, nginx, prometheus)
+├── tsconfig.test.json          where tests need their own compiler settings
+├── .vscode/extensions.json, settings.json   shared editor recommendations, if any
+├── .dockerignore
 ├── .editorconfig, .gitattributes, .gitignore
 ```
 
 Local only, never tracked: `node_modules/`, `dist/`, `.artifacts/`, `.secrets/`, `.backups/`, `tmp/`, `.env`.
+
+A product that ships demo content its app serves (printstream's `data/demo-library/`) may keep it tracked under `data/`; a demo file over the 5 MB pre-commit limit is listed with `--allow-large` in the hook, with a comment saying why it is tracked.
 
 Tests sit beside the code they test as `*.test.ts` (4 of 4). The npm workspace list names `apps/api`, `apps/web` and `packages/*` explicitly, so native shells are not installed as workspaces by accident (persistent and store-sign-controller do this; the other two use the `apps/*` glob). Compose and env file names are in [settings-config.md](settings-config.md).
 

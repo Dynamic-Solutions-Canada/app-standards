@@ -142,8 +142,8 @@ A host keeps its settings in one state store under the platform's user-data fold
 | More than one audience (server operator, bridge, developer) | `.env.<role>.example`, one per audience, with the role matching the compose file name (`dev`, `server`, `bridge`) |
 
 - Every variable in an example has a comment, placeholder values are never real hostnames or keys (see FIX-007), and a required secret has no working default (see FIX-006).
-- Names for the same thing are the same in every app: `DATABASE_URL`, `CLIENT_ORIGIN`, `API_PORT`, `CLOUDFLARE_EMAIL_*`, `FCM_*`, `DEPLOY_*`, and `ANDROID_APP_ORIGINS` for the Android origin setting. Booleans end in `_ENABLED`. The shared list is kept in this file (D-078).
-- Renaming a variable that deployed servers already set is done with a fallback to the old name for one release, because the rename is cheap in the repo and costly on the server.
+- Names for the same thing are the same in every app: `DATABASE_URL`, `CLIENT_ORIGIN`, `API_PORT`, `CLOUDFLARE_EMAIL_*`, `FCM_*`, `DEPLOY_*`, and `ANDROID_APP_ORIGINS` for the Android origin setting. Booleans end in `_ENABLED`. A setting with more than two states is one `_MODE` variable with named values (`BRIDGE_UPDATE_MODE=automatic|manual|pinned`), not several booleans that can contradict each other. The shared list is kept in this file (D-078).
+- Renaming a variable that deployed servers already set is done with a fallback to the old name for one release, because the rename is cheap in the repo and costly on the server. Software that customers run themselves keeps reading the old name indefinitely and logs a deprecation notice when it is used, because their configuration is never upgraded for them; where the software writes its own configuration file, it rewrites the old name to the new one on its next start (decided 2026-11-23, PrintStream's bridge).
 - Real values live in `.env` and `.secrets/`, both ignored; see [security.md](security.md) and [repo-hygiene.md](repo-hygiene.md).
 
 ### CONF-11: Compose file names and production topology

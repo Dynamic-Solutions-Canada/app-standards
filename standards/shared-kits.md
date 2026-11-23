@@ -6,11 +6,11 @@ The three kits own their own usage docs. These standards say when to use a kit a
 
 | Kit | What it is | Canonical docs | Local copy |
 | --- | --- | --- | --- |
-| winui-app-kit | Shared plumbing for WinUI tray and desktop apps | [README](https://github.com/Dynamic-Solutions-Canada/winui-app-kit) | `wsl-status/external/winui-app-kit/README.md` |
-| apps-promo | The "Our other apps" catalog and page | [README](https://github.com/Dynamic-Solutions-Canada/apps-promo) | `wsl-status/external/promo/README.md` |
+| winui-app-kit | Shared plumbing for WinUI tray and desktop apps | [README](https://github.com/Dynamic-Solutions-Canada/winui-app-kit) | `tray-control-for-wsl/external/winui-app-kit/README.md` |
+| apps-promo | The "Our other apps" catalog and page | [README](https://github.com/Dynamic-Solutions-Canada/apps-promo) | `tray-control-for-wsl/external/promo/README.md` |
 | devkit | Per-checkout dev hostnames, ports and databases for web apps | README in the devkit repo, on the maintainer's personal account until it moves to the `Dynamic-Solutions-Canada` organisation under D-009 | `devkit/README.md` |
 
-Counts are out of the 6 WinUI apps (display-switchr, wsl-status, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise. The kits are themselves held to these standards (READMEs, docs, AI docs, licence).
+Counts are out of the 6 WinUI apps (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise. The kits are themselves held to these standards (READMEs, docs, AI docs, licence).
 
 ## Rules
 
@@ -31,9 +31,9 @@ What the kits should additionally own is KIT-9 and KIT-10. The rules that depend
 
 ### KIT-2: WinUI apps are built on winui-app-kit
 
-- **Status:** Existing (2 of 6: display-switchr, wsl-status)
+- **Status:** Existing (2 of 6: display-switchr, tray-control-for-wsl)
 - **Applies to:** Windows
-- **Reference:** `wsl-status/` for a new app; display-switchr commit `af41968` for migrating an existing one
+- **Reference:** `tray-control-for-wsl/` for a new app; display-switchr commit `af41968` for migrating an existing one
 - **Why:** About 2,500 lines across the other four apps duplicate what the kit already owns, and the copies are where the known defects are (non-atomic settings writes, no tray GUID, startup that can override the user).
 
 - A new WinUI app starts on the kit and uses every kit type that applies to it. It does not copy the equivalent class from a sibling app.
@@ -64,7 +64,7 @@ A web monorepo gets its development hostname, ports and database from devkit, co
 
 - **Status:** Decided (D-005). Existing (submodule under `external/`: winui-app-kit 2 of 6, apps-promo 6 of 6; tag-pinned package: devkit 3 of 4)
 - **Applies to:** Windows, Web, Kit
-- **Reference:** `wsl-status/.gitmodules`; `external/promo/PromotedApps.projitems` for shared XAML; `persistent/package.json` for the devkit pin
+- **Reference:** `tray-control-for-wsl/.gitmodules`; `external/promo/PromotedApps.projitems` for shared XAML; `persistent/package.json` for the devkit pin
 - **Why:** One mechanism per stack means an agent or a CI job knows where shared code is and how to update it. Copying is the mechanism that produced six diverged build scripts.
 
 | Stack | Mechanism |
@@ -131,19 +131,19 @@ KIT-9 and KIT-10 list what is already at or past the third copy.
 | --- | --- | --- | --- | --- |
 | Tray, startup, theme, settings store, window chrome, single instance, localization classes | 4 apps still carry their own (about 600 to 800 lines each) | winui-app-kit (exists; apps migrate, KIT-2) | the kit | none |
 | Update service (Store when packaged, GitHub releases when not) | 4: little-launcher, repilot, immich-drive, persistent | winui-app-kit | `repilot/Repilot/Services/UpdateService.cs` | D-014 |
-| Settings window shell, About page, card and page styles | 6 | winui-app-kit shared XAML | `wsl-status/WslMonitor/` | D-019 |
-| Confirm dialog helper (in the kit from v1.0.0: `ConfirmDialog`) | 5 apps | winui-app-kit | `wsl-status/WslMonitor/DetailsWindow.xaml.cs` | none |
-| App bootstrap (two unhandled-exception handlers, restore settings, create host) and the hidden host window setup (in the kit from v1.0.0: `AppBootstrap`, `HostWindow`) | 6 and 5 | winui-app-kit | `wsl-status/WslMonitor/App.xaml.cs` | D-074 |
-| Tray icon rasteriser (supersample and shrink) (in the kit from v1.0.0: `TrayIconRasterizer`) | 2: display-switchr, wsl-status | winui-app-kit | `wsl-status/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
+| Settings window shell, About page, card and page styles | 6 | winui-app-kit shared XAML | `tray-control-for-wsl/WslMonitor/` | D-019 |
+| Confirm dialog helper (in the kit from v1.0.0: `ConfirmDialog`) | 5 apps | winui-app-kit | `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml.cs` | none |
+| App bootstrap (two unhandled-exception handlers, restore settings, create host) and the hidden host window setup (in the kit from v1.0.0: `AppBootstrap`, `HostWindow`) | 6 and 5 | winui-app-kit | `tray-control-for-wsl/WslMonitor/App.xaml.cs` | D-074 |
+| Tray icon rasteriser (supersample and shrink) (in the kit from v1.0.0: `TrayIconRasterizer`) | 2: display-switchr, tray-control-for-wsl | winui-app-kit | `tray-control-for-wsl/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
 | DPAPI protected store | 2: little-launcher, immich-drive (FIX-001) | winui-app-kit, accepting an app-supplied folder, file name and entropy (both apps' values are permanent once shipped), with no logging dependency so a second process such as a shell extension can link it | `immich-drive/ImmichDrive/Services/ProtectedStore.cs` (adds `Exists`, an injectable protector, folder and error hooks, atomic save, and no delete on a failed load because two processes read the file) | D-081 |
 | Settings schema versioning, backup and reset | 0 (new) | winui-app-kit | none | D-077, D-104 |
-| `NLog.config` | 6, in two variants | winui-app-kit | `wsl-status/WslMonitor/NLog.config` | D-080 |
+| `NLog.config` | 6, in two variants | winui-app-kit | `tray-control-for-wsl/WslMonitor/NLog.config` | D-080 |
 | Runtime CVE guard (`Directory.Build.targets`) and `global.json` | 3 guards, in three implementations | winui-app-kit | repilot's | D-053 |
-| `Directory.Build.props` shared block, `.gitignore` tail, `scripts/windows-build` wrapper | 6 | winui-app-kit or the build tooling | wsl-status's | none |
-| `build-msix.ps1` | 6 (1,716 lines in total) | one script driven by `windows-build.json` | `wsl-status/WslMonitorMSIX/build-msix.ps1` | D-065 |
+| `Directory.Build.props` shared block, `.gitignore` tail, `scripts/windows-build` wrapper | 6 | winui-app-kit or the build tooling | tray-control-for-wsl's | none |
+| `build-msix.ps1` | 6 (1,716 lines in total) | one script driven by `windows-build.json` | `tray-control-for-wsl/WslMonitorMSIX/build-msix.ps1` | D-065 |
 | MSIX image generator | 5 | devkit's icon generator | none | D-069 |
-| Language list (the nine locales and their aliases) and the catalog completeness check | 5 and 4 | one shared data file and one check | wsl-status's | D-067 |
-| Promo page localization adapter | 3: wsl-status, repilot, persistent | already in apps-promo; delete the copies (PROMO-7) | apps-promo | none |
+| Language list (the nine locales and their aliases) and the catalog completeness check | 5 and 4 | one shared data file and one check | tray-control-for-wsl's | D-067 |
+| Promo page localization adapter | 3: tray-control-for-wsl, repilot, persistent | already in apps-promo; delete the copies (PROMO-7) | apps-promo | none |
 
 Kit features that block a migration are added first: several tray icons per host window (little-launcher), re-pointing the Run key for portable builds and an orderly-exit hook (persistent).
 

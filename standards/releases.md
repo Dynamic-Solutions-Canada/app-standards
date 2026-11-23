@@ -2,7 +2,7 @@
 
 How a version is chosen, recorded, tagged, published and followed up. How the artifacts are packaged, signed and delivered to users is in [distribution.md](distribution.md); the CI side of release gating is in [ci.md](ci.md); store listing text is in [store-listings.md](store-listings.md).
 
-Counts are out of the 9 in-scope repos that tag or release today (little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge, printstream-home-assistant, devkit) unless a rule says otherwise. The other six (display-switchr, wsl-status, game-is-up, store-sign-controller, winui-app-kit, apps-promo) have no tags and no Releases, and follow these rules from their first release.
+Counts are out of the 9 in-scope repos that tag or release today (little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge, printstream-home-assistant, devkit) unless a rule says otherwise. The other six (display-switchr, tray-control-for-wsl, game-is-up, store-sign-controller, winui-app-kit, apps-promo) have no tags and no Releases, and follow these rules from their first release.
 
 ## Reference flows
 

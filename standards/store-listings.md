@@ -2,7 +2,7 @@
 
 Where the text and images for each store listing live, what shape they take, and how the README, the listing and the website page are kept saying the same thing. The asset sizes themselves are in [assets.md](assets.md); the locale set is in [locales.md](locales.md); how a release reaches a store is in [distribution.md](distribution.md) and [releases.md](releases.md).
 
-Counts are out of the 9 in-scope apps that have, or are being prepared for, a Microsoft Store or Google Play listing (display-switchr, wsl-status, little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge) unless a rule says otherwise. The Home Assistant integration is the one HACS listing. game-is-up and store-sign-controller have no listing.
+Counts are out of the 9 in-scope apps that have, or are being prepared for, a Microsoft Store or Google Play listing (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge) unless a rule says otherwise. The Home Assistant integration is the one HACS listing. game-is-up and store-sign-controller have no listing.
 
 ## Listing surfaces
 

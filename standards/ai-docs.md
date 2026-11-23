@@ -44,16 +44,16 @@ Checked by test on 2026-11-16 with Claude Code 2.1.322: `AGENTS.md` loaded in `/
 
 - **Status:** Existing (10 of 15; missing in store-sign-controller, phonelock, devkit, apps-promo, and printstream-home-assistant). The generated repo's exemption is Decided (D-089)
 - **Applies to:** all
-- **Reference:** `wsl-status/AGENTS.md` (small app); `persistent/AGENTS.md` (monorepo); `wsl-status/external/winui-app-kit/AGENTS.md` (kit)
+- **Reference:** `tray-control-for-wsl/AGENTS.md` (small app); `persistent/AGENTS.md` (monorepo); `tray-control-for-wsl/external/winui-app-kit/AGENTS.md` (kit)
 - **Why:** It is the only file both tools load without being told, and kits need one most because their mistakes reach every consumer.
 
 Every repo has an `AGENTS.md` at its root, including kits and tooling. A kit's file can be very short: the rules only an agent would get wrong. printstream-home-assistant is generated from printstream, whose export removes agent files. Under D-089 its instructions are a nested `AGENTS.md` in `printstream/integrations/home-assistant/` (none exists today), and the generated repo is exempt from this rule.
 
 ### AI-2: Skeleton, title, and section names
 
-- **Status:** Proposed (2 of 10 use the title form: wsl-status, winui-app-kit; section names differ in all 10)
+- **Status:** Proposed (2 of 10 use the title form: tray-control-for-wsl, winui-app-kit; section names differ in all 10)
 - **Applies to:** all
-- **Reference:** `wsl-status/AGENTS.md` for shape; `little-launcher/AGENTS.md` for the guidance map and "Keeping docs current" tables; `persistent/AGENTS.md` for "Shared helpers"
+- **Reference:** `tray-control-for-wsl/AGENTS.md` for shape; `little-launcher/AGENTS.md` for the guidance map and "Keeping docs current" tables; `persistent/AGENTS.md` for "Shared helpers"
 - **Why:** Fixed headings let an agent, and the maintainer, find the same thing in the same place in every repo.
 
 Use this skeleton. Sections marked optional are omitted, not left empty.
@@ -133,7 +133,7 @@ A repo may also add the standards as a submodule at `external/standards` for off
 
 - **Status:** Decided (D-108). Existing (0 of 15 have a `CLAUDE.md`); 5 of 10 `AGENTS.md` files address Codex by name: repilot, immich-drive, persistent, printstream, game-is-up
 - **Applies to:** all
-- **Reference:** `wsl-status/AGENTS.md`
+- **Reference:** `tray-control-for-wsl/AGENTS.md`
 - **Why:** Two instruction files drift, and guidance written for one tool reads as optional to the other.
 
 `AGENTS.md` is the single instruction file. A repo never has a `CLAUDE.md`, `CLAUDE.local.md`, or `.claude/CLAUDE.md`: Claude Code stops reading `AGENTS.md` when any of them exists, so adding one silently drops the real instructions. No other tool-specific instruction file (`.cursorrules`, `.github/copilot-instructions.md`) is kept.
@@ -195,7 +195,7 @@ A project skill with the same name as a shared one replaces it, and says in its 
 
 ### AI-10: No `.codex/`; `.claude/` holds only what Claude Code requires
 
-- **Status:** Decided (D-108). Existing (8 of 15 have no `.codex/`; display-switchr, wsl-status, repilot, immich-drive, persistent, printstream, and game-is-up track one)
+- **Status:** Decided (D-108). Existing (8 of 15 have no `.codex/`; display-switchr, tray-control-for-wsl, repilot, immich-drive, persistent, printstream, and game-is-up track one)
 - **Applies to:** all
 - **Reference:** none yet
 - **Why:** Codex is not used, and files under `.codex/commands/` were never commands in any tool; they duplicate the `desktop` skill beside them.

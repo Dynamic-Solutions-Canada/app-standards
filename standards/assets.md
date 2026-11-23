@@ -2,7 +2,7 @@
 
 Icons and imagery: where the master of each mark lives, which sizes each platform needs, how they are generated, and how the website and promo catalog get them. Which mark, colours and name an app uses is in [branding.md](branding.md); how a tray icon behaves is in [tray.md](tray.md); listing text and screenshot naming are in [store-listings.md](store-listings.md).
 
-Counts are out of the 11 end-user apps in scope unless a rule says otherwise. "Windows apps" means the six with a WinUI package (display-switchr, wsl-status, little-launcher, repilot, immich-drive, and Persistent's desktop app).
+Counts are out of the 11 end-user apps in scope unless a rule says otherwise. "Windows apps" means the six with a WinUI package (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and Persistent's desktop app).
 
 ## Proposed layout
 
@@ -56,7 +56,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 ### ASSET-3: One generator, sizing and packing only
 
-- **Status:** Decided (D-069). Proposed (2 on the shared generator, devkit-icons: chatmixr and display-switchr since 2026-11-22; diverged copies of `generate-msix-images.ps1` remain in wsl-status, repilot, immich-drive and persistent; little-launcher has none)
+- **Status:** Decided (D-069). Proposed (2 on the shared generator, devkit-icons: chatmixr and display-switchr since 2026-11-22; diverged copies of `generate-msix-images.ps1` remain in tray-control-for-wsl, repilot, immich-drive and persistent; little-launcher has none)
 - **Applies to:** Windows, Web, Android, Kit
 - **Reference:** `game-is-up/scripts/dev/generate-brand-icons.mjs` (single entry point, resvg); `display-switchr/assets/brand/icons.json` (a Windows target through devkit-icons, which writes the complete Windows size list)
 - **Why:** The size lists are identical for every app; only the art differs. Five copies of the list have already produced three different output sets.
@@ -71,7 +71,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 - **Status:** Decided (D-069). Existing (5 of 6 Windows apps commit their MSIX images; persistent ignores them and regenerates at build)
 - **Applies to:** Windows, Web, Android, HA
-- **Reference:** `wsl-status/WslMonitorMSIX/Images/`
+- **Reference:** `tray-control-for-wsl/WslMonitorMSIX/Images/`
 - **Why:** Committed outputs keep builds independent of the generator and its rasterizer, and make an icon change visible in review. The check mode in ASSET-3 removes the usual risk of committed outputs going stale.
 
 - Outputs a build or a platform reads from the tree (`.ico`, MSIX images, Android resources, web icons, HA brand images, store graphics, `assets/generated/`) are committed.
@@ -81,9 +81,9 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 ### ASSET-5: Windows size set
 
-- **Status:** Existing (2 of 6 committed `.ico` files carry the full frame list, and 2 of 5 tracked MSIX sets are complete: display-switchr, wsl-status)
+- **Status:** Existing (2 of 6 committed `.ico` files carry the full frame list, and 2 of 5 tracked MSIX sets are complete: display-switchr, tray-control-for-wsl)
 - **Applies to:** Windows
-- **Reference:** `wsl-status/WslMonitorMSIX/Images/`, `wsl-status/WslMonitor/Resources/WslMonitor.ico`
+- **Reference:** `tray-control-for-wsl/WslMonitorMSIX/Images/`, `tray-control-for-wsl/WslMonitor/Resources/WslMonitor.ico`
 - **Why:** Windows picks the nearest frame and scales it. A missing frame shows as a blurred icon at 125 and 150 percent, in the taskbar, or in the Store.
 
 | Output | File | Sizes |

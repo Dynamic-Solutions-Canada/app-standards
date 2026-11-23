@@ -2,7 +2,7 @@
 
 Which SDKs, runtimes, operating system versions and framework generations the apps build on, and where each is pinned. Shared code (winui-app-kit, devkit, any shared web package) can only target one baseline, and a security bump that has to be repeated by hand in each repo gets missed in some.
 
-Counts are against the in-scope repos a rule applies to: the 6 Windows-building repos (display-switchr, wsl-status, little-launcher, repilot, immich-drive, persistent), the 5 Node repos (persistent, printstream, game-is-up, store-sign-controller, devkit), the 4 web monorepos (the Node repos without devkit), and the 2 native Android repos (phonelock, sonarbridge).
+Counts are against the in-scope repos a rule applies to: the 6 Windows-building repos (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent), the 5 Node repos (persistent, printstream, game-is-up, store-sign-controller, devkit), the 4 web monorepos (the Node repos without devkit), and the 2 native Android repos (phonelock, sonarbridge).
 
 **This file states pin policy, not "current" versions.** The table records what the repos pinned when it was last checked (2026-11-16), so drift is visible. It is not a list of what to install. The dependency-version rule in the user-level agent rules (kept outside this repo) applies: check the registry before adding or moving a version, and never take one from memory or from this table.
 
@@ -10,7 +10,7 @@ Counts are against the in-scope repos a rule applies to: the 6 Windows-building 
 
 | Stack | Item | Pinned in | Value in the repos today | Target |
 | --- | --- | --- | --- | --- |
-| Windows | .NET SDK | `global.json` | 10.0.403 (little-launcher, repilot, persistent); 10.0.100 (display-switchr, wsl-status); no file (immich-drive, winui-app-kit) | PLAT-2 |
+| Windows | .NET SDK | `global.json` | 10.0.403 (little-launcher, repilot, persistent); 10.0.100 (display-switchr, tray-control-for-wsl); no file (immich-drive, winui-app-kit) | PLAT-2 |
 | Windows | Target framework | app csproj | `net10.0-windows10.0.22000.0` (6 of 6, and the kit) | PLAT-4 |
 | Windows | Windows App SDK | app csproj | 1.8.260209005 (6 of 6 main app projects, and the kit) | PLAT-5 |
 | Windows | Minimum Windows build | `Package.appxmanifest` | 22000 (5 of 6); 19045.5011 (immich-drive) | PLAT-6 |
@@ -56,7 +56,7 @@ Each stack's pins are reviewed once a quarter and moved together (D-095). A secu
 
 ### PLAT-2: One .NET SDK pin
 
-- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; display-switchr and wsl-status still pin 10.0.100, rechecked 2026-11-16; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
+- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; display-switchr and tray-control-for-wsl still pin 10.0.100, rechecked 2026-11-16; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
 - **Applies to:** Windows, Kit (winui-app-kit)
 - **Reference:** `repilot/global.json`
 - **Why:** Two SDK bands are pinned today, and the older one predates the runtime fix that PLAT-3 requires.
@@ -76,7 +76,7 @@ A `Directory.Build.targets` check fails the build when the runtime pack that was
 
 - **Status:** Existing (6 of 6, and winui-app-kit)
 - **Applies to:** Windows, Kit (winui-app-kit)
-- **Reference:** `wsl-status/WslMonitor/WslMonitor.csproj`
+- **Reference:** `tray-control-for-wsl/WslMonitor/WslMonitor.csproj`
 - **Why:** The kit compiles into each app, so the app and the kit must agree on framework, platforms and packaging model.
 
 The app project targets `net10.0-windows10.0.22000.0`, builds for `x64` and `ARM64` with matching runtime identifiers, and sets `WindowsPackageType` to `None`; packaging is done by the script in the `<App>MSIX` folder (see [repo-layout.md](repo-layout.md)), which publishes the app self-contained. The platform auto-detect block in `Directory.Build.props` is kept as in the kit's copy. Language and nullable settings are in [code-style.md](code-style.md). The version number's home is in [releases.md](releases.md).
@@ -87,7 +87,7 @@ Exception: an Xbox Game Bar widget is a UWP companion project in the same packag
 
 - **Status:** Existing (6 of 6 main app projects and the kit are on the same Windows App SDK version). The central version file is Decided (D-096) (0 of 6)
 - **Applies to:** Windows, Kit (winui-app-kit)
-- **Reference:** `wsl-status/external/winui-app-kit/WinUIAppKit/WinUIAppKit.csproj`
+- **Reference:** `tray-control-for-wsl/external/winui-app-kit/WinUIAppKit/WinUIAppKit.csproj`
 - **Why:** The Windows App SDK agrees today only because it was pasted at the same time. NLog and Sqlite, pinned the same way, have already drifted.
 
 Every WinUI project in the family uses the Windows App SDK version that winui-app-kit uses; an app does not move ahead of the kit. The packages the family shares (Windows App SDK, NLog, CommunityToolkit.Mvvm) get their version from one shared file, not from each csproj. That file is central package management (`Directory.Packages.props`), with the shared versions imported from the kit, which is where D-005 puts shared build props (D-096).
@@ -96,7 +96,7 @@ A project that has the `Microsoft.WindowsDesktop.App` framework reference (every
 
 Exception: a Game Bar widget's UWP project takes no Windows App SDK (D-120); its own packages are still pinned in the central file.
 
-Taking the kit's central versions moves an app to the kit's package versions: NLog was on 6.1.1 in little-launcher, repilot, immich-drive and persistent and on 6.2.2 in the kit, display-switchr and wsl-status (2026-11-16), so those four move to 6.2.2 with their kit migration.
+Taking the kit's central versions moves an app to the kit's package versions: NLog was on 6.1.1 in little-launcher, repilot, immich-drive and persistent and on 6.2.2 in the kit, display-switchr and tray-control-for-wsl (2026-11-16), so those four move to 6.2.2 with their kit migration.
 
 One secondary project is on a newer major today (persistent's widget). A project that needs a newer major than the kit says why in a comment, and the kit is moved as its own change.
 

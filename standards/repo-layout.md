@@ -2,7 +2,7 @@
 
 Where things live at the top of each repo, where build output goes, and what a deliverable file is called. What git ignores is HYG-6 in [repo-hygiene.md](repo-hygiene.md). Each stack is already close to one shape internally; these rules name that shape so a new repo starts from it and an old one knows what is out of place.
 
-Counts are against the in-scope repos a rule applies to: the 5 standalone WinUI apps (display-switchr, wsl-status, little-launcher, repilot, immich-drive), the 6 Windows-building repos (those five plus persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), the 2 Android repos (phonelock, sonarbridge), and the 3 kits (devkit, winui-app-kit, apps-promo).
+Counts are against the in-scope repos a rule applies to: the 5 standalone WinUI apps (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive), the 6 Windows-building repos (those five plus persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), the 2 Android repos (phonelock, sonarbridge), and the 3 kits (devkit, winui-app-kit, apps-promo).
 
 The trees show the canonical set. An entry marked "if any" is omitted when the repo has nothing to put there. Several entries rest on a decision owned by another topic; those are noted beside the entry.
 
@@ -194,7 +194,7 @@ The source of truth is a folder in the parent product (`integrations/home-assist
 
 - **Status:** Existing (1 of 3: winui-app-kit; devkit is close; apps-promo keeps source, script and test at the root)
 - **Applies to:** Kit
-- **Reference:** `wsl-status/external/winui-app-kit/`
+- **Reference:** `tray-control-for-wsl/external/winui-app-kit/`
 - **Why:** A kit is read from inside other repos as a submodule or package, so it must be small, flat and free of anything a consumer has to skip over.
 
 ```text
@@ -219,7 +219,7 @@ A kit has no committed build output (LAYOUT-13) and no consumer-specific paths. 
 
 - **Status:** Existing (6 of 6 consumers; persistent nests it at `apps/desktop/external/`)
 - **Applies to:** Windows, Web
-- **Reference:** `wsl-status/.gitmodules`
+- **Reference:** `tray-control-for-wsl/.gitmodules`
 - **Why:** One folder name tells people and tools which code is not owned by this repo.
 
 Submodules are checked out at `external/<name>` beside the project that uses them: `external/promo`, `external/winui-app-kit`, and optionally `external/standards`. The folder name is the short name, not the repo name. `.gitmodules` uses the current organisation URL; the three stale ones are FIX-046. How kits are versioned and pinned is in [shared-kits.md](shared-kits.md).
@@ -243,7 +243,7 @@ Script names and what each must do are in [dev-scripts.md](dev-scripts.md).
 
 - **Status:** Proposed (1 of 15 tracks a leftover folder: `legacy/` in display-switchr; five more working trees hold untracked strays at the root)
 - **Applies to:** all
-- **Reference:** `wsl-status/` (the smallest root of the Windows apps)
+- **Reference:** `tray-control-for-wsl/` (the smallest root of the Windows apps)
 - **Why:** The root is the first thing read. Leftovers there are copied into the next repo.
 
 The root holds only what its stack's tree lists. Retired code is deleted, not kept in a `legacy/` folder; git history keeps it. Scratch output, logs and one-off captures go under `.artifacts/` or `tmp/`, never in a named root file. Documents other than `README.md`, `AGENTS.md`, the licence and the files D-035 allows live under `docs/` (see [docs.md](docs.md)).

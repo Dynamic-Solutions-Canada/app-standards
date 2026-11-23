@@ -2,7 +2,7 @@
 
 How source code is formatted, linted and named in each stack, and which tool checks it. Today style is consistent by habit and checked almost nowhere, so most rules here describe an existing habit that D-016 now enforces, rolled out repo by repo with printstream on its own schedule.
 
-Counts are against the in-scope repos a rule applies to: the 6 repos with a WinUI app on the shared build tooling (display-switchr, wsl-status, little-launcher, repilot, immich-drive, persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), and the 2 Android repos (phonelock, sonarbridge).
+Counts are against the in-scope repos a rule applies to: the 6 repos with a WinUI app on the shared build tooling (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), and the 2 Android repos (phonelock, sonarbridge).
 
 How code is commented, documented and split into functions and files is covered by the user-level agent rules (kept outside this repo) (code clarity and structure, conventions, writing) and is not restated here.
 
@@ -72,7 +72,7 @@ Every monorepo has a root `tsconfig.base.json` that workspaces extend. It is the
 
 - **Status:** Existing (6 of 6 by habit, and winui-app-kit; nothing enforces it)
 - **Applies to:** Windows, Kit
-- **Reference:** `wsl-status/external/winui-app-kit/WinUIAppKit/`
+- **Reference:** `tray-control-for-wsl/external/winui-app-kit/WinUIAppKit/`
 - **Why:** The family already writes C# one way; recording it lets the `.editorconfig` and `dotnet format` hold it.
 
 - File-scoped namespaces.
@@ -81,13 +81,13 @@ Every monorepo has a root `tsconfig.base.json` that workspaces extend. It is the
 - MSBuild and manifest XML (`.csproj`, `.props`, `.targets`, `.projitems`, `.appxmanifest`, `.resw`, `.config`, `.nuspec`) use 2-space indentation; XAML keeps 4 (STYLE-1).
 - Namespaces match the project name and folder path, with no company prefix.
 
-These go in the `.editorconfig` (STYLE-1) so that `dotnet format` applies them. The static field rules are two naming rules, not an exemption: `private static readonly` fields match PascalCase, other private fields (static or not) match `_camelCase`. Decided 2026-11-16 from the code: `_camelCase` is the majority form for mutable private statics (62 of about 103 across the Windows repos; `s_` appeared only in winui-app-kit and once in wsl-status), PascalCase was already the form for `static readonly`, and all 36 MSBuild and manifest files already used 2-space indentation.
+These go in the `.editorconfig` (STYLE-1) so that `dotnet format` applies them. The static field rules are two naming rules, not an exemption: `private static readonly` fields match PascalCase, other private fields (static or not) match `_camelCase`. Decided 2026-11-16 from the code: `_camelCase` is the majority form for mutable private statics (62 of about 103 across the Windows repos; `s_` appeared only in winui-app-kit and once in tray-control-for-wsl), PascalCase was already the form for `static readonly`, and all 36 MSBuild and manifest files already used 2-space indentation.
 
 ### STYLE-6: Nullable and language settings are on in every .NET project
 
 - **Status:** Existing (6 of 6 main app projects and winui-app-kit set all three; 4 of 6 test projects omit `LangVersion`)
 - **Applies to:** Windows, Kit
-- **Reference:** `wsl-status/WslMonitor/WslMonitor.csproj`
+- **Reference:** `tray-control-for-wsl/WslMonitor/WslMonitor.csproj`
 - **Why:** A project without nullable checking can pass a null to one that has it, and the mismatch surfaces as a crash, not a warning.
 
 Every project, including helper executables and test harnesses, has `Nullable` enable, `ImplicitUsings` enable and the same `LangVersion` as the app (`preview` in all six today). Set them once in `Directory.Build.props` so new projects inherit them, and do not repeat them per csproj. Nullable warnings are fixed, not suppressed; a `!` or `#nullable disable` carries a comment saying why.
@@ -96,7 +96,7 @@ Every project, including helper executables and test harnesses, has `Nullable` e
 
 - **Status:** Decided (D-016, D-091, D-005). Proposed (0 of 6 set `AnalysisLevel`, `EnforceCodeStyleInBuild` or `TreatWarningsAsErrors`)
 - **Applies to:** Windows, Kit
-- **Reference:** `wsl-status/external/winui-app-kit/WinUIAppKit/WinUIAppKit.csproj` (documentation warnings on public members, the only compiler-checked style rule in the family)
+- **Reference:** `tray-control-for-wsl/external/winui-app-kit/WinUIAppKit/WinUIAppKit.csproj` (documentation warnings on public members, the only compiler-checked style rule in the family)
 - **Why:** The compiler is the only reviewer that reads every line on every build.
 
 An app that is not yet warning-free sets `WinUIAppKitWarningsAsErrors=false` in its `Directory.Build.props` before the kit's props import (it is evaluated at import time and ignored if set after), with a comment saying why, and removes it once the build is clean; that switch is how "once a repo builds without warnings" below is put into practice for apps on the kit.

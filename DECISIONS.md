@@ -10,7 +10,7 @@ Every entry is settled as of 2026-11-16. "Already decided" holds the maintainer'
 - **Counts** are "N of M applicable", counted against the 15 in-scope repos in `SCOPE.md` only. M is the number of in-scope repos the question applies to. Out-of-scope repos appear only as reference examples.
 - **Reversibility.** cheap: a rename or config change inside the repo. costly: touches shipped apps, installed users, store listings or many repos at once. permanent: cannot be undone once published (store identities, published package ids, signing keys, public disclosure).
 - **Blocks** lists the entries and fixes that could not be finalised until this one was answered; **Waits on** is the same link seen from the other side. Both survive on the adopted defaults as a record of the dependency; nothing is blocked now.
-- **Repo codes.** HDS display-switchr (was hub-display-switch), WSL wsl-status (was wsl-monitor), LL little-launcher, REP repilot, IMD immich-drive, PER persistent (PD is its Windows desktop app), PS printstream, GIU game-is-up, SSC store-sign-controller, PL phonelock, SNB sonarphone-nmea-bridge, HA printstream-home-assistant (fixes land in PS), DK devkit, KIT winui-app-kit, PROMO apps-promo.
+- **Repo codes.** HDS display-switchr (was hub-display-switch), WSL tray-control-for-wsl (was wsl-monitor, then wsl-status), LL little-launcher, REP repilot, IMD immich-drive, PER persistent (PD is its Windows desktop app), PS printstream, GIU game-is-up, SSC store-sign-controller, PL phonelock, SNB sonarphone-nmea-bridge, HA printstream-home-assistant (fixes land in PS), DK devkit, KIT winui-app-kit, PROMO apps-promo.
 - **Source codes** are report plus section number: AI `ai-docs.md`, AND `android-and-misc.md`, DCT `dev-ci-testing.md`, PSA `printstream-addons.md`, SET `settings-crosscutting.md` (SET 10.n is its section 10, "Other areas worth standardizing"), SLA `store-locales-assets.md`, STR `structure-releases.md`, WAP `windows-apps-product.md`, WAR `windows-apps-repo.md`, WEB `web-apps.md`. "4.n" is item n of that report's section 4. REC is `audit/RECONCILE.md`; entries sourced from it also name the rule (for example HYG-3) that carries the recommendation.
 - **Topic tags:** readme, docs, ai-docs, repo-hygiene, branding, code-style, repo-layout, dev-scripts, ci, testing, platform, releases, distribution, store-listings, locales, assets, ui, tray, promo, settings-config, shared-kits, logging, security.
 
@@ -919,8 +919,8 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 ### D-118 WSL Monitor is renamed WSL Status (superseded by D-122)
 `branding` `store-listings`
 - **Decided (2026-11-20):** the product shown as "WSL Monitor" is renamed "WSL Status" everywhere users see it (Store listing, window and tray titles, About, README, release notes). Microsoft rejected "WSL Monitor" under Store policy 10.1.1.1 as too close to an existing app, "WSL Tray Monitor". "WSL" in a name is fine.
-- **Consequence:** the GitHub repo and local folder are renamed `wsl-status` after the resubmission (confirmed 2026-11-20); the package identity, Store ID, tray GUID, mutex, startup task, settings folder and exe name stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
-- **Reversibility:** the Store name is cheap to change before publish. **Repos:** wsl-status.
+- **Consequence:** the GitHub repo and local folder are renamed `tray-control-for-wsl` after the resubmission (confirmed 2026-11-20); the package identity, Store ID, tray GUID, mutex, startup task, settings folder and exe name stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
+- **Reversibility:** the Store name is cheap to change before publish. **Repos:** tray-control-for-wsl.
 
 ### D-119 First-party usage counts in hosted services
 `logging` `security`

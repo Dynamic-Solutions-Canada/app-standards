@@ -2,7 +2,7 @@
 
 The names of the commands that run, check, build, package and deploy each app, and what each one must do. The aim is that `npm run validate` or `npm run verify:desktop` means the same thing in every repo, so people, agents, `paseo.json` and CI can call a job without reading the repo first.
 
-Counts are against the in-scope repos a rule applies to. The 8 repos with target-specific root scripts are display-switchr, wsl-status, little-launcher, repilot, immich-drive, persistent, store-sign-controller and printstream. The 6 Windows-building repos are the five standalone WinUI apps and persistent. The 4 web monorepos are persistent, printstream, game-is-up and store-sign-controller.
+Counts are against the in-scope repos a rule applies to. The 8 repos with target-specific root scripts are display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, store-sign-controller and printstream. The 6 Windows-building repos are the five standalone WinUI apps and persistent. The 4 web monorepos are persistent, printstream, game-is-up and store-sign-controller.
 
 Names are settled by D-043 and the Android entry point by D-044.
 
@@ -80,7 +80,7 @@ Renames under this rule are made once per repo, together with the docs, skills a
 | `validate` | The whole gate passes | Change files |
 | `deploy` | Publish the current commit to an environment | Skip the gate, unless an explicit flag asks for it |
 
-The renames this implies: `build:desktop` becomes `package:desktop:dev`; little-launcher's `verify:linux` becomes `test:linux`; printstream's `desktop:check` becomes `test:desktop`; game-is-up's `deploy:prod:ssh` becomes `deploy:prod`; wsl-status's `check:strings` becomes `check:l10n` (D-067).
+The renames this implies: `build:desktop` becomes `package:desktop:dev`; little-launcher's `verify:linux` becomes `test:linux`; printstream's `desktop:check` becomes `test:desktop`; game-is-up's `deploy:prod:ssh` becomes `deploy:prod`; tray-control-for-wsl's `check:strings` becomes `check:l10n` (D-067).
 
 ### SCRIPT-4: `validate` is the one gate, and it runs everything static
 

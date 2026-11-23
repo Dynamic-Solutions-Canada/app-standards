@@ -20,7 +20,7 @@ No signing material, host name or credential appears in this file. Where a rule 
 
 - **Status:** Existing (6 of 6 WinUI apps). Sharing one packaging script is Decided (D-005)
 - **Applies to:** Windows, and Windows desktop apps inside Web monorepos
-- **Reference:** `wsl-status/WslMonitorMSIX/build-msix.ps1` (tool lookup without an installed SDK, standard switch names, the strictest language check); `wsl-status/windows-build.json` for the smallest manifest
+- **Reference:** `tray-control-for-wsl/WslMonitorMSIX/build-msix.ps1` (tool lookup without an installed SDK, standard switch names, the strictest language check); `tray-control-for-wsl/windows-build.json` for the smallest manifest
 - **Why:** One packaging path for local builds and CI means the package a developer installs is built the same way as the one the Store receives.
 
 Each app has an `<App>MSIX/` folder with `Package.appxmanifest` and a `build-msix.ps1` that reads the version from `Directory.Build.props`, publishes self-contained, stamps the manifest, builds one `resources.pri` holding every declared language, packs, and signs unless told not to. The script takes the standard switches (`-Platform`, `-Configuration`, `-NoSign`, `-TrustedPfxPath`, `-TrustedPfxPassword`) so that `windows-build.json` needs no per-app translation keys. Local builds go through `scripts/windows-build`; see `windows-build-tools/README.md` for the tool itself, which these standards do not re-document. CI calls the same `build-msix.ps1`. No app uses a packaging project. Under D-005, the six diverged script copies become one shared script delivered with winui-app-kit and driven by `windows-build.json`.
@@ -52,12 +52,12 @@ Packaging scripts contain no fallback that signs with a certificate file kept be
 
 ### DIST-4: The Microsoft Store is the primary Windows channel
 
-- **Status:** Decided (D-014). Existing (4 of 6 WinUI apps have a Store-assigned identity: little-launcher, repilot, immich-drive, persistent; display-switchr and wsl-status carry an unreserved placeholder)
+- **Status:** Decided (D-014). Existing (4 of 6 WinUI apps have a Store-assigned identity: little-launcher, repilot, immich-drive, persistent; display-switchr and tray-control-for-wsl carry an unreserved placeholder)
 - **Applies to:** Windows
 - **Reference:** `immich-drive/.github/workflows/store-publish.yml`
 - **Why:** The Store handles signing, updates and payment, and a package identity cannot be changed once people have installed the app.
 
-Every Windows app is delivered through the Store. The app's name is reserved in Partner Center before its first public build, so the manifest carries the Store-assigned identity from the start and never a placeholder. Submission runs from CI as described in [releases.md](releases.md) REL-7. display-switchr and wsl-status go to the Store too, and their names are reserved now (D-014). The publisher display name in the manifest is "Dynamic Solutions (CA)" (BRAND-2 in [branding.md](branding.md), D-006).
+Every Windows app is delivered through the Store. The app's name is reserved in Partner Center before its first public build, so the manifest carries the Store-assigned identity from the start and never a placeholder. Submission runs from CI as described in [releases.md](releases.md) REL-7. display-switchr and tray-control-for-wsl go to the Store too, and their names are reserved now (D-014). The publisher display name in the manifest is "Dynamic Solutions (CA)" (BRAND-2 in [branding.md](branding.md), D-006).
 
 ### DIST-5: What a GitHub Release carries
 

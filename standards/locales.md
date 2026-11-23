@@ -2,7 +2,7 @@
 
 Which languages the apps ship in, how that set is named, and how strings are stored, keyed, resolved and checked on each stack. Listing text is in [store-listings.md](store-listings.md); the language setting's place on the Settings page is UI-4 in [ui.md](ui.md).
 
-Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (display-switchr, wsl-status, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
+Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (display-switchr, tray-control-for-wsl, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
 
 ## The nine-locale set
 
@@ -33,7 +33,7 @@ A localized app supports exactly the nine identities above, in that order, with 
 
 ### LOC-2: How the set is named
 
-- **Status:** Proposed (4 of 7 define their languages by pointing at another app, such as "the same languages as Persistent": wsl-status, little-launcher, persistent, phonelock)
+- **Status:** Proposed (4 of 7 define their languages by pointing at another app, such as "the same languages as Persistent": tray-control-for-wsl, little-launcher, persistent, phonelock)
 - **Applies to:** all
 - **Reference:** `phonelock/README.md` `## Languages` (wording of the user-facing sentence)
 - **Why:** Naming the set after one app makes that app the standard by accident, and the reference goes stale when it changes.
@@ -84,14 +84,14 @@ On Android and with `.resw`, the platform's own resource resolution provides mos
 
 ### LOC-6: Resource mechanism per stack
 
-- **Status:** Decided (D-067, D-005). Existing (2 of 5 localized Windows apps use the kit classes: display-switchr, wsl-status; 2 of 2 native Android apps use `strings.xml`; 1 of 1 localized web product uses shared JSON catalogs)
+- **Status:** Decided (D-067, D-005). Existing (2 of 5 localized Windows apps use the kit classes: display-switchr, tray-control-for-wsl; 2 of 2 native Android apps use `strings.xml`; 1 of 1 localized web product uses shared JSON catalogs)
 - **Applies to:** Windows, Web, Android, HA
 - **Reference:** see table
 - **Why:** Five mechanisms across seven apps means five checkers and no shared tooling. One per stack is the minimum the platforms allow.
 
 | Stack | Mechanism | Reference |
 | --- | --- | --- |
-| Windows | JSON catalogs embedded as resources, read through winui-app-kit's `UiText` and `SupportedLanguages`. See the kit README for usage. | `wsl-status/WslMonitor/Classes/AppLanguages.cs` |
+| Windows | JSON catalogs embedded as resources, read through winui-app-kit's `UiText` and `SupportedLanguages`. See the kit README for usage. | `tray-control-for-wsl/WslMonitor/Classes/AppLanguages.cs` |
 | Windows, accepted second mechanism | `.resw` with `x:Uid`, for an app with no resident UI that does not need live language switching | `repilot/Repilot/Strings/<locale>/Resources.resw` |
 | Windows manifest strings | `.resw`, since the package manifest requires it; generated from the catalogs at package time, not hand-kept | `persistent/apps/desktop/tools/localization-resources` |
 | Web, and native hosts of a web product | One set of JSON catalogs in the shared package, loaded by `i18next` on web and read directly by each native host | `persistent/packages/shared/src/messages/` |
@@ -104,9 +104,9 @@ No user-facing string is a literal in code or markup in a localized app. Symbols
 
 ### LOC-7: Key style and placeholder syntax
 
-- **Status:** Decided (D-067, D-099). Existing (dotted keys 2 of 5 Windows apps: wsl-status, little-launcher; `{{name}}` 3 of 5 plus the kit: display-switchr, wsl-status, persistent; snake_case and positional placeholders 2 of 2 native Android apps; Web 1 of 1 as shown)
+- **Status:** Decided (D-067, D-099). Existing (dotted keys 2 of 5 Windows apps: tray-control-for-wsl, little-launcher; `{{name}}` 3 of 5 plus the kit: display-switchr, tray-control-for-wsl, persistent; snake_case and positional placeholders 2 of 2 native Android apps; Web 1 of 1 as shown)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `wsl-status/WslMonitor/Strings/en-US.json`
+- **Reference:** `tray-control-for-wsl/WslMonitor/Strings/en-US.json`
 - **Why:** A dotted key survives a wording fix; an English sentence used as the key changes in every catalog each time the English is corrected. Named placeholders let a translator reorder a sentence.
 
 | Stack | Key style | Example | Placeholder |
@@ -144,7 +144,7 @@ Seven files or folders, one per wording catalog; none for the two aliases (LOC-5
 
 - **Status:** Decided (D-067). Existing (7 of 7 have a check, in seven implementations; 6 of 7 fail the build, and sonarbridge's `android/scripts/check-localization.py` is run by hand: neither Gradle nor a workflow calls it)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `wsl-status/scripts/check-strings.py` (most complete single script); `phonelock/companion/build.gradle` `lint` block (Android)
+- **Reference:** `tray-control-for-wsl/scripts/check-strings.py` (most complete single script); `phonelock/companion/build.gradle` `lint` block (Android)
 - **Why:** A missing key is invisible in English testing and shows as English text, or a raw key, to exactly the users the translation was for.
 
 The check fails the build, locally and in CI ([ci.md](ci.md), [testing.md](testing.md)), when any of these is false:
@@ -154,15 +154,15 @@ The check fails the build, locally and in CI ([ci.md](ci.md), [testing.md](testi
 - No value is empty.
 - Every key used in code or markup exists, and no catalog key is unused.
 - The identities declared to the OS (LOC-10) equal the supported list, and the catalog files on disk equal the seven wording catalogs.
-- Text follows the house writing rules the script can test (wsl-status's rejects em dashes).
+- Text follows the house writing rules the script can test (tray-control-for-wsl's rejects em dashes).
 
-The script is exposed as `check:l10n` (D-067; wsl-status's `check:strings` is renamed) and is part of `validate`; see [dev-scripts.md](dev-scripts.md). On Android the same guarantees come from lint configured to fail release builds on missing, extra or mismatched translations, as phonelock does, or from a script wired into the build. A shared checker for the kit catalogs belongs in winui-app-kit so the two kit apps stop carrying one each; see [shared-kits.md](shared-kits.md).
+The script is exposed as `check:l10n` (D-067; tray-control-for-wsl's `check:strings` is renamed) and is part of `validate`; see [dev-scripts.md](dev-scripts.md). On Android the same guarantees come from lint configured to fail release builds on missing, extra or mismatched translations, as phonelock does, or from a script wired into the build. A shared checker for the kit catalogs belongs in winui-app-kit so the two kit apps stop carrying one each; see [shared-kits.md](shared-kits.md).
 
 ### LOC-10: The supported list is declared to the OS
 
 - **Status:** Existing (6 of 7; little-launcher declares one language, FIX-020)
 - **Applies to:** Windows, Android
-- **Reference:** `wsl-status/WslMonitorMSIX/Package.appxmanifest`, `phonelock/companion/src/main/res/xml/locales_config.xml`
+- **Reference:** `tray-control-for-wsl/WslMonitorMSIX/Package.appxmanifest`, `phonelock/companion/src/main/res/xml/locales_config.xml`
 - **Why:** Windows, Android and both stores decide what to offer a user from the declaration, not from the files the app happens to ship.
 
 - **MSIX:** one `<Resource Language>` entry per identity, nine in the standard order with `en-US` first, or exactly one for an English-only app.
@@ -191,7 +191,7 @@ Every localized app states in writing which catalogs are AI-drafted and which ha
 
 ### LOC-13: Text that stays English is listed, not accidental
 
-- **Status:** Decided (D-101). Proposed (3 of 5 localized Windows apps each translate the shared promo page's strings by exact English match: wsl-status, repilot, persistent)
+- **Status:** Decided (D-101). Proposed (3 of 5 localized Windows apps each translate the shared promo page's strings by exact English match: tray-control-for-wsl, repilot, persistent)
 - **Applies to:** Windows, Web, Android, Kit
 - **Reference:** `persistent/docs/localization.md` (states what stays English and why)
 - **Why:** An untranslated screen in a localized app looks like a bug unless it is a stated choice, and three private copies of the same translation table is a shape that should be extracted.

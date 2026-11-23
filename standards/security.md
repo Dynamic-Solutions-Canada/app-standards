@@ -83,6 +83,8 @@ A tracked compose, nginx, or env example contains no real hostname, address, acc
 
 The API reads its environment only through one schema-validated module. When the mode is production, the schema itself rejects insecure combinations: a client origin that is not HTTPS, any development or simulator switch, and any demo or reviewer access that SEC-14 does not allow. The process refuses to start; it does not log a warning and continue.
 
+Exception for self-hosted builds (decided 2026-11-23, PrintStream): a server a customer runs on their own network may use a plain-HTTP client origin, since LAN installs normally have no certificate, and a database password that earlier releases shipped as a default is warned about at startup, with documented rotation steps, instead of refused, because refusing would stop existing installs on upgrade and the database is reachable only on the private compose network or a local socket. Production still refuses to start when the database URL is unset, so it never falls back to the code's built-in credentials. Hosted deployments get no exception.
+
 ### SEC-7: Containers run as a non-root user
 
 - **Status:** Existing (3 of 4 production API images; see FIX-008)

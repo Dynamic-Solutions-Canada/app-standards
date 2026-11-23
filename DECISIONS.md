@@ -934,6 +934,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** PLAT-4 and PLAT-5 gain this exception (UWP target framework, no Windows App SDK in the widget project). winui-app-kit gains a domain-neutral "XAML companions" packaging hook that merges a second XAML project's compiled XAML and resources into the package; all widget code stays in the app until a second app has a widget. A companion's packaging and CI accept either Visual Studio's UWP Build Tools component or the full Visual Studio UWP workload (winui-app-kit v2.5.1); hosted `windows-2025` runners compile and package the widget, and windows-build-tools' guest toolchain installs the Build Tools component. The UWP project's minimum is a Windows SDK platform (19041 for a Windows 10 22H2 floor), since the manifest holds the real floor.
 - **Reversibility:** cheap; the widget is an additive manifest extension. **Repos:** CMX, KIT, WBT.
 
+### D-121 Hub Display Switch is renamed Display Switchr
+`branding` `store-listings`
+- **Decided (2026-11-23):** the product shown as "Hub Display Switch" is renamed "Display Switchr" everywhere users see it (Store listing, window and tray titles, About, README, release notes, privacy policy), matching ChatMixr's naming. The name is reserved in Partner Center for Store ID `9P1S2QJFXZFW`, and the change ships in 1.1.0 together with the Windows 10 floor (D-018).
+- **Consequence:** as with D-118, the package identity, Store ID, tray GUID, mutex, startup task id, settings folder, exe and project names stay as they are, so installs update in place and keep their settings. The GitHub repo and local folder are renamed `display-switchr`. The privacy policy moves to `/privacy/display-switchr`, and the old address, already published, redirects there permanently. BRAND-10's registry row records both names.
+- **Reversibility:** the Store name can change again with a later update; the identifiers never change. **Repos:** display-switchr, website, apps-promo.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

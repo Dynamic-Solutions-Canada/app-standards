@@ -916,7 +916,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** LOG-9 gains a third disclosed exception with the rules that make it safe: env-driven and off unless configured, CSP widened only when on, query and hash excluded, identifiers in paths replaced, only fixed page titles sent, Do Not Track honoured, and the privacy policy describes it with its retention. game-is-up (a981719) is the reference.
 - **Reversibility:** cheap: unset two env values. **Repos:** GIU, PER (web), the company website. **Sources:** maintainer decisions 2026-11-19.
 
-### D-118 WSL Monitor is renamed WSL Status
+### D-118 WSL Monitor is renamed WSL Status (superseded by D-122)
 `branding` `store-listings`
 - **Decided (2026-11-20):** the product shown as "WSL Monitor" is renamed "WSL Status" everywhere users see it (Store listing, window and tray titles, About, README, release notes). Microsoft rejected "WSL Monitor" under Store policy 10.1.1.1 as too close to an existing app, "WSL Tray Monitor". "WSL" in a name is fine.
 - **Consequence:** the GitHub repo and local folder are renamed `wsl-status` after the resubmission (confirmed 2026-11-20); the package identity, Store ID, tray GUID, mutex, startup task, settings folder and exe name stay as they are, so installs and settings carry over. BRAND-10's registry row records both names.
@@ -939,6 +939,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Decided (2026-11-23):** the product shown as "Hub Display Switch" is renamed "Display Switchr" everywhere users see it (Store listing, window and tray titles, About, README, release notes, privacy policy), matching ChatMixr's naming. The name is reserved in Partner Center for Store ID `9P1S2QJFXZFW`, and the change ships in 1.1.0 together with the Windows 10 floor (D-018).
 - **Consequence:** as with D-118, the package identity, Store ID, tray GUID, mutex, startup task id, settings folder, exe and project names stay as they are, so installs update in place and keep their settings. The GitHub repo and local folder are renamed `display-switchr`. The privacy policy moves to `/privacy/display-switchr`, and the old address, already published, redirects there permanently. BRAND-10's registry row records both names.
 - **Reversibility:** the Store name can change again with a later update; the identifiers never change. **Repos:** display-switchr, website, apps-promo.
+
+### D-122 WSL Status is renamed Tray Control for WSL
+`branding` `store-listings`
+- **Decided (2026-11-23):** Microsoft rejected "WSL Status" under policy 10.1.1.1 because the name "contains the title of another piece of software" (WSL), so the product is renamed "Tray Control for WSL" everywhere users see it. A name that names another product only after "for" describes what the app works with instead of claiming that product's title; "WSL Tray Control" was reserved too but not used, since it leads with WSL and is close to the existing app "WSL Tray Monitor" that caused the first rejection (D-118).
+- **Consequence:** supersedes D-118's display name; everything D-118 keeps (package identity, Store ID, tray GUID, mutex, startup task, settings folder, exe name) still stays. The repo and local folder are renamed `tray-control-for-wsl`, the privacy policy moves to `/privacy/tray-control-for-wsl` with a permanent redirect from `/privacy/wsl-status`, and BRAND-10's row records all three names. A future product that works with another company's product puts that product's name after "for".
+- **Reversibility:** the Store name is cheap to change before publish. **Repos:** tray-control-for-wsl, website, apps-promo.
 
 ## Source coverage
 

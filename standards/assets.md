@@ -51,14 +51,14 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 - The master is an SVG, committed, with text converted to outlines so every rasterizer gives the same result.
 - A mark has at most three master variants: full (`icon.svg`), maskable (`icon-maskable.svg`) and monochrome (`icon-mono.svg`). Colour variants an app offers its users (little-launcher's six) are parameters of the generator or extra masters in `assets/brand/`, each stored once in the repo.
-- A mark that exists only as drawing code in a script (the five `generate-msix-images.ps1` copies) or only as rasters (little-launcher) is redrawn as an SVG. This is the main cost of D-069 and is done one app at a time.
+- A mark that exists only as drawing code in a script (the remaining `generate-msix-images.ps1` copies) or only as rasters (little-launcher) is redrawn as an SVG. This is the main cost of D-069 and is done one app at a time.
 - No app ships a platform's default or system icon as its own (phonelock's launcher icons today).
 
 ### ASSET-3: One generator, sizing and packing only
 
-- **Status:** Decided (D-069). Proposed (0 shared; five diverged copies of `generate-msix-images.ps1` in hub-display-switch, wsl-status, repilot, immich-drive and persistent; little-launcher has none)
+- **Status:** Decided (D-069). Proposed (0 shared; devkit-icons in chatmixr and hub-display-switch since 2026-11-22; diverged copies of `generate-msix-images.ps1` remain in wsl-status, repilot, immich-drive and persistent; little-launcher has none)
 - **Applies to:** Windows, Web, Android, Kit
-- **Reference:** `game-is-up/scripts/dev/generate-brand-icons.mjs` (single entry point, resvg); `hub-display-switch/HubDisplaySwitchMSIX/generate-msix-images.ps1` (the complete Windows size list)
+- **Reference:** `game-is-up/scripts/dev/generate-brand-icons.mjs` (single entry point, resvg); `hub-display-switch/assets/brand/icons.json` (a Windows target through devkit-icons, which writes the complete Windows size list)
 - **Why:** The size lists are identical for every app; only the art differs. Five copies of the list have already produced three different output sets.
 
 - One shared generator takes the masters and emits every size in the tables below. It contains no drawing code and no app-specific sizes. D-069 places it in devkit; see [shared-kits.md](shared-kits.md) and link devkit's README for usage once it exists.

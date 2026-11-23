@@ -13,7 +13,7 @@ The mechanics are provided by winui-app-kit and documented in [its README](https
 | Icon, GUID, Explorer-restart recovery, click events | `TrayIcon` | TRAY-1 to TRAY-4 |
 | Right-click menu | `TrayMenu` | TRAY-5 |
 | Flyout window | `FlyoutController` | TRAY-6 |
-| Host window, exit | none yet (see KIT-9) | TRAY-7, TRAY-8 |
+| Host window, exit | `AppBootstrap`, `HostWindow` | TRAY-7, TRAY-8 |
 | One running copy | `SingleInstance` | TRAY-9 |
 | Start with Windows | `StartupRegistration`, `StartupStatus` | TRAY-10 |
 
@@ -100,8 +100,10 @@ A tray flyout is a window handed to the kit's `FlyoutController`: desktop acryli
 - **Why:** The tray icon needs a window that outlives every visible one, and exit must not leave the icon, a connection or a notification registration behind.
 
 - `MainWindow` is a hidden host titled "<App> Host". It owns the tray icon, is styled as a tool window so it never appears in the taskbar or Alt+Tab, and cancels its own close.
-- **Host and exit (D-074):** the host is a 1x1 window moved off-screen, and Exit calls `Environment.Exit(0)` after an orderly-exit hook has run. An app with teardown to do (persistent closes a connection and unregisters notifications) does it in that hook; no app skips teardown to exit faster.
-- The host setup is about 10 lines retyped in each app and is a kit candidate (KIT-9).
+- **Host and exit (D-074):** the host is winui-app-kit's `HostWindow`, started by `AppBootstrap.Launch`: a 1x1 window moved off-screen and shown without taking the foreground (kit v2.4.0). Teardown (saving settings, closing a connection, unregistering notifications, removing the tray icon) is added as exit steps; `HostWindow.Exit` runs them, then shuts WinUI down in order, with a 5-second backstop. No app skips teardown to exit faster.
+- **Session end:** the host runs the same exit steps when Windows shuts down, restarts, signs out or closes the app for an update (kit v2.4.0). Exit steps must be quick, because they run on the UI thread and Windows waits only a few seconds. An app does not handle `WM_ENDSESSION` itself.
+- **Windows the app keeps open:** every window the app creates itself and keeps for its lifetime without activating it (an on-screen popup, for example) is registered with `HostWindow.CloseOnExit`. WinUI cannot finish shutting down while such a window is open, so an unregistered one makes every exit wait for the backstop. The kit registers its own tray flyout and settings windows.
+- An app with its own hidden host instead of the kit's (little-launcher, persistent) keeps the same behaviour by hand until it migrates (KIT-2): exit steps, closing every hidden window, then `Application.Exit` with a backstop.
 
 ### TRAY-8: Closing a window never exits
 

@@ -2,7 +2,7 @@
 
 Which languages the apps ship in, how that set is named, and how strings are stored, keyed, resolved and checked on each stack. Listing text is in [store-listings.md](store-listings.md); the language setting's place on the Settings page is UI-4 in [ui.md](ui.md).
 
-Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (display-switchr, tray-control-for-wsl, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
+Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (displayswitchr, tray-control-for-wsl, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
 
 ## The nine-locale set
 
@@ -84,7 +84,7 @@ On Android and with `.resw`, the platform's own resource resolution provides mos
 
 ### LOC-6: Resource mechanism per stack
 
-- **Status:** Decided (D-067, D-005). Existing (2 of 5 localized Windows apps use the kit classes: display-switchr, tray-control-for-wsl; 2 of 2 native Android apps use `strings.xml`; 1 of 1 localized web product uses shared JSON catalogs)
+- **Status:** Decided (D-067, D-005). Existing (2 of 5 localized Windows apps use the kit classes: displayswitchr, tray-control-for-wsl; 2 of 2 native Android apps use `strings.xml`; 1 of 1 localized web product uses shared JSON catalogs)
 - **Applies to:** Windows, Web, Android, HA
 - **Reference:** see table
 - **Why:** Five mechanisms across seven apps means five checkers and no shared tooling. One per stack is the minimum the platforms allow.
@@ -104,7 +104,7 @@ No user-facing string is a literal in code or markup in a localized app. Symbols
 
 ### LOC-7: Key style and placeholder syntax
 
-- **Status:** Decided (D-067, D-099). Existing (dotted keys 2 of 5 Windows apps: tray-control-for-wsl, little-launcher; `{{name}}` 3 of 5 plus the kit: display-switchr, tray-control-for-wsl, persistent; snake_case and positional placeholders 2 of 2 native Android apps; Web 1 of 1 as shown)
+- **Status:** Decided (D-067, D-099). Existing (dotted keys 2 of 5 Windows apps: tray-control-for-wsl, little-launcher; `{{name}}` 3 of 5 plus the kit: displayswitchr, tray-control-for-wsl, persistent; snake_case and positional placeholders 2 of 2 native Android apps; Web 1 of 1 as shown)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `tray-control-for-wsl/WslMonitor/Strings/en-US.json`
 - **Why:** A dotted key survives a wording fix; an English sentence used as the key changes in every catalog each time the English is corrected. Named placeholders let a translator reorder a sentence.
@@ -120,15 +120,15 @@ No user-facing string is a literal in code or markup in a localized app. Symbols
 - The area is the page or feature (`settings.`, `tray.`, `error.`). Error and status codes shared with a server use the same dotted form (`error.announcement-not-found`).
 - A placeholder name says what it holds (`{{count}}`, `{{deviceName}}`), and the same names appear in every catalog.
 - Plural or gendered sentences are separate keys or the library's plural form, never string concatenation.
-- Existing English-sentence keys in display-switchr are not rewritten for their own sake; under D-067 they move to dotted keys at the app's next string pass. `{name}` in little-launcher changes when it adopts the kit.
+- Existing English-sentence keys in displayswitchr are not rewritten for their own sake; under D-067 they move to dotted keys at the app's next string pass. `{name}` in little-launcher changes when it adopts the kit.
 
 Shared labels that every app shows (D-072: Settings, About and tray wording such as "Start with Windows", "Our other apps", "Open logs folder") are supplied by winui-app-kit in its own catalogs under the `kit.` key prefix, in the same wording catalogs as the apps. Text lookup checks the app's catalog, then the kit's, then `en-US`. Apps do not define `kit.` keys: a different wording for a shared label is a change to the kit, so the label reads the same in every app. The catalog check (LOC-9) treats `kit.` keys as owned by the kit.
 
 ### LOC-8: Catalog location and file names
 
-- **Status:** Decided (D-067). Existing (1 of 5 Windows apps uses the decided path: display-switchr; four different paths are in use)
+- **Status:** Decided (D-067). Existing (1 of 5 Windows apps uses the decided path: displayswitchr; four different paths are in use)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `display-switchr/HubDisplaySwitch/Localization/Catalogs/`
+- **Reference:** `displayswitchr/HubDisplaySwitch/Localization/Catalogs/`
 - **Why:** The folder is where every agent and translator looks first; four names for it across five apps costs a search each time.
 
 | Stack | Location | File name |
@@ -182,7 +182,7 @@ The locale set of the interface, the package declaration, the store listing and 
 
 ### LOC-12: Translations are marked as unreviewed until a native speaker reviews them
 
-- **Status:** Decided (D-100). Existing (4 of 7 say so in writing: sonarbridge, display-switchr, persistent, phonelock)
+- **Status:** Decided (D-100). Existing (4 of 7 say so in writing: sonarbridge, displayswitchr, persistent, phonelock)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/docs/localization.md`
 - **Why:** Every catalog so far is AI-drafted. Recording that honestly tells a future reviewer what has and has not been checked, and stops a draft being mistaken for approved copy.

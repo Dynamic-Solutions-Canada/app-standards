@@ -52,12 +52,12 @@ Packaging scripts contain no fallback that signs with a certificate file kept be
 
 ### DIST-4: The Microsoft Store is the primary Windows channel
 
-- **Status:** Decided (D-014). Existing (4 of 6 WinUI apps have a Store-assigned identity: little-launcher, repilot, immich-drive, persistent; display-switchr and tray-control-for-wsl carry an unreserved placeholder)
+- **Status:** Decided (D-014). Existing (4 of 6 WinUI apps have a Store-assigned identity: little-launcher, repilot, immich-drive, persistent; displayswitchr and tray-control-for-wsl carry an unreserved placeholder)
 - **Applies to:** Windows
 - **Reference:** `immich-drive/.github/workflows/store-publish.yml`
 - **Why:** The Store handles signing, updates and payment, and a package identity cannot be changed once people have installed the app.
 
-Every Windows app is delivered through the Store. The app's name is reserved in Partner Center before its first public build, so the manifest carries the Store-assigned identity from the start and never a placeholder. Submission runs from CI as described in [releases.md](releases.md) REL-7. display-switchr and tray-control-for-wsl go to the Store too, and their names are reserved now (D-014). The publisher display name in the manifest is "Dynamic Solutions (CA)" (BRAND-2 in [branding.md](branding.md), D-006).
+Every Windows app is delivered through the Store. The app's name is reserved in Partner Center before its first public build, so the manifest carries the Store-assigned identity from the start and never a placeholder. Submission runs from CI as described in [releases.md](releases.md) REL-7. displayswitchr and tray-control-for-wsl go to the Store too, and their names are reserved now (D-014). The publisher display name in the manifest is "Dynamic Solutions (CA)" (BRAND-2 in [branding.md](branding.md), D-006).
 
 ### DIST-5: What a GitHub Release carries
 

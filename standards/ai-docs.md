@@ -195,7 +195,7 @@ A project skill with the same name as a shared one replaces it, and says in its 
 
 ### AI-10: No `.codex/`; `.claude/` holds only what Claude Code requires
 
-- **Status:** Decided (D-108). Existing (8 of 15 have no `.codex/`; display-switchr, tray-control-for-wsl, repilot, immich-drive, persistent, printstream, and game-is-up track one)
+- **Status:** Decided (D-108). Existing (8 of 15 have no `.codex/`; displayswitchr, tray-control-for-wsl, repilot, immich-drive, persistent, printstream, and game-is-up track one)
 - **Applies to:** all
 - **Reference:** none yet
 - **Why:** Codex is not used, and files under `.codex/commands/` were never commands in any tool; they duplicate the `desktop` skill beside them.
@@ -237,7 +237,7 @@ Where worktrees are created is not stated in a project file (D-032, FIX-041): th
 
 ### AI-13: No host paths, sibling links, or personal details
 
-- **Status:** Proposed (violations in winui-app-kit, printstream, display-switchr, game-is-up, and sonarbridge: FIX-005, FIX-035, FIX-038, FIX-041)
+- **Status:** Proposed (violations in winui-app-kit, printstream, displayswitchr, game-is-up, and sonarbridge: FIX-005, FIX-035, FIX-038, FIX-041)
 - **Applies to:** all
 - **Reference:** `immich-drive/AGENTS.md` (refers to a sibling only "if available and permitted by the current environment")
 - **Why:** Tracked instructions are read in containers, CI, cloud sessions, and public repos, where a path on the maintainer's machine is wrong and a personal detail is a leak.

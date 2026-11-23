@@ -2,7 +2,7 @@
 
 Where things live at the top of each repo, where build output goes, and what a deliverable file is called. What git ignores is HYG-6 in [repo-hygiene.md](repo-hygiene.md). Each stack is already close to one shape internally; these rules name that shape so a new repo starts from it and an old one knows what is out of place.
 
-Counts are against the in-scope repos a rule applies to: the 5 standalone WinUI apps (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive), the 6 Windows-building repos (those five plus persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), the 2 Android repos (phonelock, sonarbridge), and the 3 kits (devkit, winui-app-kit, apps-promo).
+Counts are against the in-scope repos a rule applies to: the 5 standalone WinUI apps (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive), the 6 Windows-building repos (those five plus persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), the 2 Android repos (phonelock, sonarbridge), and the 3 kits (devkit, winui-app-kit, apps-promo).
 
 The trees show the canonical set. An entry marked "if any" is omitted when the repo has nothing to put there. Several entries rest on a decision owned by another topic; those are noted beside the entry.
 
@@ -12,7 +12,7 @@ The trees show the canonical set. An entry marked "if any" is omitted when the r
 
 - **Status:** Existing (5 of 5 for `<App>/`, `<App>MSIX/`, `external/`, `scripts/windows-build`, `windows-build.json`, `Directory.Build.props`, `package.json`; `tests/` in 3 of 5)
 - **Applies to:** Windows
-- **Reference:** `immich-drive/` for the file set; `display-switchr/store-assets/` for listings
+- **Reference:** `immich-drive/` for the file set; `displayswitchr/store-assets/` for listings
 - **Why:** The shared build tooling, the kit and every agent guide assume these paths. A repo that matches needs no per-repo explanation.
 
 ```text
@@ -228,7 +228,7 @@ Submodules are checked out at `external/<name>` beside the project that uses the
 
 - **Status:** Existing (11 of 15 have `scripts/`; 3 of 4 monorepos split it into `dev/` and `deploy/`; phonelock uses `tools/` and a root `build.sh`)
 - **Applies to:** all
-- **Reference:** `printstream/scripts/` (split by purpose); `display-switchr/scripts/` (small repo)
+- **Reference:** `printstream/scripts/` (split by purpose); `displayswitchr/scripts/` (small repo)
 - **Why:** The same word means one wrapper in the Windows apps, a tree in the monorepos and release helpers on Android; a fixed meaning tells an agent where to look and where to add.
 
 - Scripts that people or `package.json` run live under `scripts/`. A repo with more than a handful splits them into `scripts/dev/`, `scripts/deploy/` and `scripts/ci/`.
@@ -241,7 +241,7 @@ Script names and what each must do are in [dev-scripts.md](dev-scripts.md).
 
 ### LAYOUT-9: The repo root is a closed set
 
-- **Status:** Proposed (1 of 15 tracks a leftover folder: `legacy/` in display-switchr; five more working trees hold untracked strays at the root)
+- **Status:** Proposed (1 of 15 tracks a leftover folder: `legacy/` in displayswitchr; five more working trees hold untracked strays at the root)
 - **Applies to:** all
 - **Reference:** `tray-control-for-wsl/` (the smallest root of the Windows apps)
 - **Why:** The root is the first thing read. Leftovers there are copied into the next repo.
@@ -252,7 +252,7 @@ The root holds only what its stack's tree lists. Retired code is deleted, not ke
 
 - **Status:** Decided (D-040). Existing (6 of 6 Windows-building repos; 0 of the 5 other repos that produce deliverables)
 - **Applies to:** all repos that build something a person picks up
-- **Reference:** `display-switchr/.gitignore` and its `.artifacts/windows-build/`; `little-launcher/linux/packaging/build.py` (Linux output under `.artifacts/`)
+- **Reference:** `displayswitchr/.gitignore` and its `.artifacts/windows-build/`; `little-launcher/linux/packaging/build.py` (Linux output under `.artifacts/`)
 - **Why:** One folder means one ignore rule, one place to look for the last build, and one place to clean. The same idea has three names today (`.artifacts/`, `artifacts/`, `release/`).
 
 Build output goes to `.artifacts/` at the repo root everywhere, including monorepos, with fixed subfolders:

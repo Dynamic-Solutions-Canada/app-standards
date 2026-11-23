@@ -2,13 +2,13 @@
 
 Where the text and images for each store listing live, what shape they take, and how the README, the listing and the website page are kept saying the same thing. The asset sizes themselves are in [assets.md](assets.md); the locale set is in [locales.md](locales.md); how a release reaches a store is in [distribution.md](distribution.md) and [releases.md](releases.md).
 
-Counts are out of the 9 in-scope apps that have, or are being prepared for, a Microsoft Store or Google Play listing (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge) unless a rule says otherwise. The Home Assistant integration is the one HACS listing. game-is-up and store-sign-controller have no listing.
+Counts are out of the 9 in-scope apps that have, or are being prepared for, a Microsoft Store or Google Play listing (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, printstream, phonelock, sonarbridge) unless a rule says otherwise. The Home Assistant integration is the one HACS listing. game-is-up and store-sign-controller have no listing.
 
 ## Listing surfaces
 
 | Surface | Source in the repo | Published by | Reference |
 | --- | --- | --- | --- |
-| Microsoft Store | `store-assets/microsoft/` | CI, from the listing source (LIST-9) | `persistent/store-assets/microsoft/`, `display-switchr/store-assets/microsoft/` |
+| Microsoft Store | `store-assets/microsoft/` | CI, from the listing source (LIST-9) | `persistent/store-assets/microsoft/`, `displayswitchr/store-assets/microsoft/` |
 | Google Play | `store-assets/play/` | CI, from the listing source (LIST-9) | `persistent/apps/mobile/store/listings.json`, `persistent/.github/workflows/play-listing.yml` |
 | HACS | `hacs.json`, the README and `custom_components/<domain>/brand/`, where HACS requires them | The repo itself is the listing | `printstream-home-assistant/` |
 | Website page and README | `store-assets/web/` | The website pulls from the app repo (see [assets.md](assets.md), ASSET-12) | `persistent/README.md` (embeds its Play graphics directly) |
@@ -47,7 +47,7 @@ HACS has no folder here: `hacs.json` and `brand/` stay where HACS requires them 
 
 ### LIST-1: Listing text lives in the repo
 
-- **Status:** Decided (D-066). Existing (5 of 9 keep listing text in the repo: display-switchr, persistent, printstream, phonelock, sonarbridge)
+- **Status:** Decided (D-066). Existing (5 of 9 keep listing text in the repo: displayswitchr, persistent, printstream, phonelock, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/apps/mobile/store/listings.json`
 - **Why:** Text that exists only in a store console cannot be reviewed, translated in one pass, or checked against what the app does.
@@ -56,7 +56,7 @@ Every field a user can read on a listing (title, descriptions, feature bullets, 
 
 ### LIST-2: One `store-assets/` folder at the repo root
 
-- **Status:** Decided (D-066). Existing (2 of 9: display-switchr, persistent in part)
+- **Status:** Decided (D-066). Existing (2 of 9: displayswitchr, persistent in part)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/store-assets/`
 - **Why:** One place per repo means one validator, one capture guide, and no sync step between two copies.
@@ -65,9 +65,9 @@ Use the layout above: one subfolder per store, plus `web/` for the README and we
 
 ### LIST-3: `listings.json` shape
 
-- **Status:** Decided (D-066). Existing (2 of 9: persistent, display-switchr)
+- **Status:** Decided (D-066). Existing (2 of 9: persistent, displayswitchr)
 - **Applies to:** Windows, Web, Android apps with a store listing
-- **Reference:** `persistent/apps/mobile/store/listings.json` (Play), `display-switchr/store-assets/microsoft/listings.json` (Microsoft)
+- **Reference:** `persistent/apps/mobile/store/listings.json` (Play), `displayswitchr/store-assets/microsoft/listings.json` (Microsoft)
 - **Why:** The same shape for both stores lets one validator and one translation pass serve both, and it holds any number of locales without a schema change.
 
 Each store has one `listings.json`:
@@ -82,9 +82,9 @@ Ordered screenshot paths belong in `manifest.json` (LIST-8) and console-only set
 
 ### LIST-4: `listings.md` beside each `listings.json`
 
-- **Status:** Existing (2 of 9 have the companion file: display-switchr, persistent; phonelock has the same content as separate drafts)
+- **Status:** Existing (2 of 9 have the companion file: displayswitchr, persistent; phonelock has the same content as separate drafts)
 - **Applies to:** Windows, Web, Android apps with a store listing
-- **Reference:** `display-switchr/store-assets/microsoft/listings.md` (limits and claims), `phonelock/play/data-safety.md` (answers with reasons)
+- **Reference:** `displayswitchr/store-assets/microsoft/listings.md` (limits and claims), `phonelock/play/data-safety.md` (answers with reasons)
 - **Why:** A listing makes promises. Writing down which ones must stay true, and why each console answer was given, is what lets a later release check them.
 
 The companion file holds what the JSON cannot:
@@ -98,9 +98,9 @@ It does not hold a second copy of the listing text, and it never holds reviewer 
 
 ### LIST-5: Required fields and limits
 
-- **Status:** Existing (2 of 9 enforce limits in a validator: persistent, printstream; display-switchr records them)
+- **Status:** Existing (2 of 9 enforce limits in a validator: persistent, printstream; displayswitchr records them)
 - **Applies to:** Windows, Web, Android apps with a store listing
-- **Reference:** `persistent/apps/mobile/scripts/play-metadata.mjs` (Play limits in code), `display-switchr/store-assets/microsoft/listings.md` (Microsoft limits)
+- **Reference:** `persistent/apps/mobile/scripts/play-metadata.mjs` (Play limits in code), `displayswitchr/store-assets/microsoft/listings.md` (Microsoft limits)
 - **Why:** A translated string that is over the limit fails at upload time, in one locale, after the release is tagged. Checking in the repo moves that failure to review.
 
 Every locale record carries every required field, and the validator rejects over-length text instead of truncating it.
@@ -165,7 +165,7 @@ An app's listing is published in exactly the locales its interface supports ([lo
 - The listing is published by a workflow, from the committed source, on demand or as part of a release (see [ci.md](ci.md) and [distribution.md](distribution.md)).
 - The publisher has a **check mode** that compares the source with the live listing and writes nothing. Run it before a release and after any manual console change.
 - Before any upload it **validates**: every locale present, every required field present, limits (LIST-5), `copyFrom` targets exist, every manifest file exists, and image dimensions, count, alpha and duplicates (ASSET-9).
-- A listing source that no publisher reads, as display-switchr's is today, is a draft. It still follows this layout so that wiring the publisher is the only remaining step.
+- A listing source that no publisher reads, as displayswitchr's is today, is a draft. It still follows this layout so that wiring the publisher is the only remaining step.
 
 ### LIST-10: Store release notes come from the release-notes source
 
@@ -177,7 +177,7 @@ An app's listing is published in exactly the locales its interface supports ([lo
 Release notes are per version, not per store. Their home, path grammar and format are owned by REL-6 in [releases.md](releases.md); under D-058 it is `release-notes/<version>.md` for the `en-US` text, plus one `release-notes/<version>.<identity>.md` per other wording catalog in a localized app, committed before the tag, with the same text sent to every store and the GitHub release. This file adds three listing-side constraints:
 
 - The notes fit the shortest limit they are sent to (500 characters for Play, 1,500 for the Microsoft Store), and the publisher rejects longer text.
-- `listings.json` has no `releaseNotes` field. Persistent and display-switchr carry one today; it is removed when the per-version source exists.
+- `listings.json` has no `releaseNotes` field. Persistent and displayswitchr carry one today; it is removed when the per-version source exists.
 - For a localized app the notes ship in the listing locales (LIST-7, D-010). The publisher reads one file per wording catalog and fills the two Canadian identities through the alias mapping, as it does for `copyFrom` in the listing.
 
 Text meant only for a GitHub post, such as the AI-disclosure line, is added by the step that posts to GitHub and is not part of the shared source.

@@ -2,7 +2,7 @@
 
 The names of the commands that run, check, build, package and deploy each app, and what each one must do. The aim is that `npm run validate` or `npm run verify:desktop` means the same thing in every repo, so people, agents, `paseo.json` and CI can call a job without reading the repo first.
 
-Counts are against the in-scope repos a rule applies to. The 8 repos with target-specific root scripts are display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, store-sign-controller and printstream. The 6 Windows-building repos are the five standalone WinUI apps and persistent. The 4 web monorepos are persistent, printstream, game-is-up and store-sign-controller.
+Counts are against the in-scope repos a rule applies to. The 8 repos with target-specific root scripts are displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, store-sign-controller and printstream. The 6 Windows-building repos are the five standalone WinUI apps and persistent. The 4 web monorepos are persistent, printstream, game-is-up and store-sign-controller.
 
 Names are settled by D-043 and the Android entry point by D-044.
 
@@ -42,7 +42,7 @@ Releasing is a guided procedure, not a script name; see [releases.md](releases.m
 
 - **Status:** Existing (10 of 12 repos with something to run: all six Windows-building repos, the four monorepos and devkit; not the two Android repos). Android: Decided (D-044)
 - **Applies to:** all
-- **Reference:** `display-switchr/package.json` (wrapper only, no dependencies); `persistent/package.json` (full set)
+- **Reference:** `displayswitchr/package.json` (wrapper only, no dependencies); `persistent/package.json` (full set)
 - **Why:** One command runner in every repo means an agent, a `paseo.json` entry or a workflow calls `npm run <name>` without knowing the stack underneath.
 
 Every repo with something to run, check or build has a root `package.json` whose `scripts` use the canonical names. In a repo that is not a Node project it is `"private": true`, has no dependencies and no lockfile, and each script is a one-line call to the real tool. The five Windows apps already do this for the Windows build tooling.
@@ -66,7 +66,7 @@ Renames under this rule are made once per repo, together with the docs, skills a
 
 - **Status:** Decided (D-043). Existing in part (`verify:desktop` means "compiles" in 7 of 7 repos that define it; `build:desktop` packages and signs in 6 and builds a ZIP in 1)
 - **Applies to:** all
-- **Reference:** `display-switchr/package.json` for `verify`; `persistent/package.json` for `build`
+- **Reference:** `displayswitchr/package.json` for `verify`; `persistent/package.json` for `build`
 - **Why:** Two names do two jobs today: `verify:linux` runs tests in little-launcher and a typecheck in persistent, and `build:desktop` signs a package where `build` means compile everywhere else.
 
 | Verb | Means | Does not |
@@ -117,7 +117,7 @@ Root `test` runs every unit test in the repo, in every workspace or project. `te
 
 - **Status:** Existing (6 of 6 Windows-building repos; the wrapper is identical in all). The `build:desktop` rename: Decided (D-043)
 - **Applies to:** Windows
-- **Reference:** `display-switchr/package.json`, `display-switchr/scripts/windows-build`
+- **Reference:** `displayswitchr/package.json`, `displayswitchr/scripts/windows-build`
 - **Why:** One wrapper and four names let the same commands build any app from WSL, a container or a Windows shell.
 
 | Script | Does |
@@ -164,7 +164,7 @@ Under D-045, devkit generates these scripts, `paseo.json` and the runner from te
 
 - **Status:** Decided (D-044). Proposed (0 of 2 native Android repos)
 - **Applies to:** Android
-- **Reference:** `display-switchr/package.json` for the wrapper pattern; `sonarbridge/android/README-dev.md` for the Gradle commands
+- **Reference:** `displayswitchr/package.json` for the wrapper pattern; `sonarbridge/android/README-dev.md` for the Gradle commands
 - **Why:** Today one repo has a root shell script with a hard-coded tool path and no test or lint path, and the other documents Gradle commands in prose. Neither can be called by name.
 
 Each native Android repo has a root `package.json` (SCRIPT-1) with:
@@ -194,7 +194,7 @@ Gradle is called through the committed wrapper (see [platform.md](platform.md)),
 
 - **Status:** Proposed
 - **Applies to:** all
-- **Reference:** `display-switchr/scripts/windows-build` (overridable tool path, clear error when the tool is missing)
+- **Reference:** `displayswitchr/scripts/windows-build` (overridable tool path, clear error when the tool is missing)
 - **Why:** Scripts are run by agents in containers and worktrees as often as by a person at a prompt, so they cannot assume one machine.
 
 - A `package.json` script is a short call. Logic longer than one command lives in a file under `scripts/` (see [repo-layout.md](repo-layout.md)).

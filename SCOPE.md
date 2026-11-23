@@ -6,7 +6,7 @@ Projects held to these standards, as approved on 2026-11-15.
 
 | Project | Kind |
 | --- | --- |
-| display-switchr | Windows (WinUI) |
+| displayswitchr | Windows (WinUI) |
 | tray-control-for-wsl | Windows (WinUI) |
 | little-launcher | Windows (WinUI) |
 | repilot | Windows (WinUI) |

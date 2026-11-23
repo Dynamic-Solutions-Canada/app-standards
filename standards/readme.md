@@ -2,7 +2,7 @@
 
 How each repo's `README.md` is shaped. A README is the front door for users first and developers second; deep developer material lives in the docs set (see [docs.md](docs.md)).
 
-Counts are out of the 11 end-user apps in scope (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, printstream, game-is-up, store-sign-controller, phonelock, sonarbridge) unless a rule says otherwise.
+Counts are out of the 11 end-user apps in scope (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, printstream, game-is-up, store-sign-controller, phonelock, sonarbridge) unless a rule says otherwise.
 
 ## Templates
 
@@ -105,4 +105,4 @@ Where README images live is owned by ASSET-1 and ASSET-10 in [assets.md](assets.
 - **Status:** Existing (no hard-wrapping in most READMEs; em dashes in 6 of 15 in-scope READMEs)
 - **Applies to:** all
 
-README prose follows the writing section of the user-level agent rules (kept outside this repo) (no hard wrapping, no em dashes), which is not restated here. The rule exists so that README parity checks include it: little-launcher, repilot, immich-drive, persistent, game-is-up, and sonarbridge currently contain em dashes, and display-switchr and sonarbridge are hard-wrapped.
+README prose follows the writing section of the user-level agent rules (kept outside this repo) (no hard wrapping, no em dashes), which is not restated here. The rule exists so that README parity checks include it: little-launcher, repilot, immich-drive, persistent, game-is-up, and sonarbridge currently contain em dashes, and displayswitchr and sonarbridge are hard-wrapped.

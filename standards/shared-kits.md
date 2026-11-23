@@ -10,7 +10,7 @@ The three kits own their own usage docs. These standards say when to use a kit a
 | apps-promo | The "Our other apps" catalog and page | [README](https://github.com/Dynamic-Solutions-Canada/apps-promo) | `tray-control-for-wsl/external/promo/README.md` |
 | devkit | Per-checkout dev hostnames, ports and databases for web apps | README in the devkit repo, on the maintainer's personal account until it moves to the `Dynamic-Solutions-Canada` organisation under D-009 | `devkit/README.md` |
 
-Counts are out of the 6 WinUI apps (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise. The kits are themselves held to these standards (READMEs, docs, AI docs, licence).
+Counts are out of the 6 WinUI apps (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise. The kits are themselves held to these standards (READMEs, docs, AI docs, licence).
 
 ## Rules
 
@@ -31,9 +31,9 @@ What the kits should additionally own is KIT-9 and KIT-10. The rules that depend
 
 ### KIT-2: WinUI apps are built on winui-app-kit
 
-- **Status:** Existing (2 of 6: display-switchr, tray-control-for-wsl)
+- **Status:** Existing (2 of 6: displayswitchr, tray-control-for-wsl)
 - **Applies to:** Windows
-- **Reference:** `tray-control-for-wsl/` for a new app; display-switchr commit `af41968` for migrating an existing one
+- **Reference:** `tray-control-for-wsl/` for a new app; displayswitchr commit `af41968` for migrating an existing one
 - **Why:** About 2,500 lines across the other four apps duplicate what the kit already owns, and the copies are where the known defects are (non-atomic settings writes, no tray GUID, startup that can override the user).
 
 - A new WinUI app starts on the kit and uses every kit type that applies to it. It does not copy the equivalent class from a sibling app.
@@ -97,7 +97,7 @@ A web monorepo gets its development hostname, ports and database from devkit, co
 
 - **Status:** Existing as the conventions rule in the user-level agent rules; applied across apps in 2 of 6 WinUI apps
 - **Applies to:** all
-- **Reference:** winui-app-kit's localization classes, extracted from display-switchr's copy
+- **Reference:** winui-app-kit's localization classes, extracted from displayswitchr's copy
 - **Why:** Each copy is small and each drifts. Three hand-written versions of the same packaging fix appeared in three apps in one day.
 
 The rule "when the same shape appears a third time, extract it" from the user-level agent rules (kept outside this repo) applies across repos, not only inside one:
@@ -134,7 +134,7 @@ KIT-9 and KIT-10 list what is already at or past the third copy.
 | Settings window shell, About page, card and page styles | 6 | winui-app-kit shared XAML | `tray-control-for-wsl/WslMonitor/` | D-019 |
 | Confirm dialog helper (in the kit from v1.0.0: `ConfirmDialog`) | 5 apps | winui-app-kit | `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml.cs` | none |
 | App bootstrap (two unhandled-exception handlers, restore settings, create host) and the hidden host window setup (in the kit from v1.0.0: `AppBootstrap`, `HostWindow`) | 6 and 5 | winui-app-kit | `tray-control-for-wsl/WslMonitor/App.xaml.cs` | D-074 |
-| Tray icon rasteriser (supersample and shrink) (in the kit from v1.0.0: `TrayIconRasterizer`) | 2: display-switchr, tray-control-for-wsl | winui-app-kit | `tray-control-for-wsl/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
+| Tray icon rasteriser (supersample and shrink) (in the kit from v1.0.0: `TrayIconRasterizer`) | 2: displayswitchr, tray-control-for-wsl | winui-app-kit | `tray-control-for-wsl/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
 | DPAPI protected store | 2: little-launcher, immich-drive (FIX-001) | winui-app-kit, accepting an app-supplied folder, file name and entropy (both apps' values are permanent once shipped), with no logging dependency so a second process such as a shell extension can link it | `immich-drive/ImmichDrive/Services/ProtectedStore.cs` (adds `Exists`, an injectable protector, folder and error hooks, atomic save, and no delete on a failed load because two processes read the file) | D-081 |
 | Settings schema versioning, backup and reset | 0 (new) | winui-app-kit | none | D-077, D-104 |
 | `NLog.config` | 6, in two variants | winui-app-kit | `tray-control-for-wsl/WslMonitor/NLog.config` | D-080 |

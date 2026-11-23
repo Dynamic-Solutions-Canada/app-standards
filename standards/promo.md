@@ -2,7 +2,7 @@
 
 The "Our other apps" page: which apps show it, how they include it, and how the catalog behind it is kept complete.
 
-The page and its catalog live in the apps-promo repo, which owns its own usage docs: see [its README](https://github.com/Dynamic-Solutions-Canada/apps-promo) (local copy: `tray-control-for-wsl/external/promo/README.md`) for how to add the submodule, how `scripts/refresh-catalog.ps1` regenerates the catalog, and how web consumers read it. This file says when and where an app uses it. Counts are out of the 6 WinUI apps (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app) unless a rule says otherwise.
+The page and its catalog live in the apps-promo repo, which owns its own usage docs: see [its README](https://github.com/Dynamic-Solutions-Canada/apps-promo) (local copy: `tray-control-for-wsl/external/promo/README.md`) for how to add the submodule, how `scripts/refresh-catalog.ps1` regenerates the catalog, and how web consumers read it. This file says when and where an app uses it. Counts are out of the 6 WinUI apps (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app) unless a rule says otherwise.
 
 ## Overview
 
@@ -18,7 +18,7 @@ The page and its catalog live in the apps-promo repo, which owns its own usage d
 
 - **Status:** Existing (6 of 6)
 - **Applies to:** Windows
-- **Reference:** `display-switchr/HubDisplaySwitch/` (newest pin, uses the page's own localization hook)
+- **Reference:** `displayswitchr/HubDisplaySwitch/` (newest pin, uses the page's own localization hook)
 - **Why:** Cross-promotion only works if every app does it, and the page hides the app it is running in, so there is no reason for an app to opt out.
 
 Any WinUI app with a settings window includes the apps-promo page, from its first release. It is not copied into the app and not reimplemented. A web-view host for a client-branded product (store-sign-controller's desktop host) is not part of the family and does not include it.
@@ -59,13 +59,13 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 
 ### PROMO-5: Every shipped app has a catalog entry
 
-- **Status:** Decided (D-075, D-014). Existing (8 of the 12 end-user apps are in the catalog: chatmixr, display-switchr, immich-drive, little-launcher, persistent, printstream, repilot, tray-control-for-wsl, as of 2026-11-23)
+- **Status:** Decided (D-075, D-014). Existing (8 of the 12 end-user apps are in the catalog: chatmixr, displayswitchr, immich-drive, little-launcher, persistent, printstream, repilot, tray-control-for-wsl, as of 2026-11-23)
 - **Applies to:** Windows, Web, Android (as catalog entries), Kit
 - **Reference:** `ids.json` and `Assets/PromotedApps/apps.json` in apps-promo
 - **Why:** An app missing from the catalog is not promoted by any of its siblings, and nobody notices because the page still looks full.
 
 - Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. phonelock and sonarbridge join when they have listings (D-075). Internal or client-specific apps are not listed.
-- An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`, which is alphabetical by display name, ignoring case. A renamed product keeps its `appId` (Display Switchr is still `hub-display-switch`).
+- An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`, which is alphabetical by display name, ignoring case. A renamed product keeps its `appId` (DisplaySwitchr is still `hub-display-switch`).
 - The display name is the product's canonical name (D-012, see [branding.md](branding.md)); the catalog still shows "ImmichDrive".
 - Icons are 256 px, supplied through `iconUrl`, not the Store's 50 px logo (D-070, see [assets.md](assets.md)).
 - Adding or updating the entry and running `scripts/refresh-catalog.ps1` is a step of every release (D-063, see [releases.md](releases.md)). No release procedure includes it today.
@@ -83,9 +83,9 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 
 ### PROMO-7: Localization goes through the page's own hook
 
-- **Status:** Decided (D-101). Existing (1 of 6 uses the hook: display-switchr; 3 of 6 carry a copied adapter; 2 of 6 show the page in English only)
+- **Status:** Decided (D-101). Existing (1 of 6 uses the hook: displayswitchr; 3 of 6 carry a copied adapter; 2 of 6 show the page in English only)
 - **Applies to:** Windows
-- **Reference:** `display-switchr/HubDisplaySwitch/MainWindow.xaml.cs` (sets `PromoLocalization.LocaleProvider`)
+- **Reference:** `displayswitchr/HubDisplaySwitch/MainWindow.xaml.cs` (sets `PromoLocalization.LocaleProvider`)
 - **Why:** Three apps patch the page's text from outside by walking its visual tree. The adapters are near copies and break whenever the page changes.
 
 A localized app sets the promo page's `LocaleProvider` once at startup, to the same language source the rest of its interface uses, and calls its refresh when the language changes. No app carries a `PromotedAppsPage.Localization.cs` adapter; the three that exist are deleted when the pin is bumped (PROMO-3). An English-only app pins the provider to `en-US`, because the page otherwise follows Windows' languages and would be the only translated page in the app. The locale set is in [locales.md](locales.md), and the app descriptions in the catalog, which stay English for now, are covered by LOC-13 there.

@@ -2,7 +2,7 @@
 
 What the apps look like and how their common screens behave, per stack. The aim is that a user who knows one app finds the same window, the same Settings and About pages, and the same dialog behaviour in the next one.
 
-Counts are out of the 6 WinUI apps (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), or the 2 native Android apps (phonelock, sonarbridge) unless a rule says otherwise. store-sign-controller's desktop host and the Capacitor mobile shells are web views around the web app; they follow the Web rules for their content.
+Counts are out of the 6 WinUI apps (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), or the 2 native Android apps (phonelock, sonarbridge) unless a rule says otherwise. store-sign-controller's desktop host and the Capacitor mobile shells are web views around the web app; they follow the Web rules for their content.
 
 Related topics: the tray icon and flyout are in [tray.md](tray.md), the "Our other apps" page in [promo.md](promo.md), interface languages in [locales.md](locales.md), icon artwork in [assets.md](assets.md), and which shared code delivers these screens in [shared-kits.md](shared-kits.md). The conventions rule in the user-level agent rules (kept outside this repo) (find the sibling surface first, extract on the third copy) applies to all UI work and is not restated here.
 
@@ -22,7 +22,7 @@ Every app with a UI keeps a written guide at `.agents/guides/ui-conventions.md` 
 
 - **Status:** Existing (6 of 6 for the shell; 2 of 6 take icon, placement and theme tracking from the kit)
 - **Applies to:** Windows
-- **Reference:** `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml` and `.xaml.cs`; `display-switchr/HubDisplaySwitch/SettingsWindow.xaml` for an app whose window is named `SettingsWindow`
+- **Reference:** `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml` and `.xaml.cs`; `displayswitchr/HubDisplaySwitch/SettingsWindow.xaml` for an app whose window is named `SettingsWindow`
 - **Why:** The main window is the first thing users compare between apps. All six already share this shape by copy and paste, so writing it down stops it drifting.
 
 Every app's main window has:
@@ -41,11 +41,11 @@ The window class is `SettingsWindow` (5 of 6). Window icon, saved placement and 
 - **Reference:** `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml`
 - **Why:** A fixed footer means "About" and the sibling apps are in the same place in every app, whatever the app's own pages are.
 
-The menu items are the app's own pages, starting with its main content (a Home page, or the per-item pages in display-switchr and tray-control-for-wsl). The footer holds exactly two items, in this order: "Our other apps" (glyph E719; see [promo.md](promo.md)), then "About" (glyph E946). The built-in Settings item sits below them as WinUI places it. Nothing else goes in the footer.
+The menu items are the app's own pages, starting with its main content (a Home page, or the per-item pages in displayswitchr and tray-control-for-wsl). The footer holds exactly two items, in this order: "Our other apps" (glyph E719; see [promo.md](promo.md)), then "About" (glyph E946). The built-in Settings item sits below them as WinUI places it. Nothing else goes in the footer.
 
 ### UI-3: Page layout and cards
 
-- **Status:** Decided (D-019). Existing (2 of 6: display-switchr, tray-control-for-wsl)
+- **Status:** Decided (D-019). Existing (2 of 6: displayswitchr, tray-control-for-wsl)
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/WslMonitor/App.xaml` (`PageContentStyle`, `PageTitleStyle`, `SectionHeaderStyle`, `CardBorderStyle`) and `tray-control-for-wsl/WslMonitor/Pages/GeneralPage.xaml`
 - **Why:** Three generations of page styling coexist today, two of them inside single apps, and the shared promo page matches only the oldest. One named set of styles is the only thing that stops a fourth.
@@ -208,9 +208,9 @@ Each stack gets one lint or check for this in [code-style.md](code-style.md) and
 
 ### UI-15: First run and change notices
 
-- **Status:** Existing (first-run flag in 3 of 6 Windows apps: display-switchr, tray-control-for-wsl, little-launcher; "existing users only" notices in 2 products: little-launcher, persistent)
+- **Status:** Existing (first-run flag in 3 of 6 Windows apps: displayswitchr, tray-control-for-wsl, little-launcher; "existing users only" notices in 2 products: little-launcher, persistent)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `little-launcher/LittleLauncher/Classes/Settings/SettingsManager.cs` (`RaiseUpgradeNotices`); `display-switchr/HubDisplaySwitch/` for telling first run apart from a settings reset
+- **Reference:** `little-launcher/LittleLauncher/Classes/Settings/SettingsManager.cs` (`RaiseUpgradeNotices`); `displayswitchr/HubDisplaySwitch/` for telling first run apart from a settings reset
 - **Why:** Windows 11 hides new tray icons, so a resident app that starts silently looks like it did nothing. And a "what changed" notice shown to someone who never saw the old behaviour is noise.
 
 - **First run opens the main surface once.** A Windows app opens its settings window (or its flyout, for an app whose flyout is the product) on first launch and never again automatically. First run is a stored flag (`IsFirstRun`), and "settings were reset" is reported separately from first run (see CONF-2 in [settings-config.md](settings-config.md)).

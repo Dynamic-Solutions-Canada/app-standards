@@ -2,7 +2,7 @@
 
 Where each app writes its logs, what goes in them, how a user gets them to the maintainer, what happens when an app crashes, and the no-telemetry rule. The privacy policy itself is DOCS-8 in [docs.md](docs.md). Notifications are covered at the end because no other topic owns them; in-app status surfaces such as `InfoBar` and dialogs belong to [ui.md](ui.md).
 
-Counts are against the in-scope repos in [SCOPE.md](../SCOPE.md). "WinUI apps" means the six that share the family shape (display-switchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app). "Web APIs" means the four monorepo APIs (persistent, printstream, game-is-up, store-sign-controller). "End-user apps" means the 11 products listed in [readme.md](readme.md).
+Counts are against the in-scope repos in [SCOPE.md](../SCOPE.md). "WinUI apps" means the six that share the family shape (displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, and persistent's desktop app). "Web APIs" means the four monorepo APIs (persistent, printstream, game-is-up, store-sign-controller). "End-user apps" means the 11 products listed in [readme.md](readme.md).
 
 ## Overview
 
@@ -27,9 +27,9 @@ Logs are written to `%AppData%\<DataFolderName>\logs.<start time>.txt`, one file
 
 ### LOG-2: One shared NLog config, with levels and retention
 
-- **Status:** Decided (D-080). Existing (6 of 6 WinUI apps share the shape, in two variants: display-switchr and tray-control-for-wsl set an explicit layout line, the other four do not)
+- **Status:** Decided (D-080). Existing (6 of 6 WinUI apps share the shape, in two variants: displayswitchr and tray-control-for-wsl set an explicit layout line, the other four do not)
 - **Applies to:** Windows, Kit
-- **Reference:** `tray-control-for-wsl/WslMonitor/NLog.config` (the display-switchr and tray-control-for-wsl variant, with the explicit layout line)
+- **Reference:** `tray-control-for-wsl/WslMonitor/NLog.config` (the displayswitchr and tray-control-for-wsl variant, with the explicit layout line)
 - **Why:** Six copies of one file have already drifted, and nobody has confirmed that old log files are ever removed.
 
 The config comes from winui-app-kit (see [shared-kits.md](shared-kits.md)), not from a per-app copy. It sets:
@@ -115,7 +115,7 @@ References: `persistent/apps/api/src/lib/prisma-client.ts` (event sink), `store-
 
 ### LOG-8: How a user exports diagnostics
 
-- **Status:** Decided (D-023, D-086). Existing (3 of 6 WinUI apps have "Open logs folder": display-switchr, tray-control-for-wsl, persistent desktop; 0 of 6 have a support link)
+- **Status:** Decided (D-023, D-086). Existing (3 of 6 WinUI apps have "Open logs folder": displayswitchr, tray-control-for-wsl, persistent desktop; 0 of 6 have a support link)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` (About page content); tray-control-for-wsl (the one-line kit call); printstream's Logs tab and help and feedback dialog (web)
 - **Why:** With no telemetry, the only way the maintainer sees a problem is when the user can find the log and knows where to send it.

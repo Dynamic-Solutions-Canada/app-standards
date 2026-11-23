@@ -1,2 +1,6 @@
 # Private working material (audit reports, raw answers, security fixes FIX-001 to FIX-010); this repo is public and audit/ is not published with it (D-004).
 audit/
+
+# Per-machine Claude Code settings (permission rules)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock

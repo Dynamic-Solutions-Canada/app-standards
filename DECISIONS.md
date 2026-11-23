@@ -946,6 +946,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** supersedes D-118's display name; everything D-118 keeps (package identity, Store ID, tray GUID, mutex, startup task, settings folder, exe name) still stays. The repo and local folder are renamed `tray-control-for-wsl`, the privacy policy moves to `/privacy/tray-control-for-wsl` with a permanent redirect from `/privacy/wsl-status`, and BRAND-10's row records all three names. A future product that works with another company's product puts that product's name after "for".
 - **Reversibility:** the Store name is cheap to change before publish. **Repos:** tray-control-for-wsl, website, apps-promo.
 
+### D-123 The first Store screenshot is a generated hero
+`store-listings` `assets`
+- **Decided (2026-11-23):** Store search shows only a listing's first screenshot, at about 320 by 180, where the family's full-desktop captures read as the same blue wallpaper. Each Windows app's first screenshot becomes a generated hero: the split layout (brand panel and headline on the left, the real UI enlarged on the right) for apps whose main surface is a flyout or popup, and a PrintStream-style brand card for Repilot and ImmichDrive, whose UI is setup that users rarely see again. Headlines come from each listing's own text and are translated per locale. Microsoft's screenshot guidance advises against marketing text in screenshots; it is display advice, not a certification rule, and PrintStream's card already ships, so the family accepts it.
+- **Consequence:** LIST-8 gains the first-image rule. winui-app-kit's screenshot pipeline gains a hero template (split and brand card) fed by the manifest and a per-locale headline in `listings.json`, so each app renders its hero from a raw capture instead of hand-made art. The concepts and proofs are in the standards audit folder (store-hero-pocs).
+- **Reversibility:** cheap; a listing can drop the hero in its next submission. **Repos:** KIT, DSW, CMX, TCW, LL, REP, IMD, PER.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

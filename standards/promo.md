@@ -59,13 +59,13 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 
 ### PROMO-5: Every shipped app has a catalog entry
 
-- **Status:** Decided (D-075, D-014). Existing (5 of the 11 end-user apps are in the catalog: printstream, persistent, little-launcher, immich-drive, repilot)
+- **Status:** Decided (D-075, D-014). Existing (8 of the 12 end-user apps are in the catalog: chatmixr, display-switchr, immich-drive, little-launcher, persistent, printstream, repilot, tray-control-for-wsl, as of 2026-11-23)
 - **Applies to:** Windows, Web, Android (as catalog entries), Kit
 - **Reference:** `ids.json` and `Assets/PromotedApps/apps.json` in apps-promo
 - **Why:** An app missing from the catalog is not promoted by any of its siblings, and nobody notices because the page still looks full.
 
-- Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. display-switchr and tray-control-for-wsl join when their Store names are reserved (D-014); phonelock and sonarbridge join when they have listings (D-075). Internal or client-specific apps are not listed.
-- An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`.
+- Every app with a public listing (Microsoft Store, Google Play, or a public product site) has an entry, added when the listing goes live. phonelock and sonarbridge join when they have listings (D-075). Internal or client-specific apps are not listed.
+- An entry has a stable `appId` that never changes when a product is renamed, one link per platform the product ships on, and appears exactly once in `appOrder`, which is alphabetical by display name, ignoring case. A renamed product keeps its `appId` (Display Switchr is still `hub-display-switch`).
 - The display name is the product's canonical name (D-012, see [branding.md](branding.md)); the catalog still shows "ImmichDrive".
 - Icons are 256 px, supplied through `iconUrl`, not the Store's 50 px logo (D-070, see [assets.md](assets.md)).
 - Adding or updating the entry and running `scripts/refresh-catalog.ps1` is a step of every release (D-063, see [releases.md](releases.md)). No release procedure includes it today.

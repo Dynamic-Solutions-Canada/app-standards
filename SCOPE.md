@@ -11,6 +11,7 @@ Projects held to these standards, as approved on 2026-11-15.
 | little-launcher | Windows (WinUI) |
 | repilot | Windows (WinUI) |
 | immich-drive | Windows (WinUI) |
+| chatmixr | Windows (WinUI); added 2026-11-22 after its first Store release, so rule counts written before then leave it out |
 | persistent | Web monorepo with Windows desktop app |
 | printstream | Web monorepo |
 | game-is-up | Web monorepo |

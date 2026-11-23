@@ -2,7 +2,7 @@
 
 How source code is formatted, linted and named in each stack, and which tool checks it. Today style is consistent by habit and checked almost nowhere, so most rules here describe an existing habit that D-016 now enforces, rolled out repo by repo with printstream on its own schedule.
 
-Counts are against the in-scope repos a rule applies to: the 6 repos with a WinUI app on the shared build tooling (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), and the 2 Android repos (phonelock, sonarbridge).
+Counts are against the in-scope repos a rule applies to: the 6 repos with a WinUI app on the shared build tooling (display-switchr, wsl-status, little-launcher, repilot, immich-drive, persistent), the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller), and the 2 Android repos (phonelock, sonarbridge).
 
 How code is commented, documented and split into functions and files is covered by the user-level agent rules (kept outside this repo) (code clarity and structure, conventions, writing) and is not restated here.
 
@@ -142,7 +142,7 @@ The toolchain is ruff alone, for both formatting and lint, configured in a `pypr
 
 | Thing | Form | Example |
 | --- | --- | --- |
-| Repo and its folder | kebab-case | `hub-display-switch` |
+| Repo and its folder | kebab-case | `display-switchr` |
 | .NET project, assembly, root namespace | PascalCase, no company prefix | `HubDisplaySwitch` |
 | MSIX packaging folder | `<App>MSIX` | `RepilotMSIX` |
 | npm package name (root) | the repo name | `game-is-up` |

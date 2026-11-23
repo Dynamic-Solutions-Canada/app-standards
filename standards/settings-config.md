@@ -2,7 +2,7 @@
 
 Where each app keeps what the user chose (user settings) and what the developer or operator chose (app and build configuration), and how both are stored safely.
 
-Counts are out of the 6 WinUI apps (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise.
+Counts are out of the 6 WinUI apps (display-switchr, wsl-status, little-launcher, repilot, immich-drive, and persistent's desktop app) or the 4 web monorepos (persistent, printstream, game-is-up, store-sign-controller) unless a rule says otherwise.
 
 Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); where credentials and the `.secrets/` folder live is in [security.md](security.md) (D-038, D-081); log files that share the data folder are in [logging.md](logging.md); runtime and SDK pins are in [platform.md](platform.md). The Windows settings store is provided by winui-app-kit and documented in [its README](https://github.com/Dynamic-Solutions-Canada/winui-app-kit); it is not re-described here.
 
@@ -21,7 +21,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 ### CONF-1: Windows settings location and store
 
-- **Status:** Decided (D-076) for the location (6 of 6 already use it). Existing (2 of 6: hub-display-switch, wsl-status) for the kit store
+- **Status:** Decided (D-076) for the location (6 of 6 already use it). Existing (2 of 6: display-switchr, wsl-status) for the kit store
 - **Applies to:** Windows
 - **Reference:** `wsl-status/WslMonitor/Classes/SettingsManager.cs` (40 lines over the kit); winui-app-kit `Settings/JsonSettingsStore.cs` and `AppEnvironment.cs`
 - **Why:** One location and format means support instructions, backup advice and "open the data folder" work the same in every app. Four apps still carry a copied settings manager with a known data-loss bug (CONF-3).
@@ -35,7 +35,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 - **Status:** Existing (2 of 6 Windows apps, through the kit; 2 of 3 Electron and Linux hosts write atomically)
 - **Applies to:** Windows, Web (Electron and Linux hosts)
-- **Reference:** winui-app-kit `Settings/JsonSettingsStore.cs`; `hub-display-switch/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`WasReset`)
+- **Reference:** winui-app-kit `Settings/JsonSettingsStore.cs`; `display-switchr/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`WasReset`)
 - **Why:** A crash or power loss during a plain file write leaves a truncated settings file, and silently replacing it with defaults loses the user's setup without telling them.
 
 - Every save writes a temporary file and renames it over the original. No app uses a direct `File.WriteAllText` on its settings file.
@@ -44,9 +44,9 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 ### CONF-3: Schema version and written defaults
 
-- **Status:** Decided (D-077). Existing (0 of 6 have an integer schema version; 2 of 6 write default values: hub-display-switch, wsl-status)
+- **Status:** Decided (D-077). Existing (0 of 6 have an integer schema version; 2 of 6 write default values: display-switchr, wsl-status)
 - **Applies to:** Windows, Kit
-- **Reference:** `hub-display-switch/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`MigrateV1`, the `.v1.bak` copy) as the nearest example of one migration step
+- **Reference:** `display-switchr/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`MigrateV1`, the `.v1.bak` copy) as the nearest example of one migration step
 - **Why:** With defaults omitted from the file, a `false` saved for a setting that defaults to `true` loads back as `true`. little-launcher works around this per property; repilot, immich-drive and persistent's desktop app are exposed. And without a version, a migration has to guess the file's age from its shape.
 
 - Every settings file carries an integer `SchemaVersion`. Migrations are an ordered list of functions, one per version step, run by the kit's store, and the old file is backed up before the first one runs. A file without a version is version 0, and the current version is the number of steps.

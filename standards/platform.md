@@ -2,7 +2,7 @@
 
 Which SDKs, runtimes, operating system versions and framework generations the apps build on, and where each is pinned. Shared code (winui-app-kit, devkit, any shared web package) can only target one baseline, and a security bump that has to be repeated by hand in each repo gets missed in some.
 
-Counts are against the in-scope repos a rule applies to: the 6 Windows-building repos (hub-display-switch, wsl-status, little-launcher, repilot, immich-drive, persistent), the 5 Node repos (persistent, printstream, game-is-up, store-sign-controller, devkit), the 4 web monorepos (the Node repos without devkit), and the 2 native Android repos (phonelock, sonarbridge).
+Counts are against the in-scope repos a rule applies to: the 6 Windows-building repos (display-switchr, wsl-status, little-launcher, repilot, immich-drive, persistent), the 5 Node repos (persistent, printstream, game-is-up, store-sign-controller, devkit), the 4 web monorepos (the Node repos without devkit), and the 2 native Android repos (phonelock, sonarbridge).
 
 **This file states pin policy, not "current" versions.** The table records what the repos pinned when it was last checked (2026-11-16), so drift is visible. It is not a list of what to install. The dependency-version rule in the user-level agent rules (kept outside this repo) applies: check the registry before adding or moving a version, and never take one from memory or from this table.
 
@@ -10,7 +10,7 @@ Counts are against the in-scope repos a rule applies to: the 6 Windows-building 
 
 | Stack | Item | Pinned in | Value in the repos today | Target |
 | --- | --- | --- | --- | --- |
-| Windows | .NET SDK | `global.json` | 10.0.403 (little-launcher, repilot, persistent); 10.0.100 (hub-display-switch, wsl-status); no file (immich-drive, winui-app-kit) | PLAT-2 |
+| Windows | .NET SDK | `global.json` | 10.0.403 (little-launcher, repilot, persistent); 10.0.100 (display-switchr, wsl-status); no file (immich-drive, winui-app-kit) | PLAT-2 |
 | Windows | Target framework | app csproj | `net10.0-windows10.0.22000.0` (6 of 6, and the kit) | PLAT-4 |
 | Windows | Windows App SDK | app csproj | 1.8.260209005 (6 of 6 main app projects, and the kit) | PLAT-5 |
 | Windows | Minimum Windows build | `Package.appxmanifest` | 22000 (5 of 6); 19045.5011 (immich-drive) | PLAT-6 |
@@ -56,7 +56,7 @@ Each stack's pins are reviewed once a quarter and moved together (D-095). A secu
 
 ### PLAT-2: One .NET SDK pin
 
-- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; hub-display-switch and wsl-status still pin 10.0.100, rechecked 2026-11-16; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
+- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; display-switchr and wsl-status still pin 10.0.100, rechecked 2026-11-16; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
 - **Applies to:** Windows, Kit (winui-app-kit)
 - **Reference:** `repilot/global.json`
 - **Why:** Two SDK bands are pinned today, and the older one predates the runtime fix that PLAT-3 requires.
@@ -96,7 +96,7 @@ A project that has the `Microsoft.WindowsDesktop.App` framework reference (every
 
 Exception: a Game Bar widget's UWP project takes no Windows App SDK (D-120); its own packages are still pinned in the central file.
 
-Taking the kit's central versions moves an app to the kit's package versions: NLog was on 6.1.1 in little-launcher, repilot, immich-drive and persistent and on 6.2.2 in the kit, hub-display-switch and wsl-status (2026-11-16), so those four move to 6.2.2 with their kit migration.
+Taking the kit's central versions moves an app to the kit's package versions: NLog was on 6.1.1 in little-launcher, repilot, immich-drive and persistent and on 6.2.2 in the kit, display-switchr and wsl-status (2026-11-16), so those four move to 6.2.2 with their kit migration.
 
 One secondary project is on a newer major today (persistent's widget). A project that needs a newer major than the kit says why in a comment, and the kit is moved as its own change.
 
@@ -107,7 +107,7 @@ One secondary project is on a newer major today (persistent's widget). A project
 - **Reference:** `repilot/RepilotMSIX/Package.appxmanifest`
 - **Why:** A floor nobody tests on is a support liability on a paid app, and the README, website and manifest disagree for the published apps today.
 
-The floor is Windows 11 build 22000 for every app, with one decided exception: immich-drive keeps it now, and hub-display-switch and chatmixr take it from their next releases (D-018 amendment, 2026-11-22). The exception floor is Windows 10 22H2 with the October 2024 update or later, declared as `MinVersion="10.0.19045.5011"`. Since .NET 9 apps opt into CET shadow stacks, and unpatched Windows 10 kills every .NET 9 or later app at startup; the four-part MinVersion makes Windows refuse the install with an update prompt instead (D-018, decided 2026-11-17). Do not set `CETCompat` to false to reach older builds. winui-app-kit's floor is Windows 10 22H2 so that every app, immich-drive included, can use it. `Package.appxmanifest` is the source of truth; the README, the store listing and the website repeat what it says (see [readme.md](readme.md) and [store-listings.md](store-listings.md)).
+The floor is Windows 11 build 22000 for every app, with one decided exception: immich-drive keeps it now, and display-switchr and chatmixr take it from their next releases (D-018 amendment, 2026-11-22). The exception floor is Windows 10 22H2 with the October 2024 update or later, declared as `MinVersion="10.0.19045.5011"`. Since .NET 9 apps opt into CET shadow stacks, and unpatched Windows 10 kills every .NET 9 or later app at startup; the four-part MinVersion makes Windows refuse the install with an update prompt instead (D-018, decided 2026-11-17). Do not set `CETCompat` to false to reach older builds. winui-app-kit's floor is Windows 10 22H2 so that every app, immich-drive included, can use it. `Package.appxmanifest` is the source of truth; the README, the store listing and the website repeat what it says (see [readme.md](readme.md) and [store-listings.md](store-listings.md)).
 
 The exception has two conditions. Every release of those apps is tested on Windows 10 before it ships, which is accepted (TEST-9 in [testing.md](testing.md)). And any winui-app-kit feature that needs Windows 11 checks the OS version at runtime and degrades on Windows 10; the kit's README names such features, and the kit is tested on Windows 10 22H2. A project with a Windows 10 floor cannot rely on the platform-compatibility analyzer (CA1416) to find Windows 11 calls: the Windows SDK reference assemblies carry version attributes only up to build 19041, and Win32 calls carry none, so an unguarded Windows 11 call compiles without a warning (verified in winui-app-kit, 2026-11-16). Instead, every helper that needs Windows 11 is marked `[SupportedOSPlatform("windows10.0.22000")]` and called only behind `OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000)`; an unguarded call to a marked helper is then error CA1416 in Release. A change that adds a Windows API call is checked by hand for its minimum version. Reference: winui-app-kit's `AGENTS.md` and its README table of features that degrade on Windows 10.
 

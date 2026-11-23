@@ -56,7 +56,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 ### ASSET-3: One generator, sizing and packing only
 
-- **Status:** Decided (D-069). Proposed (2 on the shared generator, devkit-icons: chatmixr and display-switchr since 2026-11-22; diverged copies of `generate-msix-images.ps1` remain in tray-control-for-wsl, repilot, immich-drive and persistent; little-launcher has none)
+- **Status:** Decided (D-069). Proposed (3 on the shared generator, devkit-icons: chatmixr and display-switchr since 2026-11-22, tray-control-for-wsl since 2026-11-23; little-launcher, repilot, immich-drive and persistent are moving, 2026-11-23)
 - **Applies to:** Windows, Web, Android, Kit
 - **Reference:** `game-is-up/scripts/dev/generate-brand-icons.mjs` (single entry point, resvg); `display-switchr/assets/brand/icons.json` (a Windows target through devkit-icons, which writes the complete Windows size list)
 - **Why:** The size lists are identical for every app; only the art differs. Five copies of the list have already produced three different output sets.

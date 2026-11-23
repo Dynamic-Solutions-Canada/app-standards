@@ -928,6 +928,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** LOG-9 gains a fourth disclosed exception. No third-party analytics service is involved.
 - **Reversibility:** cheap. **Repos:** PS (hosted), PER.
 
+### D-120 Xbox Game Bar widgets are a UWP companion app in the same package
+`platform` `security` `shared-kits`
+- **Decided (2026-11-22; landed 2026-11-23):** an app that offers an Xbox Game Bar widget builds it as a second XAML application in its own MSIX: a C# UWP project on modern .NET (`UseUwp`, Native AOT, CsWinRT) in a sibling folder, because Game Bar activates only UWP XAML apps. The widget may not touch the app's domain directly; it talks to the running app over a channel restricted to the package's AppContainer SID and the signed-in user, carrying a small message set with no version field (both ends ship in the same package and update together; a message that does not parse drops the connection), which the app validates against its own state, with no secrets. The widget reuses the app's JSON string catalogs and its theme values by copy; it has no kit UI. The design note is `chatmixr/docs/game-bar-widget.md`. `Microsoft.Gaming.XboxGameBar` is pinned exactly in the central package file (PLAT-10), and its licence goes in the third-party notices (HYG-3). The package minimum OS is not raised for the widget (PLAT-6).
+- **Consequence:** PLAT-4 and PLAT-5 gain this exception (UWP target framework, no Windows App SDK in the widget project). winui-app-kit gains a domain-neutral "XAML companions" packaging hook that merges a second XAML project's compiled XAML and resources into the package; all widget code stays in the app until a second app has a widget. A companion's packaging and CI accept either Visual Studio's UWP Build Tools component or the full Visual Studio UWP workload (winui-app-kit v2.5.1); hosted `windows-2025` runners compile and package the widget, and windows-build-tools' guest toolchain installs the Build Tools component. The UWP project's minimum is a Windows SDK platform (19041 for a Windows 10 22H2 floor), since the manifest holds the real floor.
+- **Reversibility:** cheap; the widget is an additive manifest extension. **Repos:** CMX, KIT, WBT.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

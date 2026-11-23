@@ -19,7 +19,7 @@ The trees show the canonical set. An entry marked "if any" is omitted when the r
 <repo>/                         kebab-case
 ├── <App>/                      app project (PascalCase); see LAYOUT-2
 ├── <App>MSIX/                  Package.appxmanifest, Images/, packaging script
-├── <Helper>/                   extra shipped projects, if any (for example RepilotKey/)
+├── <Helper>/                   extra shipped projects, if any (for example RepilotKey/, ChatMixr.GameBar/, D-120)
 ├── tests/
 │   └── <Name>/                 one folder per test harness (see testing.md)
 ├── external/

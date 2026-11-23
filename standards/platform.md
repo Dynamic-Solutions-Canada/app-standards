@@ -81,6 +81,8 @@ A `Directory.Build.targets` check fails the build when the runtime pack that was
 
 The app project targets `net10.0-windows10.0.22000.0`, builds for `x64` and `ARM64` with matching runtime identifiers, and sets `WindowsPackageType` to `None`; packaging is done by the script in the `<App>MSIX` folder (see [repo-layout.md](repo-layout.md)), which publishes the app self-contained. The platform auto-detect block in `Directory.Build.props` is kept as in the kit's copy. Language and nullable settings are in [code-style.md](code-style.md). The version number's home is in [releases.md](releases.md).
 
+Exception: an Xbox Game Bar widget is a UWP companion project in the same package, with a UWP target framework and no Windows App SDK (D-120).
+
 ### PLAT-5: One Windows App SDK version, and shared package versions in one place
 
 - **Status:** Existing (6 of 6 main app projects and the kit are on the same Windows App SDK version). The central version file is Decided (D-096) (0 of 6)
@@ -91,6 +93,8 @@ The app project targets `net10.0-windows10.0.22000.0`, builds for `x64` and `ARM
 Every WinUI project in the family uses the Windows App SDK version that winui-app-kit uses; an app does not move ahead of the kit. The packages the family shares (Windows App SDK, NLog, CommunityToolkit.Mvvm) get their version from one shared file, not from each csproj. That file is central package management (`Directory.Packages.props`), with the shared versions imported from the kit, which is where D-005 puts shared build props (D-096).
 
 A project that has the `Microsoft.WindowsDesktop.App` framework reference (every app and the kit) must not also reference the `System.Security.Cryptography.ProtectedData` package: under warnings-as-errors .NET 10 fails the restore with NU1510. The package's shared version is only for test harnesses and helper processes without that framework.
+
+Exception: a Game Bar widget's UWP project takes no Windows App SDK (D-120); its own packages are still pinned in the central file.
 
 Taking the kit's central versions moves an app to the kit's package versions: NLog was on 6.1.1 in little-launcher, repilot, immich-drive and persistent and on 6.2.2 in the kit, hub-display-switch and wsl-status (2026-11-16), so those four move to 6.2.2 with their kit migration.
 

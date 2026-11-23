@@ -76,6 +76,7 @@ Each store has one `listings.json`:
 - Each locale record uses semantic field names: `title`, `shortDescription`, `fullDescription` for both stores; the Microsoft file adds `features`, `keywords` and `screenshotCaptions`.
 - An alias locale is `{ "copyFrom": "<identity>" }`, not a duplicated record (`en-CA` copies `en-US`, `fr-CA` copies `fr-FR`). The publisher expands aliases, because both stores need a full record per listing locale.
 - Field names are not the store's own import IDs. Mapping to Partner Center or Play fields is the publisher's job.
+- Fields that are not per-locale text (product ID, package name, privacy and website URLs, support contact, copyright, console settings) do not go in `listings.json`. A WinUI app keeps them in `windows-build.json` as today; a repo without such a build config keeps them in `store-assets/<store>/store.json`, which the publishers read and `listings.md` describes (decided 2026-11-23, PrintStream).
 - Release notes are not a field in this file (LIST-10).
 
 Ordered screenshot paths belong in `manifest.json` (LIST-8) and console-only settings in `listings.md` (LIST-4), so a single-locale file that also carries assets and console fields, as printstream's `listing.json` does, moves to this shape.

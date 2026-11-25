@@ -56,7 +56,7 @@ Each stack's pins are reviewed once a quarter and moved together (D-095). A secu
 
 ### PLAT-2: One .NET SDK pin
 
-- **Status:** Decided (D-053). Existing (3 of 6 pin 10.0.403; displayswitchr and tray-control-for-wsl still pin 10.0.100, rechecked 2026-11-16; 4 of the 5 with a `global.json` use `rollForward: latestFeature`)
+- **Status:** Decided (D-053). Existing (every WinUI app pins 10.0.403, rechecked 2026-11-25)
 - **Applies to:** Windows, Kit (winui-app-kit)
 - **Reference:** `repilot/global.json`
 - **Why:** Two SDK bands are pinned today, and the older one predates the runtime fix that PLAT-3 requires.
@@ -65,7 +65,7 @@ Every Windows-building repo and winui-app-kit has a `global.json` with the same 
 
 ### PLAT-3: Runtime security guard
 
-- **Status:** Decided (D-053). Existing (3 of 6: little-launcher, repilot, persistent; three separate copies)
+- **Status:** Decided (D-053). Existing (every WinUI app imports the kit targets, rechecked 2026-11-25)
 - **Applies to:** Windows
 - **Reference:** `repilot/Directory.Build.targets`
 - **Why:** The apps ship self-contained, so the .NET runtime inside the package is the app's responsibility. A build on an old runtime ships a known vulnerability without any warning.
@@ -85,7 +85,7 @@ Exception: an Xbox Game Bar widget is a UWP companion project in the same packag
 
 ### PLAT-5: One Windows App SDK version, and shared package versions in one place
 
-- **Status:** Existing (6 of 6 main app projects and the kit are on the same Windows App SDK version). The central version file is Decided (D-096) (0 of 6)
+- **Status:** Existing (the WinUI apps share the kit's Windows App SDK version except persistent, which is on 1.8, rechecked 2026-11-25; recount pending). The central version file is Decided (D-096)
 - **Applies to:** Windows, Kit (winui-app-kit)
 - **Reference:** `tray-control-for-wsl/external/winui-app-kit/WinUIAppKit/WinUIAppKit.csproj`
 - **Why:** The Windows App SDK agrees today only because it was pasted at the same time. NLog and Sqlite, pinned the same way, have already drifted.
@@ -102,7 +102,7 @@ One secondary project is on a newer major today (persistent's widget). A project
 
 ### PLAT-6: Minimum Windows version
 
-- **Status:** Decided (D-018). Existing (6 of 6 manifests already carry the decided value: build 22000 in five, 19045 in immich-drive)
+- **Status:** Decided (D-018). Existing (6 of 6 manifests carry a decided value; displayswitchr and chatmixr ship the Windows 10 floor)
 - **Applies to:** Windows, Kit (winui-app-kit)
 - **Reference:** `repilot/RepilotMSIX/Package.appxmanifest`
 - **Why:** A floor nobody tests on is a support liability on a paid app, and the README, website and manifest disagree for the published apps today.
@@ -124,7 +124,7 @@ One `<App>.slnx` at the repo root (or beside the desktop projects in a monorepo)
 
 ### PLAT-8: Node is pinned exactly, in four places that agree
 
-- **Status:** Existing (3 of 5 Node repos have all four: persistent, printstream, game-is-up). Which version: Decided (D-007)
+- **Status:** Existing (persistent, printstream, game-is-up and apps-promo have all four, rechecked 2026-11-25; recount pending). Which version: Decided (D-007)
 - **Applies to:** Web, Kit (devkit)
 - **Reference:** `game-is-up/package.json`, `game-is-up/.nvmrc`, `game-is-up/.npmrc`
 - **Why:** An exact pin enforced by npm stops "works on my Node" before install, and devkit keys its install cache on these files.
@@ -137,7 +137,7 @@ The fleet pin as of 2026-11-16 is Node 24.22.3 with npm 11.19.1, the current 24.
 
 ### PLAT-9: One web library generation
 
-- **Status:** Decided (D-007). Existing (3 of 4 web monorepos share one generation: persistent, printstream, game-is-up; store-sign-controller is one major ahead on React, Prisma, zod and TypeScript)
+- **Status:** Decided (D-007). Existing (persistent and game-is-up are on the fleet stack; printstream is the only one behind, rechecked 2026-11-25; recount pending)
 - **Applies to:** Web
 - **Reference:** `store-sign-controller/package.json` (the target); `printstream/package.json` (the generation three repos share)
 - **Why:** The four products share one skeleton (Express, Prisma, zod contracts, Vite, React). Code and fixes move between them only while the majors match.
@@ -148,7 +148,7 @@ Running the native TypeScript compiler beside the standard one (printstream, gam
 
 ### PLAT-10: Dependency versions are exact
 
-- **Status:** Decided (D-037). Existing (1 of 4 web monorepos: store-sign-controller; .NET package references are exact in 6 of 6)
+- **Status:** Decided (D-037). Existing (persistent and game-is-up now comply; printstream is behind, rechecked 2026-11-25; recount pending)
 - **Applies to:** Web, Kit (devkit); already the practice on Windows
 - **Reference:** `store-sign-controller/package.json`
 - **Why:** With exact pins a diff shows precisely what changed, and two repos on "the same" range cannot quietly resolve to different versions.
@@ -178,9 +178,9 @@ Android application ids are BRAND-7 in [branding.md](branding.md) (D-011).
 
 ### PLAT-12: Gradle conventions
 
-- **Status:** Decided (D-055). Existing (1 of 2 has a committed wrapper and Kotlin DSL: sonarbridge; 0 of 2 has a version catalog)
+- **Status:** Decided (D-055). Existing (sonarbridge and phonelock have changed since 2026-11-16; recount pending)
 - **Applies to:** Android
-- **Reference:** `sonarbridge/android/` (wrapper, Kotlin DSL, build container); `phonelock/companion/build.gradle` (each third-party dependency carries an "approved:" comment with the reason)
+- **Reference:** `sonarbridge/android/` (wrapper, Kotlin DSL, build container); `phonelock/android/companion/build.gradle.kts` (each third-party dependency carries an "approved:" comment with the reason)
 - **Why:** A build that needs a particular Gradle in a home directory cannot run in CI or a container.
 
 For new work and for phonelock:

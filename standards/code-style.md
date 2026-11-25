@@ -22,7 +22,7 @@ The script names are defined in [dev-scripts.md](dev-scripts.md). Where they run
 
 ### STYLE-1: One `.editorconfig` at every repo root
 
-- **Status:** Decided (D-016). Proposed (0 of 15 have a root `.editorconfig`; printstream has a nested one for C# only)
+- **Status:** Decided (D-016). Existing (every audited repo has a root `.editorconfig`, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `printstream/apps/desktop/.editorconfig` (C# section only); no root example exists
 - **Why:** It is the one file every editor, formatter and agent reads, so it is where the basics that all stacks share are written once.
@@ -33,9 +33,9 @@ The canonical text is kept in one place and reaches each repo by the mechanism c
 
 ### STYLE-2: Formatting is checked by a tool, not by habit
 
-- **Status:** Decided (D-016). Proposed (0 of 15 enforce a formatter)
+- **Status:** Decided (D-016). Existing (every audited repo runs a format check, except persistent's C# and printstream by decision, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
-- **Reference:** `store-sign-controller/.prettierrc.json` (the config; nothing runs it yet, see FIX-056)
+- **Reference:** `store-sign-controller/.prettierrc.json` with its `format:check` script
 - **Why:** Style that is only a habit drifts, and review time is spent on whitespace. little-launcher already shows the drift (FIX-032).
 
 A formatter is enforced in every stack, using the tools in the table above (D-016). Enforcement is rolled out one repo at a time, each taking its one-off reformat commit when it adopts the check; printstream does so on its own schedule. Each repo exposes `format` (rewrites files) and `format:check` (fails on a difference), and `format:check` is part of the `validate` gate (see [dev-scripts.md](dev-scripts.md)).
@@ -46,7 +46,7 @@ A repo adopts the formatter in one commit that contains only the reformat, with 
 
 ### STYLE-3: Web lint uses the shared ESLint flat config
 
-- **Status:** Existing (3 of 4 web monorepos: persistent, printstream, game-is-up)
+- **Status:** Existing (3 of 4 web monorepos on 2026-11-16: persistent, printstream, game-is-up; store-sign-controller has changed since; recount pending)
 - **Applies to:** Web, and Kit repos written in JavaScript or TypeScript
 - **Reference:** `persistent/eslint.config.mjs`
 - **Why:** The three configs already share one skeleton; naming it stops a fourth variant.
@@ -59,7 +59,7 @@ A product may add rules that encode its own UI conventions, as `printstream/esli
 
 ### STYLE-4: Web house style and the shared TypeScript base
 
-- **Status:** Existing (4 of 4 follow the style by habit; 2 of 4 share an identical `tsconfig.base.json`: persistent, printstream)
+- **Status:** Existing (3 of 4 web monorepos on 2026-11-16; store-sign-controller and game-is-up have changed since; recount pending)
 - **Applies to:** Web
 - **Reference:** `store-sign-controller/.prettierrc.json`, `printstream/tsconfig.base.json`
 - **Why:** One style and one compiler strictness level let code move between products without rework.
@@ -111,9 +111,9 @@ Warnings are errors in CI and Release builds (D-091).
 
 ### STYLE-8: Kotlin and Java style
 
-- **Status:** Existing (2 of 2 set `kotlin.code.style=official`). The formatter is Decided (D-016, D-092) (0 of 2)
+- **Status:** Existing (both Android repos set `kotlin.code.style=official`). The formatter is Decided (D-016, D-092); phonelock and sonarbridge have changed since 2026-11-16 (recount pending)
 - **Applies to:** Android
-- **Reference:** `sonarbridge/android/gradle.properties`; `phonelock/companion/build.gradle` (lint block)
+- **Reference:** `sonarbridge/android/gradle.properties`; `phonelock/android/companion/build.gradle.kts` (lint block)
 - **Why:** The two repos share one formatting setting today and differ in line length and density; a formatter settles it without debate.
 
 `kotlin.code.style=official` in `gradle.properties`, four spaces, and one Kotlin formatter wired into Gradle and exposed as `format` and `format:check`. The formatter is Spotless (D-092), running ktlint for Kotlin and a Java formatter for Java, set up the same way in both repos.
@@ -135,7 +135,7 @@ The toolchain is ruff alone, for both formatting and lint, configured in a `pypr
 
 ### STYLE-11: Names of repos, projects and packages
 
-- **Status:** Existing (15 of 15 repo folders are kebab-case; 6 of 6 .NET app projects are PascalCase; 4 of 4 monorepos use an `@<app>/*` scope). TypeScript module file names are Decided (D-093)
+- **Status:** Existing (repo folders kebab-case, .NET projects PascalCase, monorepos on an `@<app>/*` scope; store-sign-controller, game-is-up and the Android pair have changed since 2026-11-16, recount pending). TypeScript module file names are Decided (D-093)
 - **Applies to:** all
 - **Reference:** `repilot/` (Windows), `persistent/package.json` (Web)
 - **Why:** A name that follows the pattern can be guessed, by people and by scripts that loop over repos.

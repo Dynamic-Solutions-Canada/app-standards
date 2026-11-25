@@ -42,7 +42,7 @@ Checked by test on 2026-11-16 with Claude Code 2.1.322: `AGENTS.md` loaded in `/
 
 ### AI-1: Every repo has a root `AGENTS.md`
 
-- **Status:** Existing (10 of 15; missing in store-sign-controller, phonelock, devkit, apps-promo, and printstream-home-assistant). The generated repo's exemption is Decided (D-089)
+- **Status:** Existing (store-sign-controller, phonelock, devkit and apps-promo now have one, rechecked 2026-11-25; printstream-home-assistant is exempt; recount pending). The generated repo's exemption is Decided (D-089)
 - **Applies to:** all
 - **Reference:** `tray-control-for-wsl/AGENTS.md` (small app); `persistent/AGENTS.md` (monorepo); `tray-control-for-wsl/external/winui-app-kit/AGENTS.md` (kit)
 - **Why:** It is the only file both tools load without being told, and kits need one most because their mistakes reach every consumer.
@@ -51,7 +51,7 @@ Every repo has an `AGENTS.md` at its root, including kits and tooling. A kit's f
 
 ### AI-2: Skeleton, title, and section names
 
-- **Status:** Proposed (2 of 10 use the title form: tray-control-for-wsl, winui-app-kit; section names differ in all 10)
+- **Status:** Proposed (most audited repos now use the title form, rechecked 2026-11-25; section names still differ; recount pending)
 - **Applies to:** all
 - **Reference:** `tray-control-for-wsl/AGENTS.md` for shape; `little-launcher/AGENTS.md` for the guidance map and "Keeping docs current" tables; `persistent/AGENTS.md` for "Shared helpers"
 - **Why:** Fixed headings let an agent, and the maintainer, find the same thing in the same place in every repo.
@@ -111,7 +111,7 @@ Rules that go with it:
 
 ### AI-3: Length and nesting
 
-- **Status:** Decided (D-031). Existing (8 of 10 root files are under about 1,500 words; printstream and little-launcher are over)
+- **Status:** Decided (D-031). Existing (11 root files are over about 1,500 words on 2026-11-25: displayswitchr 2,151, chatmixr 1,938, tray-control-for-wsl 1,834, phonelock 1,797, immich-drive 1,751, sonarbridge 1,708, little-launcher 1,707, persistent 1,615, repilot 1,604, printstream 1,560, winui-app-kit 1,535)
 - **Applies to:** all
 - **Reference:** `persistent/AGENTS.md` (1,313 words, detail pushed to nested files and one guide)
 - **Why:** The root file is loaded into every session, so every extra word is paid for on every task.
@@ -120,7 +120,7 @@ The root `AGENTS.md` stays under about 1,500 words. Anything longer moves to a g
 
 ### AI-4: Link to these standards
 
-- **Status:** Decided (D-002, D-004). Existing (0 of 10)
+- **Status:** Decided (D-002, D-004). Existing (essentially every audited repo links the standards, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** the `## Standards` section of the skeleton in AI-2
 - **Why:** A link works for people, local agents, containers, and cloud sessions; a sibling path works on one machine.
@@ -131,7 +131,7 @@ A repo may also add the standards as a submodule at `external/standards` for off
 
 ### AI-5: One tool-neutral instruction file
 
-- **Status:** Decided (D-108). Existing (0 of 15 have a `CLAUDE.md`); 5 of 10 `AGENTS.md` files address Codex by name: repilot, immich-drive, persistent, printstream, game-is-up
+- **Status:** Decided (D-108). Existing (no audited repo has a `CLAUDE.md` or addresses Codex by name, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `tray-control-for-wsl/AGENTS.md`
 - **Why:** Two instruction files drift, and guidance written for one tool reads as optional to the other.
@@ -142,7 +142,7 @@ Titles, headings, and skill descriptions do not name a tool: write "the agent", 
 
 ### AI-6: Guides
 
-- **Status:** Decided (D-026). Existing (2 of the 7 repos with guides use `.agents/guides/`: persistent, printstream; 5 use `.codex/docs/`; little-launcher uses `docs/`)
+- **Status:** Decided (D-026). Existing (most repos with guides use `.agents/guides/`, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `little-launcher/docs/` with its index table in `little-launcher/AGENTS.md`; `printstream/.agents/guides/ui-conventions.md` for depth of content
 - **Why:** A tool-neutral home means both agents find the guide, and one copy per topic means it cannot contradict itself.
@@ -171,7 +171,7 @@ A skill does not hold configuration, such as a commit author (FIX-005).
 
 ### AI-8: Claude Code reaches project skills through a symlink
 
-- **Status:** Decided (D-108, D-028). Existing (0 of the 9 repos with skills); the mechanism was tested on 2026-11-16
+- **Status:** Decided (D-108, D-028). Existing (essentially every audited repo with skills has the symlink, rechecked 2026-11-25; recount pending); the mechanism was tested on 2026-11-16
 - **Applies to:** all repos with skills
 - **Reference:** none yet
 - **Why:** Claude Code reads only `.claude/skills/`, so every tracked project skill is invisible to it today; the symlink makes them visible without moving them into a Claude-only folder.
@@ -195,7 +195,7 @@ A project skill with the same name as a shared one replaces it, and says in its 
 
 ### AI-10: No `.codex/`; `.claude/` holds only what Claude Code requires
 
-- **Status:** Decided (D-108). Existing (8 of 15 have no `.codex/`; displayswitchr, tray-control-for-wsl, repilot, immich-drive, persistent, printstream, and game-is-up track one)
+- **Status:** Decided (D-108). Existing (no audited repo tracks `.codex/`, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** none yet
 - **Why:** Codex is not used, and files under `.codex/commands/` were never commands in any tool; they duplicate the `desktop` skill beside them.
@@ -206,7 +206,7 @@ A project skill with the same name as a shared one replaces it, and says in its 
 
 ### AI-11: Tool hooks
 
-- **Status:** Decided (D-030, D-108). Existing (3 of 15 have Codex hooks, which no longer run: persistent, printstream, game-is-up; 0 have Claude Code hooks)
+- **Status:** Decided (D-030, D-108). Existing (no audited repo has Codex hooks left, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `persistent/.codex/hooks.json` and `persistent/.codex/README.md` for what the hooks do (to be ported)
 - **Why:** A guard that runs in no tool in use is not a guard, and a hook nobody can explain gets disabled.
@@ -224,7 +224,7 @@ When a repo has Claude Code hooks:
 
 ### AI-12: `paseo.json`
 
-- **Status:** Existing (3 of 15: persistent, printstream, game-is-up, which are all three devkit consumers). Decided (D-045) for the shared template and (D-088) for the standalone Windows apps (0 of 5)
+- **Status:** Existing (persistent, printstream, game-is-up, store-sign-controller and the three newer WinUI apps, rechecked 2026-11-25; recount pending). Decided (D-045) for the shared template and (D-088) for the standalone Windows apps
 - **Applies to:** Web; Windows (proposed)
 - **Reference:** `persistent/paseo.json`
 - **Why:** A new worktree that is missing its submodules or dev environment fails in ways that look like code bugs.
@@ -237,7 +237,7 @@ Where worktrees are created is not stated in a project file (D-032, FIX-041): th
 
 ### AI-13: No host paths, sibling links, or personal details
 
-- **Status:** Proposed (violations in winui-app-kit, printstream, displayswitchr, game-is-up, and sonarbridge: FIX-005, FIX-035, FIX-038, FIX-041)
+- **Status:** Proposed (displayswitchr, winui-app-kit, printstream, game-is-up and sonarbridge are now clean, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `immich-drive/AGENTS.md` (refers to a sibling only "if available and permitted by the current environment")
 - **Why:** Tracked instructions are read in containers, CI, cloud sessions, and public repos, where a path on the maintainer's machine is wrong and a personal detail is a leak.
@@ -261,7 +261,7 @@ One rule, stated once in the shared `commit` skill and not per repo (D-013): an 
 
 ### AI-15: Agent files stay true
 
-- **Status:** Existing in most repos; stale references are tracked as FIX-034, FIX-036, and FIX-039, and writing-rule violations as FIX-044 and FIX-045
+- **Status:** Existing in most repos; writing-rule violations are tracked as FIX-044 and FIX-045; the stale references in FIX-034, FIX-036, and FIX-039 are resolved
 - **Applies to:** all
 - **Reference:** `little-launcher/AGENTS.md` "Keeping docs current" table; the `audit-docs` skill in persistent, printstream, game-is-up, and little-launcher
 - **Why:** An agent follows a stale instruction exactly, so a deleted file named in a skill becomes a recreated file.

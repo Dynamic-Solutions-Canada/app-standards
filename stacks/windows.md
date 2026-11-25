@@ -19,7 +19,7 @@ WinUI tray and desktop apps, including Windows desktop hosts inside web monorepo
 | AI-11: Tool hooks | Decided |
 | AI-13: No host paths, sibling links, or personal details | Proposed |
 | AI-14: No restated global rules; one commit and push rule | Decided |
-| AI-15: Agent files stay true | Existing in most repos; stale references are tracked as FIX-034, FIX-036, and FIX-039, and writing-rule violations as FIX-044 and FIX-045 |
+| AI-15: Agent files stay true | Existing in most repos; writing-rule violations are tracked as FIX-044 and FIX-045; the stale references in FIX-034, FIX-036, and FIX-039 are resolved |
 
 ## [Assets](../standards/assets.md)
 
@@ -303,7 +303,7 @@ WinUI tray and desktop apps, including Windows desktop hosts inside web monorepo
 | TRAY-4: Clicks | Existing |
 | TRAY-5: Menu items and order | Decided |
 | TRAY-6: Flyout | Existing |
-| TRAY-7: Hidden host window and exit | Existing |
+| TRAY-7: Hidden host window and exit | Existing for the host window |
 | TRAY-8: Closing a window never exits | Existing |
 | TRAY-9: One running copy | Existing |
 | TRAY-10: Start with Windows | Existing |

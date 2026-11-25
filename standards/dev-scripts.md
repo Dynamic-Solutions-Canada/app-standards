@@ -108,16 +108,16 @@ In a web monorepo that also ships a native app, a suite that needs that platform
 
 - **Status:** Existing (2 of 5 repos with a root `test` use a discovery script: persistent, printstream)
 - **Applies to:** all
-- **Reference:** `persistent/scripts/dev/run-tests.mjs` (small); `printstream/scripts/dev/run-tests.mjs` (large)
+- **Reference:** devkit's `devkit-test` (small); `printstream/scripts/dev/run-tests.mjs` (large)
 - **Why:** A test that no script runs is not a test. A hand-kept list of folders, or an unquoted `**`, drops new tests without an error.
 
 Root `test` runs every unit test in the repo, in every workspace or project. `test:<target>` narrows to one target and `test:scripts` covers the repo's own scripts. How the script finds test files (a discovery script or quoted globs, never a hand-kept folder list or an unquoted `**`) is owned by TEST-5 in [testing.md](testing.md), which also tracks the two known cases. Frameworks, file names and what must be tested are in the same file.
 
 ### SCRIPT-6: Windows entry points go through `scripts/windows-build`
 
-- **Status:** Existing (6 of 6 Windows-building repos; the wrapper is identical in all). The `build:desktop` rename: Decided (D-043)
+- **Status:** Existing (every Windows app calls the kit's one `scripts/windows-build`; only immich-drive keeps a copy, rechecked 2026-11-25). The `build:desktop` rename: Decided (D-043)
 - **Applies to:** Windows
-- **Reference:** `displayswitchr/package.json`, `displayswitchr/scripts/windows-build`
+- **Reference:** `displayswitchr/package.json`, `winui-app-kit/scripts/windows-build`
 - **Why:** One wrapper and four names let the same commands build any app from WSL, a container or a Windows shell.
 
 | Script | Does |
@@ -194,7 +194,7 @@ Gradle is called through the committed wrapper (see [platform.md](platform.md)),
 
 - **Status:** Proposed
 - **Applies to:** all
-- **Reference:** `displayswitchr/scripts/windows-build` (overridable tool path, clear error when the tool is missing)
+- **Reference:** `winui-app-kit/scripts/windows-build` (overridable tool path, clear error when the tool is missing)
 - **Why:** Scripts are run by agents in containers and worktrees as often as by a person at a prompt, so they cannot assume one machine.
 
 - A `package.json` script is a short call. Logic longer than one command lives in a file under `scripts/` (see [repo-layout.md](repo-layout.md)).

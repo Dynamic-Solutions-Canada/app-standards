@@ -31,7 +31,7 @@ What the kits should additionally own is KIT-9 and KIT-10. The rules that depend
 
 ### KIT-2: WinUI apps are built on winui-app-kit
 
-- **Status:** Existing (2 of 6: displayswitchr, tray-control-for-wsl)
+- **Status:** Existing (displayswitchr, tray-control-for-wsl, chatmixr, immich-drive and repilot are fully on the kit, and little-launcher except its host window, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/` for a new app; displayswitchr commit `af41968` for migrating an existing one
 - **Why:** About 2,500 lines across the other four apps duplicate what the kit already owns, and the copies are where the known defects are (non-atomic settings writes, no tray GUID, startup that can override the user).
@@ -53,7 +53,7 @@ Every WinUI app with a settings window includes the promo page. Path, URL, pin, 
 
 ### KIT-4: Web monorepos use devkit for development
 
-- **Status:** Decided (D-007). Existing (3 of 4: persistent, printstream, game-is-up, all on the same tag)
+- **Status:** Decided (D-007). Existing (4 of 4 consumers pin devkit by tag, rechecked 2026-11-25)
 - **Applies to:** Web
 - **Reference:** `persistent/devkit.config.mjs` for a typical app; `printstream/devkit.config.mjs` for checks, cleanup and baselines
 - **Why:** Without it each checkout needs fixed ports and its own database setup, so two worktrees of one app cannot run at once. store-sign-controller shows the cost: its own Postgres service, fixed ports, and an install on every container start.
@@ -62,7 +62,7 @@ A web monorepo gets its development hostname, ports and database from devkit, co
 
 ### KIT-5: How shared code reaches an app
 
-- **Status:** Decided (D-005). Existing (submodule under `external/`: winui-app-kit 2 of 6, apps-promo 6 of 6; tag-pinned package: devkit 3 of 4)
+- **Status:** Decided (D-005). Existing (winui-app-kit 6 of 6 plus chatmixr; apps-promo by submodule; devkit 4 of 4 by tag pin, rechecked 2026-11-25)
 - **Applies to:** Windows, Web, Kit
 - **Reference:** `tray-control-for-wsl/.gitmodules`; `external/promo/PromotedApps.projitems` for shared XAML; `persistent/package.json` for the devkit pin
 - **Why:** One mechanism per stack means an agent or a CI job knows where shared code is and how to update it. Copying is the mechanism that produced six diverged build scripts.
@@ -82,9 +82,9 @@ A web monorepo gets its development hostname, ports and database from devkit, co
 
 ### KIT-6: Versioning and pinning
 
-- **Status:** Decided (D-005). Existing (1 of 3 kits is tagged: devkit; winui-app-kit and apps-promo are pinned by bare commit)
+- **Status:** Decided (D-005). Existing (3 of 3 kits are tagged; consumers are not on one tag, devkit pins range from v0.24.0 to v0.29.0, rechecked 2026-11-25)
 - **Applies to:** Kit, Windows, Web
-- **Reference:** devkit's `vX.Y.Z` tags and the `#v0.16.2` pins in its three consumers
+- **Reference:** devkit's `vX.Y.Z` tags and the `#vX.Y.Z` pins in its consumers' `package.json`
 - **Why:** A bare commit says nothing about what changed or whether it is safe to take, and without tags the six promo consumers ended up on four different commits.
 
 - Every kit is tagged `vX.Y.Z` with SemVer meaning: a breaking change is a major version. Tag and release-note rules are in [releases.md](releases.md).
@@ -122,7 +122,7 @@ KIT-9 and KIT-10 list what is already at or past the third copy.
 
 ### KIT-9: Windows code due to move into a kit
 
-- **Status:** Decided (D-005, and the decisions named per row)
+- **Status:** Decided (D-005, and the decisions named per row). The update service, DPAPI store, logging config, runtime guard, MSIX script and promo adapter copies are gone from the apps (rechecked 2026-11-25)
 - **Applies to:** Windows, Kit
 - **Reference:** the "best copy" column
 - **Why:** These are the items already copied three or more times, or copied twice with a defect in one copy.
@@ -137,10 +137,10 @@ KIT-9 and KIT-10 list what is already at or past the third copy.
 | Tray icon rasteriser (supersample and shrink) (in the kit from v1.0.0: `TrayIconRasterizer`) | 2: displayswitchr, tray-control-for-wsl | winui-app-kit | `tray-control-for-wsl/WslMonitor/Classes/TrayIconRenderer.cs` | D-071 |
 | DPAPI protected store | 2: little-launcher, immich-drive (FIX-001) | winui-app-kit, accepting an app-supplied folder, file name and entropy (both apps' values are permanent once shipped), with no logging dependency so a second process such as a shell extension can link it | `immich-drive/ImmichDrive/Services/ProtectedStore.cs` (adds `Exists`, an injectable protector, folder and error hooks, atomic save, and no delete on a failed load because two processes read the file) | D-081 |
 | Settings schema versioning, backup and reset | 0 (new) | winui-app-kit | none | D-077, D-104 |
-| `NLog.config` | 6, in two variants | winui-app-kit | `tray-control-for-wsl/WslMonitor/NLog.config` | D-080 |
+| `NLog.config` | 6, in two variants | winui-app-kit | `winui-app-kit/build/NLog.config` | D-080 |
 | Runtime CVE guard (`Directory.Build.targets`) and `global.json` | 3 guards, in three implementations | winui-app-kit | repilot's | D-053 |
 | `Directory.Build.props` shared block, `.gitignore` tail, `scripts/windows-build` wrapper | 6 | winui-app-kit or the build tooling | tray-control-for-wsl's | none |
-| `build-msix.ps1` | 6 (1,716 lines in total) | one script driven by `windows-build.json` | `tray-control-for-wsl/WslMonitorMSIX/build-msix.ps1` | D-065 |
+| `build-msix.ps1` | 6 (1,716 lines in total) | one script driven by `windows-build.json` | `winui-app-kit/build/build-msix.ps1` | D-065 |
 | MSIX image generator | 5 | devkit's icon generator | none | D-069 |
 | Language list (the nine locales and their aliases) and the catalog completeness check | 5 and 4 | one shared data file and one check | tray-control-for-wsl's | D-067 |
 | Promo page localization adapter | 3: tray-control-for-wsl, repilot, persistent | already in apps-promo; delete the copies (PROMO-7) | apps-promo | none |
@@ -158,7 +158,7 @@ Kit features that block a migration are added first: several tray icons per host
 | --- | --- | --- | --- | --- |
 | `scripts/dev/run-dev.mjs`, the `compose.dev.yml` `node` service, `paseo.json`, the `dev:*` scripts | 3 | devkit, as generated templates, not a runtime dependency; printstream's runner may stay custom | `game-is-up/` | D-045 |
 | `wait-for-db.mjs`, the Vite `server` block | 3 | devkit helpers | `persistent/` | D-045 |
-| Test discovery script for `node --test` | 2 scripts and 2 hand-written globs | devkit | `persistent/scripts/dev/run-tests.mjs` | D-050 |
+| Test discovery script for `node --test` | 2 scripts and 2 hand-written globs | devkit | devkit's `devkit-test` | D-050 |
 | "Remote development with Devkit" README section and `docs/devkit-remote.md` | 3, drifted | deleted; link to devkit's README | devkit's README | none |
 | `deploy-over-ssh.mjs` | 3 implementations | devkit, as a generated template written into `scripts/deploy/` | `persistent/scripts/deploy/deploy-over-ssh.mjs` | D-045 |
 | Back-aware modal | 3: printstream, persistent, store-sign-controller (`AppDialog`); game-is-up has a narrower handler in one modal | a shared web UI package (D-005: a new `web-app-kit` repo, pinned by tag) | `printstream/apps/web/src/components/BackAwareModal.tsx` | D-005, D-007 |

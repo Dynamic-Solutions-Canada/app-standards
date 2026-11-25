@@ -102,7 +102,7 @@ Where README images live is owned by ASSET-1 and ASSET-10 in [assets.md](assets.
 
 ### README-10: Prose style
 
-- **Status:** Existing (no hard-wrapping in most READMEs; em dashes in 6 of 15 in-scope READMEs)
+- **Status:** Existing (no hard-wrapping in most READMEs, displayswitchr's included since 2026-11-25; em dashes in some; recount pending)
 - **Applies to:** all
 
 README prose follows the writing section of the user-level agent rules (kept outside this repo) (no hard wrapping, no em dashes), which is not restated here. The rule exists so that README parity checks include it: little-launcher, repilot, immich-drive, persistent, game-is-up, and sonarbridge currently contain em dashes, and displayswitchr and sonarbridge are hard-wrapped.

@@ -25,7 +25,7 @@ Display names are spaced words in title case, except the ones settled as one wor
 
 ### BRAND-2: Publisher display name
 
-- **Status:** Decided (D-006). Existing (5 of 6 WinUI manifests use "Dynamic Solutions (CA)"; Persistent's desktop app uses "Dynamic Solutions Canada")
+- **Status:** Decided (D-006). Existing (persistent now uses "Dynamic Solutions (CA)", rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `repilot/RepilotMSIX/Package.appxmanifest`
 - **Why:** The Microsoft Store rejects a package whose publisher display name does not match the account exactly.
@@ -34,9 +34,9 @@ The publisher display name is "Dynamic Solutions (CA)", used unchanged in every 
 
 ### BRAND-3: Copyright holder
 
-- **Status:** Decided (D-006). Existing (0 of 7 licence files name the company; all seven name the individual owner)
+- **Status:** Decided (D-006). Existing (licence files now name the company, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
-- **Reference:** `repilot/LICENSE.md`
+- **Reference:** `repilot/LICENSE`
 - **Why:** The licence, the README, and the About page must name the same holder for the grant to be clear.
 
 The copyright holder is the company, written "Dynamic Solutions", for every repo except the two personal projects, game-is-up and store-sign-controller, whose holder is the individual owner (the repo owner's legal name). printstream and its Home Assistant integration keep their own licence (D-008), and the holder named in it was not part of the decision. The same holder appears on every About page's copyright line (BRAND-8). The copyright line reads `Copyright (c) <first year>-<current year> <holder>`, or a single year for a new repo, and is identical in the licence file (HYG-1 in [repo-hygiene.md](repo-hygiene.md)), the README's License section (README-5), and any About page that shows it.
@@ -71,7 +71,7 @@ Every URL compiled into an app (About-page source link, update check, promo cata
 
 ### BRAND-6: Windows package identity
 
-- **Status:** Decided (D-014). Existing (4 of 6 WinUI apps use the Store-assigned identity)
+- **Status:** Decided (D-014). Existing (displayswitchr and tray-control-for-wsl are now live on Store identities, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows
 - **Reference:** `immich-drive/ImmichDriveMSIX/Package.appxmanifest`
 - **Why:** The identity is permanent once an app is published, and settings and updates are tied to it.
@@ -127,7 +127,7 @@ The support link goes to the repo's GitHub issues page, which has an issue templ
 
 ### BRAND-9: One contact
 
-- **Status:** Decided (D-017). Existing (2 contact addresses are in use across the 2 Android apps, one of them personal; FIX-011)
+- **Status:** Decided (D-017). Existing (2 contact addresses are in use across the 2 Android apps, one of them personal on 2026-11-16; FIX-011, resolved since)
 - **Applies to:** all
 - **Reference:** `phonelock/PRIVACY.md` (uses the company address)
 - **Why:** A personal address in a public policy or listing is hard to withdraw once stores have indexed it.

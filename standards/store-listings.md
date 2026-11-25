@@ -47,7 +47,7 @@ HACS has no folder here: `hacs.json` and `brand/` stay where HACS requires them 
 
 ### LIST-1: Listing text lives in the repo
 
-- **Status:** Decided (D-066). Existing (5 of 9 keep listing text in the repo: displayswitchr, persistent, printstream, phonelock, sonarbridge)
+- **Status:** Decided (D-066). Existing (also met by the three newer WinUI apps, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/apps/mobile/store/listings.json`
 - **Why:** Text that exists only in a store console cannot be reviewed, translated in one pass, or checked against what the app does.
@@ -56,7 +56,7 @@ Every field a user can read on a listing (title, descriptions, feature bullets, 
 
 ### LIST-2: One `store-assets/` folder at the repo root
 
-- **Status:** Decided (D-066). Existing (2 of 9: displayswitchr, persistent in part)
+- **Status:** Decided (D-066). Existing (also met by the three newer WinUI apps; printstream has root `store-assets/`, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/store-assets/`
 - **Why:** One place per repo means one validator, one capture guide, and no sync step between two copies.
@@ -65,7 +65,7 @@ Use the layout above: one subfolder per store, plus `web/` for the README and we
 
 ### LIST-3: `listings.json` shape
 
-- **Status:** Decided (D-066). Existing (2 of 9: persistent, displayswitchr)
+- **Status:** Decided (D-066). Existing (also met by the three newer WinUI apps, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `persistent/apps/mobile/store/listings.json` (Play), `displayswitchr/store-assets/microsoft/listings.json` (Microsoft)
 - **Why:** The same shape for both stores lets one validator and one translation pass serve both, and it holds any number of locales without a schema change.
@@ -83,7 +83,7 @@ Ordered screenshot paths belong in `manifest.json` (LIST-8) and console-only set
 
 ### LIST-4: `listings.md` beside each `listings.json`
 
-- **Status:** Existing (2 of 9 have the companion file: displayswitchr, persistent; phonelock has the same content as separate drafts)
+- **Status:** Existing (also met by the three newer WinUI apps, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `displayswitchr/store-assets/microsoft/listings.md` (limits and claims), `phonelock/play/data-safety.md` (answers with reasons)
 - **Why:** A listing makes promises. Writing down which ones must stay true, and why each console answer was given, is what lets a later release check them.
@@ -141,7 +141,7 @@ An app's listing is published in exactly the locales its interface supports ([lo
 
 ### LIST-8: Screenshots are named, ordered by a manifest, and captured from the real app
 
-- **Status:** Existing (1 of 9 has a manifest and a scripted pipeline: persistent)
+- **Status:** Existing (also met by the three newer WinUI apps, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/store-assets/manifest.json`, `persistent/store-assets/README.md`
 - **Why:** Order, caption and alt text are part of the listing. Keeping them beside the files means a reorder or a caption fix is a one-line change, not a recapture.

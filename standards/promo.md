@@ -25,7 +25,7 @@ Any WinUI app with a settings window includes the apps-promo page, from its firs
 
 ### PROMO-2: Submodule path and canonical URL
 
-- **Status:** Existing (6 of 6 for the path and import; 3 of 6 for the URL, see FIX-046)
+- **Status:** Existing (6 of 6 for the path and import on 2026-11-16; every consumer uses the current URL, rechecked 2026-11-25, FIX-046)
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/.gitmodules`, `tray-control-for-wsl/WslMonitor/WslMonitor.csproj`
 - **Why:** One path and one URL mean the same commands, CI steps and ignore rules work in every repo.
@@ -41,7 +41,7 @@ The pre-rename URL (`technicallyreal-promo` under the personal account) is not u
 
 ### PROMO-3: Pin policy
 
-- **Status:** Decided (D-005). Existing (0 of 6 pin a tag; four different commits are pinned across the six consumers)
+- **Status:** Decided (D-005). Existing (7 of 7 consumers pin a tag, across three tags, rechecked 2026-11-25)
 - **Applies to:** Windows, Kit
 - **Reference:** none yet; devkit's tag pins are the model (see KIT-6)
 - **Why:** The catalog reaches shipped apps at runtime without a bump, so pins only matter for page code. Left alone they scatter, and a fix such as the localization hook then exists in one app and is re-implemented in three.
@@ -72,7 +72,7 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 
 ### PROMO-6: The manifest URL is a permanent identifier
 
-- **Status:** Proposed (the fetch-with-fallback behaviour is Existing in 6 of 6; the URL still uses the pre-rename owner and repo name, FIX-017)
+- **Status:** Proposed (the fetch-with-fallback behaviour is Existing in 6 of 6; the URL now uses the current owner and repo name, FIX-017, resolved)
 - **Applies to:** Kit, Windows
 - **Reference:** `Views/PromotedAppsPage.xaml.cs` in apps-promo
 - **Why:** Installed copies fetch the catalog from a fixed public URL. If that URL stops resolving, every shipped app's page silently freezes at its last cached catalog.
@@ -83,7 +83,7 @@ The page is a footer item of the settings window's `NavigationView`, directly ab
 
 ### PROMO-7: Localization goes through the page's own hook
 
-- **Status:** Decided (D-101). Existing (1 of 6 uses the hook: displayswitchr; 3 of 6 carry a copied adapter; 2 of 6 show the page in English only)
+- **Status:** Decided (D-101). Existing (displayswitchr and the three newer WinUI apps use the hook, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows
 - **Reference:** `displayswitchr/HubDisplaySwitch/MainWindow.xaml.cs` (sets `PromoLocalization.LocaleProvider`)
 - **Why:** Three apps patch the page's text from outside by walking its visual tree. The adapters are near copies and break whenever the page changes.
@@ -92,7 +92,7 @@ A localized app sets the promo page's `LocaleProvider` once at startup, to the s
 
 ### PROMO-8: The page matches its host
 
-- **Status:** Decided (D-019, D-075). Existing (1 of 6: the page uses the oldest page styling, which matches only little-launcher)
+- **Status:** Decided (D-019, D-075). Existing (6 of 7 consumers have the restyle; immich-drive lacks it, rechecked 2026-11-25)
 - **Applies to:** Kit, Windows, Web
 - **Reference:** UI-3 in [ui.md](ui.md)
 - **Why:** A shared page that looks different from the pages around it reads as an advert pasted into the app.

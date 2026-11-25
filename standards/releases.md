@@ -45,7 +45,7 @@ The notes for the version are written and approved first (REL-6). Then the versi
 
 ### REL-3: Tag format and lanes
 
-- **Status:** Decided (D-060). Existing (`vX.Y.Z` for the main lane in 8 of 9; `<lane>-vX.Y.Z` in 1 of 2 multi-lane repos: persistent; annotated tags in 3 of 9: little-launcher, immich-drive, devkit)
+- **Status:** Decided (D-060). Existing (met by the three newer WinUI apps; printstream produces `desktop-v` tags, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `little-launcher` tags (annotated `vX.Y.Z`); `persistent` tags (`desktop-vX.Y.Z`, `linux-vX.Y.Z`)
 - **Why:** One rule lets a reader tell what a tag released without knowing the repo's history.
@@ -58,7 +58,7 @@ The notes for the version are written and approved first (REL-6). Then the versi
 
 ### REL-4: Deployed web products are tagged
 
-- **Status:** Decided (D-061). Proposed (none of the 4 Web monorepos tags what it deploys)
+- **Status:** Decided (D-061). Existing (persistent tags what it deploys, rechecked 2026-11-25; recount pending)
 - **Applies to:** Web
 - **Reference:** none in scope; printstream's public mirror creates `vX.Y.Z` from CI and is the nearest example
 - **Why:** "What is live" should be answerable from git, not from a server.
@@ -67,7 +67,7 @@ A web product whose version users can see (persistent, printstream) tags the dep
 
 ### REL-5: CI creates the GitHub Release
 
-- **Status:** Existing (7 of 9: every repo with release workflows; phonelock uses a local script and devkit a person). The title format and the disclosure wording are Decided (D-097)
+- **Status:** Existing (met by the three newer WinUI apps, rechecked 2026-11-25; recount pending). The title format and the disclosure wording are Decided (D-097)
 - **Applies to:** all
 - **Reference:** `immich-drive/.github/workflows/build-msix.yml`
 - **Why:** A Release made by hand is skipped under time pressure (devkit has Releases for only some of its tags) and its title and body drift from one release to the next.
@@ -84,7 +84,7 @@ A flow that must stay a local script (phonelock, until it has workflows) meets t
 
 ### REL-6: Release notes are a committed file, written for users
 
-- **Status:** Decided (D-058). Existing (2 of 9 use one approved, committed source for both GitHub and the store and fail without it: immich-drive, printstream)
+- **Status:** Decided (D-058). Existing (met by the three newer WinUI apps, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `immich-drive/release-notes/` with `immich-drive/.github/scripts/set-store-release-notes.ps1`; `printstream/apps/web/src/product-changelog.json` with `changelog:check`
 - **Why:** Notes derived from commit subjects describe the work, not the benefit, and notes typed into a store console exist nowhere else.
@@ -110,7 +110,7 @@ An app's first Microsoft Store submission is the exception: Microsoft's submissi
 
 ### REL-8: The release procedure lives in a `release` skill
 
-- **Status:** Existing (2 of 9: persistent, printstream; the procedure is written in six different kinds of place across the rest)
+- **Status:** Existing (met by the three newer WinUI apps; persistent uses the release-notes grammar, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `printstream/.agents/skills/release/SKILL.md`
 - **Why:** A release is a fixed sequence that agents run, and a skill is the one place both an agent and a person will look.

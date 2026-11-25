@@ -80,9 +80,9 @@ Reset and export of settings are covered by CONF-4 in [settings-config.md](setti
 
 ### UI-5: About page
 
-- **Status:** Decided (D-005, D-014, D-017, D-086). winui-app-kit ships the page from v1.1.0; 0 of 6 apps use it yet (each app's kit migration adopts it)
+- **Status:** Decided (D-005, D-014, D-017, D-086). Existing (every WinUI app shows About through the kit, rechecked 2026-11-25)
 - **Applies to:** Windows
-- **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` for content; `tray-control-for-wsl/WslMonitor/Pages/AboutPage.xaml` for layout and for taking the version from the kit
+- **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` for content; `winui-app-kit/Xaml/AboutPage.xaml` for layout and for taking the version from the kit
 - **Why:** About is where a user goes for the version, an update, help and the logs. Today no two apps offer the same set, and none offers a support link.
 
 The items every About surface carries, on any stack, are listed once in BRAND-8 in [branding.md](branding.md). This rule owns how a Windows app lays them out, as these cards, in order:
@@ -102,7 +102,7 @@ Windows apps use winui-app-kit's shared `AboutPage`, filled from an `AboutInfo` 
 
 ### UI-6: Dialogs and status messages
 
-- **Status:** Existing (confirmations are code-built `ContentDialog`s in every app that has one; destructive ones default to Close in 3 of the 4 apps checked). A shared helper is Proposed
+- **Status:** Existing (confirmations are code-built `ContentDialog`s in every app that has one; little-launcher now has 9 input forms in 4 files, rechecked 2026-11-25; recount pending). A shared helper is Proposed
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml.cs` (`ConfirmAsync`)
 - **Why:** A destructive dialog whose default button is the destructive one turns a stray Enter key into data loss. One helper makes the safe default the only default.
@@ -136,7 +136,7 @@ A web app builds its Joy theme through a `theme/buildTheme.ts` module adapted fr
 
 ### UI-9: Dialogs and the Back-aware modal
 
-- **Status:** Existing (3 of 4 close dialogs on Back: printstream, persistent, store-sign-controller; the close rule is written down and linted in 1 of 4)
+- **Status:** Existing (persistent and store-sign-controller use web-app-kit's dialog, rechecked 2026-11-25; recount pending)
 - **Applies to:** Web
 - **Reference:** `printstream/apps/web/src/components/BackAwareModal.tsx`; `printstream/eslint.config.mjs` for the lint rules
 - **Why:** In an installed PWA or a Capacitor shell, Back is the user's "close this" gesture. A dialog that ignores it navigates the page away underneath and loses the user's place.
@@ -148,7 +148,7 @@ A web app builds its Joy theme through a `theme/buildTheme.ts` module adapted fr
 
 ### UI-10: Installable web app (PWA)
 
-- **Status:** Existing (3 of 4: printstream, persistent, game-is-up; store-sign-controller has a static manifest and no service worker)
+- **Status:** Existing (persistent and store-sign-controller have changed since 2026-11-16; recount pending)
 - **Applies to:** Web
 - **Reference:** `game-is-up/apps/web/vite.config.ts`; `printstream/apps/web/src/lib/appUpdate.ts`
 - **Why:** The same web bundle is what the desktop and mobile shells load, so how it installs and updates decides whether users are ever on a stale version.
@@ -184,7 +184,7 @@ New Android apps use Jetpack Compose. sonarbridge stays on programmatic Views an
 
 ### UI-13: Empty states
 
-- **Status:** Proposed (a shared empty state exists in 1 of 6 Windows apps, tray-control-for-wsl, and 2 of 4 web apps, printstream and game-is-up)
+- **Status:** Proposed (persistent and store-sign-controller use web-app-kit's empty state, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `printstream/apps/web/src/components/EmptyState.tsx`; `tray-control-for-wsl/WslMonitor/Controls/DistroList.cs`
 - **Why:** An empty list with no explanation looks broken. Grey text in one place and a designed message in the next makes one product look like several.

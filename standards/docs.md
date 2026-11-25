@@ -37,9 +37,9 @@ This rule is about documents, not configuration files. D-035 also allows a root 
 
 ### DOCS-2: Developer guide
 
-- **Status:** Decided (D-035). Existing (4 of 15 have `docs/development.md`; 2 more use a root file under another name)
+- **Status:** Decided (D-035). Existing (the three newer WinUI apps and repilot have `docs/development.md`, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `persistent/docs/development.md`; `repilot/DEVELOPING.md` for the right size in a small app
+- **Reference:** `persistent/docs/development.md`; `repilot/docs/development.md` for the right size in a small app
 - **Why:** The README's Developers section links here (README-4), so the target must exist under one name.
 
 `docs/development.md` covers prerequisites, build, run, test, debug, and the release procedure or a link to it. In a small app it is the only developer document and may include a short architecture section. Kit repos use their README as the developer guide (README-8) and do not need this file. displayswitchr and tray-control-for-wsl have no developer guide today; their build steps sit in the README.
@@ -68,7 +68,7 @@ A product with several large subsystems may split into `docs/<area>-architecture
 
 ### DOCS-5: One copy per topic, with a scope header
 
-- **Status:** Decided (D-026). Existing (1 of 15 opens topic docs with a scope header: little-launcher)
+- **Status:** Decided (D-026). Existing (several repos now open topic docs with a Scope header, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
 - **Reference:** `little-launcher/docs/versioning.md`, indexed from `little-launcher/docs/README.md`
 - **Why:** A topic kept in two places drifts; printstream keeps most guides twice and already gives two locations for one of them (FIX-040).
@@ -90,7 +90,7 @@ A topic doc opens with two lines: what it covers ("Scope") and the paths it gove
 
 - **Status:** Decided (D-005). Existing (0 of 6: every Windows-building repo carries its own copy of the build guide)
 - **Applies to:** all
-- **Reference:** none yet; `tray-control-for-wsl/.codex/docs/windows-development.md` is the only corrected copy
+- **Reference:** none yet
 - **Why:** A fix made in one copy does not reach the others (FIX-037, FIX-038).
 
 Documentation for something shared (the Windows build bridge, devkit, winui-app-kit, apps-promo) lives once, in the project that owns it. An app keeps only what is specific to it, such as its platform and its submodules, and links to the rest by URL. The link must resolve outside this machine: no sibling-checkout paths (see AI-13 in [ai-docs.md](ai-docs.md)). This is the documentation side of README-4, which says the same for the devkit section of the README.

@@ -19,7 +19,7 @@ Home Assistant integrations, including ones generated from a parent repo. The ru
 | AI-11: Tool hooks | Decided |
 | AI-13: No host paths, sibling links, or personal details | Proposed |
 | AI-14: No restated global rules; one commit and push rule | Decided |
-| AI-15: Agent files stay true | Existing in most repos; stale references are tracked as FIX-034, FIX-036, and FIX-039, and writing-rule violations as FIX-044 and FIX-045 |
+| AI-15: Agent files stay true | Existing in most repos; writing-rule violations are tracked as FIX-044 and FIX-045; the stale references in FIX-034, FIX-036, and FIX-039 are resolved |
 
 ## [Assets](../standards/assets.md)
 

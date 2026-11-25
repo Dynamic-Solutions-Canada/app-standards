@@ -20,7 +20,7 @@ Counts are out of the 15 in-scope repos unless a rule says otherwise. The audit 
 
 - **Status:** Existing (8 of 8 repos with JavaScript or TypeScript tests)
 - **Applies to:** Web, Kit, and repo scripts in any stack
-- **Reference:** `persistent/scripts/dev/run-tests.mjs` (discovery) and any `*.test.ts` beside its source in `persistent/apps/api/`
+- **Reference:** devkit's `devkit-test` (discovery, persistent's `test` script) and any `*.test.ts` beside its source in `persistent/apps/api/`
 - **Why:** It is already universal, needs no dependency beyond `tsx`, and runs the same on the host, in the devkit container and in CI.
 
 Tests use Node's built-in runner, with `tsx` for TypeScript, and Testing Library with jsdom for React components. Test files are named `*.test.ts`, `*.test.tsx` or `*.test.mjs` and sit beside the code they test. No repo adds vitest, jest or Playwright without a recorded reason.
@@ -45,7 +45,7 @@ The required minimum is JUnit tests under the module's `src/test`, with Robolect
 
 ### TEST-4: The Home Assistant integration is tested in the parent repo
 
-- **Status:** Decided (D-084). Proposed (the two Python tests in printstream are run by no script or workflow)
+- **Status:** Decided (D-084). Proposed (references changed since 2026-11-16; recount pending)
 - **Applies to:** HA
 - **Reference:** `printstream/integrations/home-assistant/tests/` (contract fixtures generated from the product and checked against their producer)
 - **Why:** The public repo is a generated snapshot, so the only place a failing test can stop a bad release is before the export.
@@ -54,9 +54,9 @@ The integration's Python tests (`unittest`) and ruff run in printstream's gate a
 
 ### TEST-5: A root `test` script that discovers tests
 
-- **Status:** Decided (D-050). Existing (2 of 4 Web monorepos use a discovery script: persistent, printstream). FIX-054 and FIX-055 cover the two repos with hand-written globs
+- **Status:** Decided (D-050). Existing (2 of 4 Web monorepos use a discovery script: persistent, printstream). FIX-054 and FIX-055, the two repos with hand-written globs, are resolved (recount pending)
 - **Applies to:** all stacks with tests
-- **Reference:** `persistent/scripts/dev/run-tests.mjs`; `printstream/scripts/dev/run-tests.mjs` as the scale exception
+- **Reference:** devkit's `devkit-test`; `printstream/scripts/dev/run-tests.mjs` as the scale exception
 - **Why:** An unquoted `**` glob matches one directory level, so a test added one folder deeper is skipped without any error.
 
 Every repo with tests has a root `test` script that finds them by walking the tree (or by quoted globs), never by an unquoted `**` or a hand-kept list of folders. The standard for Web repos is persistent's small discovery script, shipped from devkit; printstream keeps its own runner (result cache, batching, flake isolation) because of its size. Discovery skips `node_modules`, build output and `external/` submodules, so a kit's tests run in the kit's repo and not by accident in a consumer.
@@ -67,7 +67,7 @@ Every repo with tests has a root `test` script that finds them by walking the tr
 
 ### TEST-7: Database-backed tests never skip silently
 
-- **Status:** Decided (D-049). Existing (1 of 4 Web monorepos splits them into `test:integration`: store-sign-controller; printstream makes the database mandatory in `validate`; persistent skips them when an environment variable is absent; game-is-up has none wired)
+- **Status:** Decided (D-049). Existing (changed since 2026-11-16; recount pending)
 - **Applies to:** Web
 - **Reference:** `game-is-up` (`*.integration.test.ts` beside the code, `test:integration` with a `_test` database guard) and devkit's `devkit-test --integration`; `printstream/.github/workflows/ci.yml` (Postgres service)
 - **Why:** A test that skips when its database is missing reports success for work that was never checked.
@@ -112,9 +112,9 @@ The Windows build VM and the Android VM are never run at the same time; both REA
 
 ### TEST-10: Native UI tests are guarded and never run by default
 
-- **Status:** Existing (2 of 2 repos with such suites: little-launcher, repilot)
+- **Status:** Existing (little-launcher and repilot, whose suites moved to `tests-native/`; recount pending)
 - **Applies to:** Windows; any stack with tests that drive a real desktop or device
-- **Reference:** `little-launcher/tests/native-drag/README.md`; `repilot/tests/Repilot.InputTests/README.md`
+- **Reference:** `little-launcher/tests-native/LittleLauncher.NativeDrag/README.md`; `repilot/tests-native/Repilot.InputTests/README.md`
 - **Why:** A test that moves the pointer, injects keys or replaces settings can damage the session of whoever is using the machine.
 
 A suite that moves the pointer, sends input, or replaces user settings refuses to start unless it is on the expected machine and has an explicit opt-in. It is never part of `test`, `validate` or CI, and it works on a disposable copy of settings. Its README states the guard and how to run it deliberately. It lives in `tests-native/<Suite>/`, outside the `tests/` folder that the shared test runner discovers, so it cannot be picked up by `test` by accident. The opt-in is an environment variable named for the app (for example `REPILOT_INPUT_TESTS=1`), and the suite also refuses to run on any OS other than the one it drives; the variable is the machine statement, so suites do not hardcode a host name (AI-13).

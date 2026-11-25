@@ -10,7 +10,7 @@ The trees show the canonical set. An entry marked "if any" is omitted when the r
 
 ### LAYOUT-1: WinUI app layout
 
-- **Status:** Existing (5 of 5 for `<App>/`, `<App>MSIX/`, `external/`, `scripts/windows-build`, `windows-build.json`, `Directory.Build.props`, `package.json`; `tests/` in 3 of 5)
+- **Status:** Existing (the Windows apps match the folder set; the build wrapper now lives in the kit, see SCRIPT-6; recount pending)
 - **Applies to:** Windows
 - **Reference:** `immich-drive/` for the file set; `displayswitchr/store-assets/` for listings
 - **Why:** The shared build tooling, the kit and every agent guide assume these paths. A repo that matches needs no per-repo explanation.
@@ -228,7 +228,7 @@ Submodules are checked out at `external/<name>` beside the project that uses the
 
 - **Status:** Existing (11 of 15 have `scripts/`; 3 of 4 monorepos split it into `dev/` and `deploy/`; phonelock uses `tools/` and a root `build.sh`)
 - **Applies to:** all
-- **Reference:** `printstream/scripts/` (split by purpose); `displayswitchr/scripts/` (small repo)
+- **Reference:** `printstream/scripts/` (split by purpose); `winui-app-kit/scripts/` (small repo)
 - **Why:** The same word means one wrapper in the Windows apps, a tree in the monorepos and release helpers on Android; a fixed meaning tells an agent where to look and where to add.
 
 - Scripts that people or `package.json` run live under `scripts/`. A repo with more than a handful splits them into `scripts/dev/`, `scripts/deploy/` and `scripts/ci/`.
@@ -241,7 +241,7 @@ Script names and what each must do are in [dev-scripts.md](dev-scripts.md).
 
 ### LAYOUT-9: The repo root is a closed set
 
-- **Status:** Proposed (1 of 15 tracks a leftover folder: `legacy/` in displayswitchr; five more working trees hold untracked strays at the root)
+- **Status:** Proposed (displayswitchr's `legacy/` is gone, rechecked 2026-11-25; recount pending for untracked strays)
 - **Applies to:** all
 - **Reference:** `tray-control-for-wsl/` (the smallest root of the Windows apps)
 - **Why:** The root is the first thing read. Leftovers there are copied into the next repo.
@@ -250,7 +250,7 @@ The root holds only what its stack's tree lists. Retired code is deleted, not ke
 
 ### LAYOUT-10: Build output goes under a git-ignored root `.artifacts/`
 
-- **Status:** Decided (D-040). Existing (6 of 6 Windows-building repos; 0 of the 5 other repos that produce deliverables)
+- **Status:** Decided (D-040). Existing (every Windows-building repo; printstream writes to `.artifacts/` too, rechecked 2026-11-25; recount pending)
 - **Applies to:** all repos that build something a person picks up
 - **Reference:** `displayswitchr/.gitignore` and its `.artifacts/windows-build/`; `little-launcher/linux/packaging/build.py` (Linux output under `.artifacts/`)
 - **Why:** One folder means one ignore rule, one place to look for the last build, and one place to clean. The same idea has three names today (`.artifacts/`, `artifacts/`, `release/`).

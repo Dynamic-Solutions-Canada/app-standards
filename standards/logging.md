@@ -8,7 +8,7 @@ Counts are against the in-scope repos in [SCOPE.md](../SCOPE.md). "WinUI apps" m
 
 | Stack | Where logs go | Reference |
 | --- | --- | --- |
-| Windows | One text file per launch in the app's data folder, written by NLog (LOG-1, LOG-2) | `tray-control-for-wsl/WslMonitor/NLog.config` |
+| Windows | One text file per launch in the app's data folder, written by NLog (LOG-1, LOG-2) | `winui-app-kit/build/NLog.config` |
 | Web API | Standard output through one `logger` module, captured by Docker with a size cap (LOG-3, LOG-4) | `printstream/apps/api/src/lib/logs.ts` |
 | Electron and Linux hosts | One capped `host.log` in the host's data folder (LOG-5) | `persistent/apps/linux-desktop` |
 | Android | The platform log only; no log file (LOG-5) | `phonelock` |
@@ -20,7 +20,7 @@ Counts are against the in-scope repos in [SCOPE.md](../SCOPE.md). "WinUI apps" m
 
 - **Status:** Decided (D-080, D-076). Existing (6 of 6 Windows hosts; store-sign-controller dropped its desktop host when it became web only)
 - **Applies to:** Windows
-- **Reference:** `tray-control-for-wsl/WslMonitor/NLog.config`
+- **Reference:** `winui-app-kit/build/NLog.config`
 - **Why:** A user asked for "the log from when it broke" can find one file per launch by its timestamp, in the same place in every app.
 
 Logs are written to `%AppData%\<DataFolderName>\logs.<start time>.txt`, one file per launch, named by the process start time. `<DataFolderName>` is the same folder that holds `settings.json`; CONF-1 in [settings-config.md](settings-config.md) defines it once for both the settings store and the logging config. The kit's shared NLog config cannot name the folder, so the app calls `AppLogging.UseDataFolder("<DataFolderName>")` first thing in its `App` constructor; the config is linked into every app executable by the kit's build targets, so an app deletes its own `NLog.config` rather than copying the kit's (see the kit's README). A hand-appended log file, a second folder, or a vendor-named folder is not allowed.
@@ -29,7 +29,7 @@ Logs are written to `%AppData%\<DataFolderName>\logs.<start time>.txt`, one file
 
 - **Status:** Decided (D-080). Existing (6 of 6 WinUI apps share the shape, in two variants: displayswitchr and tray-control-for-wsl set an explicit layout line, the other four do not)
 - **Applies to:** Windows, Kit
-- **Reference:** `tray-control-for-wsl/WslMonitor/NLog.config` (the displayswitchr and tray-control-for-wsl variant, with the explicit layout line)
+- **Reference:** `winui-app-kit/build/NLog.config` (the shared config every WinUI app links, with the explicit layout line)
 - **Why:** Six copies of one file have already drifted, and nobody has confirmed that old log files are ever removed.
 
 The config comes from winui-app-kit (see [shared-kits.md](shared-kits.md)), not from a per-app copy. It sets:
@@ -115,7 +115,7 @@ References: `persistent/apps/api/src/lib/prisma-client.ts` (event sink), `store-
 
 ### LOG-8: How a user exports diagnostics
 
-- **Status:** Decided (D-023, D-086). Existing (3 of 6 WinUI apps have "Open logs folder": displayswitchr, tray-control-for-wsl, persistent desktop; 0 of 6 have a support link)
+- **Status:** Decided (D-023, D-086). Existing (every WinUI app has "Open logs folder", rechecked 2026-11-25; recount pending for the support link)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/apps/desktop/Persistent.Desktop/Pages/AboutPage.xaml` (About page content); tray-control-for-wsl (the one-line kit call); printstream's Logs tab and help and feedback dialog (web)
 - **Why:** With no telemetry, the only way the maintainer sees a problem is when the user can find the log and knows where to send it.

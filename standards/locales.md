@@ -24,7 +24,7 @@ Nine identities, seven wording catalogs. This table is the single statement of t
 
 ### LOC-1: The supported set is the nine-locale set
 
-- **Status:** Existing (7 of 11)
+- **Status:** Existing (repilot's native names now match, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/packages/shared/src/locales.ts`
 - **Why:** One set across the family means one translation pass per string, one listing matrix, and a user who changes app keeps their language.
@@ -84,7 +84,7 @@ On Android and with `.resw`, the platform's own resource resolution provides mos
 
 ### LOC-6: Resource mechanism per stack
 
-- **Status:** Decided (D-067, D-005). Existing (2 of 5 localized Windows apps use the kit classes: displayswitchr, tray-control-for-wsl; 2 of 2 native Android apps use `strings.xml`; 1 of 1 localized web product uses shared JSON catalogs)
+- **Status:** Decided (D-067, D-005). Existing (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
 - **Applies to:** Windows, Web, Android, HA
 - **Reference:** see table
 - **Why:** Five mechanisms across seven apps means five checkers and no shared tooling. One per stack is the minimum the platforms allow.
@@ -106,7 +106,7 @@ No user-facing string is a literal in code or markup in a localized app. Symbols
 
 - **Status:** Decided (D-067, D-099). Existing (dotted keys 2 of 5 Windows apps: tray-control-for-wsl, little-launcher; `{{name}}` 3 of 5 plus the kit: displayswitchr, tray-control-for-wsl, persistent; snake_case and positional placeholders 2 of 2 native Android apps; Web 1 of 1 as shown)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `tray-control-for-wsl/WslMonitor/Strings/en-US.json`
+- **Reference:** `tray-control-for-wsl/WslMonitor/Localization/Catalogs/en-US.json`
 - **Why:** A dotted key survives a wording fix; an English sentence used as the key changes in every catalog each time the English is corrected. Named placeholders let a translator reorder a sentence.
 
 | Stack | Key style | Example | Placeholder |
@@ -126,7 +126,7 @@ Shared labels that every app shows (D-072: Settings, About and tray wording such
 
 ### LOC-8: Catalog location and file names
 
-- **Status:** Decided (D-067). Existing (1 of 5 Windows apps uses the decided path: displayswitchr; four different paths are in use)
+- **Status:** Decided (D-067). Existing (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `displayswitchr/HubDisplaySwitch/Localization/Catalogs/`
 - **Why:** The folder is where every agent and translator looks first; four names for it across five apps costs a search each time.
@@ -144,7 +144,7 @@ Seven files or folders, one per wording catalog; none for the two aliases (LOC-5
 
 - **Status:** Decided (D-067). Existing (7 of 7 have a check, in seven implementations; 6 of 7 fail the build, and sonarbridge's `android/scripts/check-localization.py` is run by hand: neither Gradle nor a workflow calls it)
 - **Applies to:** Windows, Web, Android
-- **Reference:** `tray-control-for-wsl/scripts/check-strings.py` (most complete single script); `phonelock/companion/build.gradle` `lint` block (Android)
+- **Reference:** `winui-app-kit/scripts/check-localization.py` (the one script every WinUI app runs); `phonelock/android/companion/build.gradle.kts` `lint` block (Android)
 - **Why:** A missing key is invisible in English testing and shows as English text, or a raw key, to exactly the users the translation was for.
 
 The check fails the build, locally and in CI ([ci.md](ci.md), [testing.md](testing.md)), when any of these is false:
@@ -160,7 +160,7 @@ The script is exposed as `check:l10n` (D-067; tray-control-for-wsl's `check:stri
 
 ### LOC-10: The supported list is declared to the OS
 
-- **Status:** Existing (6 of 7; little-launcher declares one language, FIX-020)
+- **Status:** Existing (7 of 7; little-launcher's single declared language, FIX-020, is resolved)
 - **Applies to:** Windows, Android
 - **Reference:** `tray-control-for-wsl/WslMonitorMSIX/Package.appxmanifest`, `phonelock/companion/src/main/res/xml/locales_config.xml`
 - **Why:** Windows, Android and both stores decide what to offer a user from the declaration, not from the files the app happens to ship.
@@ -182,7 +182,7 @@ The locale set of the interface, the package declaration, the store listing and 
 
 ### LOC-12: Translations are marked as unreviewed until a native speaker reviews them
 
-- **Status:** Decided (D-100). Existing (4 of 7 say so in writing: sonarbridge, displayswitchr, persistent, phonelock)
+- **Status:** Decided (D-100). Existing (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/docs/localization.md`
 - **Why:** Every catalog so far is AI-drafted. Recording that honestly tells a future reviewer what has and has not been checked, and stops a draft being mistaken for approved copy.
@@ -191,7 +191,7 @@ Every localized app states in writing which catalogs are AI-drafted and which ha
 
 ### LOC-13: Text that stays English is listed, not accidental
 
-- **Status:** Decided (D-101). Proposed (3 of 5 localized Windows apps each translate the shared promo page's strings by exact English match: tray-control-for-wsl, repilot, persistent)
+- **Status:** Decided (D-101). Proposed (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
 - **Applies to:** Windows, Web, Android, Kit
 - **Reference:** `persistent/docs/localization.md` (states what stays English and why)
 - **Why:** An untranslated screen in a localized app looks like a bug unless it is a stated choice, and three private copies of the same translation table is a shape that should be extracted.

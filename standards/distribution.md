@@ -20,7 +20,7 @@ No signing material, host name or credential appears in this file. Where a rule 
 
 - **Status:** Existing (6 of 6 WinUI apps). Sharing one packaging script is Decided (D-005)
 - **Applies to:** Windows, and Windows desktop apps inside Web monorepos
-- **Reference:** `tray-control-for-wsl/WslMonitorMSIX/build-msix.ps1` (tool lookup without an installed SDK, standard switch names, the strictest language check); `tray-control-for-wsl/windows-build.json` for the smallest manifest
+- **Reference:** `winui-app-kit/build/build-msix.ps1` (tool lookup without an installed SDK, standard switch names, the strictest language check); `tray-control-for-wsl/windows-build.json` for the smallest manifest
 - **Why:** One packaging path for local builds and CI means the package a developer installs is built the same way as the one the Store receives.
 
 Each app has an `<App>MSIX/` folder with `Package.appxmanifest` and a `build-msix.ps1` that reads the version from `Directory.Build.props`, publishes self-contained, stamps the manifest, builds one `resources.pri` holding every declared language, packs, and signs unless told not to. The script takes the standard switches (`-Platform`, `-Configuration`, `-NoSign`, `-TrustedPfxPath`, `-TrustedPfxPassword`) so that `windows-build.json` needs no per-app translation keys. Local builds go through `scripts/windows-build`; see `windows-build-tools/README.md` for the tool itself, which these standards do not re-document. CI calls the same `build-msix.ps1`. No app uses a packaging project. Under D-005, the six diverged script copies become one shared script delivered with winui-app-kit and driven by `windows-build.json`.
@@ -43,7 +43,7 @@ Packaging scripts contain no fallback that signs with a certificate file kept be
 
 ### DIST-3: Dev builds use their own package identity
 
-- **Status:** Decided (D-065). Existing (2 of 4 apps with a Store identity: immich-drive, persistent)
+- **Status:** Decided (D-065). Existing (displayswitchr and tray-control-for-wsl are now live on Store identities, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows
 - **Reference:** `immich-drive/windows-build.json` (`dev_identity`, `store_identity`, `store_identity_switch`)
 - **Why:** A dev build that reuses the Store identity cannot sit beside the Store install, and an upgrade over the Store copy cannot be tested.

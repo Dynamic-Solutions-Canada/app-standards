@@ -21,7 +21,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 ### CONF-1: Windows settings location and store
 
-- **Status:** Decided (D-076) for the location. Existing (reset and schema version are in every WinUI app, rechecked 2026-11-25; recount pending) for the kit store
+- **Status:** Decided (D-076) for the location (6 of 6 already use it). Existing (2 of 6: displayswitchr, tray-control-for-wsl) for the kit store. Counts are from 2026-11-16; more apps are on the kit since (recount pending)
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/WslMonitor/Classes/SettingsManager.cs` (40 lines over the kit); winui-app-kit `Settings/JsonSettingsStore.cs` and `AppEnvironment.cs`
 - **Why:** One location and format means support instructions, backup advice and "open the data folder" work the same in every app. Four apps still carry a copied settings manager with a known data-loss bug (CONF-3).
@@ -44,7 +44,7 @@ Related topics: what the Settings page looks like is UI-4 in [ui.md](ui.md); whe
 
 ### CONF-3: Schema version and written defaults
 
-- **Status:** Decided (D-077). Existing (every WinUI app has a schema version, rechecked 2026-11-25; recount pending)
+- **Status:** Decided (D-077). Existing (every WinUI app has an integer schema version, rechecked 2026-11-25; recount pending for written defaults)
 - **Applies to:** Windows, Kit
 - **Reference:** `displayswitchr/HubDisplaySwitch/Classes/Settings/SettingsManager.cs` (`MigrateV1`, the `.v1.bak` copy) as the nearest example of one migration step
 - **Why:** With defaults omitted from the file, a `false` saved for a setting that defaults to `true` loads back as `true`. little-launcher works around this per property; repilot, immich-drive and persistent's desktop app are exposed. And without a version, a migration has to guess the file's age from its shape.
@@ -66,7 +66,7 @@ The mechanics are the kit's `JsonSettingsStore` and are documented in its README
 
 ### CONF-4: Reset and export
 
-- **Status:** Decided (D-104). Existing (reset is in every WinUI app, rechecked 2026-11-25; recount pending for export and import)
+- **Status:** Decided (D-104). Existing (reset is in every WinUI app, rechecked 2026-11-25; export and import: 1 of 6 on 2026-11-16, little-launcher, recount pending)
 - **Applies to:** Windows, Web
 - **Reference:** `little-launcher/LittleLauncher/Pages/SystemPage.xaml` for export and import
 - **Why:** "Delete the settings file" is the support answer today, and it requires the user to find a folder that packaged apps redirect.
@@ -119,7 +119,7 @@ A host keeps its settings in one state store under the platform's user-data fold
 
 ### CONF-9: Server environment is read in one validated module
 
-- **Status:** Existing (persistent and printstream declare keys in one module, rechecked 2026-11-25; recount pending)
+- **Status:** Existing (4 of 4)
 - **Applies to:** Web
 - **Reference:** `persistent/apps/api/src/lib/env.ts` (helpers such as `blankToUndefined`); `store-sign-controller/apps/api/src/lib/env.ts` (production guards)
 - **Why:** A missing or malformed variable should stop the server at start with a clear message, not surface as a wrong behaviour in production.
@@ -131,7 +131,7 @@ A host keeps its settings in one state store under the platform's user-data fold
 
 ### CONF-10: Env example files and shared variable names
 
-- **Status:** Decided (D-078). Existing (printstream has 7 documented exceptions; persistent declares keys in one module, rechecked 2026-11-25; recount pending)
+- **Status:** Decided (D-078). Existing (1 of 4 names examples by role: printstream; 2 of 4 use a single `.env.example`: persistent, store-sign-controller). Counts are from 2026-11-16; printstream now has 7 documented exceptions (recount pending)
 - **Applies to:** Web, Android (for a server component)
 - **Reference:** `printstream/.env.server.example` (by role); `persistent/.env.example` (single file with a "which context needs what" header)
 - **Why:** The example file is the only documentation most variables get, and three names for the same Android origin setting means shared code and shared docs cannot refer to it.

@@ -2,7 +2,7 @@
 
 Which GitHub Actions workflows each repo carries, when they run, and how they are written. What the tests are and where they run locally is in [testing.md](testing.md); what a release does after the gate passes is in [releases.md](releases.md); script names such as `validate` and `verify:desktop` are defined in [dev-scripts.md](dev-scripts.md).
 
-Counts are out of the 15 in-scope repos unless a rule says otherwise. Eight of them have workflows today (little-launcher, repilot, immich-drive, persistent, printstream, sonarbridge, printstream-home-assistant, devkit), 45 workflow files in total. The Home Assistant workflows are authored in `printstream/integrations/home-assistant/.github/workflows/` and exported, so changes to them land in printstream.
+Counts are out of the 15 in-scope repos unless a rule says otherwise. Eight of them had workflows on 2026-11-16 (little-launcher, repilot, immich-drive, persistent, printstream, sonarbridge, printstream-home-assistant, devkit), 45 workflow files in total; most in-scope repos have them now (recount pending). The Home Assistant workflows are authored in `printstream/integrations/home-assistant/.github/workflows/` and exported, so changes to them land in printstream.
 
 ## Baseline workflow set
 
@@ -58,7 +58,7 @@ Any workflow that publishes (a GitHub Release, a store submission, a container i
 
 - **Status:** Existing (most repos now comply, rechecked 2026-11-25; recount pending). FIX-010 covers the three files with no `permissions` block at all
 - **Applies to:** all
-- **Reference:** `printstream/.github/workflows/android-ci.yml`
+- **Reference:** `printstream/.github/workflows/ci-android.yml`
 - **Why:** The default token scope is wider than any check needs, a hung job burns minutes for hours, and two release runs racing each other can publish twice.
 
 Every workflow file has:

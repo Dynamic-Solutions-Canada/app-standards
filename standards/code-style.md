@@ -46,7 +46,7 @@ A repo adopts the formatter in one commit that contains only the reformat, with 
 
 ### STYLE-3: Web lint uses the shared ESLint flat config
 
-- **Status:** Existing (3 of 4 web monorepos on 2026-11-16: persistent, printstream, game-is-up; store-sign-controller has changed since; recount pending)
+- **Status:** Existing (3 of 4 web monorepos: persistent, printstream, game-is-up). Counts are from 2026-11-16; store-sign-controller, game-is-up and the Android pair have changed since (recount pending)
 - **Applies to:** Web, and Kit repos written in JavaScript or TypeScript
 - **Reference:** `persistent/eslint.config.mjs`
 - **Why:** The three configs already share one skeleton; naming it stops a fourth variant.
@@ -59,7 +59,7 @@ A product may add rules that encode its own UI conventions, as `printstream/esli
 
 ### STYLE-4: Web house style and the shared TypeScript base
 
-- **Status:** Existing (3 of 4 web monorepos on 2026-11-16; store-sign-controller and game-is-up have changed since; recount pending)
+- **Status:** Existing (4 of 4 follow the style by habit; 2 of 4 share an identical `tsconfig.base.json`: persistent, printstream). Counts are from 2026-11-16; store-sign-controller, game-is-up and the Android pair have changed since (recount pending)
 - **Applies to:** Web
 - **Reference:** `store-sign-controller/.prettierrc.json`, `printstream/tsconfig.base.json`
 - **Why:** One style and one compiler strictness level let code move between products without rework.
@@ -111,7 +111,7 @@ Warnings are errors in CI and Release builds (D-091).
 
 ### STYLE-8: Kotlin and Java style
 
-- **Status:** Existing (both Android repos set `kotlin.code.style=official`). The formatter is Decided (D-016, D-092); phonelock and sonarbridge have changed since 2026-11-16 (recount pending)
+- **Status:** Existing (2 of 2 set `kotlin.code.style=official`). The formatter is Decided (D-016, D-092) (0 of 2). Counts are from 2026-11-16; phonelock and sonarbridge have changed since (recount pending)
 - **Applies to:** Android
 - **Reference:** `sonarbridge/android/gradle.properties`; `phonelock/android/companion/build.gradle.kts` (lint block)
 - **Why:** The two repos share one formatting setting today and differ in line length and density; a formatter settles it without debate.
@@ -135,7 +135,7 @@ The toolchain is ruff alone, for both formatting and lint, configured in a `pypr
 
 ### STYLE-11: Names of repos, projects and packages
 
-- **Status:** Existing (repo folders kebab-case, .NET projects PascalCase, monorepos on an `@<app>/*` scope; store-sign-controller, game-is-up and the Android pair have changed since 2026-11-16, recount pending). TypeScript module file names are Decided (D-093)
+- **Status:** Existing (15 of 15 repo folders are kebab-case; 6 of 6 .NET app projects are PascalCase; 4 of 4 monorepos use an `@<app>/*` scope). TypeScript module file names are Decided (D-093). Counts are from 2026-11-16; store-sign-controller, game-is-up and the Android pair have changed since (recount pending)
 - **Applies to:** all
 - **Reference:** `repilot/` (Windows), `persistent/package.json` (Web)
 - **Why:** A name that follows the pattern can be guessed, by people and by scripts that loop over repos.

@@ -76,7 +76,7 @@ A web monorepo gets its development hostname, ports and database from devkit, co
 
 - Shared build configuration arrives through three imports: the app's `Directory.Build.props`, `Directory.Build.targets` and `Directory.Packages.props` each import the matching file from the kit's `build/` folder. The kit's README documents the files and their switches; apps do not restate them.
 - Shared code is never vendored by hand into an app's own source folders.
-- The build tooling the Windows apps call (windows-build-tools) has no remote today and is referenced by an absolute host path (FIX-049). It gets a GitHub repo of its own (D-005).
+- The build tooling the Windows apps call (windows-build-tools) has a GitHub repo of its own (D-005); before that it had no remote and was referenced by an absolute host path (FIX-049, resolved).
 - The kit README's "No XAML (yet)" rule is replaced when this decision lands.
 - Shared agent skills and shared CI workflows are delivered separately; see [ai-docs.md](ai-docs.md) (D-029) and [ci.md](ci.md) (D-047). This repo itself reaches apps by link (D-002).
 

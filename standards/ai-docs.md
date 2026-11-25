@@ -113,7 +113,7 @@ Rules that go with it:
 
 - **Status:** Decided (D-031). Existing (11 root files are over about 1,500 words on 2026-11-25: displayswitchr 2,151, chatmixr 1,938, tray-control-for-wsl 1,834, phonelock 1,797, immich-drive 1,751, sonarbridge 1,708, little-launcher 1,707, persistent 1,615, repilot 1,604, printstream 1,560, winui-app-kit 1,535)
 - **Applies to:** all
-- **Reference:** `persistent/AGENTS.md` (1,313 words, detail pushed to nested files and one guide)
+- **Reference:** `persistent/AGENTS.md` for pushing detail into nested files and one guide (1,313 words on 2026-11-16; 1,615 on 2026-11-25, over the limit again); `printstream/.agents/guides/` for topic guides the root file links to
 - **Why:** The root file is loaded into every session, so every extra word is paid for on every task.
 
 The root `AGENTS.md` stays under about 1,500 words. Anything longer moves to a guide, a reference doc, or a nested `AGENTS.md`. Monorepos keep nested files at workspace level only (`apps/*`, `packages/*`), with finer rules in guides. Nested files are never listed by hand in the root file; they are enumerated with `git ls-files`.
@@ -131,7 +131,7 @@ A repo may also add the standards as a submodule at `external/standards` for off
 
 ### AI-5: One tool-neutral instruction file
 
-- **Status:** Decided (D-108). Existing (no audited repo has a `CLAUDE.md` or addresses Codex by name, rechecked 2026-11-25; recount pending)
+- **Status:** Decided (D-108). Existing (0 of 15 had a `CLAUDE.md` on 2026-11-16, recount pending); no audited `AGENTS.md` addresses Codex by name, rechecked 2026-11-25
 - **Applies to:** all
 - **Reference:** `tray-control-for-wsl/AGENTS.md`
 - **Why:** Two instruction files drift, and guidance written for one tool reads as optional to the other.
@@ -208,7 +208,7 @@ A project skill with the same name as a shared one replaces it, and says in its 
 
 - **Status:** Decided (D-030, D-108). Existing (no audited repo has Codex hooks left, rechecked 2026-11-25; recount pending)
 - **Applies to:** all
-- **Reference:** `persistent/.codex/hooks.json` and `persistent/.codex/README.md` for what the hooks do (to be ported)
+- **Reference:** none in the repos; persistent's `.codex/hooks.json` and `.codex/README.md`, removed since 2026-11-16, are in its history
 - **Why:** A guard that runs in no tool in use is not a guard, and a hook nobody can explain gets disabled.
 
 Anything that must never be committed (generated files, secrets) is enforced by a git hook, which applies to every tool and to people; see HYG-10 in [repo-hygiene.md](repo-hygiene.md). Tool hooks are for guidance during a session only: reminders by path, targeted validation, worktree preparation.
@@ -237,7 +237,7 @@ Where worktrees are created is not stated in a project file (D-032, FIX-041): th
 
 ### AI-13: No host paths, sibling links, or personal details
 
-- **Status:** Proposed (displayswitchr, winui-app-kit, printstream, game-is-up and sonarbridge are now clean, rechecked 2026-11-25; recount pending)
+- **Status:** Proposed (on 2026-11-16 violations were in winui-app-kit, printstream, displayswitchr, game-is-up, and sonarbridge: FIX-005, FIX-035, FIX-038, FIX-041; all five are clean on 2026-11-25, and FIX-035, FIX-038 and FIX-041 are resolved)
 - **Applies to:** all
 - **Reference:** `immich-drive/AGENTS.md` (refers to a sibling only "if available and permitted by the current environment")
 - **Why:** Tracked instructions are read in containers, CI, cloud sessions, and public repos, where a path on the maintainer's machine is wrong and a personal detail is a leak.

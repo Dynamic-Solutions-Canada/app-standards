@@ -56,7 +56,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 ### ASSET-3: One generator, sizing and packing only
 
-- **Status:** Decided (D-069). Proposed (persistent, game-is-up and store-sign-controller have changed since 2026-11-23; recount pending)
+- **Status:** Decided (D-069). Proposed (3 on the shared generator, devkit-icons: chatmixr and displayswitchr since 2026-11-22, tray-control-for-wsl since 2026-11-23; little-launcher, repilot, immich-drive and persistent are moving, 2026-11-23). persistent, game-is-up and store-sign-controller have changed since 2026-11-23 (recount pending)
 - **Applies to:** Windows, Web, Android, Kit
 - **Reference:** `game-is-up/scripts/dev/generate-brand-icons.mjs` (single entry point, resvg); `displayswitchr/assets/brand/icons.json` (a Windows target through devkit-icons, which writes the complete Windows size list)
 - **Why:** The size lists are identical for every app; only the art differs. Five copies of the list have already produced three different output sets.
@@ -69,7 +69,7 @@ This rule owns the asset folder layout; README-9 in [readme.md](readme.md) and t
 
 ### ASSET-4: Generated files are committed where the platform reads them, and never edited
 
-- **Status:** Decided (D-069). Existing (persistent, game-is-up and store-sign-controller have changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-069). Existing (5 of 6 Windows apps commit their MSIX images; persistent ignores them and regenerates at build). Counts are from 2026-11-16; persistent, game-is-up and store-sign-controller have changed since (recount pending)
 - **Applies to:** Windows, Web, Android, HA
 - **Reference:** `tray-control-for-wsl/WslMonitorMSIX/Images/`
 - **Why:** Committed outputs keep builds independent of the generator and its rasterizer, and make an icon change visible in review. The check mode in ASSET-3 removes the usual risk of committed outputs going stale.
@@ -119,7 +119,7 @@ The monochrome layer is required (it is what themed icons use) and comes from `i
 
 ### ASSET-7: Web and PWA size set
 
-- **Status:** Existing (persistent, game-is-up and store-sign-controller have changed since 2026-11-16; recount pending)
+- **Status:** Existing (2 of 4 web apps: printstream, game-is-up; the other two are FIX-027). Counts are from 2026-11-16; persistent, game-is-up and store-sign-controller have changed since (recount pending)
 - **Applies to:** Web
 - **Reference:** `printstream/apps/web/vite.config.ts`, `printstream/apps/web/public/`
 - **Why:** One SVG declared as both `any` and `maskable` has no safe-zone padding when masked and gives installers that need a raster nothing to use.

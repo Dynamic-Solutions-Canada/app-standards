@@ -2,7 +2,7 @@
 
 Which languages the apps ship in, how that set is named, and how strings are stored, keyed, resolved and checked on each stack. Listing text is in [store-listings.md](store-listings.md); the language setting's place on the Settings page is UI-4 in [ui.md](ui.md).
 
-Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (displayswitchr, tray-control-for-wsl, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app).
+Counts are out of the 11 end-user apps in scope unless a rule says otherwise. Seven of them are localized (displayswitchr, tray-control-for-wsl, little-launcher, repilot, persistent, phonelock, sonarbridge); "of 7" counts those. "Of 5" counts the localized Windows apps (the first four plus Persistent's desktop app). immich-drive is localized now too and is not yet in these counts (recount pending).
 
 ## The nine-locale set
 
@@ -84,7 +84,7 @@ On Android and with `.resw`, the platform's own resource resolution provides mos
 
 ### LOC-6: Resource mechanism per stack
 
-- **Status:** Decided (D-067, D-005). Existing (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-067, D-005). Existing (2 of 5 localized Windows apps use the kit classes: displayswitchr, tray-control-for-wsl; 2 of 2 native Android apps use `strings.xml`; 1 of 1 localized web product uses shared JSON catalogs). Counts are from 2026-11-16; little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since (recount pending)
 - **Applies to:** Windows, Web, Android, HA
 - **Reference:** see table
 - **Why:** Five mechanisms across seven apps means five checkers and no shared tooling. One per stack is the minimum the platforms allow.
@@ -126,7 +126,7 @@ Shared labels that every app shows (D-072: Settings, About and tray wording such
 
 ### LOC-8: Catalog location and file names
 
-- **Status:** Decided (D-067). Existing (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-067). Existing (1 of 5 Windows apps uses the decided path: displayswitchr; four different paths are in use). Counts are from 2026-11-16; little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since (recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `displayswitchr/HubDisplaySwitch/Localization/Catalogs/`
 - **Why:** The folder is where every agent and translator looks first; four names for it across five apps costs a search each time.
@@ -160,7 +160,7 @@ The script is exposed as `check:l10n` (D-067; tray-control-for-wsl's `check:stri
 
 ### LOC-10: The supported list is declared to the OS
 
-- **Status:** Existing (7 of 7; little-launcher's single declared language, FIX-020, is resolved)
+- **Status:** Existing (6 of 7 on 2026-11-16; little-launcher's single declared language, FIX-020, is resolved since; recount pending)
 - **Applies to:** Windows, Android
 - **Reference:** `tray-control-for-wsl/WslMonitorMSIX/Package.appxmanifest`, `phonelock/companion/src/main/res/xml/locales_config.xml`
 - **Why:** Windows, Android and both stores decide what to offer a user from the declaration, not from the files the app happens to ship.
@@ -182,7 +182,7 @@ The locale set of the interface, the package declaration, the store listing and 
 
 ### LOC-12: Translations are marked as unreviewed until a native speaker reviews them
 
-- **Status:** Decided (D-100). Existing (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-100). Existing (4 of 7 say so in writing: sonarbridge, displayswitchr, persistent, phonelock). Counts are from 2026-11-16; little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since (recount pending)
 - **Applies to:** Windows, Web, Android
 - **Reference:** `persistent/docs/localization.md`
 - **Why:** Every catalog so far is AI-drafted. Recording that honestly tells a future reviewer what has and has not been checked, and stops a draft being mistaken for approved copy.
@@ -191,7 +191,7 @@ Every localized app states in writing which catalogs are AI-drafted and which ha
 
 ### LOC-13: Text that stays English is listed, not accidental
 
-- **Status:** Decided (D-101). Proposed (little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-101). Proposed (3 of 5 localized Windows apps each translate the shared promo page's strings by exact English match: tray-control-for-wsl, repilot, persistent). Counts are from 2026-11-16; little-launcher, immich-drive, repilot and tray-control-for-wsl have changed since (recount pending)
 - **Applies to:** Windows, Web, Android, Kit
 - **Reference:** `persistent/docs/localization.md` (states what stays English and why)
 - **Why:** An untranslated screen in a localized app looks like a bug unless it is a stated choice, and three private copies of the same translation table is a shape that should be extracted.

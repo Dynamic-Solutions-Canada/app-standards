@@ -94,7 +94,7 @@ A tray flyout is a window handed to the kit's `FlyoutController`: desktop acryli
 
 ### TRAY-7: Hidden host window and exit
 
-- **Status:** Existing for the host window. Decided (D-074) for how it is hidden and how the app exits (displayswitchr, tray-control-for-wsl and immich-drive use the decided host; little-launcher does not, rechecked 2026-11-25; recount pending)
+- **Status:** Existing (5 of 5) for the host window. Decided (D-074) for how it is hidden and how the app exits (displayswitchr, tray-control-for-wsl and immich-drive use the decided host; little-launcher does not, rechecked 2026-11-25; recount pending)
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/WslMonitor/MainWindow.xaml.cs`
 - **Why:** The tray icon needs a window that outlives every visible one, and exit must not leave the icon, a connection or a notification registration behind.

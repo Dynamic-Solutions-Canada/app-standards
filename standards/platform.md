@@ -8,9 +8,11 @@ Counts are against the in-scope repos a rule applies to: the 6 Windows-building 
 
 ## Baselines as pinned today
 
+This table is from 2026-11-16 apart from the .NET SDK row (recount pending). The 2026-11-25 audit found persistent on Windows App SDK 1.8 while the kit has moved on, displayswitchr and chatmixr shipping the Windows 10 floor, and persistent and game-is-up on the fleet web stack with printstream the only one behind.
+
 | Stack | Item | Pinned in | Value in the repos today | Target |
 | --- | --- | --- | --- | --- |
-| Windows | .NET SDK | `global.json` | 10.0.403 (little-launcher, repilot, persistent); 10.0.100 (displayswitchr, tray-control-for-wsl); no file (immich-drive, winui-app-kit) | PLAT-2 |
+| Windows | .NET SDK | `global.json` | 10.0.403 (every WinUI app, rechecked 2026-11-25) | PLAT-2 |
 | Windows | Target framework | app csproj | `net10.0-windows10.0.22000.0` (6 of 6, and the kit) | PLAT-4 |
 | Windows | Windows App SDK | app csproj | 1.8.260209005 (6 of 6 main app projects, and the kit) | PLAT-5 |
 | Windows | Minimum Windows build | `Package.appxmanifest` | 22000 (5 of 6); 19045.5011 (immich-drive) | PLAT-6 |
@@ -148,7 +150,7 @@ Running the native TypeScript compiler beside the standard one (printstream, gam
 
 ### PLAT-10: Dependency versions are exact
 
-- **Status:** Decided (D-037). Existing (persistent and game-is-up now comply; printstream is behind, rechecked 2026-11-25; recount pending)
+- **Status:** Decided (D-037). Existing (1 of 4 web monorepos: store-sign-controller; .NET package references are exact in 6 of 6). Counts are from 2026-11-16; persistent and game-is-up have since moved to the fleet stack and printstream is the only one behind (recount pending)
 - **Applies to:** Web, Kit (devkit); already the practice on Windows
 - **Reference:** `store-sign-controller/package.json`
 - **Why:** With exact pins a diff shows precisely what changed, and two repos on "the same" range cannot quietly resolve to different versions.
@@ -178,7 +180,7 @@ Android application ids are BRAND-7 in [branding.md](branding.md) (D-011).
 
 ### PLAT-12: Gradle conventions
 
-- **Status:** Decided (D-055). Existing (sonarbridge and phonelock have changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-055). Existing (1 of 2 has a committed wrapper and Kotlin DSL: sonarbridge; 0 of 2 has a version catalog). Counts are from 2026-11-16; phonelock now has `android/companion/build.gradle.kts` (recount pending)
 - **Applies to:** Android
 - **Reference:** `sonarbridge/android/` (wrapper, Kotlin DSL, build container); `phonelock/android/companion/build.gradle.kts` (each third-party dependency carries an "approved:" comment with the reason)
 - **Why:** A build that needs a particular Gradle in a home directory cannot run in CI or a container.

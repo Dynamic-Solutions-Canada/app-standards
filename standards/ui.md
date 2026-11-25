@@ -102,7 +102,7 @@ Windows apps use winui-app-kit's shared `AboutPage`, filled from an `AboutInfo` 
 
 ### UI-6: Dialogs and status messages
 
-- **Status:** Existing (confirmations are code-built `ContentDialog`s in every app that has one; little-launcher now has 9 input forms in 4 files, rechecked 2026-11-25; recount pending). A shared helper is Proposed
+- **Status:** Existing (confirmations are code-built `ContentDialog`s in every app that has one; destructive ones defaulted to Close in 3 of the 4 apps checked on 2026-11-16; little-launcher now has 9 input forms in 4 files, rechecked 2026-11-25; recount pending). A shared helper is Proposed
 - **Applies to:** Windows
 - **Reference:** `tray-control-for-wsl/WslMonitor/DetailsWindow.xaml.cs` (`ConfirmAsync`)
 - **Why:** A destructive dialog whose default button is the destructive one turns a stray Enter key into data loss. One helper makes the safe default the only default.
@@ -148,7 +148,7 @@ A web app builds its Joy theme through a `theme/buildTheme.ts` module adapted fr
 
 ### UI-10: Installable web app (PWA)
 
-- **Status:** Existing (persistent and store-sign-controller have changed since 2026-11-16; recount pending)
+- **Status:** Existing (3 of 4: printstream, persistent, game-is-up; store-sign-controller has a static manifest and no service worker). Counts are from 2026-11-16; persistent and store-sign-controller have changed since (recount pending)
 - **Applies to:** Web
 - **Reference:** `game-is-up/apps/web/vite.config.ts`; `printstream/apps/web/src/lib/appUpdate.ts`
 - **Why:** The same web bundle is what the desktop and mobile shells load, so how it installs and updates decides whether users are ever on a stale version.

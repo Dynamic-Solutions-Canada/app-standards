@@ -210,7 +210,7 @@ WinUI tray and desktop apps, including Windows desktop hosts inside web monorepo
 | HYG-4: Default branch and topic branches | Existing |
 | HYG-5: Commit subjects | Existing |
 | HYG-6: `.gitignore` | Decided |
-| HYG-7: `.gitattributes` | Proposed |
+| HYG-7: `.gitattributes` | Existing |
 | HYG-8: Dependabot | Decided |
 | HYG-9: Security policy and issue template in public repos | Decided |
 | HYG-10: Git hooks | Decided |
@@ -303,7 +303,7 @@ WinUI tray and desktop apps, including Windows desktop hosts inside web monorepo
 | TRAY-4: Clicks | Existing |
 | TRAY-5: Menu items and order | Decided |
 | TRAY-6: Flyout | Existing |
-| TRAY-7: Hidden host window and exit | Existing for the host window |
+| TRAY-7: Hidden host window and exit | Existing |
 | TRAY-8: Closing a window never exits | Existing |
 | TRAY-9: One running copy | Existing |
 | TRAY-10: Start with Windows | Existing |

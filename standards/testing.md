@@ -45,7 +45,7 @@ The required minimum is JUnit tests under the module's `src/test`, with Robolect
 
 ### TEST-4: The Home Assistant integration is tested in the parent repo
 
-- **Status:** Decided (D-084). Proposed (references changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-084). Proposed (the two Python tests in printstream are run by no script or workflow). Counts are from 2026-11-16; its references have changed since (recount pending)
 - **Applies to:** HA
 - **Reference:** `printstream/integrations/home-assistant/tests/` (contract fixtures generated from the product and checked against their producer)
 - **Why:** The public repo is a generated snapshot, so the only place a failing test can stop a bad release is before the export.
@@ -67,7 +67,7 @@ Every repo with tests has a root `test` script that finds them by walking the tr
 
 ### TEST-7: Database-backed tests never skip silently
 
-- **Status:** Decided (D-049). Existing (changed since 2026-11-16; recount pending)
+- **Status:** Decided (D-049). Existing (1 of 4 Web monorepos splits them into `test:integration`: store-sign-controller; printstream makes the database mandatory in `validate`; persistent skips them when an environment variable is absent; game-is-up has none wired). Counts are from 2026-11-16; its references have changed since (recount pending)
 - **Applies to:** Web
 - **Reference:** `game-is-up` (`*.integration.test.ts` beside the code, `test:integration` with a `_test` database guard) and devkit's `devkit-test --integration`; `printstream/.github/workflows/ci.yml` (Postgres service)
 - **Why:** A test that skips when its database is missing reports success for work that was never checked.

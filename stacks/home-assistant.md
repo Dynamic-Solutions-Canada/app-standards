@@ -156,7 +156,7 @@ Home Assistant integrations, including ones generated from a parent repo. The ru
 | HYG-4: Default branch and topic branches | Existing |
 | HYG-5: Commit subjects | Existing |
 | HYG-6: `.gitignore` | Decided |
-| HYG-7: `.gitattributes` | Proposed |
+| HYG-7: `.gitattributes` | Existing |
 | HYG-8: Dependabot | Decided |
 | HYG-9: Security policy and issue template in public repos | Decided |
 | HYG-10: Git hooks | Decided |

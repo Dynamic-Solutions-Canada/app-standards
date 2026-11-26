@@ -199,3 +199,11 @@ Every localized app states in writing which catalogs are AI-drafted and which ha
 - A localized app's localization doc lists what is deliberately English: legal pages, log files, diagnostic exports, content fetched from a remote English source, and developer-only surfaces. On Windows it also notes that WinUI's own built-in control text (for example a text box's Cut, Copy, Paste and Select All menu) follows the Windows display language, not the in-app language choice: the kit does not set `PrimaryLanguageOverride`, because doing so makes "Use system setting" resolve to the last chosen language (winui-app-kit README).
 - The listing's "claims to keep true" repeats any of these a user would notice ([store-listings.md](store-listings.md), LIST-4).
 - Shared UI shipped by a kit is localized in the kit, through the same catalogs mechanism, not re-translated in each host. The promo page is the current case: apps-promo translates its own page text at its newest pin (PROMO-7 in [promo.md](promo.md)), three hosts on older pins still carry an exact-match translation table, and, from apps-promo v2.2.0, the app descriptions are translated in the catalog's own source (D-101, amended 2026-11-18). The host tables are deleted with the pin bump, including any host table that translated descriptions.
+
+### LOC-14: German addresses the user as "du"
+
+- **Status:** Decided (D-124). Converting (2026-11-26: Persistent and ImmichDrive already use "du"; DisplaySwitchr, ChatMixr, Repilot, Tray Control and the kit's German catalog are being converted)
+- **Applies to:** Windows, Web, Android, Kit
+- **Why:** One product family should speak to a German user one way; a mix of "du" and "Sie" across apps, or within one, reads as careless.
+
+German interface text, listing text, hero text and release notes use informal "du" and its forms, including imperatives ("Wähle eine Aktion", not "Wählen Sie eine Aktion"). Product names and quoted Windows terms stay as Windows writes them.

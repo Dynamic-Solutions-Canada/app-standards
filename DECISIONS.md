@@ -954,6 +954,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Consequence:** LIST-8 gains the first-image rule. devkit gains one shared hero renderer (split and brand card), fed by the store-assets manifest and a per-locale headline in `listings.json`, so the WinUI apps and the web monorepos render their heroes from a raw capture instead of hand-made art. The concepts and proofs are in the standards audit folder (store-hero-pocs).
 - **Reversibility:** cheap; a listing can drop the hero in its next submission. **Repos:** DK, KIT, HDS, CMX, WSL, LL, REP, IMD, PER, PS.
 
+### D-124 German addresses the user as "du"
+`locales`
+- **Decided (2026-11-26):** every app's German text, interface and listings, uses informal "du", including imperatives ("Wähle", not "Wählen Sie"). Before this the family was mixed: Persistent and ImmichDrive used "du", DisplaySwitchr and ChatMixr "Sie", and Repilot and Tray Control both; the localized screenshot review surfaced it.
+- **Consequence:** LOC-14. The apps and the kit's German catalog convert their formal strings; the change ships with the localized screenshot pass.
+- **Reversibility:** moderate; a full German copy pass per app. **Repos:** KIT, HDS, CMX, WSL, LL, REP, IMD, PER, PS.
+
 ## Source coverage
 
 Every numbered divergence in the audit reports maps to an entry here or to `FIXES.md`.

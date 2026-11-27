@@ -1,6 +1,6 @@
 # AI docs
 
-How a repo instructs coding agents: `AGENTS.md`, guides, skills, hooks, and `paseo.json`. Claude Code is the only agent tool in use (D-108). Files stay in tool-neutral locations, and a `.claude/` path is used only where Claude Code cannot read anything else. Documents written for people are in [docs.md](docs.md).
+How a repo instructs coding agents: `AGENTS.md`, guides, skills and hooks. Claude Code is the only agent tool in use (D-108). Files stay in tool-neutral locations, and a `.claude/` path is used only where Claude Code cannot read anything else. Documents written for people are in [docs.md](docs.md).
 
 Counts are out of the 15 in-scope repos unless a rule says otherwise. Ten of them have a root `AGENTS.md` today.
 
@@ -18,7 +18,6 @@ AGENTS.md                      always loaded; routes to everything below
   agents/<name>.md             subagents, only if the repo defines any (AI-10)
 scripts/hooks/                 hook scripts, called from settings.json (AI-11)
 docs/                          anything people also read (see docs.md)
-paseo.json                     worktree setup and named scripts (AI-12)
 
 No CLAUDE.md, no .codex/, no .claude/commands/.
 ```
@@ -127,7 +126,7 @@ The root `AGENTS.md` stays under about 1,500 words. Anything longer moves to a g
 
 Every `AGENTS.md` has a `## Standards` section, directly after the intro, with the GitHub URL of the standards repo and of the stack index that applies. That section is a pointer, not a summary: it does not restate any rule. The standards repo is public (D-004), so the link resolves for outside readers, CI and cloud sessions as well as for the maintainer; the URL is filled into the skeleton once the repo has been pushed.
 
-A repo may also add the standards as a submodule at `external/standards` for offline reading. The link remains the source of truth, and a repo that adds the submodule initialises it in its worktree setup (AI-12). The repo never refers to the standards by a host path.
+A repo may also add the standards as a submodule at `external/standards` for offline reading. The link remains the source of truth, and a repo that adds the submodule documents initialising it like its other submodules (LAYOUT-7 in [repo-layout.md](repo-layout.md)). The repo never refers to the standards by a host path.
 
 ### AI-5: One tool-neutral instruction file
 
@@ -224,16 +223,7 @@ When a repo has Claude Code hooks:
 
 ### AI-12: `paseo.json`
 
-- **Status:** Existing (persistent, printstream, game-is-up, store-sign-controller and the three newer WinUI apps, rechecked 2026-11-25; recount pending). Decided (D-045) for the shared template and (D-088) for the standalone Windows apps
-- **Applies to:** Web; Windows (proposed)
-- **Reference:** `persistent/paseo.json`
-- **Why:** A new worktree that is missing its submodules or dev environment fails in ways that look like code bugs.
-
-A repo that agents open worktrees in has a `paseo.json` at its root with a worktree `setup` and `teardown` and one named script per canonical command in [dev-scripts.md](dev-scripts.md). Script keys are the command names with colons replaced by hyphens (`dev-doctor`, `validate`, `test`, `build`).
-
-Devkit repos use devkit's setup and teardown pair as documented in devkit's README; do not re-document it. Repos with submodules run `git submodule deinit --all --force` in teardown, because `git worktree remove` refuses a worktree that still has submodules (reference: immich-drive's `paseo.json`). Under D-045, devkit generates the file from a template. Under D-088, the Windows repos' file initialises submodules on setup and exposes the four `*:desktop` scripts.
-
-Where worktrees are created is not stated in a project file (D-032, FIX-041): the maintainer's global rules put them inside the main checkout at `.worktrees/<name>/`, and each repo ignores that folder in git, its Docker build context, and its lint, format, test and watcher settings.
+- **Status:** Retired (D-127). Paseo is no longer used, so no repo carries a `paseo.json`. Preparing a new clone or worktree (hooks, submodules, the web dev environment) is HYG-10 in [repo-hygiene.md](repo-hygiene.md), LAYOUT-7 in [repo-layout.md](repo-layout.md) and SCRIPT-7 in [dev-scripts.md](dev-scripts.md); where worktrees live is HYG-6 in [repo-hygiene.md](repo-hygiene.md).
 
 ### AI-13: No host paths, sibling links, or personal details
 

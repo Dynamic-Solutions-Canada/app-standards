@@ -117,7 +117,7 @@ A WinUI app inside a web monorepo (persistent) keeps this same set under `apps/d
 ├── .nvmrc, .npmrc
 ├── tsconfig.base.json
 ├── eslint.config.mjs, .prettierrc.json
-├── devkit.config.mjs, paseo.json
+├── devkit.config.mjs
 ├── Dockerfile
 ├── compose.dev.yml             and the production compose file (D-079)
 ├── .env.example                (D-078), plus `.env.<role>.example` per role (server, dev, bridge)
@@ -223,6 +223,8 @@ A kit has no committed build output (LAYOUT-13) and no consumer-specific paths. 
 - **Why:** One folder name tells people and tools which code is not owned by this repo.
 
 Submodules are checked out at `external/<name>` beside the project that uses them: `external/promo`, `external/winui-app-kit`, and optionally `external/standards`. The folder name is the short name, not the repo name. `.gitmodules` uses the current organisation URL; the three stale ones are FIX-046. How kits are versioned and pinned is in [shared-kits.md](shared-kits.md).
+
+Nothing initialises submodules in a new clone or worktree automatically (devkit's deploy does it on the server only). A repo with submodules says in its developer guide to clone with `--recurse-submodules` or run `git submodule update --init` afterwards, and that a new worktree needs the same before a build (reference: `immich-drive/docs/development.md`). Before removing such a worktree, run `git submodule deinit --all --force` in it; `git worktree remove` refuses a worktree that still has initialised submodules.
 
 ### LAYOUT-8: `scripts/` holds the repo's scripts, and only that
 

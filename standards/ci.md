@@ -88,7 +88,7 @@ Runner images move too: `ubuntu-latest` moved to Ubuntu 26 from 2026-10-19. A jo
 
 - **Status:** Decided (D-046). Existing (SHA pins and a Dependabot `github-actions` entry in most repos, rechecked 2026-11-25; recount pending). FIX-009 and FIX-052 cover the floating branches and the unwatched satellite directory
 - **Applies to:** all
-- **Reference:** `printstream/.github/dependabot.yml` for the Dependabot entry; the out-of-scope `paseo-shared-browser/.github/workflows/ci.yml` for SHA pins with a version comment
+- **Reference:** `printstream/.github/dependabot.yml` for the Dependabot entry; `persistent/.github/workflows/ci.yml` (`android-actions/setup-android`, `gradle/actions/setup-gradle`) for SHA pins with a version comment
 - **Why:** Third-party actions run with access to signing and store secrets, and a moved tag changes what runs without any commit in the repo.
 
 - Third-party actions (store publishers, release creators, Android and Home Assistant helpers, signing actions) are pinned to a full commit SHA with the version in a trailing comment. An action whose project publishes no current release and documents a branch instead (hacs/action, home-assistant/actions) is pinned to that branch head's SHA with the branch and date in the comment (`# main, 2026-06-08`), refreshed by hand, rather than to an old release tag that would downgrade the check.

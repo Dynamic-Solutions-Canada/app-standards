@@ -29,9 +29,9 @@ Shared projects are both a source of conventions and held to them (READMEs, docs
 
 - Client work, which keeps its own standards
 - shopify-form-filler, shopify-raw-material-tracker
-- android-vm, paseo-shared-browser
+- android-vm; paseo-shared-browser (retired with Paseo, D-127)
 - windows-build-tools, dynamic-solutions-website (used as references, not held to the standards)
-- paseo-branch-tracker, esphome-lvgl, kotn_helper
+- paseo-branch-tracker (retired with Paseo, D-127), esphome-lvgl, kotn_helper
 - printstream-import-extension (possibly dead)
 - Repos in other GitHub organisations and personal forks
 - Upstream projects the maintainer contributes to, all `*.worktrees`, printstream-public (a dead clone; live public exports are produced under `printstream/data/exports/`)

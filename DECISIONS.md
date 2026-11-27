@@ -342,7 +342,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 
 ### D-088 `paseo.json` in the standalone Windows repos
 `ai-docs` `dev-scripts`
-- **Adopted (2026-11-16).**
+- **Adopted (2026-11-16). Superseded by D-127 (2026-11-27):** Paseo is retired, so no repo carries a `paseo.json`.
 - **Question:** do the five standalone Windows repos get a `paseo.json`?
 - **Options:** (a) yes: worktree setup initialises submodules, and there is one named script per `*:desktop` command [0 of 5]; (b) no, worktree setup stays manual [5 of 5]. The web monorepos have one in 3 of 4 (PER, PS, GIU).
 - **Recommend:** (a). Reason: a new worktree without its submodules fails to build in a way that looks like a code bug, and named scripts let an agent call the four build commands the same way in every repo.
@@ -487,7 +487,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 
 ### D-045 How much dev orchestration devkit owns
 `shared-kits` `dev-scripts`
-- **Adopted (2026-11-16).**
+- **Adopted (2026-11-16). The `paseo.json` part is superseded by D-127 (2026-11-27):** devkit no longer generates `paseo.json` by default; the rest of this entry stands.
 - **Question:** do `run-dev.mjs`, the compose `node` service, `paseo.json`, the `dev:*` scripts and the `deploy-over-ssh.mjs` deploy script move into DK?
 - **Options:** (a) DK owns them through an `init` or template command [0 of 3 consumers; each hand-copies about 100 lines, and the deploy script exists in three implementations]; (b) keep copying [3 of 3: PER, PS, GIU].
 - **Recommend:** (a) as templates DK generates, not a runtime dependency, with PS's 317-line runner allowed to stay custom. The deploy script ships the same way, as a template written into `scripts/deploy/` from PER's copy, so DK still takes no part in a production deploy at run time. Reason: it removes the copies without making DK opinionated about PS's host bridge, slicer and resume needs.
@@ -972,6 +972,12 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Decided (2026-11-26):** PrintStream is a shared tool, so its language is a workspace (or self-hosted install) setting rather than a per-user one, which departs from LOC-4's "follows the system unless the user picks one". Notifications and emails use the workspace's language. New audit-log entries are written in it, and existing entries stay as recorded. A workspace with no language set follows each viewer's browser. The sign-in page uses the workspace's language when it is known, otherwise the browser's. Changing the language warns before the page reloads.
 - **Consequence:** LOC-4 records PrintStream as the exception. PrintStream leaves the LOC-1 exemption list once its localization ships. Other apps keep the per-user rule.
 - **Reversibility:** moderate; a per-user override could be added on top of the workspace setting later. **Repos:** PS.
+
+### D-127 Paseo is retired; `paseo.json` is no longer a standard
+`ai-docs` `dev-scripts` `shared-kits`
+- **Decided (2026-11-27):** Paseo is no longer used, so the family stops carrying a `paseo.json`. AI-12 is retired, D-088 is superseded, and so is the `paseo.json` part of D-045. devkit v0.31.0 writes and checks `paseo.json` only when an app sets `generated: { paseo: true }`, which no app does, and the file has been deleted from the app repos.
+- **Consequence:** what the file's worktree `setup` did is now done by steps the repos already document. A web monorepo prepares a new worktree with `npm run dev:prepare-worktree`, and in the repos with hooks its `dev:postprepare` runs `lefthook install` (SCRIPT-7, HYG-10). A Windows repo's developer guide already says to run `lefthook install` once per clone and to clone with submodules or run `git submodule update --init` (HYG-10, LAYOUT-7); LAYOUT-7 now also asks it to say that a new worktree needs the same, as immich-drive's and little-launcher's guides do. Where worktrees live moves from AI-12 to HYG-6. The ID AI-12 is kept, marked retired, and is not reused.
+- **Reversibility:** cheap; devkit can generate the file again with `generated: { paseo: true }`. **Repos:** DK, PER, PS, GIU, SSC, HDS, CMX, WSL, LL, REP, IMD.
 
 ## Source coverage
 

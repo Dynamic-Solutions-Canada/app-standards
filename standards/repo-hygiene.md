@@ -112,6 +112,8 @@ Every repo has a `.gitignore` in three parts, in this order. The shared block co
 
 The Visual Studio template's `[Rr]elease/` rule also matches `.agents/skills/release/`, the standard `release` skill (AI-7, REL-8). A Windows repo that has the skill re-includes it in its project rules with `!/.agents/skills/release/`, and checks it with `git check-ignore`. Reference: winui-app-kit's `.gitignore`.
 
+Worktrees are created inside the main checkout at `.worktrees/<name>/`. That location is stated once in the maintainer's user-level rules, not in a project file (D-032, FIX-041), and besides ignoring it in git, each repo excludes the folder from its Docker build context and from its lint, format, test and file-watcher settings.
+
 Directory rules end with a slash. A rule copied from another repo is checked for that repo's names before it is committed, and lines that match nothing are removed. What counts as a secret and where one may live are in [security.md](security.md); which agent folders are tracked is in [ai-docs.md](ai-docs.md).
 
 This rule owns the ignore file; LAYOUT-14 in [repo-layout.md](repo-layout.md) was merged into it.
@@ -177,10 +179,10 @@ Pull request templates, `CONTRIBUTING`, `CODE_OF_CONDUCT`, `CODEOWNERS`, and `FU
 
 - **Status:** Decided (D-030). Existing (9 app repos and web-app-kit run lefthook, rechecked 2026-11-25; devkit, winui-app-kit, apps-promo and printstream have no hooks)
 - **Applies to:** all
-- **Reference:** none yet in scope
+- **Reference:** `game-is-up/package.json` (`dev:postprepare`) for installing the hooks in a web repo; `repilot/docs/development.md` for a Windows repo
 - **Why:** A git hook applies to every tool and to people, where an agent tool's hook covers only that tool.
 
-What must never be committed (generated files edited by hand, secrets, files over a size limit) is blocked by a git hook managed with lefthook, configured in one `lefthook.yml` at the root. Hooks are installed with `lefthook install`: the worktree `setup` in `paseo.json` runs it, and the developer guide tells people to run it once in a fresh clone. Repos without an npm dependency step rely on a user-level lefthook install rather than adding one. Husky is removed (FIX-042). Hooks stay fast: they check the staged files and do not run the test suite, which belongs to `validate` and CI (see [ci.md](ci.md)). Hooks that guide an agent during a session are covered by AI-11 in [ai-docs.md](ai-docs.md).
+What must never be committed (generated files edited by hand, secrets, files over a size limit) is blocked by a git hook managed with lefthook, configured in one `lefthook.yml` at the root. Hooks are installed with `lefthook install`, once per clone, as the developer guide says. In a web monorepo on devkit the app's `dev:postprepare` script runs it, so `npm run dev:prepare-worktree` installs the hooks in each new worktree (SCRIPT-7 in [dev-scripts.md](dev-scripts.md)), and a fresh clone runs `npx lefthook install` once; npm does not run lefthook's own install script, because each repo denies it in `allowScripts` (PLAT-10 in [platform.md](platform.md)). Repos without an npm dependency step (the Windows apps) rely on a user-level lefthook install rather than adding one, and their developer guide tells people to run `lefthook install` once after cloning. Husky is removed (FIX-042). Hooks stay fast: they check the staged files and do not run the test suite, which belongs to `validate` and CI (see [ci.md](ci.md)). Hooks that guide an agent during a session are covered by AI-11 in [ai-docs.md](ai-docs.md).
 
 ### HYG-11: Remotes and submodule URLs are current
 

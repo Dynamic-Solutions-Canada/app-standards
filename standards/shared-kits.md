@@ -156,7 +156,7 @@ Kit features that block a migration are added first: several tray icons per host
 
 | Code | Copies today | Destination | Best copy | Depends on |
 | --- | --- | --- | --- | --- |
-| `scripts/dev/run-dev.mjs`, the `compose.dev.yml` `node` service, `paseo.json`, the `dev:*` scripts | 3 | devkit, as generated templates, not a runtime dependency; printstream's runner may stay custom | `game-is-up/` | D-045 |
+| `scripts/dev/run-dev.mjs`, the `compose.dev.yml` `node` service, the `dev:*` scripts | 3 | devkit, as generated templates, not a runtime dependency; printstream's runner may stay custom | `game-is-up/` | D-045 (`paseo.json` dropped by D-127) |
 | `wait-for-db.mjs`, the Vite `server` block | 3 | devkit helpers | `persistent/` | D-045 |
 | Test discovery script for `node --test` | 2 scripts and 2 hand-written globs | devkit | devkit's `devkit-test` | D-050 |
 | "Remote development with Devkit" README section and `docs/devkit-remote.md` | 3, drifted | deleted; link to devkit's README | devkit's README | none |

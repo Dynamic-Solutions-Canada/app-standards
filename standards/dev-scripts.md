@@ -1,6 +1,6 @@
 # Dev scripts
 
-The names of the commands that run, check, build, package and deploy each app, and what each one must do. The aim is that `npm run validate` or `npm run verify:desktop` means the same thing in every repo, so people, agents, `paseo.json` and CI can call a job without reading the repo first.
+The names of the commands that run, check, build, package and deploy each app, and what each one must do. The aim is that `npm run validate` or `npm run verify:desktop` means the same thing in every repo, so people, agents and CI can call a job without reading the repo first.
 
 Counts are against the in-scope repos a rule applies to. The 8 repos with target-specific root scripts are displayswitchr, tray-control-for-wsl, little-launcher, repilot, immich-drive, persistent, store-sign-controller and printstream. The 6 Windows-building repos are the five standalone WinUI apps and persistent. The 4 web monorepos are persistent, printstream, game-is-up and store-sign-controller.
 
@@ -43,7 +43,7 @@ Releasing is a guided procedure, not a script name; see [releases.md](releases.m
 - **Status:** Existing (10 of 12 repos with something to run: all six Windows-building repos, the four monorepos and devkit; not the two Android repos). Android: Decided (D-044)
 - **Applies to:** all
 - **Reference:** `displayswitchr/package.json` (wrapper only, no dependencies); `persistent/package.json` (full set)
-- **Why:** One command runner in every repo means an agent, a `paseo.json` entry or a workflow calls `npm run <name>` without knowing the stack underneath.
+- **Why:** One command runner in every repo means a person, an agent or a workflow calls `npm run <name>` without knowing the stack underneath.
 
 Every repo with something to run, check or build has a root `package.json` whose `scripts` use the canonical names. In a repo that is not a Node project it is `"private": true`, has no dependencies and no lockfile, and each script is a one-line call to the real tool. The five Windows apps already do this for the Windows build tooling.
 
@@ -60,7 +60,7 @@ The job comes first, then the target, then a variant: `verify:android`, `package
 
 `target:*` is kept only as a namespace for tool-style helpers that are not one of the canonical jobs: `dev:*`, `db:*`, `android:*` and `shots:*`. So `android:logs` is a helper, and the Android compile check is `verify:android`, not `android:verify`.
 
-Renames under this rule are made once per repo, together with the docs, skills and `paseo.json` entries that name the old script. An old name is not kept as an alias.
+Renames under this rule are made once per repo, together with the docs, skills and workflows that name the old script. An old name is not kept as an alias.
 
 ### SCRIPT-3: Each verb has one meaning
 
@@ -133,16 +133,16 @@ The wrapper lives only in winui-app-kit; apps call `external/winui-app-kit/scrip
 
 ### SCRIPT-7: Web entry points go through devkit
 
-- **Status:** Existing (3 of 4 web monorepos: persistent, printstream, game-is-up; store-sign-controller is not on devkit). Who owns the copies: Decided (D-045)
+- **Status:** Existing (4 of 4 web monorepos: persistent, printstream, game-is-up, store-sign-controller). Who owns the copies: Decided (D-045)
 - **Applies to:** Web
-- **Reference:** `persistent/package.json`, `persistent/paseo.json`
+- **Reference:** `persistent/package.json`
 - **Why:** The dev stack needs ports, hostnames and a database per checkout. Devkit provides them, and the same eight names make every web repo start the same way.
 
 A web monorepo defines `dev` and the seven lifecycle names in the table, each calling devkit. What each one does is documented in devkit's README and is not repeated in the app (see [shared-kits.md](shared-kits.md)).
 
-`paseo.json` mirrors `dev`, `validate`, `test` and `build` and the lifecycle scripts by calling the npm script, so the two never disagree. A repo may add project-specific `dev:*` helpers (`dev:db`, `dev:demo`) but does not rename the eight.
+A new worktree is prepared by hand with `npm run dev:prepare-worktree` before anything else runs in it; nothing runs it automatically. Devkit owns that script: it runs `devkit prepare` and then the app's own `dev:postprepare`, which holds the app's steps (generating the database client, building a shared package, and `lefthook install` for HYG-10 in [repo-hygiene.md](repo-hygiene.md)); printstream's runs its own `scripts/dev/prepare-worktree.mjs` instead. A worktree skill, where a repo has one, runs it as its first step (reference: printstream's `start-worktree` skill). A repo may add project-specific `dev:*` helpers (`dev:db`, `dev:demo`) but does not rename the eight.
 
-Under D-045, devkit generates these scripts, `paseo.json` and the runner from templates, so they stop being hand-copied.
+Under D-045, devkit generates these scripts and the runner from templates, so they stop being hand-copied. It no longer generates a `paseo.json` by default (D-127).
 
 ### SCRIPT-8: Database scripts
 

@@ -135,6 +135,7 @@ WinUI tray and desktop apps, including Windows desktop hosts inside web monorepo
 | LOC-11: Listing and release-note locales track the UI locales | Decided |
 | LOC-12: Translations are marked as unreviewed until a native speaker reviews them | Decided |
 | LOC-13: Text that stays English is listed, not accidental | Decided |
+| LOC-14: German addresses the user as "du" | Decided |
 
 ## [Logging, diagnostics and privacy disclosure](../standards/logging.md)
 

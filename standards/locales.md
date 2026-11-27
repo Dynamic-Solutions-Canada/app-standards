@@ -55,7 +55,7 @@ An app is in one of two states, and is in the same state everywhere (interface, 
 - **Localized:** the full nine-locale set.
 - **English only:** one language, `en-US`, declared as the only language everywhere, and stated in the README.
 
-The exemptions, decided in D-010: printstream is exempt until it has an i18n layer; game-is-up, store-sign-controller and the Home Assistant integration are exempt; immich-drive is brought into the nine-locale set because it is a paid Store app sold in the same markets as the localized ones. Kits and developer tooling (devkit's CLI, agent docs, logs) are English and are not user-facing in this sense. A new app with a store listing is localized from its first release unless an exemption is recorded in D-010.
+The exemptions, decided in D-010: printstream is exempt until its localization ships (in progress since 2026-11-26, D-126); game-is-up, store-sign-controller and the Home Assistant integration are exempt; immich-drive is brought into the nine-locale set because it is a paid Store app sold in the same markets as the localized ones. Kits and developer tooling (devkit's CLI, agent docs, logs) are English and are not user-facing in this sense. A new app with a store listing is localized from its first release unless an exemption is recorded in D-010.
 
 ### LOC-4: Default, fallback and resolution
 
@@ -65,7 +65,7 @@ The exemptions, decided in D-010: printstream is exempt until it has an i18n lay
 - **Why:** The edge cases (a Traditional Chinese user, a French-speaking Swiss user, a key missing from one catalog) should behave the same in every app.
 
 - **Default** is `en-US`. It is also the catalog every other catalog is checked against.
-- **Choice:** the app follows the system language unless the user picks one in Settings. The picker shows the nine identities by native name in the standard order; its place on the Settings page and the wording of the follow-the-system option are UI-4 in [ui.md](ui.md) (D-072).
+- **Choice:** the app follows the system language unless the user picks one in Settings. Exception: PrintStream, a shared tool, sets the language per workspace or install, and a workspace with none set follows each viewer's browser (D-126). The picker shows the nine identities by native name in the standard order; its place on the Settings page and the wording of the follow-the-system option are UI-4 in [ui.md](ui.md) (D-072).
 - **Resolution:** the user's ordered language preferences are tried in turn. For each, an exact identity match wins; otherwise the same language and script family (`fr-CH` gets `fr-FR`, `pt-PT` gets `pt-BR`). If nothing matches, `en-US`.
 - **Script safety:** Traditional Chinese (`zh-Hant`, or `zh` with region TW, HK or MO) never resolves to the Simplified catalog. It falls through to the next preference, then English.
 - **Per-key fallback:** a key missing from a catalog shows the `en-US` text, never the key or an empty string. The catalog check (LOC-9) exists so this never happens in a release.

@@ -132,12 +132,12 @@ Where a tool demands its own layout (fastlane's `metadata/android/<locale>/` tex
 
 ### LIST-7: Listing locales equal UI locales
 
-- **Status:** Decided (D-010, D-098). Existing (2 of the 7 localized apps: persistent, sonarbridge)
+- **Status:** Decided (D-010, D-125). Existing (2 of the 7 localized apps: persistent, sonarbridge)
 - **Applies to:** Windows, Web, Android apps with a store listing
 - **Reference:** `sonarbridge/fastlane/metadata/android/` (nine listing locales matching nine UI locales)
 - **Why:** A listing in English for an app that runs in Japanese hides the translation from the people it was made for, and a Japanese listing for an English-only app misleads them.
 
-An app's listing is published in exactly the locales its interface supports ([locales.md](locales.md), LOC-1 and LOC-3): all nine identities for a localized app, one for an English-only app. Listing wording uses the same terms as the in-app catalogs. A release is not complete until listing text exists for every wording catalog. Under D-098, screenshots are captured once, in English, and serve every listing locale, as persistent and sonarbridge do today. Captions and alt text are translated.
+An app's listing is published in exactly the locales its interface supports ([locales.md](locales.md), LOC-1 and LOC-3): all nine identities for a localized app, one for an English-only app. Listing wording uses the same terms as the in-app catalogs. A release is not complete until listing text exists for every wording catalog. Under D-125, screenshots are captured in every listing locale, with Windows, the app and the sample data all in that language. Captions and alt text are translated, and no listing says its screenshots show the English interface.
 
 ### LIST-8: Screenshots are named, ordered by a manifest, and captured from the real app
 
@@ -148,11 +148,11 @@ An app's listing is published in exactly the locales its interface supports ([lo
 
 - **Names:** `NN-subject-theme.png`, two-digit order first, lower-case kebab subject, `light` or `dark` last (`00-current-dark.png`). Drop the theme only when the app has one theme.
 - **Manifest:** `store-assets/manifest.json` lists, per store, each file with its raw source, theme, caption and alt text. The captions in `listings.json` and the manifest order must agree in count.
-- **Raw captures** stay in `store-assets/raw/` so framing and captions can change without recapturing.
+- **Raw captures** stay in `store-assets/raw/<store>/<locale>/`, renders in `store-assets/screenshots/<locale>/` (or the store's equivalent), so framing and captions can change without recapturing. Windows captures are taken at 200% scale on a 4K desktop with the clock pinned, so every language shows the same moment (D-125).
 - **Content:** captured from the real installed app with synthetic data. No personal names, device names, network names, account details or addresses.
 - **First image (D-123):** a Store listing's first screenshot is a generated hero, because it is the only image Store search shows and a full-desktop capture is unreadable at card size. Every app uses the split layout: the app's brand colour panel with a short headline on the left, and its real UI, enlarged from a raw capture, on the right. When the app's own window is only setup, the right side shows what the app does instead: ImmichDrive shows File Explorer with its thumbnails, Repilot shows the action picker. The brand card (icon, name, headline and subline over the brand gradient) stays available in the renderer but no app uses it (amended 2026-11-24). The headline comes from the listing's own text, is translated per locale, and sits in the top two-thirds of the image. The rest of the screenshots stay as captured.
 - **Look (decided 2026-11-17):** every screenshot shows the app in dark mode. Windows screenshots are framed centred on the Windows 11 default dark wallpaper (the dark "bloom", `C:\Windows\Web\Wallpaper\Windows\img19.jpg`), read from a Windows machine at render time and never committed to a repo. When a capture includes the taskbar or desktop (tray flyouts, for example), the capture machine is prepared first: desktop icons hidden, unrelated taskbar pins removed where Windows allows it, the taskbar search box and Widgets turned off, and the app's own tray icon visible. Those settings are restored afterwards on any shared machine. Android screenshots are dark mode, placed in a phone frame on a backdrop, as persistent does (reusable phone frame, saved studio backdrop in `store-assets/marketing/`, app pixels only from raw captures; reference `persistent/store-assets/README.md`).
-- **Approval:** new or changed screenshots, in a store listing, a README or the website, are shown to the maintainer and approved before they are committed as listing assets or published.
+- **Approval:** new or changed screenshots, in a store listing, a README or the website, are shown to the maintainer and approved before they are committed as listing assets or published. For a localized set, the maintainer approves English plus one sample language; the other languages pass the automated checks (catalog coverage, clipping, the hero check) and an independent visual pass. New captures go live with the app's next Store release, so a listing never shows wording newer than the installed build (D-125).
 - **Sizes and counts** are in [assets.md](assets.md), ASSET-9.
 - **Scripts:** capture, render, check and sync are package scripts, documented in `store-assets/README.md`. Persistent's `shots:*` set is the model; script naming follows [dev-scripts.md](dev-scripts.md).
 

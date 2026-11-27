@@ -687,7 +687,7 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 
 ### D-098 Screenshot language in store listings
 `store-listings` `locales`
-- **Adopted (2026-11-16).**
+- **Adopted (2026-11-16). Superseded by D-125 (2026-11-25):** screenshots are now captured per listing language.
 - **Question:** are listing screenshots captured once in English or once per language?
 - **Options:** (a) English captures for every listing locale, with captions and alt text translated [2 of the 2 apps with a nine-locale listing: PER, SNB]; (b) one capture set per wording catalog, seven sets; (c) a translated first screenshot only.
 - **Recommend:** (a). Reason: seven capture sets on every interface change is a recurring cost that would leave screenshots stale; revisit for one app when a market matters enough to pay it.
@@ -953,12 +953,25 @@ These entries were offered as "adopted unless vetoed". None was vetoed, so each 
 - **Decided (2026-11-23):** Store search shows only a listing's first screenshot, at about 320 by 180, where the family's full-desktop captures read as the same blue wallpaper. Each Windows app's first screenshot becomes a generated hero: the split layout (brand panel and headline on the left, the real UI enlarged on the right) for apps whose main surface is a flyout or popup, and a brand card in the style of PrintStream's current poster for Repilot and ImmichDrive, whose UI is setup that users rarely see again. PrintStream itself moves to the split layout. Headlines come from each listing's own text and are translated per locale. Microsoft's screenshot guidance advises against marketing text in screenshots; it is display advice, not a certification rule, and PrintStream's card already ships, so the family accepts it.
 - **Consequence:** LIST-8 gains the first-image rule. devkit gains one shared hero renderer (split and brand card), fed by the store-assets manifest and a per-locale headline in `listings.json`, so the WinUI apps and the web monorepos render their heroes from a raw capture instead of hand-made art. The concepts and proofs are in the standards audit folder (store-hero-pocs).
 - **Reversibility:** cheap; a listing can drop the hero in its next submission. **Repos:** DK, KIT, HDS, CMX, WSL, LL, REP, IMD, PER, PS.
+- **Amended (2026-11-24):** every app uses the split layout. Repilot shows its action picker and ImmichDrive shows File Explorer with its thumbnails, so no app uses the brand card. Under D-125 the hero is rendered per listing language, with the headline line breaks set per language.
 
 ### D-124 German addresses the user as "du"
 `locales`
 - **Decided (2026-11-26):** every app's German text, interface and listings, uses informal "du", including imperatives ("Wähle", not "Wählen Sie"). Before this the family was mixed: Persistent and ImmichDrive used "du", DisplaySwitchr and ChatMixr "Sie", and Repilot and Tray Control both; the localized screenshot review surfaced it.
 - **Consequence:** LOC-14. The apps and the kit's German catalog convert their formal strings; the change ships with the localized screenshot pass.
 - **Reversibility:** moderate; a full German copy pass per app. **Repos:** KIT, HDS, CMX, WSL, LL, REP, IMD, PER, PS.
+
+### D-125 Store screenshots are captured per listing language
+`store-listings` `locales` `assets`
+- **Decided (2026-11-25):** each localized app's Store screenshots are captured in every listing language, with Windows itself, the app and the sample data all in that language. This replaces D-098's single English set. Windows captures are taken at 200% scale on a 4K desktop in a disposable VM session, with the clock pinned so every language shows the same time and date. The maintainer approves the English set plus one sample language (Japanese for the 2026-11 pass); the other languages are covered by automated checks (catalog coverage, clipping and the hero check) and an independent visual pass.
+- **Consequence:** LIST-7 and LIST-8 change: captures live in `store-assets/raw/<store>/<locale>/` and renders in `screenshots/<locale>/`, and listings drop the sentence saying the screenshots show the English interface. New captures go live with each app's next Store release, so a listing never shows wording newer than the installed build (decided 2026-11-27). Play listings follow for the apps with an Android build, starting with Persistent.
+- **Reversibility:** moderate; the capture tooling stays, and a language can fall back to the English set. **Repos:** HDS, WSL, LL, REP, IMD, PER, PS; CMX keeps its existing shots until its own pass.
+
+### D-126 PrintStream's language is set per workspace
+`locales`
+- **Decided (2026-11-26):** PrintStream is a shared tool, so its language is a workspace (or self-hosted install) setting rather than a per-user one, which departs from LOC-4's "follows the system unless the user picks one". Notifications and emails use the workspace's language. New audit-log entries are written in it, and existing entries stay as recorded. A workspace with no language set follows each viewer's browser. The sign-in page uses the workspace's language when it is known, otherwise the browser's. Changing the language warns before the page reloads.
+- **Consequence:** LOC-4 records PrintStream as the exception. PrintStream leaves the LOC-1 exemption list once its localization ships. Other apps keep the per-user rule.
+- **Reversibility:** moderate; a per-user override could be added on top of the workspace setting later. **Repos:** PS.
 
 ## Source coverage
 

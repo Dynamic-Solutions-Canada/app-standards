@@ -108,6 +108,7 @@ Shared projects consumed by apps: winui-app-kit, apps-promo, devkit. The rules b
 | LOC-2: How the set is named | Proposed |
 | LOC-3: Fully localized or English only, with named exemptions | Decided |
 | LOC-13: Text that stays English is listed, not accidental | Decided |
+| LOC-14: German addresses the user as "du" | Decided |
 
 ## [Logging, diagnostics and privacy disclosure](../standards/logging.md)
 

@@ -29,7 +29,7 @@ Every app's main window has:
 
 - A Mica backdrop with content extended into the title bar, and a transparent `NavigationViewContentBackground` override in `App.xaml`.
 - A 48 px custom title bar holding a 16 px app icon and the caption text.
-- A left-pane `NavigationView` with the back button hidden and the built-in Settings item switched on. The open pane is 240 wide (2 of 6; little-launcher sizes its pane to the widest label because of its long translated labels, which is an accepted variation).
+- A left-pane `NavigationView` with the back button hidden and the built-in Settings item switched on. The open pane is at least 240 wide and grows to its widest label, up to 320, so translated labels are never clipped (winui-app-kit v2.10.1 does this for every app).
 - One instance of the window per process (`ShowInstance()` or equivalent), with its size and position remembered and ignored when the monitor is gone.
 
 The window class is `SettingsWindow` (5 of 6). Window icon, saved placement and bring-to-front come from winui-app-kit (`WindowIcon`, `WindowChrome`, `WindowPlacement`), not from local Win32 code. Navigation and card icons are `FontIcon` glyphs from the system icon font (6 of 6); no icon library is added. The app icon ships as `Resources/<App>.ico` plus a 256 px `<App>.png` for in-app images (3 of 6), because XAML decodes an `.ico` at its 16 px frame; see [assets.md](assets.md).
